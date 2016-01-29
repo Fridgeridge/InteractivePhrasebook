@@ -1,0 +1,2 @@
+i -src testsuite/compiler/check/lins/linsCnc.gf
+pg -printer=pgf_pretty

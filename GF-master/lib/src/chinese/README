@@ -1,0 +1,29 @@
+Chinese resource grammar
+
+(c) Aarne Ranta, Zhuo Lin Qiqige, Qiao Haiyan 2012
+
+
+19/10/2012
+
+This is a compilable, almost complete, but not yet perfect implementation of the GF resource grammar for Chinese.
+
+The Synopsis test set has the following statistics:
+
+  GOOD 295  68%
+  SOSO  66  15%
+  BAD   76  17%
+
+More details:
+
+  eng_chi2.txt     -- the test set with annotations
+  chinese-log.txt  -- a log of the grammar writing process
+
+There is also a Pinyin version of the grammar, in the subdirectory ./pinyin/.
+
+The grammar is not yet a part of the "official" demos and documentation. But you can find alpha versions in
+
+  http://tournesol.cs.chalmers.se/~aarne/gf/csynopsis.html   -- make sure to select coding UTF8 in your browser 
+
+  http://tournesol.cs.chalmers.se:41296/minibar/minibar.html -- select ResourceDemo
+   
+

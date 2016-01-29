@@ -1,0 +1,140 @@
+body.syntax-editor {
+    background: #ccc url("../minibar/brushed-metal.png");
+}
+
+.hidden
+{
+  display:none;
+}
+
+.editor select#to_menu
+{
+  height: 10em;
+  position: absolute;
+  min-width: 5em;
+  }
+
+#import
+{
+  position: absolute;
+  display: inline-block;
+  padding: 0.3em;
+  background: #EEE;
+  border: 1px solid #999;
+  font-size: 0.95em;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+#import.hidden
+{
+  display: none;
+  }
+#import input[type=text]
+{
+  width: 20em;
+  font-family: monospace;
+  padding: 0.2em;
+  }
+
+#tree, #tree_str
+{
+  white-space:pre-wrap;
+  font-family: monospace;
+  background: rgba(238, 238, 238, 0.6);
+  padding:0.5em;
+  margin:0.5em 0;
+  }
+
+#tree .node
+{
+  margin: 0.5em 0 0.5em 0.75em;
+  border-left: 1px dashed #BBB;
+  padding-left: 1.25em;
+  }
+#tree .node.first
+{
+  margin-left: 0;
+  border-left: none;
+  }
+
+#tree .node a
+{
+  cursor: pointer;
+  }
+#tree .node a:hover
+{
+  text-decoration: underline;
+  }
+#tree .node a.current
+{
+  font-weight: bold;
+  }
+
+#tree_str
+{
+  font-size:0.85em;
+  color:#666;
+  }
+
+#refinements
+{
+  /* display: inline-block; */
+  /* margin-left: 0.5em; */
+  margin-top: 0.3em;
+  border: 3px solid #e0e0e0;
+  padding: 5px;
+  }
+
+#linearisations
+{
+  /* background: rgba(170, 170, 170, 0.5); */
+  /* padding:0.5em; */
+  margin:0.5em 0;
+  }
+#linearisations div
+{
+  padding:0.2em;
+  }
+#linearisations .lang
+{
+  display: inline-block;
+  margin-right: 0.5em;
+  width: 3em;
+  font-weight: bold;
+  text-align: center;
+  }
+#linearisations .lin
+{
+  }
+
+.refinement
+{
+  margin: 0.1em;
+  display: inline-block;
+  cursor: pointer;
+  border: 1px solid;
+  padding: 0.2em;
+  font: 0.9em sans-serif;
+  background: white;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+.refinement.disabled
+{
+  opacity: 0.5;
+  }
+
+div#debug
+{
+  font: 10px monospace;
+  white-space: pre-wrap;
+  color: #333;
+  margin: 1em 0;
+  border: 1px dashed #999;
+  padding: 1em;
+  }
+
+/* From http://www.grammaticalframework.org/css/style.css */
+.about table { border-collapse: collapse; }
+.about th,
+.about td { border: 1px solid #333; padding:0 5px; }
+.about td { background: white; }
+.about th { background: #9df; }

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+About the syntax editor
+</title>
+<link rel=stylesheet type="text/css" href="../minibar/minibar.css"> <link rel=stylesheet type="text/css" href="editor.css"> <meta charset="UTF-8">
+</head>
+<body class="about">
+
+<h1 id="gf-web-based-syntax-editor">GF web-based syntax editor</h1>
+<p>John J. Camilleri<br />January 2013</p>
+<p>A tool for building and manipulating abstract syntax trees in GF. This is meant as improved replacement of the <a href="http://www.grammaticalframework.org/~meza/restWiki/editor.html">old syntax editor</a>.</p>
+<h2 id="example-usage">Example usage</h2>
+<p>If you want to use the tool in your own application, everything you need in the source files <code>editor.html</code> and <code>editor_online.js</code>. Contact the <a href="http://groups.google.com/group/gf-dev">GF developer mailing list</a> if you have any problems.</p>
+<h2 id="available-startup-options">Available startup options</h2>
+<h3 id="grammar-manager">Grammar Manager</h3>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Options</th>
+<th align="left">Description</th>
+<th align="left">Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>initial.grammar</code></td>
+<td align="left">Initial grammar URL, e.g. <code>&quot;http://localhost:41296/grammars/Foods.pgf&quot;</code></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"><code>initial.startcat</code></td>
+<td align="left">Initial startcat</td>
+<td align="left">(grammar default)</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>initial.languages</code></td>
+<td align="left">Initial linearisation languages, e.g. <code>[&quot;Eng&quot;,&quot;Swe&quot;,&quot;Mlt&quot;]</code></td>
+<td align="left">(all)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="editor">Editor</h3>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Options</th>
+<th align="left">Description</th>
+<th align="left">Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>target</code></td>
+<td align="left"></td>
+<td align="left">&quot;editor&quot;</td>
+</tr>
+<tr class="even">
+<td align="left"><code>initial.abstr</code></td>
+<td align="left">Initial abstract tree (as string), e.g. <code>&quot;Pred (That Fish) Expensive&quot;</code></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>lin_action</code></td>
+<td align="left">Function called when clicking on the language button beside each linearisation.</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"><code>lin_action_tooltip</code></td>
+<td align="left">Tooltip for the button beside each linearisation.</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>show_grammar_menu</code></td>
+<td align="left">Show grammar menu?</td>
+<td align="left">True</td>
+</tr>
+<tr class="even">
+<td align="left"><code>show_startcat_menu</code></td>
+<td align="left">Show startcat menu?</td>
+<td align="left">True</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>show_to_menu</code></td>
+<td align="left">Show languages menu?</td>
+<td align="left">True</td>
+</tr>
+<tr class="even">
+<td align="left"><code>show_random_button</code></td>
+<td align="left">Show random button?</td>
+<td align="left">True</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>show_import</code></td>
+<td align="left">Show import button/panel?</td>
+<td align="left">True</td>
+</tr>
+<tr class="even">
+<td align="left"><code>show_export</code></td>
+<td align="left">Show export button?</td>
+<td align="left">True</td>
+</tr>
+</tbody>
+</table>
+<h2 id="notes">Notes</h2>
+<ul>
+<li>Tested with latest Chrome and Firefox (only).</li>
+</ul>
+<h2 id="to-dofeature-requests">To do/feature requests</h2>
+<ul>
+<li>Compatibility with grammars with dependent category types</li>
+<li>Clicking on tokens to select tree node</li>
+<li>Clipboard of trees</li>
+<li>Usage of printnames</li>
+<li>Enter string/float/int literals</li>
+<li>more prominence to Disamb-linearizations</li>
+<li>show all resulting linearization variants</li>
+<li>undo/redo (or back/forward) navigation</li>
+<li>structure fridge magnets more (eg newline before the magnet whose first letter is different)</li>
+</ul>
+<h2 id="known-bugs">Known bugs</h2>
+<ul>
+<li>Change startcat doesn't work when given an initial startcat</li>
+</ul>
+</body>
+</html>
+
+

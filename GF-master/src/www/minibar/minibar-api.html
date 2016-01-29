@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>GF web services API examples</title>
+<meta charset="UTF-8">
+<meta name = "viewport" content = "width = device-width">
+
+<style type="text/css">
+body { background: #eee; }
+h1, h2, h3, small, th { font-family: sans-serif; }
+th { text-align: left; }
+h1,h2 { border-bottom: 2px solid black }
+dt { background: #cef; }
+code { background: #ffc; }
+dt.js { background: white; margin-bottom: 1ex; }
+dt.js em { color: #36f; }
+dd { background: #ffc; margin-top: 1ex; margin-bottom: 1ex; }
+
+dl.apiexamples>dt, dl.apiexamples>dd { font-family: monospace; }
+dl.apiexamples>dd {  white-space: pre; }
+
+table.border { border-collapse: collapse; margin-top: 1ex; margin-bottom: 1ex; }
+table.border td, table.border th { border: 1px solid black; background: #fcfcfc; }
+
+div.modtime { float: right; }
+.modtime { color: #666; white-space: nowrap; }
+
+</style>
+
+<body>
+<h1>Minibar API</h1>
+
+The Minibar web app consists of the following objects:
+
+<ul>
+  <li><a href="#Minibar">Minibar</a>
+  <li><a href="#Input">Input</a>
+  <li><a href="#Translations">Translations</a>
+</ul>
+
+They are described below.
+
+<h2 id=Minibar>The Minibar object</h2>
+
+<p>
+This object implements the complete Minibar web app. It is defined in
+<a href="minibar.js">minibar.js</a>. It also uses the <code>Input</code>
+and <code>Translations</code> objects described below, and some auxiliary
+functions defined in <a href="minibar_support.js">minibar_support.js</a>
+and <a href="../js/support.js">support.js</a>, so to use it in an
+HTML file, you would normally include at least the following:
+
+<blockquote><pre>
+&lt;script type="text/JavaScript" src="minibar.js">&lt;/script>
+&lt;script type="text/JavaScript" src="minibar_input.js">&lt;/script>
+&lt;script type="text/JavaScript" src="minibar_translations.js">&lt;/script>
+&lt;script type="text/JavaScript" src="minibar_support.js">&lt;/script>
+&lt;script type="text/JavaScript" src="../js/support.js">&lt;/script>
+</pre></blockquote>
+
+<p>
+For an example, see <a href="minibar.html">minibar.html</a>.
+
+<h3>Constructor</h3>
+
+<code>var minibar=new Minibar(server,options,target)</code>
+
+<ul>
+  <li><code>server</code> is the PGF service object.
+  <li><code>options</code> is an object where the following properties
+  can be set to override various default options:
+    <table class=border>
+        <tr><th>Option<th>Default<th>Description
+        <tr><td>show_abstract<td>false<td rowspan=6>See Translations,
+	  not used directly by Minibar
+	<tr><td>show_trees<td>false
+	<tr><td>tree_img_format<td>"png"
+	<tr><td>show_grouped_translations<td>true
+	<tr><td>show_brackets<td>false
+	<tr><td>translate_limit<td>25
+
+	<tr><td>delete_button_text<td>"⌫"<td rowspan=5>See Input,
+	  not used directly by Minibar
+	<tr><td>default_source_language<td>null
+	<tr><td>startcat_menu<td>true
+	<tr><td>random_button<td>true
+	<tr><td>word_replacements<td>false
+	<tr><td>try_google<td>true<td>Include a button to try the current
+	  sentence in Google Translate
+	<tr><td>feedback_url<td>null<td>Include a button to open a feedback
+	  form. The HTTP server must be configured to handle form submissions
+	  for this to work.
+	<tr><td>help_url<td>null<td>Include a button to open a help text.
+    </table>
+  <li><code>target</code> is the <code>id</code> of the HTML element inside
+    which the minibar user interface is created. It can be omitted if
+    the <code>id</code> is <code>minibar</code>. The HTML document should
+    contain something like this:
+    <blockquote><code>&lt;div id="minibar">&lt;/div></code></blockquote>
+</ul>
+
+<h3>Methods</h3>
+There are several internal methods, but since this is a self-contained
+web app, there is usually no need to call any methods from outside.
+
+<h2 id=Input>The Input object</h2>
+
+This object handles user input. Text can be entered by typing or by clicking
+on the "refrigerator magnets".
+<p>
+It is defined in
+<a href="minibar_input.js">minibar_input.js</a>.
+It also uses some auxiliary functions defined
+in <a href="minibar_support.js">minibar_support.js</a>
+and <a href="../js/support.js">support.js</a>, so to use it in an
+HTML file, you would normally include at least the following:
+
+<blockquote><pre>
+&lt;script type="text/JavaScript" src="minibar_input.js">&lt;/script>
+&lt;script type="text/JavaScript" src="minibar_support.js">&lt;/script>
+&lt;script type="text/JavaScript" src="../js/support.js">&lt;/script>
+</pre></blockquote>
+
+<h3>Constructor</h3>
+
+<code>var input=new Input(server,translations,options)</code>
+
+<ul>
+  <li><code>server</code> is the PGF service object
+  <li><code>options</code> is an object where the following properties
+  can be set to override various default options:
+      <table class=border>
+        <tr><th>Option<th>Default<th>Description
+	<tr><td>delete_button_text<td>"⌫"<td>The label for the button that deletes the last word.
+	<tr><td>default_source_language<td>null<td>The concrete language to
+	  use for input in case the user's browers doesn't supply a suitable
+	  default. If none is provided the first language in alphabetical
+	  order will be used.
+	<tr><td>startcat_menu<td>true<td>Include a menu to choose which start
+	  category to use for parsing (instead of the grammar's default start
+	  category).
+	<tr><td>random_button<td>true<td>Include a button to generate a
+	  random sentence.
+	<tr><td>word_replacements<td>false<td>Enable
+	  <a href="about.html#wordforword">word-for-word replacements</a>.
+	  (This is an experimental feature.)
+    </table>
+
+  <li><code>translations</code> is the object that is notified when the input
+  has changed. In the minibar, this is the object that display translations, but
+  other apps might of course use the entered text for other purposes.
+  The following methods will be called:
+  <ul>
+    <li><code>translations.clear()</code> is called when there is no entered
+    text.
+    <li><code>translations.translateFrom({from:<var>conc</var>,input:<var>string</var>})</code>
+    is called when the user has entered some text. The <code>from</code>
+    property is the name of the concrete syntax and the <code>input</code>
+    property is the entered text.
+  </ul>
+</ul>
+
+<h3>Properties and user interface</h3>
+
+The <code>input</code> object created by the <code>Input</code> constructor
+contains the following fields that the caller should add to the user interface:
+<ul>
+  <li><code>input.main</code> is the main user interface where the current
+  input and the refrigerator magnets are displayed.
+  <li><code>input.menus</code> contains the menu for selecting input language.
+  <li><code>input.buttons</code> contains
+  buttons for deleting the last word, clearing the input and generating
+  a random sentence (if enabled in the options).
+</ul>
+
+<h3>Methods</h3>
+
+<ul>
+  <li><code>input.change_grammar(grammar_info)</code> should be called
+  after a different grammar is selected in the <code>server</code> object. It
+  will clear away old input and magnets, and update the input language menu
+  with the languages available in the new grammar.
+
+</ul>
+
+<h2 id=Translations>The Translations object</h2>
+
+This object displays translations. It is defined in
+<a href="minibar_translations.js">minibar_translations.js</a>.
+It also uses some auxiliary functions defined
+in <a href="minibar_support.js">minibar_support.js</a>
+and <a href="../js/support.js">support.js</a>, so to use it in an
+HTML file, you would normally include at least the following:
+
+<blockquote><pre>
+&lt;script type="text/JavaScript" src="minibar_translations.js">&lt;/script>
+&lt;script type="text/JavaScript" src="minibar_support.js">&lt;/script>
+&lt;script type="text/JavaScript" src="../js/support.js">&lt;/script>
+</pre></blockquote>
+
+<h3>Constructor</h3>
+<code>var translations=new Translations(server,options)</code>
+<ul>
+  <li><code>server</code> is the PGF service object.
+  <li><p><code>options</code> is an object where the following properties
+  can be set to override various default options:
+      <table class=border>
+        <tr><th>Option<th>Default<th>Description
+        <tr><td>show_abstract<td>false<td>show the abstract syntax in addition
+	  to the concrete syntax for the translations
+	<tr><td>show_trees<td>false<td>add buttons to display syntax trees
+	  next to translations.
+	<tr><td>tree_img_format<td>"png"<td>format for trees & alignment images,
+	                                    can be "gif", "png" or "svg"
+	<tr><td>show_grouped_translations<td>true<td>in case there are
+	  multiple translations, group them by concrete language
+	<tr><td>show_brackets<td>false<td>show bracketed string
+	<tr><td>translate_limit<td>25<td>maximum number of parse trees to retrieve    </table>
+
+</ul>
+
+<h3>Properties and user interface</h3>
+
+
+The <code>translations</code> object created by the <code>Translations</code>
+constructor contains the following fields that the caller should add to
+the user interface:
+<ul>
+  <li><code>translations.main</code> is the main user interface where the current
+  translations are displayed.
+  <li><code>translations.menus</code> contains the menu for selecting
+  a target language. The user can select <em>All</em> or one particular
+  language.
+</ul>
+
+<h3>Methods</h3>
+<ul>
+  <li><code>translations.change_grammar(grammar_info)</code> should be called
+  after a different grammar is selected in the <code>server</code> object. It
+  will clear away old translations and update the target language menu
+  with the languages available in the new grammar.
+  <li><code>translations.clear()</code> clears the main output area from old translations.
+  <li><code>translations.translateFrom({from:<var>conc</var>,input:<var>string</var>})</code>
+  displays translations of the text given in the <code>input</code>
+  property (as an array of words)
+  from the concrete syntax indicated by the <code>from</code>.
+</ul>
+
+
+<hr>
+<div class=modtime>
+<small class=modtime>
+HTML <!-- hhmts start -->Last modified: Tue Nov 27 15:03:15 CET 2012 <!-- hhmts end -->
+</small>
+</div>
+
+<address>
+<a href="Http://www.cse.chalmers.se/~hallgren/">TH</a>
+</address>

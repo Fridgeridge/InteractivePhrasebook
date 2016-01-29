@@ -1,0 +1,132 @@
+body { margin:0; padding: 5px; position: relative; }
+h1 { float: right; margin: 0; font-size: 150%; }
+h2 { font-size: 120%; }
+h3 { font-size: 100%; }
+
+div.pagehead {
+    font-family: sans-serif;
+    /*position: fixed; top: 5px; left: 5px; right: 5px; z-index: 2;*/
+    background-color: #d0d0d0;
+    padding: 1px 5px;
+    border-radius: 5px;
+}
+table.menubar td { padding: 5px; cursor: default; }
+table.menubar dl, td.options > div > dl, dl.popupmenu {
+    z-index: 2;
+    display: none; position: absolute;
+    background: white; /* fallback */
+    background: rgba(255,255,255,0.95);
+    color: black;
+    border: 1px solid black;
+    margin: 0;
+    padding: 5px 0;
+    box-shadow: 4px 4px 12px rgba(0,0,0,0.33);
+}
+table.menubar td:hover > dl, :hover > dl.popupmenu { display: block; }
+table.menubar dt, dl.popupmenu > dt { margin: 0; padding: 5px; }
+table.submenu dt { padding: 0; }
+table.menubar td:hover, table.menubar dt:hover, dl.popupmenu > dt:hover {
+    background-color: #36f; color: white;
+}
+table.menubar dt.disabled { color: #999; }
+table.menubar dt.disabled:hover { background-color: white; }
+table table dl { left: 6em; }
+table.menubar dt { white-space: nowrap; }
+dt.unsupported { color: #999; }
+
+div.document {
+    /*margin-top: 7ex;*/
+    clear: both;
+    background: white;
+    border: 2px solid #009;
+    padding: 0.6ex;
+}
+
+div.document h2, div.document h3 { color: #009; }
+
+table.segments { margin-left: auto; margin-right: auto; }
+.current_segment, .segment:hover { background: #ff9; }
+
+td.actions { padding: 1ex 1em 1ex 0.5em; }
+td.options { padding: 1ex 1em; }
+.segment td.source, .segment td.target {
+    padding: 1ex;
+    border-bottom: 2px solid #ccc;
+    vertical-align: baseline;
+}
+td.options > div, td.actions > div { position: relative; margin: 0; }
+td.options:hover > div > form > dl,td.actions:hover > div > dl {
+    display: block;
+}
+td.options > div > form > dl, td.actions > div > dl {
+    left: 1em;
+    font-family: sans-serif;
+    white-space: nowrap;
+}
+
+td.source input[name=it], td.target input[name=it], textarea, input[name=punctchars] {
+    font-family: inherit; font-size: inherit;
+}
+
+td.source input[name=it], td.target input[name=it], textarea { width: 100%; }
+
+table.paralleltexts td {
+    padding: 1ex;
+    vertical-align: baseline;
+    line-height: 130%;
+}
+table.paralleltexts td.source {
+    padding-right: 0.7em;
+    border-right: 2px solid #ccc;
+}
+table.paralleltexts td.target { padding-left:  0.7em; }
+
+label { font-family: sans-serif; }
+
+form { margin: 0; }
+
+form.import { 
+    min-width: 90%; /* extend to availiable width for Safari */
+    /*background: #eee;*/
+    margin: 10px; /* extend to available width for other browsers */
+    padding: 10px;
+    box-shadow: 4px 4px 12px rgba(0,0,0,0.33);
+}
+
+span.actions { visibility: hidden; }
+tr:hover div > span.actions { visibility: visible; }
+span.arrow, span.actions { color: blue; }
+span.error { color: red; }
+span.choices { color: blue; font-weight: bold; font-family: sans-serif; }
+
+.default_quality { background-color: #ffc; background-color: rgba(255,255,0,0.20) }
+.high_quality { background-color: #cfc; background-color: rgba(0,255,0,0.20); }
+.low_quality { background-color: #fcc; background-color: rgba(255,0,0,0.20); }
+.bad_quality { background-color: #f88; background-color: rgba(255,0,0,0.53); }
+.manual_quality { background-color: #ccf; background-color: rgba(0,0,255,0.20); }
+
+div.overlay {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%; height: 100%;
+    background: white; /* fallback */
+    background: rgba(0,0,0,0.3);
+}
+
+div.overlay > div {
+    margin: 5em 3em;
+    background: white; /* fallback */
+    background: rgba(255,255,255,0.95);
+    padding: 1em;
+    box-shadow: 4px 4px 12px rgba(0,0,0,0.33);
+    /*border-radius: 5px;*/
+}
+
+div#minibar, div#syntax_editor {
+    border: 1px solid black;
+    padding: 5px;
+    background: #ccc url("../minibar/brushed-metal.png");
+}

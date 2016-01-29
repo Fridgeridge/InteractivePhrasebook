@@ -1,0 +1,20 @@
+@import url(style0.css);
+
+table { border-collapse: collapse; }
+
+table.news td {
+    background: inherit;
+    border: 0;
+    vertical-align: baseline;
+    padding: 0.25ex 0.5ex;
+}
+
+table.news td:nth-child(1) {
+    /* Don't want the hyphens in dates (2012-06-29) to cause line breaks */
+    white-space: nowrap;
+}
+
+th,td { border: 1px solid #333; }
+
+td { background: white; }
+th { background: #9df; }

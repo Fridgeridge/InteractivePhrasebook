@@ -1,0 +1,10 @@
+Some of the sources are transliterated, in
+
+ ./src
+ ../hindustani
+
+Before compilation, do
+
+  gf -s <translit.gfs
+
+to get unicode.

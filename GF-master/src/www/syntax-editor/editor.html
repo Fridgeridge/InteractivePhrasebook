@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="author" href="http://www.grammaticalframework.org/~john/" title="John J. Camilleri">
+  <title>Syntax Editor</title>
+  <link rel="stylesheet" type="text/css" href="../minibar/minibar.css" />
+  <link rel="stylesheet" type="text/css" href="editor.css" />
+</head>
+<body class="syntax-editor">
+  <h2>Syntax Editor</h2>
+  <div id="minibar"></div>
+  <div id="editor"></div>
+  <noscript>This page doesn't work unless JavaScript is enabled.</noscript>
+
+  <hr />
+  <small class="modtime">
+  John J. Camilleri, December 2012 </br>
+  [ <a href="about.html">About syntax editor</a>
+  | <a href="../minibar/minibar.html">Minibar</a> ]
+  </small>
+  <div id="debug" class="hidden"></div>
+
+  <!-- Common -->
+  <script type="text/javascript" src="../js/grammar_manager.js"></script>
+  <script type="text/javascript" src="../js/support.js"></script>
+  <script type="text/JavaScript" src="../js/localstorage.js"></script>
+  <script type="text/javascript" src="../js/pgf_online.js"></script>
+  <script type="text/JavaScript" src="../js/langcode.js"></script>
+
+  <!-- Editor -->
+  <script type="text/javascript" src="ast.js"></script>
+  <script type="text/javascript" src="editor_menu.js"></script>
+  <script type="text/javascript" src="editor.js"></script>
+
+  <!-- Minibar -->
+  <script type="text/JavaScript" src="../minibar/minibar.js"></script>
+  <script type="text/JavaScript" src="../minibar/minibar_input.js"></script>
+  <script type="text/JavaScript" src="../minibar/minibar_translations.js"></script>
+  <script type="text/JavaScript" src="../minibar/minibar_support.js"></script>
+
+  <!-- Get us rolling! -->
+  <script type="text/javascript" src="editor_online.js"></script>
+  
+</body>
+</html>

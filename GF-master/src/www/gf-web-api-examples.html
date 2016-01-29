@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>GF web services API examples</title>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="gfse/editor.css" title="Cloud">
+<meta name = "viewport" content = "width = device-width">
+
+<style type="text/css">
+
+dt { background: #cef; }
+dt.js { background: white; margin-bottom: 1ex; }
+dt.js em { color: #36f; }
+dd { background: #ffc; margin-top: 1ex; margin-bottom: 1ex; }
+dt, dd { padding: 0.3ex; }
+
+dl.apiexamples>dt, dl.apiexamples>dd { font-family: monospace; }
+dl.apiexamples>dd {  white-space: pre; }
+
+@media projection {
+    div.intro { display: none; }
+
+    body {
+	font-size: 150%;
+    }
+
+    h2 { page-break-before: always; }
+
+    dl.apiexamples dd {
+	page-break-after: always;
+	/*border-style: none;*/
+    }
+}
+
+</style>
+
+<body>
+<h1><a href="../"><img src="../P/gf-cloud.png" alt=""></a>
+    GF web services API examples</h1>
+
+GF can be used interactively from the GF Shell. Some of the functionality
+availiable in the GF shell is also available via the GF web services API.
+
+<p>
+The
+<a href="http://code.google.com/p/grammatical-framework/wiki/GFWebServiceAPI">GF
+Web Service API page</a> describes the calls supported by the GF web service
+API. Below, we illustrate these calls by examples, and also show
+how to make these calls from JavaScript using the API defined in
+<a href="js/pgf_online.js"><code>pgf_online.js</code></a>.
+
+<p>
+<strong>Note</strong> that <code>pgf_online.js</code> was initially developed
+with one particular web application in mind (the minibar), so the server API was
+incomplete. It was simplified and generalized in August 2011 to support the
+full API.
+
+<dl>
+  <dt class=js>These boxes show what the calls look like in the JavaScript
+    API defined in <code>pgf_online.js</code>.
+  <dt>These boxes show the corresponding URLs sent to the PGF server.
+  <dd>These boxes show the JSON (JavaScript data structures) returned by the PGF
+    server. This will be passed to the callback function supplied in the
+    call.
+</dl>
+
+<h2>Initialization</h2>
+<dl class=apiexamples>
+  <dt class=js>
+    <em>// Select which server and grammars to use:</em>
+    <br>var server_options = {
+    <br>&nbsp;&nbsp;grammars_url: "http://www.grammaticalframework.org/grammars/",
+    <br>&nbsp;&nbsp;grammar_list: ["Foods.pgf"] <em>// It's ok to skip this</em>
+    <br>}
+    <br>var server = pgf_online(server_options);
+</dl>
+
+<h2>Examples</h2>
+
+<dl class=apiexamples>
+  <dt class=js> <em>//  Get the list of available grammars</em>
+    <br>server.get_grammarlist(callback)
+  <dt>http://localhost:41296/grammars/grammars.cgi
+  <dd>["Foods.pgf","Phrasebook.pgf"]
+  <dt class=js> <em>// Select which grammar to use</em>
+    <br>server.switch_grammar("Foods.pgf")
+  <dt class=js><em>// Get list of concrete languages and other grammar info</em>
+    <br>server.grammar_info(callback)
+  <dt>http://localhost:41296/grammars/Foods.pgf
+  <dd>{"name":"Foods",
+ "userLanguage":"FoodsEng",
+ "startcat":"Comment",
+ "categories":["Comment","Float","Int","Item","Kind","Quality","String"],
+ "functions":["Boring","Cheese","Delicious","Expensive","Fish","Fresh",
+           "Italian","Mod","Pizza","Pred","That","These","This","Those","Very",
+           "Warm","Wine"],
+ "languages":[{"name":"FoodsBul","languageCode":""},
+ 	      {"name":"FoodsEng","languageCode":"en-US"},
+ 	      {"name":"FoodsFin","languageCode":""},
+	      {"name":"FoodsSwe","languageCode":"sv-SE"},
+	      ...]
+}
+  <dt class=js><em>// Get a random syntax tree</em>
+    <br>server.get_random({},callback)
+  <dt>http://localhost:41296/grammars/Foods.pgf?command=random
+  <dd>[{"tree":"Pred (That Pizza) (Very Boring)"}]
+  <dt class=js><em>// Linearize a syntax tree</em>
+    <br>server.linearize({tree:"Pred (That Pizza) (Very Boring)",to:"FoodsEng"},callback)
+  <dt>http://localhost:41296/grammars/Foods.pgf?command=linearize&amp;tree=Pred+(That+Pizza)+(Very+Boring)&amp;to=FoodsEng
+  <dd>[{"to":"FoodsEng","text":"that pizza is very boring"}]
+  <dt class=js>server.linearize({tree:"Pred (That Pizza) (Very Boring)"},callback)
+  <dt>http://localhost:41296/grammars/Foods.pgf?command=linearize&amp;tree=Pred+(That+Pizza)+(Very+Boring)
+  <dd>[{"to":"FoodsBul","text":"онази пица е много еднообразна"},
+ {"to":"FoodsEng","text":"that pizza is very boring"},
+ {"to":"FoodsFin","text":"tuo pizza on erittäin tylsä"},
+ {"to":"FoodsSwe","text":"den där pizzan är mycket tråkig"},
+ ...
+]
+  <dt class=js><em>// Parse a string</em>
+    <br>server.parse({from:"FoodsEng",input:"that pizza is very boring"},callback)
+  <dt>http://localhost:41296/grammars/Foods.pgf?command=parse&amp;input=that+pizza+is+very+boring&amp;from=FoodsEng
+  <dd>[{"from":"FoodsEng",
+  "brackets":{"cat":"Comment","fid":10,"index":0,"children":[{"cat":"Item","fid":7,"index":0,"children":[{"token":"that"},{"cat":"Kind","fid":6,"index":0,"children":[{"token":"pizza"}]}]},{"token":"is"},{"cat":"Quality","fid":9,"index":0,"children":[{"token":"very"},{"cat":"Quality","fid":8,"index":0,"children":[{"token":"boring"}]}]}]},
+  "trees":["Pred (That Pizza) (Very Boring)"]}]
+  <dt class=js><em>// Translate to all available languages</em>
+    <br>server.translate({from:"FoodsEng",input:"that pizza is very boring"},callback)
+  <dd>...
+  <dt class=js><em>// Translate to one language</em>
+    <br>server.translate({input:"that pizza is very boring", from:"FoodsEng", to:"FoodsSwe"}, callback)
+  <dt>http://localhost:41296/grammars/Foods.pgf?command=translate&amp;input=that+pizza+is+very+boring&amp;from=FoodsEng&amp;to=FoodsSwe
+  <dd>[{"from":"FoodsEng",
+  "brackets":{"cat":"Comment","fid":10,"index":0,"children":[{"cat":"Item","fid":7,"index":0,"children":[{"token":"that"},{"cat":"Kind","fid":6,"index":0,"children":[{"token":"pizza"}]}]},{"token":"is"},{"cat":"Quality","fid":9,"index":0,"children":[{"token":"very"},{"cat":"Quality","fid":8,"index":0,"children":[{"token":"boring"}]}]}]},
+  "translations":
+       [{"tree":"Pred (That Pizza) (Very Boring)",
+         "linearizations":
+            [{"to":"FoodsSwe",
+              "text":"den där pizzan är mycket tråkig"}]}]}]
+  <dt class=js><em>// Get completions (what words could come next)</em>
+    <br>server.complete({from:"FoodsEng",input:"that pizza is very "},callback)
+  <dt>http://localhost:41296/grammars/Foods.pgf?command=complete&amp;input=that+pizza+is+very+&amp;from=FoodsEng
+  <dd>[{"from":"FoodsEng",
+  "brackets":{"cat":"_","fid":0,"index":0,"children":[{"cat":"Item","fid":7,"index":0,"children":[{"token":"that"},{"cat":"Kind","fid":6,"index":0,"children":[{"token":"pizza"}]}]},{"token":"is"},{"token":"very"}]},
+  "completions":["boring","delicious","expensive","fresh","Italian","very","warm"],
+  "text":""}]
+  <dt class=js><em>// Get info about a category in the abstract syntax</em>
+    <br>server.browse({id:"Kind"},callback)
+  <dt>http://localhost:41296/grammars/Foods.pgf?command=browse&amp;id=Kind&amp;format=json
+  <dd>{"def":"cat Kind",
+ "producers":["Cheese","Fish","Mod","Pizza","Wine"],
+ "consumers":["Mod","That","These","This","Those"]}
+  <dt class=js><em>// Get info about a function in the abstract syntax</em>
+    <br>server.browse({id:"This"},callback)
+  <dt>http://localhost:41296/grammars/Foods.pgf?command=browse&amp;id=This&amp;format=json
+  <dd>{"def":"fun This : Kind -> Item","producers":[],"consumers":[]}
+  <dt class=js><em>// Get info about all categories and functions in the abstract syntax</em>
+    <br>server.browse({},callback)
+  <dt>http://localhost:41296/grammars/Foods.pgf?command=browse&amp;format=json
+  <dd>{"cats":{"Kind":{"def":"cat Kind",
+                 "producers":["Cheese","Fish","Mod","Pizza","Wine"],
+                 "consumers":["Mod","That","These","This","Those"]},
+         ...},
+ "funs":{"This":{"def":"fun This : Kind -> Item","producers":[],"consumers":[]},
+         ...}
+}
+  <dt class=js><em>// Convert an abstract syntax tree to JSON</em>
+    <br>server.pgf_call("abstrjson",{tree:"Pred (That Pizza) (Very Boring)"},callback)
+
+  <dt>http://localhost:41296/grammars/Foods.pgf?command=abstrjson&amp;tree=Pred+(That+Pizza)+(Very+Boring)
+  <dd>{"fun":"Pred","fid":4,
+ "children":[{"fun":"That","fid":1,
+              "children":[{"fun":"Pizza","fid":0}]},
+             {"fun":"Very","fid":3,
+              "children":[{"fun":"Boring","fid":2}]}]}
+  <dt class=js><em>// Lookup the morphological analysis of a word</em>
+    <br>server.pgf_call("lookupmorpho",{input:"fish",from:"FoodsEng"},callback)
+  <dt>http://localhost:41296/grammars/Foods.pgf?command=lookupmorpho&amp;input=fish&amp;from=FoodsEng
+  <dd>[{"lemma":"Fish","analysis":"s Pl"},{"lemma":"Fish","analysis":"s Sg"}]
+</dl>
+<hr>
+<div class=modtime><small>
+<!-- hhmts start -->Last modified: Sat Jun 21 14:57:43 CEST 2014 <!-- hhmts end -->
+  </small></div>
+<address><a href="http://www.cse.chalmers.se/~hallgren/">TH</a></address>

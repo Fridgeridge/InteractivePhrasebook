@@ -1,0 +1,309 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>About: GF online editor for simple multilingual grammars</title>
+<link rel="stylesheet" type="text/css" href="editor.css" title="Cloud">
+<link rel="alternate stylesheet" type="text/css" href="molto.css" title="MOLTO">
+
+<link rel=author href="http://www.cse.chalmers.se/~hallgren/" title="Thomas Hallgren">
+
+<meta name = "viewport" content = "width = device-width">
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<meta charset="UTF-8">
+
+<script type="text/javascript" src="slideshow.js"></script>
+
+</head>
+
+<body>
+<h1><a href="../"><img src="../P/gf-cloud.png" alt="" title="GF Cloud Service"></a>GF online editor for simple multilingual grammars</h1>
+
+<div class=right>
+  <div class=slideshow>
+    <img onload="start_slideshow(this,{delay:5,fade:0.3})" src="P/w1s.jpg" alt="[GF online editor screen shoot]">
+    <img class=hidden src="P/w2s.jpg" alt="[GF online editor screen shoot]">
+    <img class=hidden src="P/w3s.jpg" alt="[GF online editor screen shoot]">
+    <img class=hidden src="P/w4s.jpg" alt="[GF online editor screen shoot]">
+  </div>
+</div>
+<h2>Introduction</h2>
+
+Traditionally, <a href="http://www.grammaticalframework.org/">GF</a>
+grammars are created in a text editor and tested in the
+GF shell. Text editors know very little (if anything) about the syntax of
+GF grammars, and thus provide little guidance for novice GF users. Also, the
+grammar author has to download and install the GF software on his/her own
+computer.
+
+<p>
+In contrast, the
+<a href="."><em>GF online editor for simple multilingual grammars</em></a>
+is available online, making it easier to get started. All that
+is needed is a reasonably modern web browser. Even Android and iOS devices
+can be used.
+<p>
+The editor
+also guides the grammar author by showing a skeleton grammar file and
+hinting how the parts should be filled in. When a new part is added to the
+grammar, it is immediately checked for errors.
+
+<p>
+Editing operations are accessed by clicking on editing symbols embedded
+in the grammar display:
+<span class=more>+</span>=Add an item,
+<span class=delete>×</span>=Delete an item,
+<span class=edit>%</span>=Edit an item.
+These are revealed when hovering over items. On touch devices, hovering is
+in some cases simulated by tapping, but there is also a button at the bottom
+of the display to "Enable editing on touch devices" that reveals all editing
+symbols.
+
+<p>
+In spite of its name, the core of the editor runs in the web
+browser, so once you have opened the web page, you can
+<strong>continue editing</strong> grammars even while you are
+<strong>offline</strong>. Grammar compilation &amp; testing and some
+error checking is done by the GF server and is not available while offline.
+
+<h3>Current status</h3>
+
+<p>
+At the moment, the editor supports only a small subset of the GF grammar
+notation.
+Proper error checking is done for abstract syntax, but not (yet) for concrete
+syntax.
+
+<p>
+The grammars created with this editor always consists of one file for the
+abstract syntax, and one file for each concrete syntax.
+
+<h4>Abstract syntax</h4>
+
+The supported abstract syntax corresponds to context-free grammars
+(no dependent types). The definition of an abstract syntax is limited to
+<ul>
+  <li>a list of inherited abstract syntaxes,
+  <li>a list of <em>category names</em>,
+  <var>Cat<sub>1</sub></var> ; ... ; <var>Cat<sub>n</sub></var>,
+  <li>a list of <em>functions</em> of the form
+  <var>Fun</var> : <var>Cat<sub>1</sub></var> -> ... ->
+  <var>Cat<sub>n</sub></var>,
+  <li>and a <em>start category</em>.
+</ul>
+
+Available editing operations:
+<ul>
+  <li>Inherited abstract syntaxes can be added and removed.
+  <li>Categories can be added, removed and renamed. When renaming a category,
+  occurences of it in function types will be updated accordingly.
+  <li>Functions can be added, removed and edited. Concrete syntaxes are updated
+  to reflect changes.
+  <li>Functions can be reordered using drag-and-drop.
+</ul>
+
+Error checks:
+
+<ul>
+  <li>Syntactically incorrect function definitions are refused.
+  <li>Semantic problem such as duplicated definitions or references to
+  undefined categories, are highlighted.
+</ul>
+
+<h4>Concrete syntax</h4>
+
+At the moment, the concrete syntax for a language <var>L</var> is limited to
+<ul>
+  <li>inheriting the concrete syntax <var>G<sub>i</sub>L</var>
+  for each <var>G<sub>i</sub></var> inherited by the abstract syntax.
+  <li>opening a selection of the Resource Grammar Library modules
+  <code>Syntax</code><var>L</var>, <code>Paradigms</code><var>L</var>,
+  <code>Lexicon</code><var>L</var>, <code>Symbolic</code><var>L</var>
+  and <code>Extra</code><var>L</var>,
+  <li><em>linearization types</em> for the categories in the abstract syntax,
+  <li><em>linearizations</em> for the functions in the abstract syntax,
+  <li><em>parameter type definitions</em>,
+  <var>P</var> = <var>C<sub>1</sub></var> | ... |<var>C<sub>n</sub></var>,
+  <li>and <em>operation definitions</em>, <var>op</var> = <var>expr</var>,
+   <var>op</var> : <var>type</var> = <var>expr</var>,
+</ul>
+
+Available editing operations:
+<ul>
+  <li>Modules can be added and removed from the list of opened Resource Grammar
+  Library modules.
+  <li>The LHSs of the linearization types and linearizations are determined by
+  the abstract syntax and do not need to be entered manually.
+  The RHSs can
+  be edited.
+  <li>Parameter types can be added, removed and edited.
+  <li>Operation definitons can be added, removed and edited.
+  <li>Definitions can be reordered (using drag-and-drop).
+</ul>
+Also,
+
+<ul>
+  <li>When a new concrete syntax is added to the grammar, a copy of the
+  currently open concrete syntax is created, since copying and modifying
+  is usually easier than creating something new from scratch.
+  (If the abstract syntax is currently open, the new conrete syntax will
+  start out empty.)
+  <li>When adding a new concrete syntax, you normally pick one of the supported
+  languages from a list. The language code and the file name is determined
+  automatically. But you can also pick <em>Other</em> from the list and change
+  the language code afterwards to add a concrete syntax for a language
+  that is not in the list.
+</ul>
+
+Error checks:
+<ul>
+  <li>The RHSs in the concrete syntax are checked
+  for syntactic correctness by the editor as they are entered.
+  (TODO: the syntax of parameter types is not check at the moment.)
+  <li>Duplicated definitions are highlighted. Checks for other
+  semantic errors are delayed until the grammar is compiled.
+</ul>
+
+<h3>Grammar views</h3>
+
+The editor supports three ways to view a grammar:
+
+<ul>
+  <li><strong>Column view</strong>:
+  this is the traditional view where you see one complete grammar module at a
+  time. i.e. either the abstract syntax or one of the concrete syntaxes in the
+  grammar.
+  <li><strong>Matrix view</strong>:
+  this presents an overview of the grammar where columns
+  correspond to the abstract and concrete syntax modules and rows correspond
+  to the categories and functions in the grammar.
+  <li><strong>Row view</strong>:
+  this view shows one function form the abstract syntax and
+  the corresponding linearization functions from all the concrete syntaxes.
+</ul>
+
+<h3>Compiling and testing grammars</h3>
+
+When pressing the <strong>Compile</strong> button, the grammar will be compiled
+with GF, and any errors not detected by the editor will be reported.
+The grammar will also be compiled when pressing the <strong>Minibar</strong>
+and <strong>Quiz</strong> buttons before opening the grammar for testing
+in the Minibar or the Translation Quiz, respectively.
+
+<h3><img class=right src="P/1307545089_weather_04.png" alt="">
+<img class=right src="P/1306856253_weather_06.png" alt="">Grammars in the
+cloud</h3>
+
+While the editor normally stores grammars locally in the browser, it is also
+possible to store grammars in the cloud.  Grammars can be stored in the cloud
+just for backup, or to make them accessible from multiple devices.
+
+<p>
+There is no automatic synchronization between local grammars and the cloud.
+Instead, the user should press
+<img src="P/1306856253_weather_06.png" alt="[Cloud Upload]">
+to upload the grammars to the cloud, and press
+<img src="P/1307545089_weather_04.png" alt="[Cloud download]">
+to download grammars from the cloud. In both cases, complete grammars
+are copied and older versions at the destination will be overwritten.
+When a grammar is deleted, both the local copy and the copy in the cloud
+is deleted.
+
+<p>
+Each device is initially assigned to its own unique cloud. Each device can thus
+have its own set of grammars that are not available on other devices.  It is
+also possible to merge clouds and share a common set of grammars between
+multiple devices: when uploading grammars to the cloud, a link to this grammar
+cloud appears. Accessing this link from another device will cause the clouds of
+the two devices to be merged. After this, grammars uploaded from one of the
+devices can be downloaded on the other devices. Any number devices can join the
+same grammar cloud in this way.
+
+<p>
+<strong>Note</strong> that while it is possible to copy grammars between
+multiple devices, there is no way to merge concurrent edits from multiple
+devices. If the same grammar is uploaded to the
+cloud from multiple devices, the last upload wins. Thus the current
+implementation is suitable for a single user switching between different
+devices, but not recommended for sharing grammars between multiple users.
+
+<p>
+Also <strong>note</strong> that each grammar is assigned a unique identity
+when it is first created. Renaming a grammar does not change its identity.
+This means that name changes are propagated between devices like other changes.
+
+<h4 id=public>Public grammars</h4>
+<blockquote>
+[October 2012: this is an <strong>experimental feature</strong> that
+might be replaced by an incompatible grammar sharing mechanism in the future.]
+</blockquote>
+<p>
+The grammar cloud also includes a list of public grammars.
+Grammars can be added to the public list by pressing the
+<strong>Publish</strong> button shown next to the grammars in the list of
+your grammars.
+
+<p>
+The <strong>Publish</strong> button creates <em>copy</em> of your grammar.
+If you continue to edit your grammar, the changes will be local only.
+You can press the <strong>Publish</strong> button again to update the public
+copy.
+
+<p>
+You can remove a grammar from the public list by pressing the
+<span class=delete>×</span> button next to the grammar in the public list.
+You can <em>not</em> remove grammars published by other users.
+
+<p>
+When you open a public grammar published by another user, a <em>copy</em> of
+the grammar is added to the list of your grammars. Any changes will be made in
+your own copy of the grammar. If you publish your copy of the grammar, it will
+appear separately in the list of public grammars. You can not
+overwrite grammars published by other users, even if they have the same name.
+
+<p>
+TODO: Publishing grammars that inherit form other grammars is not recommended.
+There is no way to indicate which of several grammars with the same name is
+being inherited.
+
+<p>
+TODO: There should probably be a way to identify who published a grammar and
+when. Maybe the publish button should be restricted to registered users...
+
+
+<h3>Example-based grammar writing</h3>
+
+We experimented with this in 2011. It is currently not included, but it
+might return in a future version...
+
+<h3>Future work</h3>
+
+This prototype gives an idea of how a web based GF grammar editor could work.
+While this editor is implemented in JavaScript and runs in the web browser,
+we do not expect to create a full implementation of GF that runs in the
+web browser, but let the editor communicate with a server running GF.
+<p>
+By developing a GF server with an appropriate API, it should
+be possible to extend the editor to support a larger fragment of GF,
+to do proper error checking and make more of the existing GF shell functionality
+accessible directly from the editor.
+<p>
+The current grammar cloud service is very primitive. In particular, it is not
+suitable for multiple users developing a grammar in collaboration.
+
+<h3>Related documents</h3>
+<ul>
+  <li><a href="http://www.grammaticalframework.org/~hallgren/Talks/GF/gf-ide.html">GF Grammar Development Tools</a>. Slides from a presentation at the MOLTO meeting in Göteborg, March 2011.
+  <li><a href="http://www.grammaticalframework.org/grammar-ide/">The GF Grammar IDE</a>. MOLTO deliverable.
+  <li><a href="http://www.grammaticalframework.org/compiler-api">The GF Grammar
+  Compiler API</a>. MOLTO deliverable.
+</ul>
+
+<hr>
+<div class=modtime><small>
+<!-- hhmts start -->Last modified: Tue Oct  9 16:52:47 CEST 2012 <!-- hhmts end -->
+  </small></div>
+<address>
+<a href="http://www.cse.chalmers.se/~hallgren/">TH</a>
+<img src="http://www.altocumulus.org/~hallgren/online.cgi?icon" alt="">
+</address>
+</body> </html>

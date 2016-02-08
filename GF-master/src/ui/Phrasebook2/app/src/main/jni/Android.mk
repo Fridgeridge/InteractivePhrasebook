@@ -10,11 +10,11 @@ gu_c_files := assert.c  choice.c  exn.c   fun.c   in.c      map.c  out.c     utf
 bits.c    defs.c    enum.c  file.c  hash.c  mem.c  prime.c  seq.c   string.c  ucs.c   variant.c
 
 LOCAL_MODULE    := jpgf
-LOCAL_SRC_FILES := $(addprefix ../../../runtime/java/, $(jni_c_files)) \
-                   $(addprefix ../../../runtime/c/sg/, $(sg_c_files)) \
-                   $(addprefix ../../../runtime/c/pgf/, $(pgf_c_files)) \
-                   $(addprefix ../../../runtime/c/gu/, $(gu_c_files))
-LOCAL_C_INCLUDES := ../../../runtime/c
+LOCAL_SRC_FILES := $(addprefix ../../../../../../runtime/java/, $(jni_c_files)) \
+                   $(addprefix ../../../../../../runtime/c/sg/, $(sg_c_files)) \
+                   $(addprefix ../../../../../../runtime/c/pgf/, $(pgf_c_files)) \
+                   $(addprefix ../../../../../../runtime/c/gu/, $(gu_c_files))
+LOCAL_C_INCLUDES := ../../../../../../runtime/c
 
 include $(BUILD_SHARED_LIBRARY)
 

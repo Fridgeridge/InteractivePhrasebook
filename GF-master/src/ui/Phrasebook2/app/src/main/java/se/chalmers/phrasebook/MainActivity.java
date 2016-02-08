@@ -2,10 +2,20 @@ package se.chalmers.phrasebook;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 
-public class MainActivity extends ActionBarActivity {
+import org.grammaticalframework.pgf.PGF;
+import org.grammaticalframework.sg.SG;
+
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.io.StringBufferInputStream;
+
+public class MainActivity extends ActionBarActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,5 +43,14 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+        EditText et = (EditText) findViewById(R.id.editText);
+        if(et != null && et.getText()!=null && et.getText().length() > 0 ){
+            String s = et.getText().toString();
+            Log.d("G", s);
+        }
     }
 }

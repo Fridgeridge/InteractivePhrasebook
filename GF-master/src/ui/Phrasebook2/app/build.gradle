@@ -3,11 +3,10 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 23
     buildToolsVersion "22.0.1"
-
     defaultConfig {
         applicationId "se.chalmers.phrasebook"
-        minSdkVersion 10
-        targetSdkVersion 10
+        minSdkVersion 14
+        targetSdkVersion 14
         versionCode 1
         versionName "1.0"
     }
@@ -25,12 +24,15 @@ android {
         jniLibs.srcDir 'src/main/libs' //set .so files location to libs
         jni.srcDirs = [] //disable automatic ndk-build call
     }
+    productFlavors {
+    }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
+    compile project(':jpgf')
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:multidex:1.0.0'
-    compile project(':jpgf')
+    compile 'com.android.support:design:23.1.1'
 }

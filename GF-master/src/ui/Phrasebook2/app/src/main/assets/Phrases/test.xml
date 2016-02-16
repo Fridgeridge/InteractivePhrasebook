@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <name>"Test sentence"</name>
+    <template>"?s asd 1?"</template>
+    <xsl:template>

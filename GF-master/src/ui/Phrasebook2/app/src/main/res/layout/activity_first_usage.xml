@@ -7,7 +7,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="se.chalmers.phrasebook.FirstUsageActivity">
+    tools:context="se.chalmers.phrasebook.FirstUsageActivity"
+    android:background="#85ccc5">
 
     <Button
         android:layout_width="150dp"
@@ -20,7 +21,8 @@
         android:background="@color/main_color"
         android:textSize="25dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:onClick="sendMessage" />
 
     <Spinner
         android:layout_width="wrap_content"
@@ -35,4 +37,17 @@
         android:id="@+id/spinner2"
         android:layout_below="@+id/spinner"
         android:layout_alignParentLeft="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Interactive Phrasebook"
+        android:id="@+id/titleText"
+        android:textColor="#f4efef"
+        android:textSize="48dp"
+        android:textAlignment="textEnd"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="73dp" />
 </RelativeLayout>

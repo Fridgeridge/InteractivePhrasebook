@@ -8,7 +8,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="se.chalmers.phrasebook.FirstUsageActivity"
-    android:background="#85ccc5">
+    android:background="#b2dfdb">
 
     <Button
         android:layout_width="150dp"
@@ -29,7 +29,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/spinner"
         android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true" />
+        android:layout_centerHorizontal="true"
+        android:popupTheme="#e0f7fa" />
 
     <Spinner
         android:layout_width="wrap_content"

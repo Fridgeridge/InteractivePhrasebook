@@ -11,4 +11,13 @@
         <item>Hebrew</item>
     </string-array>
 
+    <string-array name="placeholder_phrases">
+        <item>How much does something cost?</item>
+        <item>Someone is born somewhere</item>
+        <item>Someone is hungry</item>
+        <item>Blalbalbalblababab</item>
+        <item>I eat apples. They are full of nutrition.</item>
+    </string-array>
+
+
 </resources>

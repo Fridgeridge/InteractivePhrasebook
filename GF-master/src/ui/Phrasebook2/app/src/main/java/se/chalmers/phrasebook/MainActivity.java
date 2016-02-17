@@ -57,7 +57,7 @@ public class MainActivity extends ActionBarActivity{
     }
 
     public void sendMessage(View view) {
-        Intent intent = new Intent(this, HomeScreenActivity.class);
+        Intent intent = new Intent(this, PhraseListActivity.class);
         startActivity(intent);
     }
 

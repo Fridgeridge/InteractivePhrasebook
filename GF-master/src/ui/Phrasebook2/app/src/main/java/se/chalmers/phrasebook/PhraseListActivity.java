@@ -11,8 +11,11 @@ public class PhraseListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phrase_list);
+    }
 
-        ArrayAdapter<CharSequence> phraseAdapter = ArrayAdapter.createFromResource(this, R.array.placeholder_phrases,
+    //placeholder function
+    protected void initializeList(String phrasebookID){
+        ArrayAdapter<CharSequence> phraseAdapter = ArrayAdapter.createFromResource(this, R.array.placeholder_phrases1,
                 android.R.layout.simple_list_item_1);
         ListView listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(phraseAdapter);

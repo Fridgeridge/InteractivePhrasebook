@@ -6,6 +6,11 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.GridView;
+import android.widget.ListView;
+
+import se.chalmers.phrasebook.adapters.PhrasebookButtonAdapter;
 
 public class HomeScreenActivity extends AppCompatActivity {
 
@@ -13,17 +18,15 @@ public class HomeScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        String[] myStringArray = {"Simple phrases","Hospital phrases", "Restaurant phrases","LOOOOOOOOOOOOOOOOOO00000000000000000000000000000000000000000000000OOOOOOOOOOOOOOOONG Phrases"};
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, myStringArray);
+
+        GridView gridView = (GridView) findViewById(R.id.gridView);
+        gridView.setAdapter(new PhrasebookButtonAdapter(this,myStringArray));
+
+
     }
 
 }

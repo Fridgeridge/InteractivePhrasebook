@@ -1,28 +1,20 @@
 package se.chalmers.phrasebook;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 
-import org.grammaticalframework.pgf.Concr;
-import org.grammaticalframework.pgf.Expr;
-import org.grammaticalframework.pgf.ExprProb;
-import org.grammaticalframework.pgf.MorphoAnalysis;
 import org.grammaticalframework.pgf.PGF;
-import org.grammaticalframework.pgf.ParseError;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-public class MainActivity extends ActionBarActivity implements View.OnClickListener {
+public class MainActivity extends ActionBarActivity{
 
     private PGF pgf;
 
@@ -64,37 +56,10 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onClick(View v) {
-        EditText et = (EditText) findViewById(R.id.editText);
-        if(et != null && et.getText()!=null && et.getText().length() > 0 ){
-            String s = et.getText().toString();
-            Log.d("G", s);
-            Map<String,Concr> map = pgf.getLanguages();
-            Log.d("G",map.toString());
-            Concr concr = map.get("PhrasebookEng");
-            Log.d("G", concr.getName());
-
-            String output="";
-            try {
-                Iterator<ExprProb> iter = concr.parse("Chunk", s).iterator(); // try parse as chunk
-                Expr expr = iter.next().getExpr();
-                output = concr.linearize(expr);
-            } catch (ParseError e) {                               	  // if this fails
-                List<MorphoAnalysis> morphos = concr.lookupMorpho(s) ;  // lookup morphological analyses
-
-                morphos.addAll(concr.lookupMorpho(s.toLowerCase())) ;  // including the analyses of the lower-cased word
-
-                for (MorphoAnalysis ana : morphos) {
-                    if (concr.hasLinearization(ana.getLemma())) {    // check that the word has linearization in target
-                        output = concr.linearize(Expr.readExpr(ana.getLemma())) ;
-                        break ;                                           // if yes, don't search any more
-                    }
-                }
-            }
-
-            Log.d("G",output);
-
-        }
+    public void sendMessage(View view) {
+        Intent intent = new Intent(this, HomeScreenActivity.class);
+        startActivity(intent);
     }
-}
+
+    }
+

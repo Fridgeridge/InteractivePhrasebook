@@ -2,4 +2,5 @@
 <resources>
     <item name="main_color" type="color">#4db6ac</item>
     <item name="secondary_color" type="color">#80cbc4</item>
+    <item name="highlight_color" type="color">#ff7043</item>
 </resources>

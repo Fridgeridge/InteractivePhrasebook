@@ -43,7 +43,8 @@ public class PhrasebookButtonAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         Button button;
         if(convertView == null) {
-            button = (Button);
+            button = new Button(context);
+            button.findViewById(R.id.phrasebookButton);
             //button.setLayoutParams(new GridView.LayoutParams(100, 55));
             //button.setPadding(10, 10, 10, 10);
         }else {

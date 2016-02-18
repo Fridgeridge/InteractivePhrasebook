@@ -27,5 +27,15 @@
         <item>Someone wants some food</item>
     </string-array>
 
+    <string-array name="button_names">
+        <item>Tourism</item>
+        <item>Favorites</item>
+        <item>Getting from the airport</item>
+        <item>Greetings</item>
+        <item>Emergency</item>
+        <item>Food</item>
+        <item>Directions</item>
+    </string-array>
+
 
 </resources>

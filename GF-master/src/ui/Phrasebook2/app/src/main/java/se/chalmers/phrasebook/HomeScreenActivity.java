@@ -21,7 +21,7 @@ public class HomeScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home_screen);
 
         Resources res = getResources();
-        String[] buttonNames = res.getStringArray(R.array.placeholder_phrases1);
+        String[] buttonNames = res.getStringArray(R.array.button_names);
         GridView gridView = (GridView) findViewById(R.id.gridView);
         gridView.setAdapter(new PhrasebookButtonAdapter(this, buttonNames));
 

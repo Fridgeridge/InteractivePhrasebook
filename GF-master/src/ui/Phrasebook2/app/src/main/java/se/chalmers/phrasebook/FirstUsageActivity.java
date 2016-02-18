@@ -1,5 +1,6 @@
 package se.chalmers.phrasebook;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -28,6 +29,7 @@ public class FirstUsageActivity extends AppCompatActivity {
     }
      //Test class to develop buttons
     public void sendMessage(View view) {
-        System.out.println("START");
+        Intent intent = new Intent(this, HomeScreenActivity.class);
+        startActivity(intent);
     }
 }

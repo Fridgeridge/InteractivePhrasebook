@@ -5,10 +5,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.GridView;
-import android.widget.LinearLayout;
 
-import se.chalmers.phrasebook.R;
+import static se.chalmers.phrasebook.R.drawable.grid_phrasebook_button;
 
 /**
  * Created by David on 2016-02-17.
@@ -44,17 +42,12 @@ public class PhrasebookButtonAdapter extends BaseAdapter {
         Button button;
         if(convertView == null) {
             button = new Button(context);
-            button.findViewById(R.id.phrasebookButton);
-            //button.setLayoutParams(new GridView.LayoutParams(100, 55));
-            //button.setPadding(10, 10, 10, 10);
         }else {
             button = (Button) convertView;
         }
+        button.setBackgroundResource(grid_phrasebook_button);
         button.setText(phrasebookNames[position]);
-        button.setBackgroundColor(context.getResources().getColor(R.color.main_color));
         button.setId(position);
-
-        button.setLayoutParams((new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)));
 
         return button;
     }

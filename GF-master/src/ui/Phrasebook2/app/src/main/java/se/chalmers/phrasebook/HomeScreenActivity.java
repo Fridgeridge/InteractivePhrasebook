@@ -1,5 +1,6 @@
 package se.chalmers.phrasebook;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -18,13 +19,11 @@ public class HomeScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
-        String[] myStringArray = {"Simple phrases","Hospital phrases", "Restaurant phrases","LOOOOOOOOOOOOOOOOOO00000000000000000000000000000000000000000000000OOOOOOOOOOOOOOOONG Phrases"};
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, myStringArray);
-
+        Resources res = getResources();
+        String[] buttonNames = res.getStringArray(R.array.placeholder_phrases1);
         GridView gridView = (GridView) findViewById(R.id.gridView);
-        gridView.setAdapter(new PhrasebookButtonAdapter(this,myStringArray));
+        gridView.setAdapter(new PhrasebookButtonAdapter(this, buttonNames));
 
 
     }

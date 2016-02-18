@@ -1,11 +1,20 @@
 package se.chalmers.phrasebook.adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 
+import se.chalmers.phrasebook.FirstUsageActivity;
+import se.chalmers.phrasebook.HomeScreenActivity;
+import se.chalmers.phrasebook.PhraseListActivity;
+import se.chalmers.phrasebook.R;
+
+import static se.chalmers.phrasebook.R.color.main_color;
 import static se.chalmers.phrasebook.R.drawable.grid_phrasebook_button;
 
 /**
@@ -40,14 +49,27 @@ public class PhrasebookButtonAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         Button button;
+
         if(convertView == null) {
             button = new Button(context);
         }else {
             button = (Button) convertView;
         }
-        button.setBackgroundResource(grid_phrasebook_button);
+       final View clickview = convertView;
+
+        button.setMinimumHeight(150);
+        button.setBackgroundColor(context.getResources().getColor(R.color.main_color));
+        button.setTextColor(Color.WHITE);
         button.setText(phrasebookNames[position]);
         button.setId(position);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, PhraseListActivity.class);
+                context.startActivity(intent);
+            }
+        });
 
         return button;
     }

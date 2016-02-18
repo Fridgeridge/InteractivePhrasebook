@@ -1,5 +1,6 @@
 package se.chalmers.phrasebook;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -25,7 +26,7 @@ public class HomeScreenActivity extends AppCompatActivity {
         GridView gridView = (GridView) findViewById(R.id.gridView);
         gridView.setAdapter(new PhrasebookButtonAdapter(this, buttonNames));
 
-
     }
+
 
 }

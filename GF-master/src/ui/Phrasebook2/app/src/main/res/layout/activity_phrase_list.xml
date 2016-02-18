@@ -7,7 +7,9 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="se.chalmers.phrasebook.PhraseListActivity">
+    tools:context="se.chalmers.phrasebook.PhraseListActivity"
+    android:background="@color/background_color"
+    >
 
     <ListView
         android:layout_width="wrap_content"

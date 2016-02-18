@@ -1,5 +1,6 @@
 package se.chalmers.phrasebook;
 
+import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -15,6 +16,9 @@ public class PhraseListActivity extends AppCompatActivity {
 
     //placeholder function
     protected void initializeList(String phrasebookID){
+
+        Resources res = getResources();
+        String[] names = res.getStringArray(R.array.placeholder_phrases1);
         ArrayAdapter<CharSequence> phraseAdapter = ArrayAdapter.createFromResource(this, R.array.placeholder_phrases1,
                 android.R.layout.simple_list_item_1);
         ListView listView = (ListView) findViewById(R.id.listView);

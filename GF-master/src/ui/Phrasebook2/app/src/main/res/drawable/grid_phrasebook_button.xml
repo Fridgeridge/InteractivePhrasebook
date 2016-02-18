@@ -2,17 +2,16 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <Button xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="100dp" android:layout_height="100dp"
-        android:clickable="false"
+        android:clickable="true"
         android:id="@+id/phrasebookButton"
         android:minHeight="40dp"
         android:minWidth="40dp"
-        android:minLines="1"
-        android:background="@color/main_color"
-        android:alpha="1"
+        android:background="@color/highlight_color"
         android:allowUndo="false"
         android:textColor="#ffffff"
         android:textStyle="bold"
-        android:visibility="visible">
+
+        >
 
 
     </Button>

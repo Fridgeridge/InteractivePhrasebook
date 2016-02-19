@@ -9,7 +9,7 @@
         android:theme="@style/AppTheme.NoActionBar">
         android:name="android.support.multidex.MultiDexApplication">
         <activity
-            android:name=".FirstUsageActivity"
+            android:name=".gui.FirstUsageActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,9 +17,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HomeScreenActivity"/>
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".PhraseListActivity"/>
+        <activity android:name=".gui.HomeScreenActivity"/>
+        <activity android:name=".gui.MainActivity"/>
+        <activity android:name=".gui.PhraseListActivity"/>
 
     </application>
 

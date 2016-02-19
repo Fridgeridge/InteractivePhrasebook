@@ -1,21 +1,15 @@
-package se.chalmers.phrasebook.adapters;
+package se.chalmers.phrasebook.gui.adapters;
 
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 
-import se.chalmers.phrasebook.FirstUsageActivity;
-import se.chalmers.phrasebook.HomeScreenActivity;
-import se.chalmers.phrasebook.PhraseListActivity;
+import se.chalmers.phrasebook.gui.PhraseListActivity;
 import se.chalmers.phrasebook.R;
-
-import static se.chalmers.phrasebook.R.color.main_color;
-import static se.chalmers.phrasebook.R.drawable.grid_phrasebook_button;
 
 /**
  * Created by David on 2016-02-17.

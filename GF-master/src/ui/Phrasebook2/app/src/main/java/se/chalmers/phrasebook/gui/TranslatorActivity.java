@@ -1,9 +1,12 @@
-package se.chalmers.phrasebook;
+package se.chalmers.phrasebook.gui;
 
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import se.chalmers.phrasebook.R;
 
 public class TranslatorActivity extends AppCompatActivity {
 
@@ -11,15 +14,15 @@ public class TranslatorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_translator);
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+        android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         String[] example = new String[3];
         example[0] = "Chicken";
         example[1] = "Apple";
         example[2] = "Car";
 
         OptionsFragment fragment = OptionsFragment.newInstance(example);
-        fragmentTransaction.add(R.id.scrollView, fragment);
+        fragmentTransaction.add(R.id.textView , fragment);//TODO Change layout to correct one
         fragmentTransaction.commit();
     }
 }

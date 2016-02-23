@@ -53,14 +53,12 @@ public class XMLParser {
     }
 
     private String getContent(Document document){
-        NodeList nl = document.getElementsByTagName("choice");
+        NodeList nl = document.getElementsByTagName("syntax");
         String s = "";
 
         for (int i = 0; i <nl.getLength(); i++) {
-            // Process only element nodes (type 1)
-            if (nl.item(i).hasAttributes()) {
                 s += nl.item(i).getTextContent();
-            }
+
         }
 
         return s;

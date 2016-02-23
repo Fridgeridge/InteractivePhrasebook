@@ -17,17 +17,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<<<<<<< HEAD
-        <activity android:name=".HomeScreenActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".PhraseListActivity" />
-        <activity android:name=".TranslatorActivity"></activity>
-=======
+
         <activity android:name=".gui.HomeScreenActivity"/>
         <activity android:name=".gui.MainActivity"/>
         <activity android:name=".gui.PhraseListActivity"/>
+        <activity android:name="gui.TranslatorActivity"/>
 
->>>>>>> ead05520f82e184cd32374c221fe154d881ab1b6
     </application>
 
 </manifest>

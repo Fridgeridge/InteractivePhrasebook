@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:background="@color/background_color"
-    tools:context="se.chalmers.phrasebook.HomeScreenActivity">
+    tools:context=".gui.HomeScreenActivity">
 
     <include layout="@layout/content_home_screen" />
 

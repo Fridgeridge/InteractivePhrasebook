@@ -1,10 +1,12 @@
-package se.chalmers.phrasebook;
+package se.chalmers.phrasebook.gui;
 
 import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import se.chalmers.phrasebook.R;
 
 public class PhraseListActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package se.chalmers.phrasebook;
+package se.chalmers.phrasebook.gui;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +13,8 @@ import org.grammaticalframework.pgf.PGF;
 
 import java.io.IOException;
 import java.io.InputStream;
+
+import se.chalmers.phrasebook.R;
 
 public class MainActivity extends ActionBarActivity{
 

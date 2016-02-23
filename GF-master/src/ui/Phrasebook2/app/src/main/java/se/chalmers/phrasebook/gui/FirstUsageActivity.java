@@ -1,4 +1,4 @@
-package se.chalmers.phrasebook;
+package se.chalmers.phrasebook.gui;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,8 +7,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-import java.util.ArrayList;
-import java.util.List;
+import se.chalmers.phrasebook.R;
 
 public class FirstUsageActivity extends AppCompatActivity {
 

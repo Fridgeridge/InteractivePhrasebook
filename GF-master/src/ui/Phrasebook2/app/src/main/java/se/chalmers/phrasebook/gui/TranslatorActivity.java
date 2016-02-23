@@ -5,8 +5,10 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 import se.chalmers.phrasebook.R;
+import se.chalmers.phrasebook.gui.listners.OnSwipeTouchListener;
 
 public class TranslatorActivity extends AppCompatActivity {
 
@@ -17,6 +19,13 @@ public class TranslatorActivity extends AppCompatActivity {
         android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
         android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         String[] example = new String[3];
+        View my_view = this.findViewById(android.R.id.optionsListView);
+        my_view.setOnTouchListener(new OnSwipeTouchListener(TranslatorActivity.this) {
+            @Override
+            public void onSwipeLeft() {
+                System.out.println("Swiping left");
+            }
+        });
         example[0] = "Chicken";
         example[1] = "Apple";
         example[2] = "Car";

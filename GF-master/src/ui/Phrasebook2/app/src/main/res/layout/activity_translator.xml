@@ -33,12 +33,10 @@
         android:layout_below="@+id/targetPhrase"
         android:layout_alignParentLeft="true">
 
-        <ScrollView
+        <ListView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/scrollView"
-            android:background="@color/secondary_color"
-            android:fillViewport="false" />
+            android:layout_height="wrap_content"
+            android:id="@+id/optionsListView" />
     </LinearLayout>
 
 </RelativeLayout>

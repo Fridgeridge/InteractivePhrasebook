@@ -1,4 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
-    <name>"Test sentence"</name>
-    <template>"?s asd 1?"</template>
-    <xsl:template>
+
+<phrasebook>
+
+    <sentence descripton="What is somebody's name">
+        <syntax>
+            <item>PQuestion</item>
+        </syntax>
+        <syntax>
+            <item>QWhatName</item>
+        </syntax>
+        <syntax question ="Who are we asking about?">
+            <choice desc = "me (male)">IMale</choice>
+            <choice desc = "me (female)">IFemale</choice>
+            <choice desc = "you (a male friend)">YouFamMale</choice>
+            <choice desc = "you (a female friend)">YouFamFemale</choice>
+            <choice desc = "you (a male stranger)">YouPolMale</choice>
+            <choice desc = "you (a female stranger)">YouPolFemale</choice>
+            <choice desc = "wife of...">Wife
+                <choice desc = "me (male)">IMale</choice>
+                <choice desc = "me (female)">IFemale</choice>
+                <choice desc = "you (a male friend)">YouFamMale</choice>
+                <choice desc = "you (a female friend)">YouFamFemale</choice>
+                <choice desc = "you (a male stranger)">YouPolMale</choice>
+                <choice desc = "you (a female stranger)">YouPolFemale</choice>
+            </choice>
+            <choice desc = "husband of...">Husband
+                <choice desc = "me (male)">IMale</choice>
+                <choice desc = "me (female)">IFemale</choice>
+                <choice desc = "you (a male friend)">YouFamMale</choice>
+                <choice desc = "you (a female friend)">YouFamFemale</choice>
+                <choice desc = "you (a male stranger)">YouPolMale</choice>
+                <choice desc = "you (a female stranger)">YouPolFemale</choice>
+            </choice>
+            <choice desc = "daughter of...">Daughter
+                <choice desc = "me (male)">IMale</choice>
+                <choice desc = "me (female)">IFemale</choice>
+                <choice desc = "you (a male friend)">YouFamMale</choice>
+                <choice desc = "you (a female friend)">YouFamFemale</choice>
+                <choice desc = "you (a male stranger)">YouPolMale</choice>
+                <choice desc = "you (a female stranger)">YouPolFemale</choice>
+            </choice>
+            <choice desc = "son of...">Son
+                <choice desc = "me (male)">IMale</choice>
+                <choice desc = "me (female)">IFemale</choice>
+                <choice desc = "you (a male friend)">YouFamMale</choice>
+                <choice desc = "you (a female friend)">YouFamFemale</choice>
+                <choice desc = "you (a male stranger)">YouPolMale</choice>
+                <choice desc = "you (a female stranger)">YouPolFemale</choice>
+            </choice>
+            <choice desc = "children of...">Children
+                <choice desc = "me (male)">IMale</choice>
+                <choice desc = "me (female)">IFemale</choice>
+                <choice desc = "you (a male friend)">YouFamMale</choice>
+                <choice desc = "you (a female friend)">YouFamFemale</choice>
+                <choice desc = "you (a male stranger)">YouPolMale</choice>
+                <choice desc = "you (a female stranger)">YouPolFemale</choice>
+            </choice>
+        </syntax>
+    </sentence>
+
+
+
+
+</phrasebook>
+

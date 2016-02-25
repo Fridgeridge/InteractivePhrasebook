@@ -9,10 +9,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import org.grammaticalframework.pgf.Concr;
+import org.grammaticalframework.pgf.Expr;
 import org.grammaticalframework.pgf.PGF;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 import se.chalmers.phrasebook.R;
 
@@ -31,15 +34,7 @@ public class MainActivity extends ActionBarActivity{
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         Context mContext = getApplication().getApplicationContext();
-        InputStream in;
-        String name = "Grammars/Phrasebook.pgf";
-        try {
-            Log.d("d", "Pre");
-            in = mContext.getAssets().open(name);
-            pgf = PGF.readPGF(in);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
         return true;
     }
 

@@ -6,16 +6,21 @@ package se.chalmers.phrasebook.backend;
  */
 public class SyntaxSentence {
 
-    private SyntaxElement[] elements;
+    private String id;
+    private String description;
+    private StaticSyntaxElement head;
 
+    public SyntaxSentence(StaticSyntaxElement head, String id, String description){
 
+    }
 
-
+    public String outputSentenceSyntax(){
+        return head.outputSyntax();
+    }
 
     @Override
     public String toString() {
-
-        return this.toString();
+        return "ID:"+id+"\t"+"Description:"+description;
     }
 
 }

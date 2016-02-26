@@ -52,7 +52,7 @@ public class PhrasebookButtonAdapter extends BaseAdapter {
        final View clickview = convertView;
 
         button.setMinimumHeight(150);
-        button.setBackgroundColor(context.getResources().getColor(R.color.main_color));
+        button.setBackgroundColor(context.getResources().getColor(R.color.primary_color));
         button.setTextColor(Color.WHITE);
         button.setText(phrasebookNames[position]);
         button.setId(position);

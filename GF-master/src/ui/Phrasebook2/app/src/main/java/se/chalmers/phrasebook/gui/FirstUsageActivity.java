@@ -26,14 +26,14 @@ public class FirstUsageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_usage);
 
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
-        Spinner spinner2 = (Spinner) findViewById(R.id.spinner2);
+        Spinner originSpinner = (Spinner) findViewById(R.id.origin_spinner);
+        Spinner targetSpinner = (Spinner) findViewById(R.id.target_spinner);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.language_array,
                 android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-        spinner2.setAdapter(adapter);
+        originSpinner.setAdapter(adapter);
+        targetSpinner.setAdapter(adapter);
 
         Context mContext = getApplication().getApplicationContext();
         InputStream in;

@@ -23,7 +23,8 @@ public class XMLParser {
     private XmlPullParser parser;
     private PhraseBook phraseBook;
     private DocumentBuilder documentBuilder;
-    public XMLParser(){
+
+    public XMLParser() {
         parser = Xml.newPullParser();
         try {
             documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -33,12 +34,11 @@ public class XMLParser {
     }
 
 
-
-
-    public NodeList getSentenceList(Document document, String sentenceTitle){
+    public NodeList getSentenceList(Document document, String sentenceTitle) {
         NodeList result = null;
         NodeList nl = document.getElementsByTagName("sentence");
-        for (int i = 0; i <nl.getLength(); i++) {
+
+        for (int i = 0; i < nl.getLength(); i++) {
             String s = nl.item(i).getFirstChild().getNodeValue();
             s = trimNodeValue(s);
             if (nl.item(i).getNodeType() == Node.ELEMENT_NODE && sentenceTitle.equals(s)) {
@@ -48,30 +48,54 @@ public class XMLParser {
         return result;
     }
 
+    public String[] getAllSentencesTitles(Document document) {
+        String[] result;
+        NodeList sentences = document.getElementsByTagName("sentence");
+        int nbrOfSentences = sentences.getLength();
+        result = new String[nbrOfSentences];
+
+        for (int i = 0; i < nbrOfSentences; i++) {
+            result[i] = sentences.item(i).getAttributes().item(0).getNodeValue();
+        }
+
+        return result;
+    }
+
+    public Document acquireDocument(InputStream is) {
+        try {
+            return documentBuilder.parse(is);
+        } catch (SAXException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     private String trimNodeValue(String s) {
-        s = s.replaceAll("[\\s]","");//Trim the whitespace characters
+        s = s.replaceAll("[\\s]", "");//Trim the whitespace characters
         return s;
     }
 
-    public SyntaxSentence parseToSentence(NodeList sentence){
+    public SyntaxSentence parseToSentence(NodeList sentence) {
         SyntaxSentence syntaxSentence;
-        StaticSyntaxElement staticSyntaxElement;
+        AbstractSyntaxElement element;
+
 
         return null;
     }
 
-    private StaticSyntaxElement parseSyntaxElement(NodeList nl){
+    private StaticSyntaxElement parseSyntaxElement(NodeList nl) {
         String nodeValue;
         String description;
         for (int i = 0; i < nl.getLength(); i++) {
-            if (nl.item(i).getNodeType() == Node.ELEMENT_NODE ) {
+            if (nl.item(i).getNodeType() == Node.ELEMENT_NODE) {
 
-                if(nl.item(i){//End node at list
-                    return new StaticSyntaxElement("","",null,false,null);
-                }else{
-                    return new StaticSyntaxElement("","",null,false,null);
-                }
-
+//                if(nl.item(i)){//End node at list
+//                    return new StaticSyntaxElement("","",null,false,null);
+//                }else{
+//                    return new StaticSyntaxElement("","",null,false,null);
+//                }
 
 
             }
@@ -81,12 +105,12 @@ public class XMLParser {
         return null;
     }
 
-    public String trim
 
-    public String parseDOM(InputStream is){
+    public String parseDOM(InputStream is) {
         String result = "";
         try {
             Document xmlDom = documentBuilder.parse(is);
+            getAllSentencesTitles(xmlDom);
             result = getStringContent(xmlDom);
         } catch (SAXException e) {
             e.printStackTrace();
@@ -97,15 +121,15 @@ public class XMLParser {
         return result;
     }
 
-    private String getStringContent(Document document){
-        NodeList nl = getSentenceList(document,"QWhatName");
+    private String getStringContent(Document document) {
+        NodeList nl = getSentenceList(document, "QWhatName");
         String s = "";
-        for (int i = 0; i <nl.getLength(); i++) {
+        for (int i = 0; i < nl.getLength(); i++) {
             if (nl.item(i).getNodeType() == Node.ELEMENT_NODE) {
-                System.out.println(nl.item(i).getNodeName()+" at level "+i+" and "+nl.item(i).getTextContent());
+                System.out.println(nl.item(i).getNodeName() + " at level " + i + " and " + nl.item(i).getTextContent());
                 //System.out.println(nl.item(i).getTextContent());
             }
-                s += nl.item(i).getTextContent();
+            s += nl.item(i).getTextContent();
         }
         return s;
     }
@@ -145,7 +169,6 @@ public class XMLParser {
 //        return entries;
 //
 //    }
-
 
 
 }

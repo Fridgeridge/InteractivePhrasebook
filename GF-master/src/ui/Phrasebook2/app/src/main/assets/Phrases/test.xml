@@ -2,7 +2,7 @@
 
 <phrasebook>
 
-    <sentence descripton="What is somebody's name">QWhatName
+    <sentence desc="What is somebody's name">QWhatName
         <syntax>PQuestion
         <syntax>QWhatName
         <syntax question ="Who are we asking about?">
@@ -57,7 +57,14 @@
         </syntax>
     </sentence>
 
-
+    <persons>
+        <choice desc = "me (male)">IMale</choice>
+        <choice desc = "me (female)">IFemale</choice>
+        <choice desc = "you (a male friend)">YouFamMale</choice>
+        <choice desc = "you (a female friend)">YouFamFemale</choice>
+        <choice desc = "you (a male stranger)">YouPolMale</choice>
+        <choice desc = "you (a female stranger)">YouPolFemale</choice>
+    </persons>
 
 
 </phrasebook>

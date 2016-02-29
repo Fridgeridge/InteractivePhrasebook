@@ -2,70 +2,43 @@
 
 <phrasebook>
 
-    <sentence desc="What is somebody's name">QWhatName
-        <syntax>PQuestion
-        <syntax>QWhatName
-        <syntax question ="Who are we asking about?">
-            <choice desc = "me (male)">IMale</choice>
-            <choice desc = "me (female)">IFemale</choice>
-            <choice desc = "you (a male friend)">YouFamMale</choice>
-            <choice desc = "you (a female friend)">YouFamFemale</choice>
-            <choice desc = "you (a male stranger)">YouPolMale</choice>
-            <choice desc = "you (a female stranger)">YouPolFemale</choice>
-            <choice desc = "wife of...">Wife
-                <choice desc = "me (male)">IMale</choice>
-                <choice desc = "me (female)">IFemale</choice>
-                <choice desc = "you (a male friend)">YouFamMale</choice>
-                <choice desc = "you (a female friend)">YouFamFemale</choice>
-                <choice desc = "you (a male stranger)">YouPolMale</choice>
-                <choice desc = "you (a female stranger)">YouPolFemale</choice>
-            </choice>
-            <choice desc = "husband of...">Husband
-                <choice desc = "me (male)">IMale</choice>
-                <choice desc = "me (female)">IFemale</choice>
-                <choice desc = "you (a male friend)">YouFamMale</choice>
-                <choice desc = "you (a female friend)">YouFamFemale</choice>
-                <choice desc = "you (a male stranger)">YouPolMale</choice>
-                <choice desc = "you (a female stranger)">YouPolFemale</choice>
-            </choice>
-            <choice desc = "daughter of...">Daughter
-                <choice desc = "me (male)">IMale</choice>
-                <choice desc = "me (female)">IFemale</choice>
-                <choice desc = "you (a male friend)">YouFamMale</choice>
-                <choice desc = "you (a female friend)">YouFamFemale</choice>
-                <choice desc = "you (a male stranger)">YouPolMale</choice>
-                <choice desc = "you (a female stranger)">YouPolFemale</choice>
-            </choice>
-            <choice desc = "son of...">Son
-                <choice desc = "me (male)">IMale</choice>
-                <choice desc = "me (female)">IFemale</choice>
-                <choice desc = "you (a male friend)">YouFamMale</choice>
-                <choice desc = "you (a female friend)">YouFamFemale</choice>
-                <choice desc = "you (a male stranger)">YouPolMale</choice>
-                <choice desc = "you (a female stranger)">YouPolFemale</choice>
-            </choice>
-            <choice desc = "children of...">Children
-                <choice desc = "me (male)">IMale</choice>
-                <choice desc = "me (female)">IFemale</choice>
-                <choice desc = "you (a male friend)">YouFamMale</choice>
-                <choice desc = "you (a female friend)">YouFamFemale</choice>
-                <choice desc = "you (a male stranger)">YouPolMale</choice>
-                <choice desc = "you (a female stranger)">YouPolFemale</choice>
-            </choice>
-        </syntax>
-        </syntax>
-        </syntax>
+
+    <sentence id = "QWhatName" desc = "What is somebody's name?">
+        <node syntax = "PQuestion">
+            <node syntax = "QWhatName">
+                <node child = "persons"></node>
+                <node child = "familypersons"></node>
+            </node>
+        </node>
     </sentence>
 
-    <persons>
-        <choice desc = "me (male)">IMale</choice>
-        <choice desc = "me (female)">IFemale</choice>
-        <choice desc = "you (a male friend)">YouFamMale</choice>
-        <choice desc = "you (a female friend)">YouFamFemale</choice>
-        <choice desc = "you (a male stranger)">YouPolMale</choice>
-        <choice desc = "you (a female stranger)">YouPolFemale</choice>
+    <persons desc = "Who are we asking about?">
+        <node syntax = "IMale" desc = "me (male)"></node>
+        <node syntax = "IFemale" desc ="me (female)"></node>
+        <node syntax = "YouFamMale" desc ="you (a male friend)"></node>
+        <node syntax = "YouFamFemale" desc="you (a female friend)"></node>
+        <node syntax = "YouPolMale" desc="you (a male stranger)"></node>
+        <node syntax = "YouPolFemale" desc="you (a female stranger)"></node>
     </persons>
 
+    <familypersons desc = "Who are we asking about?">
+        <node syntax = "Wife" desc = "Wife of...">
+            <node child ="persons"></node>
+        </node>
+        <node syntax = "Husband" desc = "Husband of...">
+            <node child ="persons"></node>
+        </node>
+        <node syntax = "Daughter" desc = "Daughter of...">
+            <node child ="persons"></node>
+        </node>
+        <node syntax = "Son" desc = "Son of...">
+            <node child ="persons"></node>
+        </node>
+        <node syntax = "Children" desc = "Children of...">
+            <node child ="persons"></node>
+        </node>
+
+    </familypersons>
 
 </phrasebook>
 

@@ -3,6 +3,7 @@ package se.chalmers.phrasebook.backend;
 import android.util.Xml;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
@@ -55,7 +56,7 @@ public class XMLParser {
         result = new String[nbrOfSentences];
 
         for (int i = 0; i < nbrOfSentences; i++) {
-            result[i] = sentences.item(i).getAttributes().item(0).getNodeValue();
+            result[i] = sentences.item(i).getAttributes().item(1).getNodeValue();
         }
 
         return result;
@@ -77,34 +78,49 @@ public class XMLParser {
         return s;
     }
 
-    public SyntaxSentence parseToSentence(NodeList sentence) {
-        SyntaxSentence syntaxSentence;
-        AbstractSyntaxElement element;
+    public SyntaxTree parseToSentence(Document document, NodeList sentence) {
+        SyntaxTree syntaxTree;
+        int length = sentence.getLength();
 
-
-        return null;
-    }
-
-    private StaticSyntaxElement parseSyntaxElement(NodeList nl) {
-        String nodeValue;
-        String description;
-        for (int i = 0; i < nl.getLength(); i++) {
-            if (nl.item(i).getNodeType() == Node.ELEMENT_NODE) {
-
-//                if(nl.item(i)){//End node at list
-//                    return new StaticSyntaxElement("","",null,false,null);
-//                }else{
-//                    return new StaticSyntaxElement("","",null,false,null);
-//                }
-
-
+        for (int i = 0; i < length; i++) {
+            if (!(sentence.item(i).getNodeType() == Node.ELEMENT_NODE)) {
+                continue;
             }
+            System.out.println(constructSentence(sentence, ""));
         }
 
 
         return null;
     }
 
+    private String constructSentence(NodeList nl, String s) {
+        if (nl == null || nl.getLength() < 1)
+            return "";
+        int length = nl.getLength();
+
+        for (int i = 0; i < length; i++) {
+            NamedNodeMap attributes = nl.item(i).getAttributes();
+            for(Node n: attributes.getNamedItem("*"));
+
+
+            s = s + constructSentence(nl.item(i).getChildNodes(), s);
+        }
+        return s;
+    }
+
+    public NodeList jumpToChild(Document document, String child) {
+        NodeList result = null;
+        NodeList nl = document.getElementsByTagName(child);
+
+        for (int i = 0; i < nl.getLength(); i++) {
+            String s = nl.item(i).getFirstChild().getNodeValue();
+            if (nl.item(i).getNodeType() == Node.ELEMENT_NODE) {
+                result = nl.item(i).getChildNodes();
+            }
+        }
+        return result;
+
+    }
 
     public String parseDOM(InputStream is) {
         String result = "";
@@ -133,42 +149,5 @@ public class XMLParser {
         }
         return s;
     }
-
-//    public String parseSentence(InputStream is){
-//        try {
-//            parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
-//            parser.setInput(is, null);
-//            parser.nextTag();
-//            return readFeed(parser).toString();
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (XmlPullParserException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//        return "";
-//    }
-//
-//    private List readFeed(XmlPullParser parser) throws XmlPullParserException, IOException {
-//        List entries = new ArrayList();
-//        //parser.require(XmlPullParser.TEXT, null, "feed");
-//        while (parser.next() != XmlPullParser.END_TAG) {
-//            if (parser.getEventType() != XmlPullParser.START_TAG) {
-//                continue;
-//            }
-//            String name = parser.getName();
-//            // Starts by looking for the entry tag
-//            if (name.equals("entry")) {
-//                entries.add(parser.getAttributeCount());
-//            } else {
-//                entries.add(parser.getName());
-//            }
-//        }
-//        return entries;
-//
-//    }
-
 
 }

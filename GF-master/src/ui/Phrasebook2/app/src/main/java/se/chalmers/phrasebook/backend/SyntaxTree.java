@@ -24,16 +24,28 @@ public class SyntaxTree {
         if (node == null) {
             return "";
         } else if (node.selectedChild == null) {
-            return node.data;
+            return " "+node.data;
         } else {
             return node.data + " (" + getSentenceSyntax(node.selectedChild) + ")";
         }
 
     }
+
+
     //TODO Fix method
-    public Node findNode(Node node){
-
-
+    public Node findNode(Node node, String syntax) {
+        if (node == null) {
+            return null;
+        }
+        if (node.data.equals(syntax)) {
+            return node;
+        } else if (node.children.isEmpty()) {
+            return null;//Unsure
+        } else {
+            for (Node n : node.children) {
+                return findNode(n, syntax);
+            }
+        }
 
         return node;
     }
@@ -66,14 +78,13 @@ public class SyntaxTree {
         return node.children;
     }
 
-    public boolean isNodeModular(Node node){
+    public boolean isNodeModular(Node node) {
         return node.parent.children.size() > 1;
     }
 
     public static class Node {
         private String data;
-        private int level;//Indicate the current hiearchy of the node tree
-        private Node parent;//Could be used to minimize redunancy
+        private Node parent;
         private List<Node> children;
         private Node selectedChild;
 
@@ -81,8 +92,17 @@ public class SyntaxTree {
             this.data = data;
         }
 
-        public boolean equals(Object o){
-            return false;
+        public boolean equals(Object o) {
+
+            if(this == o){
+                return true;
+            }
+            if (!(o instanceof Node)) {
+                return false;
+            }
+            Node n = (Node) o;
+
+            return this.data.equals(n.data) && this.parent.equals(n.parent);
         }
     }
 }

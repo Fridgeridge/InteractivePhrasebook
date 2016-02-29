@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 
-import se.chalmers.phrasebook.gui.PhraseListActivity;
 import se.chalmers.phrasebook.R;
+import se.chalmers.phrasebook.gui.PhraseListActivity;
 
 /**
  * Created by David on 2016-02-17.
@@ -19,7 +19,7 @@ public class PhrasebookButtonAdapter extends BaseAdapter {
     private Context context;
     private String[] phrasebookNames;
 
-    public PhrasebookButtonAdapter(Context context, String[] names){
+    public PhrasebookButtonAdapter(Context context, String[] names) {
         this.context = context;
         phrasebookNames = names;
     }
@@ -44,12 +44,12 @@ public class PhrasebookButtonAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         Button button;
 
-        if(convertView == null) {
+        if (convertView == null) {
             button = new Button(context);
-        }else {
+        } else {
             button = (Button) convertView;
         }
-       final View clickview = convertView;
+        final View clickview = convertView;
 
         button.setMinimumHeight(150);
         button.setBackgroundColor(context.getResources().getColor(R.color.primary_color));

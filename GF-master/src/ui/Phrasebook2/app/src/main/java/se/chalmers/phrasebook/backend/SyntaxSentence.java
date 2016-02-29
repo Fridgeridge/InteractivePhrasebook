@@ -10,17 +10,17 @@ public class SyntaxSentence {
     private String description;
     private StaticSyntaxElement head;
 
-    public SyntaxSentence(StaticSyntaxElement head, String id, String description){
+    public SyntaxSentence(StaticSyntaxElement head, String id, String description) {
 
     }
 
-    public String outputSentenceSyntax(){
+    public String outputSentenceSyntax() {
         return head.outputSyntax();
     }
 
     @Override
     public String toString() {
-        return "ID:"+id+"\t"+"Description:"+description;
+        return "ID:" + id + "\t" + "Description:" + description;
     }
 
 }

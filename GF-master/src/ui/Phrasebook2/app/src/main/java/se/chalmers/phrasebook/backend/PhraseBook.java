@@ -3,7 +3,6 @@ package se.chalmers.phrasebook.backend;
 import org.grammaticalframework.pgf.Expr;
 
 import java.util.HashSet;
-import java.util.List;
 
 /**
  * A class representing a phrasebook containing sentences
@@ -14,7 +13,7 @@ public class PhraseBook {
     private String title;
     private HashSet<SyntaxSentence> sentences;
 
-    public PhraseBook(String name, Expr[] sentences){
+    public PhraseBook(String name, Expr[] sentences) {
         title = name;
 
     }

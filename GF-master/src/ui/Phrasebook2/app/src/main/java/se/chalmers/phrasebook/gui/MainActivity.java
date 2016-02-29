@@ -4,22 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import org.grammaticalframework.pgf.Concr;
-import org.grammaticalframework.pgf.Expr;
 import org.grammaticalframework.pgf.PGF;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.List;
 
 import se.chalmers.phrasebook.R;
 
-public class MainActivity extends ActionBarActivity{
+public class MainActivity extends ActionBarActivity {
 
     private PGF pgf;
 
@@ -58,5 +51,5 @@ public class MainActivity extends ActionBarActivity{
         startActivity(intent);
     }
 
-    }
+}
 

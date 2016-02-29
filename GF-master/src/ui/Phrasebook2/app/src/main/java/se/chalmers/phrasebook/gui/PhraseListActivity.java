@@ -1,8 +1,8 @@
 package se.chalmers.phrasebook.gui;
 
 import android.content.res.Resources;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -18,7 +18,7 @@ public class PhraseListActivity extends AppCompatActivity {
     }
 
     //placeholder function
-    protected void initializeList(String phrasebookID){
+    protected void initializeList(String phrasebookID) {
 
         Resources res = getResources();
         String[] names = res.getStringArray(R.array.placeholder_phrases1);

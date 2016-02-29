@@ -7,16 +7,15 @@ package se.chalmers.phrasebook.backend;
 public class StaticSyntaxElement extends AbstractSyntaxElement {
 
 
-
-    public StaticSyntaxElement(String data, AbstractSyntaxElement child){
+    public StaticSyntaxElement(String data, AbstractSyntaxElement child) {
         super(child, data);
     }
 
-    public String outputSyntax(){
-        if(getChild()== null) {
-           return getSyntaxData();
-        }else{
-           return getSyntaxData()+" ("+getChild().outputSyntax()+") ";
+    public String outputSyntax() {
+        if (getChild() == null) {
+            return getSyntaxData();
+        } else {
+            return getSyntaxData() + " (" + getChild().outputSyntax() + ") ";
         }
 
     }

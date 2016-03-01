@@ -35,10 +35,10 @@ public class FirstUsageActivity extends AppCompatActivity {
         targetSpinner.setAdapter(adapter);
 
 
-        XMLParser parser = new XMLParser();
         try {
             InputStream is = getAssets().open("Phrases/test.xml");
-            Document doc = parser.acquireDocument(is);
+            XMLParser parser = new XMLParser(is);
+            Document doc = parser.acquireDocument();
             SyntaxTree tree = parser.parseToSentence(doc,parser.jumpToChild(doc,"sentence"));
         } catch (IOException es) {
             es.printStackTrace();

@@ -24,12 +24,18 @@ public class XMLParser {
     private XmlPullParser parser;
     private PhraseBook phraseBook;
     private DocumentBuilder documentBuilder;
+    private Document document;
 
-    public XMLParser() {
+    public XMLParser(InputStream is) {
         parser = Xml.newPullParser();
         try {
             documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+            document = documentBuilder.parse(is);
         } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -62,15 +68,8 @@ public class XMLParser {
         return result;
     }
 
-    public Document acquireDocument(InputStream is) {
-        try {
-            return documentBuilder.parse(is);
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
+    public Document acquireDocument() {
+        return this.document;
     }
 
     private String trimNodeValue(String s) {
@@ -99,11 +98,24 @@ public class XMLParser {
         int length = nl.getLength();
 
         for (int i = 0; i < length; i++) {
-            NamedNodeMap attributes = nl.item(i).getAttributes();
-            for(Node n: attributes.getNamedItem("*"));
+            if (nl.item(i) != null && nl.item(i).getAttributes() != null) {
+
+                NamedNodeMap attributes = nl.item(i).getAttributes();
+
+                if (attributes.getNamedItem("syntax") != null) {
+                    System.out.println(attributes.getNamedItem("syntax").getNodeValue());
+                }
+                if (attributes.getNamedItem("desc") != null) {
+                    System.out.println(attributes.getNamedItem("desc").getNodeValue());
+                }
+                if (attributes.getNamedItem("child") != null) {
+                    String node = attributes.getNamedItem("child").getNodeValue();
+                    s = s + constructSentence(jumpToChild(document, node), s);
+                }
 
 
-            s = s + constructSentence(nl.item(i).getChildNodes(), s);
+                s = s + constructSentence(nl.item(i).getChildNodes(), s);
+            }
         }
         return s;
     }

@@ -13,12 +13,12 @@
     </sentence>
 
     <persons desc = "Who are we asking about?">
-        <node syntax = "IMale" desc = "me (male)"></node>
-        <node syntax = "IFemale" desc ="me (female)"></node>
-        <node syntax = "YouFamMale" desc ="you (a male friend)"></node>
-        <node syntax = "YouFamFemale" desc="you (a female friend)"></node>
-        <node syntax = "YouPolMale" desc="you (a male stranger)"></node>
-        <node syntax = "YouPolFemale" desc="you (a female stranger)"></node>
+        <option syntax = "IMale" desc = "me (male)"></option>
+        <option syntax = "IFemale" desc ="me (female)"></option>
+        <option syntax = "YouFamMale" desc ="you (a male friend)"></option>
+        <option syntax = "YouFamFemale" desc="you (a female friend)"></option>
+        <option syntax = "YouPolMale" desc="you (a male stranger)"></option>
+        <option syntax = "YouPolFemale" desc="you (a female stranger)"></option>
     </persons>
 
     <familypersons desc = "Who are we asking about?">

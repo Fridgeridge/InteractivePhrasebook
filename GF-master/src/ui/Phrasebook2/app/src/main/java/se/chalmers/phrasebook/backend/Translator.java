@@ -5,9 +5,11 @@ import android.util.Log;
 import org.grammaticalframework.pgf.Concr;
 import org.grammaticalframework.pgf.Expr;
 import org.grammaticalframework.pgf.PGF;
+import org.grammaticalframework.pgf.PGFError;
 
 import java.io.InputStream;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by David on 2016-02-25.
@@ -15,25 +17,23 @@ import java.util.Map;
 public class Translator {
 
     private PGF pgf;
+    private Concr originLanguage, targetLanguage;
 
-
-    public void translate(InputStream in) {
-
-        String name = "Grammars/Phrasebook.pgf";
-        Log.d("d", "Pre");
-        pgf = PGF.readPGF(in);
-        Expr e = Expr.readExpr("PQuestion (QProp (PropAction (ATired (Daughter YouFamFemale))))");
-        Map<String, Concr> langs = pgf.getLanguages();
-        Concr eng = langs.get("PhrasebookEng");
-        String s = eng.linearize(e);
-
-
-        System.out.println(s);
-
-        System.out.println("Start cat:" + pgf.getStartCat() + "\n");
-
-
+    //String name = "Grammars/Phrasebook.pgf";
+    public Translator(InputStream grammar){
+        pgf = PGF.readPGF(grammar);
     }
 
+    public String translate(Concr lang, String abstractSyntax) throws PGFError {
+        Expr e = Expr.readExpr(abstractSyntax);
+        return lang.linearize(e);
+    }
+
+
+    public String[] getLanguages(){
+        Set<String> strings = pgf.getLanguages().keySet();
+
+        return strings.toArray(new String[strings.size()]);
+    }
 
 }

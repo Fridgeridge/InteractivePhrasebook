@@ -78,44 +78,60 @@ public class XMLParser {
         return s;
     }
 
-//    public SyntaxTree parseToSentence(Document document, NodeList sentence) {
-//        SyntaxTree syntaxTree;
-//        int length = sentence.getLength();
-//
-//        return null;
-//    }
 
-//    private Node constructSentence(NodeList nl, SyntaxTree tree, Node parent) {
-//        if (nl == null || nl.getLength() < 1)
-//            return null;
-//        int length = nl.getLength();
-//        String syntax = "", desc = "", option = "";
-//        for (int i = 0; i < length; i++) {
-//            if (nl.item(i) != null && (nl.item(i).getNodeType() == Node.ELEMENT_NODE) && nl.item(i).getAttributes() != null) {
-//                NamedNodeMap attributes = nl.item(i).getAttributes();
-//
-//                if (attributes.getNamedItem("syntax") != null) {
-//                    syntax = attributes.getNamedItem("syntax").getNodeValue();
-//
-//                }
-//                if (attributes.getNamedItem("desc") != null) {
-//                    desc = attributes.getNamedItem("desc").getNodeValue();
-//                }
-//                if (attributes.getNamedItem("child") != null) {
-//                    option = attributes.getNamedItem("child").getNodeValue();
-//
-//                    NodeList list = jumpToChild(document,option);
-//                    tree.addChild(parent, constructSentence(list,tree,parent));
-//
-//                }
-//                Node child = new Node(syntax);
-//                child.setDescription(desc);
-//                tree.addChild(parent,child);
-//            }
-//            constructSentence(nl.item(i).getChildNodes(),tree, parent);
-//        }
-//        return parent;
-//    }
+    public SyntaxTree parseToSentence(Document document, NodeList sentence) {
+        SyntaxTree syntaxTree;
+        int length = sentence.getLength();
+
+        return null;
+    }
+
+    private Node constructSentence(NodeList nl, SyntaxTree tree, Node parent) {
+        if (nl == null || nl.getLength() < 1)
+            return null;
+        int length = nl.getLength();
+        String syntax = "", desc = "", question="", option ;
+        for (int i = 0; i < length; i++) {
+            if (nl.item(i) != null && (nl.item(i).getNodeType() == Node.ELEMENT_NODE) && nl.item(i).getAttributes() != null) {
+                NamedNodeMap attributes = nl.item(i).getAttributes();
+
+                if (attributes.getNamedItem("syntax") != null) {
+                    syntax = attributes.getNamedItem("syntax").getNodeValue();
+
+                }
+
+                if (attributes.getNamedItem("desc") != null) {
+                    desc = attributes.getNamedItem("desc").getNodeValue();
+                }
+
+
+                if (attributes.getNamedItem("question") != null) {
+                    question = attributes.getNamedItem("childdesc").getNodeValue();
+                }
+
+
+                if (attributes.getNamedItem("child") != null) {
+                    option = attributes.getNamedItem("child").getNodeValue();
+
+                    NodeList list = jumpToChild(document, option);
+                    tree.addChild(parent, constructSentence(list, tree, parent));
+                }
+
+                if (!syntax.isEmpty()) {
+                    SyntaxTree.Node child = new SyntaxTree.Node(syntax);
+
+                    if (!question.isEmpty()) parent.setChildDescription(question);
+                    if (!desc.isEmpty()) child.setDataDescription(desc);
+
+                    tree.addChild(parent, child);//Adds the current node to the parent
+                    tree.addChild(child,constructSentence(nl.item(i).getChildNodes(), tree, child));//recursively adds grandchild to child, until nodelist is empty or null
+                }
+
+            }
+        }
+        return parent;
+    }
+
 
     public NodeList jumpToChild(Document document, String child) {
         NodeList result = null;

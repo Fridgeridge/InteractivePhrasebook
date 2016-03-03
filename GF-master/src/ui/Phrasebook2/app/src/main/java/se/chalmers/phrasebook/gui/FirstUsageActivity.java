@@ -2,6 +2,7 @@ package se.chalmers.phrasebook.gui;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -34,38 +35,38 @@ public class FirstUsageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        model = new Model();
+            model = new Model();
 
-        setContentView(R.layout.activity_first_usage);
+            setContentView(R.layout.activity_first_usage);
 
-        final Spinner originSpinner = (Spinner) findViewById(R.id.origin_spinner);
-        final Spinner targetSpinner = (Spinner) findViewById(R.id.target_spinner);
+            final Spinner originSpinner = (Spinner) findViewById(R.id.origin_spinner);
+            final Spinner targetSpinner = (Spinner) findViewById(R.id.target_spinner);
 
-        languages = new ArrayList<String>();
-        initLanguages();
+            languages = new ArrayList<String>();
+            initLanguages();
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, languages);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        originSpinner.setAdapter(adapter);
-        targetSpinner.setAdapter(adapter);
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, languages);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            originSpinner.setAdapter(adapter);
+            targetSpinner.setAdapter(adapter);
 
-        Button startButton = (Button) findViewById(R.id.startButton);
+            Button startButton = (Button) findViewById(R.id.startButton);
 
-        View.OnClickListener startListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //model.setOrginLanguage();
-                //model.setTargetLanguage();
+            View.OnClickListener startListener = new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //model.setOrginLanguage();
+                    //model.setTargetLanguage();
 
-                System.out.println("Origin language: " + originSpinner.getSelectedItem().toString() +
-                        "Target language: " + targetSpinner.getSelectedItem().toString());
+                    System.out.println("Origin language: " + originSpinner.getSelectedItem().toString() +
+                            "Target language: " + targetSpinner.getSelectedItem().toString());
 
-            }
-        };
+                    startApplication();
 
-        startButton.setOnClickListener(startListener);
+                }
+            };
 
-
+            startButton.setOnClickListener(startListener);
 
 
 //        try {
@@ -80,8 +81,8 @@ public class FirstUsageActivity extends AppCompatActivity {
 
     }
 
-    //Test class to develop buttons
-    public void sendMessage(View view) {
+    //Starts the Home activity
+    public void startApplication() {
         Intent intent = new Intent(this, HomeScreenActivity.class);
         startActivity(intent);
     }
@@ -90,7 +91,7 @@ public class FirstUsageActivity extends AppCompatActivity {
     //Generate strings for spinners
     private void initLanguages(){
        // List temp = model.getLanguages();
-        List<String> strings = new ArrayList<>(5);
+        List<String> strings = new ArrayList<>();
 
         for(int i = 0; i < 5; i++){
             //languages.add(temp.get(i).getClass().getName());

@@ -21,7 +21,7 @@
         </node>
     </sentence>
 
-    <persons desc = "Who are we asking about?">
+    <persons question= "Who are we asking about?">
         <option syntax = "IMale" desc = "me (male)"></option>
         <option syntax = "IFemale" desc ="me (female)"></option>
         <option syntax = "YouFamMale" desc ="you (a male friend)"></option>
@@ -30,7 +30,7 @@
         <option syntax = "YouPolFemale" desc="you (a female stranger)"></option>
     </persons>
 
-    <familypersons desc = "Who are we asking about?">
+    <familypersons question = "Who are we asking about?">
         <node syntax = "Wife" desc = "Wife of...">
             <node child ="persons"></node>
         </node>

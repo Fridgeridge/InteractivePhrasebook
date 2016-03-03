@@ -11,7 +11,6 @@ public class SyntaxTree {
 
     public SyntaxTree(String rootData) {
         root = new Node(rootData);
-        root.children = new ArrayList<Node>();
     }
 
     /**
@@ -23,10 +22,10 @@ public class SyntaxTree {
     public String getSentenceSyntax(Node node) {
         if (node == null) {
             return "";
-        } else if (node.selectedChild == null) {
-            return " " + node.data;
+        } else if (node.getSelectedChild() == null) {
+            return " " + node.getData();
         } else {
-            return node.data + " (" + getSentenceSyntax(node.selectedChild) + ")";
+            return node.getData() + " (" + getSentenceSyntax(node.getSelectedChild()) + ")";
         }
 
     }
@@ -37,12 +36,12 @@ public class SyntaxTree {
         if (node == null) {
             return null;
         }
-        if (node.data.equals(syntax)) {
+        if (node.getData().equals(syntax)) {
             return node;
-        } else if (node.children.isEmpty()) {
+        } else if (node.getChildren().isEmpty()) {
             return null;//Unsure
         } else {
-            for (Node n : node.children) {
+            for (Node n : node.getChildren()) {
                 return findNode(n, syntax);
             }
         }
@@ -50,36 +49,32 @@ public class SyntaxTree {
         return node;
     }
 
-    public boolean addChild(Node node, Node child) {
-        if (node.children.isEmpty())
-            root.selectedChild = child;
+    public void addChild(Node node, Node child) {
+        if (node.getChildren().isEmpty())
+            root.setSelectedChild(child);
 
-        child.parent = node;
-        return node.children.add(child);
+        child.setParent(node);
+        node.getChildren().add(child);
     }
 
     public boolean removeChild(Node node, Node child) {
-        boolean status = node.children.remove(child);
-        if (status && node.children.isEmpty()) {
-            node.selectedChild = null;
+        boolean status = node.getChildren().remove(child);
+        if (status && node.getChildren().isEmpty()) {
+            node.setSelectedChild(null);
         }
 
         return status;
     }
 
     public boolean setSelectedChild(Node node, Node child) {
-        boolean status = node.children.contains(child);
+        boolean status = node.getChildren().contains(child);
         if (status)
-            node.selectedChild = child;
+            node.setSelectedChild(child);
         return status;
     }
 
-    public List<Node> getChildren(Node node) {
-        return node.children;
-    }
-
     public boolean isNodeModular(Node node) {
-        return node.parent.children.size() > 1;
+        return node.getParent().getChildren().size() > 1;
     }
 
 

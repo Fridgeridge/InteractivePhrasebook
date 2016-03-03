@@ -8,6 +8,13 @@ import java.util.List;
 public class Node {
     private String data;
     private String desc;
+    private Node parent;
+    private List<Node> children;
+    private Node selectedChild;
+
+    public Node(){
+
+    }
 
     public String getData() {
         return data;
@@ -48,10 +55,6 @@ public class Node {
     public void setSelectedChild(Node selectedChild) {
         this.selectedChild = selectedChild;
     }
-
-    private Node parent;
-    private List<Node> children;
-    private Node selectedChild;
 
     public Node(String data) {
         this.data = data;

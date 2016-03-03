@@ -24,7 +24,7 @@ public class SyntaxTree {
         if (node == null) {
             return "";
         } else if (node.selectedChild == null) {
-            return " "+node.data;
+            return " " + node.data;
         } else {
             return node.data + " (" + getSentenceSyntax(node.selectedChild) + ")";
         }
@@ -84,6 +84,7 @@ public class SyntaxTree {
 
     public static class Node {
         private String data;
+        private String desc;
         private Node parent;
         private List<Node> children;
         private Node selectedChild;
@@ -92,9 +93,18 @@ public class SyntaxTree {
             this.data = data;
         }
 
+        public boolean setDescription(String desc) {
+            if (desc == null || desc.isEmpty()) {
+                return false;
+            } else {
+                this.desc = desc;
+                return true;
+            }
+        }
+
         public boolean equals(Object o) {
 
-            if(this == o){
+            if (this == o) {
                 return true;
             }
             if (!(o instanceof Node)) {

@@ -12,6 +12,15 @@
         </node>
     </sentence>
 
+    <sentence id = "QWhatAge" desc = "How old is someone?">
+        <node syntax = "PQuestion">
+            <node syntax = "QWhatAge">
+                <node child = "persons"></node>
+                <node child = "familypersons"></node>
+            </node>
+        </node>
+    </sentence>
+
     <persons desc = "Who are we asking about?">
         <option syntax = "IMale" desc = "me (male)"></option>
         <option syntax = "IFemale" desc ="me (female)"></option>

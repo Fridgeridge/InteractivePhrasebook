@@ -38,6 +38,7 @@ public class XMLParser {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
 
@@ -81,40 +82,39 @@ public class XMLParser {
         SyntaxTree syntaxTree;
         int length = sentence.getLength();
 
-        System.out.println(constructSentence(sentence, ""));
-
         return null;
     }
 
-    private String constructSentence(NodeList nl, String s) {
+    private SyntaxTree.Node constructSentence(NodeList nl, SyntaxTree tree, SyntaxTree.Node parent) {
         if (nl == null || nl.getLength() < 1)
-            return "";
+            return null;
         int length = nl.getLength();
-        String syntax = "", desc = "", node = "", tmp = "";
+        String syntax = "", desc = "", option = "";
         for (int i = 0; i < length; i++) {
             if (nl.item(i) != null && (nl.item(i).getNodeType() == Node.ELEMENT_NODE) && nl.item(i).getAttributes() != null) {
                 NamedNodeMap attributes = nl.item(i).getAttributes();
 
                 if (attributes.getNamedItem("syntax") != null) {
                     syntax = attributes.getNamedItem("syntax").getNodeValue();
-//                    System.out.println("Syntax " + attributes.getNamedItem("syntax").getNodeValue());
 
                 }
                 if (attributes.getNamedItem("desc") != null) {
                     desc = attributes.getNamedItem("desc").getNodeValue();
-//                    System.out.println("Desc " + attributes.getNamedItem("desc").getNodeValue());
                 }
                 if (attributes.getNamedItem("child") != null) {
-                    node = attributes.getNamedItem("child").getNodeValue();
-                    tmp = syntax + desc + node + "_";
-                    s = constructSentence(jumpToChild(document, node), s + tmp);
+                    option = attributes.getNamedItem("child").getNodeValue();
+
+                    NodeList list = jumpToChild(document,option);
+                    tree.addChild(parent, constructSentence(list,tree,parent));
+
                 }
-//                 tmp =  syntax + desc + node + "_";
-                System.out.println(syntax + " " + desc + " " + node);
+                SyntaxTree.Node child = new SyntaxTree.Node(syntax);
+                child.setDescription(desc);
+                tree.addChild(parent,child);
             }
-            s = constructSentence(nl.item(i).getChildNodes(), s + tmp);
+            constructSentence(nl.item(i).getChildNodes(),tree, parent);
         }
-        return s;
+        return parent;
     }
 
     public NodeList jumpToChild(Document document, String child) {

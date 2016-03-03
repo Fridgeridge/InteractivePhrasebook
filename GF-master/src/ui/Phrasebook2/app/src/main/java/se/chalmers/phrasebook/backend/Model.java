@@ -8,37 +8,44 @@ import java.util.List;
  */
 public class Model {
 
+    private static Model model = new Model();
+
     private List<Language> languages;
     private ArrayList<PhraseBook> phrasebooks;
 
-    private Language orginLanguage;
-    private Language targetLanguage;
+    private String originLanguage;
+    private String targetLanguage;
 
-    public Model(){
+    private Model(){
         languages = new ArrayList<Language>();
         phrasebooks = new ArrayList<PhraseBook>();
     }
 
-    public Model(Language orgin, Language target) {
-        orginLanguage = orgin;
+    private Model(String origin, String target) {
+        originLanguage = origin;
         targetLanguage = target;
+
         languages = new ArrayList<Language>();
         phrasebooks = new ArrayList<PhraseBook>();
     }
 
-    public Language getOrginLanguage() {
-        return orginLanguage;
+    public static Model getInstance(){
+        return model;
     }
 
-    public void setOrginLanguage(Language orginLanguage) {
-        this.orginLanguage = orginLanguage;
+    public String getOrginLanguage() {
+        return originLanguage;
     }
 
-    public Language getTargetLanguage() {
+    public void setOrginLanguage(String originLanguage) {
+        this.originLanguage = originLanguage;
+    }
+
+    public String getTargetLanguage() {
         return targetLanguage;
     }
 
-    public void setTargetLanguage(Language targetLanguage) {
+    public void setTargetLanguage(String targetLanguage) {
         this.targetLanguage = targetLanguage;
     }
 

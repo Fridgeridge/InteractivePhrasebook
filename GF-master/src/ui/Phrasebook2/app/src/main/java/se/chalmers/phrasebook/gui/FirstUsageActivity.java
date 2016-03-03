@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import se.chalmers.phrasebook.R;
+import se.chalmers.phrasebook.backend.Langs;
 import se.chalmers.phrasebook.backend.Language;
 import se.chalmers.phrasebook.backend.Model;
 import se.chalmers.phrasebook.backend.SyntaxTree;
@@ -30,12 +31,13 @@ public class FirstUsageActivity extends AppCompatActivity {
     private List<String> languages;
 
     private Model model;
+    private Langs langs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-            model = new Model();
+            model = Model.getInstance();
 
             setContentView(R.layout.activity_first_usage);
 
@@ -55,11 +57,10 @@ public class FirstUsageActivity extends AppCompatActivity {
             View.OnClickListener startListener = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //model.setOrginLanguage();
-                    //model.setTargetLanguage();
 
-                    System.out.println("Origin language: " + originSpinner.getSelectedItem().toString() +
-                            "Target language: " + targetSpinner.getSelectedItem().toString());
+                    //Sätter bara language strängen nu, vet inte hur man ska hämta nyckeln
+                    model.setOrginLanguage(originSpinner.getSelectedItem().toString());
+                    model.setTargetLanguage(targetSpinner.getSelectedItem().toString());
 
                     startApplication();
 
@@ -90,12 +91,9 @@ public class FirstUsageActivity extends AppCompatActivity {
 
     //Generate strings for spinners
     private void initLanguages(){
-       // List temp = model.getLanguages();
-        List<String> strings = new ArrayList<>();
 
-        for(int i = 0; i < 5; i++){
-            //languages.add(temp.get(i).getClass().getName());
-            languages.add(i, "Hej" + i);
+        for(Langs l: Langs.values()){
+            languages.add(l.getLang());
         }
 
     }

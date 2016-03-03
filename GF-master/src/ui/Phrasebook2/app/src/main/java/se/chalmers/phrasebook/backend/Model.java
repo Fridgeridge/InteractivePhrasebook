@@ -14,6 +14,11 @@ public class Model {
     private Language orginLanguage;
     private Language targetLanguage;
 
+    public Model(){
+        languages = new ArrayList<Language>();
+        phrasebooks = new ArrayList<PhraseBook>();
+    }
+
     public Model(Language orgin, Language target) {
         orginLanguage = orgin;
         targetLanguage = target;
@@ -36,4 +41,9 @@ public class Model {
     public void setTargetLanguage(Language targetLanguage) {
         this.targetLanguage = targetLanguage;
     }
+
+    public List<Language> getLanguages(){
+        return languages;
+    }
+
 }

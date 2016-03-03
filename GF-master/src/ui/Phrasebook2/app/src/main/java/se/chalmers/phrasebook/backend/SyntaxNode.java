@@ -5,9 +5,17 @@ import java.util.List;
 /**
  * Created by Björn on 2016-03-03.
  */
-public class Node {
+public class SyntaxNode {
     private String data;
     private String desc;
+    private SyntaxNode parent;
+    private List<SyntaxNode> children;
+    private SyntaxNode selectedChild;
+
+    //TODO
+    public SyntaxNode(){
+
+    }
 
     public String getData() {
         return data;
@@ -25,35 +33,31 @@ public class Node {
         this.desc = desc;
     }
 
-    public Node getParent() {
+    public SyntaxNode getParent() {
         return parent;
     }
 
-    public void setParent(Node parent) {
+    public void setParent(SyntaxNode parent) {
         this.parent = parent;
     }
 
-    public List<Node> getChildren() {
+    public List<SyntaxNode> getChildren() {
         return children;
     }
 
-    public void setChildren(List<Node> children) {
+    public void setChildren(List<SyntaxNode> children) {
         this.children = children;
     }
 
-    public Node getSelectedChild() {
+    public SyntaxNode getSelectedChild() {
         return selectedChild;
     }
 
-    public void setSelectedChild(Node selectedChild) {
+    public void setSelectedChild(SyntaxNode selectedChild) {
         this.selectedChild = selectedChild;
     }
 
-    private Node parent;
-    private List<Node> children;
-    private Node selectedChild;
-
-    public Node(String data) {
+    public SyntaxNode(String data) {
         this.data = data;
     }
 
@@ -71,10 +75,10 @@ public class Node {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Node)) {
+        if (!(o instanceof SyntaxNode)) {
             return false;
         }
-        Node n = (Node) o;
+        SyntaxNode n = (SyntaxNode) o;
 
         return this.data.equals(n.data) && this.parent.equals(n.parent);
     }

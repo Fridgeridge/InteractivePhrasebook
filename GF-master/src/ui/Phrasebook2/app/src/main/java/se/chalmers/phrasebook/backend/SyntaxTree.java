@@ -7,11 +7,10 @@ import java.util.List;
  * Created by Björn on 2016-02-26.
  */
 public class SyntaxTree {
-    private Node root;
+    private SyntaxNode root;
 
     public SyntaxTree(String rootData) {
-        root = new Node(rootData);
-        root.children = new ArrayList<Node>();
+        root = new SyntaxNode(rootData);
     }
 
     /**
@@ -20,29 +19,29 @@ public class SyntaxTree {
      * @param node The current node
      * @return A String representing the syntax of the sentence
      */
-    public String getSentenceSyntax(Node node) {
+    public String getSentenceSyntax(SyntaxNode node) {
         if (node == null) {
             return "";
-        } else if (node.selectedChild == null) {
-            return " " + node.data;
+        } else if (node.getSelectedChild() == null) {
+            return " " + node.getData();
         } else {
-            return node.data + " (" + getSentenceSyntax(node.selectedChild) + ")";
+            return node.getData() + " (" + getSentenceSyntax(node.getSelectedChild()) + ")";
         }
 
     }
 
 
     //TODO Fix method
-    public Node findNode(Node node, String syntax) {
+    public SyntaxNode findNode(SyntaxNode node, String syntax) {
         if (node == null) {
             return null;
         }
-        if (node.data.equals(syntax)) {
+        if (node.getData().equals(syntax)) {
             return node;
-        } else if (node.children.isEmpty()) {
+        } else if (node.getChildren().isEmpty()) {
             return null;//Unsure
         } else {
-            for (Node n : node.children) {
+            for (SyntaxNode n : node.getChildren()) {
                 return findNode(n, syntax);
             }
         }
@@ -50,36 +49,32 @@ public class SyntaxTree {
         return node;
     }
 
-    public boolean addChild(Node node, Node child) {
-        if (node.children.isEmpty())
-            root.selectedChild = child;
+    public void addChild(SyntaxNode node,SyntaxNode child) {
+        if (node.getChildren().isEmpty())
+            root.setSelectedChild(child);
 
-        child.parent = node;
-        return node.children.add(child);
+        child.setParent(node);
+        node.getChildren().add(child);
     }
 
-    public boolean removeChild(Node node, Node child) {
-        boolean status = node.children.remove(child);
-        if (status && node.children.isEmpty()) {
-            node.selectedChild = null;
+    public boolean removeChild(SyntaxNode node, SyntaxNode child) {
+        boolean status = node.getChildren().remove(child);
+        if (status && node.getChildren().isEmpty()) {
+            node.setSelectedChild(null);
         }
 
         return status;
     }
 
-    public boolean setSelectedChild(Node node, Node child) {
-        boolean status = node.children.contains(child);
+    public boolean setSelectedChild(SyntaxNode node, SyntaxNode child) {
+        boolean status = node.getChildren().contains(child);
         if (status)
-            node.selectedChild = child;
+            node.setSelectedChild(child);
         return status;
     }
 
-    public List<Node> getChildren(Node node) {
-        return node.children;
-    }
-
-    public boolean isNodeModular(Node node) {
-        return node.parent.children.size() > 1;
+    public boolean isNodeModular(SyntaxNode node) {
+        return node.getParent().getChildren().size() > 1;
     }
 
 

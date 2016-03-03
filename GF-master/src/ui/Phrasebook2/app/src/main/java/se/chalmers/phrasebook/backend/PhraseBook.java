@@ -11,7 +11,6 @@ import java.util.HashSet;
 public class PhraseBook {
 
     private String title;
-    private HashSet<SyntaxSentence> sentences;
 
     public PhraseBook(String name, Expr[] sentences) {
         title = name;

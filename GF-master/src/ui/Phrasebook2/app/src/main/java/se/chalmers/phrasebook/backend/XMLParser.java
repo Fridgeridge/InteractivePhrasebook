@@ -85,7 +85,7 @@ public class XMLParser {
         return null;
     }
 
-    private SyntaxTree.Node constructSentence(NodeList nl, SyntaxTree tree, SyntaxTree.Node parent) {
+    private Node constructSentence(NodeList nl, SyntaxTree tree, Node parent) {
         if (nl == null || nl.getLength() < 1)
             return null;
         int length = nl.getLength();
@@ -108,7 +108,7 @@ public class XMLParser {
                     tree.addChild(parent, constructSentence(list,tree,parent));
 
                 }
-                SyntaxTree.Node child = new SyntaxTree.Node(syntax);
+                Node child = new Node(syntax);
                 child.setDescription(desc);
                 tree.addChild(parent,child);
             }

@@ -82,37 +82,5 @@ public class SyntaxTree {
         return node.parent.children.size() > 1;
     }
 
-    public static class Node {
-        private String data;
-        private String desc;
-        private Node parent;
-        private List<Node> children;
-        private Node selectedChild;
 
-        public Node(String data) {
-            this.data = data;
-        }
-
-        public boolean setDescription(String desc) {
-            if (desc == null || desc.isEmpty()) {
-                return false;
-            } else {
-                this.desc = desc;
-                return true;
-            }
-        }
-
-        public boolean equals(Object o) {
-
-            if (this == o) {
-                return true;
-            }
-            if (!(o instanceof Node)) {
-                return false;
-            }
-            Node n = (Node) o;
-
-            return this.data.equals(n.data) && this.parent.equals(n.parent);
-        }
-    }
 }

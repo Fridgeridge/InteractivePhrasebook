@@ -17,11 +17,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".gui.FirstUsageActivity"/>
+        <activity android:name=".gui.FirstUsageActivity" />
         <activity android:name=".gui.HomeScreenActivity" />
         <activity android:name=".gui.MainActivity" />
         <activity android:name=".gui.PhraseListActivity" />
         <activity android:name="gui.TranslatorActivity" />
+        <activity
+            android:name=".gui.NavigationActivity"
+            android:label="@string/title_activity_navigation"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
     </application>
 
 </manifest>

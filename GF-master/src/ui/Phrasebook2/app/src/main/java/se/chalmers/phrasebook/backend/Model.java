@@ -1,7 +1,11 @@
 package se.chalmers.phrasebook.backend;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import static se.chalmers.phrasebook.backend.FilePaths.PHRASEBOOK;
 
 /**
  * Created by Björn on 2016-03-03.
@@ -12,32 +16,50 @@ public class Model {
 
     private List<Language> languages;
     private ArrayList<PhraseBook> phrasebooks;
-
+    private String[] languageKeys;
+    private Translator translator;
     private String originLanguage;
     private String targetLanguage;
 
-    private Model(){
+    private Model() {
         languages = new ArrayList<Language>();
         phrasebooks = new ArrayList<PhraseBook>();
+
+        try {
+            InputStream is = this.getClass().getClassLoader().getResourceAsStream(PHRASEBOOK.getPath());//FIXME Utilize Context.getResources instead
+            translator = new Translator(is);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        languageKeys = translator.getLanguages();
     }
 
     private Model(String origin, String target) {
+        this();
         originLanguage = origin;
         targetLanguage = target;
-
-        languages = new ArrayList<Language>();
-        phrasebooks = new ArrayList<PhraseBook>();
     }
 
-    public static Model getInstance(){
+    public String[] getLanguages() {
+        ArrayList<String> list = new ArrayList<String>();
+        for (String key : languageKeys) {
+            if (Langs.getEngName(key) != null)
+                list.add(Langs.getEngName(key));
+        }
+        return list.toArray(new String[list.size()]);
+
+    }
+
+    public static Model getInstance() {
         return model;
     }
 
-    public String getOrginLanguage() {
+    public String getOriginLanguage() {
         return originLanguage;
     }
 
-    public void setOrginLanguage(String originLanguage) {
+    public void setOriginLanguage(String originLanguage) {
         this.originLanguage = originLanguage;
     }
 
@@ -47,10 +69,6 @@ public class Model {
 
     public void setTargetLanguage(String targetLanguage) {
         this.targetLanguage = targetLanguage;
-    }
-
-    public List<Language> getLanguages(){
-        return languages;
     }
 
 }

@@ -9,38 +9,39 @@ import java.util.Map;
  */
 public enum Langs {
 
-    RUSSIAN("Russian","PhrasebookRus"),
-    BULGARIAN("Bulgarian","PhrasebookBul"),
-    HINDU("Hindu","PhrasebookHin"),
-    CATALAN("Catalan","PhrasebookCat"),
-    THAI("Thai","PhrasebookTha"),
-    PERSIAN("Persian","PhrasebookPes"),
-    FINNISH("Finnish","PhrasebookFin"),
-    JAPANESE("Japanese","PhrasebookJpn"),
-    POLISH("Polish","PhrasebookPol"),
-    SWEDISH("Swedish","PhrasebookSwe"),
-    URDU("Urdu","PhrasebookUrd"),
-    ROMANIAN("Romanian","PhrasebookRon"),
-    CHINESE("Chinese", "PhrasebookChi"),
-    ITALIAN("Italian","PhrasebookIta"),
-    DANISH("Danish","PhrasebookDan"),
-    SPANISH("Spanish","PhrasebookSpa"),
-    LATVIAN("Latvian","PhrasebookLav"),
-    ENGLISH("English","PhrasebookEng"),
-    NORWEGIAN("Norwegian","PhrasebookNor"),
-    GERMAN("German","PhrasebookGer"),
-    DUTCH("Dutch","PhrasebookDut"),
-    FRENCH("French","PhrasebookFre");
+    RUSSIAN("ру́сский","Russian","PhrasebookRus"),
+    BULGARIAN("български","Bulgarian","PhrasebookBul"),
+    HINDU("हिन्दी","Hindi","PhrasebookHin"),
+    CATALAN("Català","Catalan","PhrasebookCat"),
+    THAI("","Thai","PhrasebookTha"),
+    PERSIAN("","Persian","PhrasebookPes"),
+    FINNISH("","Finnish","PhrasebookFin"),
+    JAPANESE("","Japanese","PhrasebookJpn"),
+    POLISH("","Polish","PhrasebookPol"),
+    SWEDISH("Svenska","Swedish","PhrasebookSwe"),
+    URDU("","Urdu","PhrasebookUrd"),
+    ROMANIAN("","Romanian","PhrasebookRon"),
+    CHINESE("","Chinese", "PhrasebookChi"),
+    ITALIAN("","Italian","PhrasebookIta"),
+    DANISH("","Danish","PhrasebookDan"),
+    SPANISH("","Spanish","PhrasebookSpa"),
+    LATVIAN("","Latvian","PhrasebookLav"),
+    ENGLISH("English","English","PhrasebookEng"),
+    NORWEGIAN("","Norwegian","PhrasebookNor"),
+    GERMAN("","German","PhrasebookGer"),
+    DUTCH("","Dutch","PhrasebookDut"),
+    FRENCH("","French","PhrasebookFre");
 
 
     private final String language;
     private final String key;
-
+    private final String nativeSpelling;
 
 
     private static final Map<String, String> langMap = Collections.unmodifiableMap(initializeMap());
 
-    private Langs(String language, String key){
+    private Langs(String spelling, String language, String key){
+        this.nativeSpelling = spelling;
         this.language = language;
         this.key = key;
     }
@@ -65,4 +66,10 @@ public enum Langs {
         return langMap.get(key);
     }
 
+    public static String getKey(String name){
+        for(Map.Entry<String,String> e:langMap.entrySet()){
+            if(e.getValue().equals(name)) return e.getKey();
+        }
+        return null;
+    }
 }

@@ -37,7 +37,7 @@ public class FirstUsageActivity extends AppCompatActivity {
             final Spinner targetSpinner = (Spinner) findViewById(R.id.target_spinner);
 
             languages = new ArrayList<String>();
-            initLanguages();
+            languages = model.getLanguages();
 
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, languages);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -50,9 +50,8 @@ public class FirstUsageActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
 
-                    //Sätter bara language strängen nu, vet inte hur man ska hämta nyckeln
-                    model.setOriginLanguage(originSpinner.getSelectedItem().toString());
-                    model.setTargetLanguage(targetSpinner.getSelectedItem().toString());
+                    model.setOriginLanguage(Langs.getKey(originSpinner.getSelectedItem().toString()));
+                    model.setTargetLanguage(Langs.getKey(targetSpinner.getSelectedItem().toString()));
 
                     startApplication();
 
@@ -80,13 +79,4 @@ public class FirstUsageActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
-    //Generate strings for spinners
-    private void initLanguages(){
-
-        for(Langs l: Langs.values()){
-            languages.add(l.getLang());
-        }
-
-    }
 }

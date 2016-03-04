@@ -33,6 +33,7 @@ public class Model {
         }
 
         languageKeys = translator.getLanguages();
+
     }
 
     private Model(String origin, String target) {
@@ -41,13 +42,13 @@ public class Model {
         targetLanguage = target;
     }
 
-    public String[] getLanguages() {
+    public ArrayList<String> getLanguages() {
         ArrayList<String> list = new ArrayList<String>();
         for (String key : languageKeys) {
             if (Langs.getEngName(key) != null)
                 list.add(Langs.getEngName(key));
         }
-        return list.toArray(new String[list.size()]);
+        return list;
 
     }
 

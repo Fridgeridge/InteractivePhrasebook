@@ -41,7 +41,7 @@ public class HelperActivity extends Activity {
         }
         else {
             //startActivity(new Intent(HelperActivity.ths , HomeScreenActivity.class));
-            Intent intent = new Intent(this, HomeScreenActivity.class);
+            Intent intent = new Intent(this, FirstUsageActivity.class);
             startActivity(intent);
             finish();
         }

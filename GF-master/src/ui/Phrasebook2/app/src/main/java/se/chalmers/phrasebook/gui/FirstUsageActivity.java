@@ -1,8 +1,6 @@
 package se.chalmers.phrasebook.gui;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -11,19 +9,13 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 import org.grammaticalframework.pgf.PGF;
-import org.w3c.dom.Document;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Langs;
-import se.chalmers.phrasebook.backend.Language;
 import se.chalmers.phrasebook.backend.Model;
-import se.chalmers.phrasebook.backend.SyntaxTree;
-import se.chalmers.phrasebook.backend.XMLParser;
 
 public class FirstUsageActivity extends AppCompatActivity {
     private PGF pgf;
@@ -59,7 +51,7 @@ public class FirstUsageActivity extends AppCompatActivity {
                 public void onClick(View v) {
 
                     //Sätter bara language strängen nu, vet inte hur man ska hämta nyckeln
-                    model.setOrginLanguage(originSpinner.getSelectedItem().toString());
+                    model.setOriginLanguage(originSpinner.getSelectedItem().toString());
                     model.setTargetLanguage(targetSpinner.getSelectedItem().toString());
 
                     startApplication();

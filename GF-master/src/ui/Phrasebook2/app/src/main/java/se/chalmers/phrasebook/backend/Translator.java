@@ -7,6 +7,7 @@ import org.grammaticalframework.pgf.Expr;
 import org.grammaticalframework.pgf.PGF;
 import org.grammaticalframework.pgf.PGFError;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 import java.util.Set;
@@ -19,9 +20,9 @@ public class Translator {
     private PGF pgf;
     private Concr originLanguage, targetLanguage;
 
-    //String name = "Grammars/Phrasebook.pgf";
-    public Translator(InputStream grammar){
+    public Translator(InputStream grammar) throws IOException {
         pgf = PGF.readPGF(grammar);
+        grammar.close();
     }
 
     public String translate(Concr lang, String abstractSyntax) throws PGFError {

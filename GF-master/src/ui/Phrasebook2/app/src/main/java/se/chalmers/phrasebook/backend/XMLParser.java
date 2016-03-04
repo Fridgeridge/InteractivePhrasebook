@@ -113,18 +113,18 @@ public class XMLParser {
                 if (attributes.getNamedItem("child") != null) {
                     option = attributes.getNamedItem("child").getNodeValue();
 
-                    NodeList list = jumpToChild(document, option);
-                    tree.addChild(parent, constructSentence(list, tree, parent));
-                }
-
-                if (!syntax.isEmpty()) {
-                    SyntaxTree.Node child = new SyntaxTree.Node(syntax);
-
-                    if (!question.isEmpty()) parent.setChildDescription(question);
-                    if (!desc.isEmpty()) child.setDataDescription(desc);
-
-                    tree.addChild(parent, child);//Adds the current node to the parent
-                    tree.addChild(child,constructSentence(nl.item(i).getChildNodes(), tree, child));//recursively adds grandchild to child, until nodelist is empty or null
+//                    NodeList list = jumpToChild(document, option);
+//                    tree.addChild(parent, constructSentence(list, tree, parent));
+//                }
+//
+//                if (!syntax.isEmpty()) {
+//                    SyntaxTree.Node child = new SyntaxTree.Node(syntax);
+//
+//                    if (!question.isEmpty()) parent.setChildDescription(question);
+//                    if (!desc.isEmpty()) child.setDataDescription(desc);
+//
+//                    tree.addChild(parent, child);//Adds the current node to the parent
+//                    tree.addChild(child,constructSentence(nl.item(i).getChildNodes(), tree, child));//recursively adds grandchild to child, until nodelist is empty or null
                 }
 
             }

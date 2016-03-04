@@ -1,21 +1,17 @@
 package se.chalmers.phrasebook.backend;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Björn on 2016-03-03.
  */
 public class SyntaxNode {
-    private String data;
-    private String desc;
-    private SyntaxNode parent;
-    private List<SyntaxNode> children;
-    private SyntaxNode selectedChild;
-
-    //TODO
-    public SyntaxNode(){
-
-    }
+    private String data = null;
+    private String desc = null;
+    private SyntaxNode parent = null;
+    private List<SyntaxNode> children = new ArrayList<SyntaxNode>();
+    private SyntaxNode selectedChild = null;
 
     public String getData() {
         return data;
@@ -59,6 +55,13 @@ public class SyntaxNode {
 
     public SyntaxNode(String data) {
         this.data = data;
+    }
+
+    public boolean hasChildren() {
+        if(children.isEmpty()) {
+            return true;
+        }
+        return false;
     }
 
     public boolean setDescription(String desc) {

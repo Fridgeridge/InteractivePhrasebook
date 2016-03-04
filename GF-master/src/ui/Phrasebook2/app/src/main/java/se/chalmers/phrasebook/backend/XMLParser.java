@@ -11,6 +11,8 @@ import org.xmlpull.v1.XmlPullParser;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -20,6 +22,8 @@ import javax.xml.parsers.ParserConfigurationException;
  * Created by David on 2016-02-19.
  */
 public class XMLParser {
+
+
 
     private XmlPullParser parser;
     private PhraseBook phraseBook;
@@ -85,6 +89,47 @@ public class XMLParser {
 
         return null;
     }
+
+    //wrapper
+    private SyntaxTree constructSentence2(Node currentRoot) {
+        return new SyntaxTree(constructSyntaxTreeSentence(currentRoot, null));
+    }
+
+    private SyntaxNode constructSyntaxTreeSentence(Node currentRoot, SyntaxNode treeRoot){
+        if(!currentRoot.hasChildNodes()) {
+            return null;
+        }
+        String syntax = "", desc = "", option = "";
+        NodeList nodeList = currentRoot.getChildNodes();
+
+        for (int i = 0; i < nodeList.getLength(); i++) {
+            Node currentNode = nodeList.item(i);
+            if (currentNode.getNodeType() == Node.ELEMENT_NODE) {
+                NamedNodeMap attributes = nodeList.item(i).getAttributes();
+
+                if (attributes.getNamedItem("syntax") != null) {
+                    syntax = attributes.getNamedItem("syntax").getNodeValue();
+                }
+
+                if (attributes.getNamedItem("desc") != null) {
+                    desc = attributes.getNamedItem("desc").getNodeValue();
+                }
+
+                if (attributes.getNamedItem("child") != null) {
+                    option = attributes.getNamedItem("child").getNodeValue();
+                    SyntaxNode child = new SyntaxNode(option);
+                    child.setDesc(desc);
+                    List<SyntaxNode> children = treeRoot.getChildren();
+                    children.add(constructSyntaxTreeSentence(currentNode, child));
+                    if(!treeRoot.hasChildren()) {
+                        treeRoot.setSelectedChild(child);
+                    }
+                }
+            }
+        }
+        return treeRoot;
+    }
+
 
     private Node constructSentence(NodeList nl, SyntaxTree tree, Node parent) {
         if (nl == null || nl.getLength() < 1)
@@ -176,3 +221,4 @@ public class XMLParser {
     }
 
 }
+

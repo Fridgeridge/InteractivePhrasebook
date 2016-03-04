@@ -3,13 +3,6 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_home_screen">HomeScreenActivity</string>
 
-    <string-array name="language_array">
-        <item>English</item>
-        <item>Swedish</item>
-        <item>Finnish</item>
-        <item>Catalan</item>
-        <item>Hebrew</item>
-    </string-array>
 
     <string-array name="placeholder_phrases1">
         <item>How much does something cost?</item>

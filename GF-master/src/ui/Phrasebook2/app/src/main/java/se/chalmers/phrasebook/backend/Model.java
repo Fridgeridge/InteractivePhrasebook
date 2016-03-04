@@ -14,15 +14,15 @@ public class Model {
 
     private static Model model = new Model();
 
-    private List<Language> languages;
     private ArrayList<PhraseBook> phrasebooks;
     private String[] languageKeys;
     private Translator translator;
     private String originLanguage;
     private String targetLanguage;
 
+    private String currentPhrasebook;
+
     private Model() {
-        languages = new ArrayList<Language>();
         phrasebooks = new ArrayList<PhraseBook>();
 
         try {
@@ -40,6 +40,8 @@ public class Model {
         this();
         originLanguage = origin;
         targetLanguage = target;
+
+        currentPhrasebook = "";
     }
 
     public ArrayList<String> getLanguages() {
@@ -70,6 +72,14 @@ public class Model {
 
     public void setTargetLanguage(String targetLanguage) {
         this.targetLanguage = targetLanguage;
+    }
+
+    public void setCurrentPhrasebook(String phrasebook){
+        currentPhrasebook = phrasebook;
+    }
+
+    public String getCurrentPhrasebook(){
+        return currentPhrasebook;
     }
 
 }

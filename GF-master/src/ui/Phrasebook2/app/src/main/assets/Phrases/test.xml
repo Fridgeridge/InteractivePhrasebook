@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<phrasebook>
+<phrases>
 
 
     <sentence id = "QWhatName" desc = "What is somebody's name?">
@@ -49,5 +49,8 @@
 
     </familypersons>
 
-</phrasebook>
+
+</phrases>
+
+
 

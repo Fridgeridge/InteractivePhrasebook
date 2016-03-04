@@ -91,8 +91,8 @@ public class XMLParser {
     }
 
     //wrapper
-    private SyntaxTree constructSentence2(Node currentRoot) {
-        return new SyntaxTree(constructSyntaxTreeSentence(currentRoot, null));
+    public SyntaxTree constructSentence2(Node currentRoot) {
+        return new SyntaxTree(constructSyntaxTreeSentence(currentRoot, new SyntaxNode("root")));
     }
 
     private SyntaxNode constructSyntaxTreeSentence(Node currentRoot, SyntaxNode treeRoot){
@@ -124,6 +124,7 @@ public class XMLParser {
                     if(!treeRoot.hasChildren()) {
                         treeRoot.setSelectedChild(child);
                     }
+                    treeRoot.setChildren(children);
                 }
             }
         }

@@ -21,16 +21,16 @@
         </node>
     </sentence>
 
-    <persons question= "Who are we asking about?">
+    <child id ="persons"  question= "Who are we asking about?">
         <option syntax = "IMale" desc = "me (male)"></option>
         <option syntax = "IFemale" desc ="me (female)"></option>
         <option syntax = "YouFamMale" desc ="you (a male friend)"></option>
         <option syntax = "YouFamFemale" desc="you (a female friend)"></option>
         <option syntax = "YouPolMale" desc="you (a male stranger)"></option>
         <option syntax = "YouPolFemale" desc="you (a female stranger)"></option>
-    </persons>
+    </child>
 
-    <familypersons question = "Who are we asking about?">
+    <child id="familypersons" question = "Who are we asking about?">
         <node syntax = "Wife" desc = "Wife of...">
             <node child ="persons"></node>
         </node>
@@ -46,8 +46,7 @@
         <node syntax = "Children" desc = "Children of...">
             <node child ="persons"></node>
         </node>
-
-    </familypersons>
+    </child>
 
 </phrasebook>
 

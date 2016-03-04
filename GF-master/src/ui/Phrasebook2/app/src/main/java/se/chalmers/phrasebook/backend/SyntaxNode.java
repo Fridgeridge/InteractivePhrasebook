@@ -41,6 +41,12 @@ public class SyntaxNode {
         return children;
     }
 
+    public boolean addChild(SyntaxNode node) {
+        if (node != null)
+            return children.add(node);
+        return false;
+    }
+
     public void setChildren(List<SyntaxNode> children) {
         this.children = children;
     }
@@ -58,7 +64,7 @@ public class SyntaxNode {
     }
 
     public boolean hasChildren() {
-        if(children.isEmpty()) {
+        if (children.isEmpty()) {
             return true;
         }
         return false;

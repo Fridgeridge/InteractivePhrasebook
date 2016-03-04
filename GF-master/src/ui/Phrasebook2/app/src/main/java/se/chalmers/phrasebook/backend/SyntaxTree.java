@@ -13,6 +13,10 @@ public class SyntaxTree {
         root = new SyntaxNode(rootData);
     }
 
+    public SyntaxTree(SyntaxNode root) {
+        this.root = root;
+    }
+
     /**
      * Build recursively from root node to parse syntax
      *

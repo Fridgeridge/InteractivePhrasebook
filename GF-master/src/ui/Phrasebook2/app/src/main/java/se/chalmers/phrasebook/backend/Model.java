@@ -1,11 +1,8 @@
 package se.chalmers.phrasebook.backend;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import static se.chalmers.phrasebook.backend.FilePaths.PHRASEBOOK;
 
 /**
  * Created by Björn on 2016-03-03.

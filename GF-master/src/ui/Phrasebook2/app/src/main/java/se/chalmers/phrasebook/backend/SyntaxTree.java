@@ -31,8 +31,21 @@ public class SyntaxTree {
 
     }
 
+    //Non-recursive way of parsing, still not
+    //usable with several input arguments
+    public String parseSentenceSyntax() {
+        SyntaxNode current = getSentenceHead();
+        String parsed = current.getData();
+        String end = "";
+        while(current.getSelectedChild() != null) {
+            current = current.getSelectedChild();
+            parsed = parsed + "(" + current.getData();
+            end = end + ")";
+        }
+        return parsed + end;
+    }
 
-    public String parseString(){
+    public String parseString() {
         String s = getSentenceSyntax(this.getSentenceHead());
         return s;
     }

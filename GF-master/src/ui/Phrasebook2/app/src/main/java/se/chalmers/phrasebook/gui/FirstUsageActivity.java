@@ -69,7 +69,7 @@ public class FirstUsageActivity extends AppCompatActivity {
             InputStream is = getAssets().open("Phrases/sentences.xml");
             XMLParser parser = new XMLParser(is);
             SyntaxTree tree = parser.buildSyntaxTree(parser.jumpToChild("sentence", "QWhatName"));
-            System.out.println(tree.parseString());
+            System.out.println(tree.parseSentenceSyntax());
         } catch (IOException es) {
             es.printStackTrace();
         }

@@ -7,11 +7,11 @@ import java.util.List;
  * Created by Björn on 2016-03-03.
  */
 public class SyntaxNode {
-    private String data = null;
-    private String desc = null;
-    private SyntaxNode parent = null;
+    private String data;
+    private String desc;
+    private SyntaxNode parent;
     private List<SyntaxNode> children = new ArrayList<SyntaxNode>();
-    private SyntaxNode selectedChild = null;
+    private SyntaxNode selectedChild;
 
     public String getData() {
         return data;
@@ -41,6 +41,12 @@ public class SyntaxNode {
         return children;
     }
 
+    public boolean addChild(SyntaxNode node) {
+        if (node != null)
+            return children.add(node);
+        return false;
+    }
+
     public void setChildren(List<SyntaxNode> children) {
         this.children = children;
     }
@@ -58,7 +64,7 @@ public class SyntaxNode {
     }
 
     public boolean hasChildren() {
-        if(children.isEmpty()) {
+        if (children.isEmpty()) {
             return true;
         }
         return false;

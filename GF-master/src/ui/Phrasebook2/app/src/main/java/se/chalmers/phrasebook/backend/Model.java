@@ -20,7 +20,6 @@ public class Model {
     private Model() {
         languages = new ArrayList<Language>();
         phrasebooks = new ArrayList<PhraseBook>();
-
     }
 
     private Model(String origin, String target) {

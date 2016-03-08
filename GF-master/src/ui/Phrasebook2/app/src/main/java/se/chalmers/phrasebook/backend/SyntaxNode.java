@@ -42,8 +42,13 @@ public class SyntaxNode {
     }
 
     public boolean addChild(SyntaxNode node) {
-        if (node != null)
-            return children.add(node);
+        if (node != null) {
+            if(children.isEmpty()) {
+                selectedChild = node;
+            }
+            children.add(node);
+            return true;
+        }
         return false;
     }
 

@@ -77,7 +77,7 @@ public class XMLParser {
 
     private SyntaxNode constructSentence(NodeList nl, SyntaxNode parent) {
         if (nl == null || nl.getLength() < 1)
-            return null;
+            return parent;
         int length = nl.getLength();
         for (int i = 0; i < length; i++) {
             if (nl.item(i) != null && (nl.item(i).getNodeType() == Node.ELEMENT_NODE) && nl.item(i).getAttributes() != null) {
@@ -97,22 +97,22 @@ public class XMLParser {
                     question = attributes.getNamedItem("question").getNodeValue();
                 }
 
+                if (attributes.getNamedItem("child") != null) {
+                    option = attributes.getNamedItem("child").getNodeValue();
+                    constructSentence(jumpToChild("child", option), parent);
+
+                }
                 if (!syntax.isEmpty()) {
                     SyntaxNode node = new SyntaxNode(syntax);
                     parent.addChild(node);
                     constructSentence(nl.item(i).getChildNodes(), node);
                 }
-                if (attributes.getNamedItem("child") != null) {
-                    option = attributes.getNamedItem("child").getNodeValue();
-                    constructSentence(jumpToChild("child", option), parent);
-                }
+
+
             }
-
-
         }
         return parent;
     }
-
 
     public NodeList jumpToChild(String tag, String id) {
         NodeList result = null;

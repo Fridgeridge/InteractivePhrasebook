@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 import org.grammaticalframework.pgf.PGF;
-import org.w3c.dom.Document;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -67,10 +66,10 @@ public class FirstUsageActivity extends AppCompatActivity {
 
 
         try {
-            InputStream is = getAssets().open("Phrases/test.xml");
+            InputStream is = getAssets().open("Phrases/sentences.xml");
             XMLParser parser = new XMLParser(is);
-            SyntaxTree tree = parser.constructSentence2(parser.jumpToChild("sentence", "QWhatAge"));
-            System.out.println(tree);
+            SyntaxTree tree = parser.buildSyntaxTree(parser.jumpToChild("sentence", "QWhatName"));
+            System.out.println(tree.parseString());
         } catch (IOException es) {
             es.printStackTrace();
         }

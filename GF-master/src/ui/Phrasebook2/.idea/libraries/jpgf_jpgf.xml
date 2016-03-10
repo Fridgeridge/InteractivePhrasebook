@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="jpgf.jpgf">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/jpgf/jpgf.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

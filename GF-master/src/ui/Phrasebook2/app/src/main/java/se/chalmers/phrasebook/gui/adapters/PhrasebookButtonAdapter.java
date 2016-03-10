@@ -10,7 +10,7 @@ import android.widget.Button;
 
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
-import se.chalmers.phrasebook.gui.PhraseListActivity;
+import se.chalmers.phrasebook.gui.activities.PhraseListActivity;
 
 /**
  * Created by David on 2016-02-17.
@@ -60,9 +60,11 @@ public class PhrasebookButtonAdapter extends BaseAdapter {
         }
         final View clickview = convertView;
 
-        button.setMinimumHeight(150);
-        button.setBackgroundColor(context.getResources().getColor(R.color.primary_color));
-        button.setTextColor(Color.WHITE);
+  //      button.setMinimumHeight(150);
+        button.setHeight(100);
+        button.setWidth(100);
+        button.setBackgroundResource(R.drawable.grid_phrasebook_button);
+        button.setTextColor(Color.BLACK);
         button.setText(phrasebookNames[position]);
         button.setId(position);
 

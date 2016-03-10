@@ -1,4 +1,4 @@
-package se.chalmers.phrasebook.gui;
+package se.chalmers.phrasebook.gui.activities;
 
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -23,7 +23,7 @@ public class HomeScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home_screen);
 
         Resources res = getResources();
-        String[] buttonNames = res.getStringArray(R.array.button_names);
+        String[] buttonNames = res.getStringArray(R.array.phrasebooks_default);
         GridView gridView = (GridView) findViewById(R.id.gridView);
         gridView.setAdapter(new PhrasebookButtonAdapter(this, buttonNames));
 

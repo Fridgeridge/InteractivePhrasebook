@@ -1,4 +1,4 @@
-package se.chalmers.phrasebook.gui;
+package se.chalmers.phrasebook.gui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;

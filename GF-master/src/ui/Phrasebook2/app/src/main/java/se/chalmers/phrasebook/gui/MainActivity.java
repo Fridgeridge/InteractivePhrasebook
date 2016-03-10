@@ -11,6 +11,7 @@ import android.view.View;
 import org.grammaticalframework.pgf.PGF;
 
 import se.chalmers.phrasebook.R;
+import se.chalmers.phrasebook.gui.activities.PhraseListActivity;
 
 public class MainActivity extends ActionBarActivity {
 

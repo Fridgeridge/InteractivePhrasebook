@@ -1,13 +1,9 @@
-package se.chalmers.phrasebook.gui;
+package se.chalmers.phrasebook.gui.activities;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import se.chalmers.phrasebook.gui.FirstUsageActivity;
-import se.chalmers.phrasebook.gui.HomeScreenActivity;
-import se.chalmers.phrasebook.gui.MainActivity;
 
 /**
  * Created by matilda on 03/03/16.

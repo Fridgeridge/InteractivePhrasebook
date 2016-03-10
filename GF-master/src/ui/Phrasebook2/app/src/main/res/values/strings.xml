@@ -4,31 +4,40 @@
     <string name="title_activity_home_screen">HomeScreenActivity</string>
 
 
-    <string-array name="placeholder_phrases1">
-        <item>How much does something cost?</item>
-        <item>Someone is born somewhere</item>
-        <item>Someone is hungry</item>
-        <item>Blalbalbalblababab</item>
-        <item>I eat apples. They are full of nutrition.</item>
+    <!--String arrays for adapters-->
+    <string-array name="phrases">
+        <item>What is somebody's name?</item>
+        <item>Somebody's name is...</item>
+        <item>How old is someone?</item>
     </string-array>
 
-    <string-array name="placeholder_phrases2">
-        <item>Someone loves someone</item>
-        <item>Someone has children</item>
-        <item>Someone is hungry</item>
-        <item>Someone lives somewhere</item>
-        <item>Someone wants some food</item>
-    </string-array>
-
-    <string-array name="button_names">
+    <string-array name="phrasebooks_default">
         <item>Tourism</item>
-        <item>Favorites</item>
-        <item>Getting from the airport</item>
-        <item>Greetings</item>
-        <item>Emergency</item>
-        <item>Food</item>
-        <item>Directions</item>
     </string-array>
+
+    <string-array name="my_phrasebooks">
+        <item>Tourism</item>
+    </string-array>
+
+
+    <!--Strings for option fragments-->
+    <string name="talking_to">Who are you talking to?</string>
+    <string name="how_to_phrase">Do you want to...</string>
+
+
+    <!--Strings arrays for option spinners-->
+    <string-array name="persons">
+        <item>Female friend</item>
+        <item>Male friend</item>
+        <item>Stranger</item>
+    </string-array>
+
+    <string-array name="phrase_types">
+        <item>ask a question?</item>
+        <item>make a statement?</item>
+        <item>make a negation?</item>
+    </string-array>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

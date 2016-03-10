@@ -1,11 +1,8 @@
 package se.chalmers.phrasebook.backend;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import static se.chalmers.phrasebook.backend.FilePaths.PHRASEBOOK;
 
 /**
  * Created by Björn on 2016-03-03.
@@ -16,7 +13,6 @@ public class Model {
 
     private ArrayList<PhraseBook> phrasebooks;
     private String[] languageKeys;
-    private Translator translator;
     private String originLanguage;
     private String targetLanguage;
 
@@ -24,16 +20,6 @@ public class Model {
 
     private Model() {
         phrasebooks = new ArrayList<PhraseBook>();
-
-        try {
-            InputStream is = this.getClass().getClassLoader().getResourceAsStream(PHRASEBOOK.getPath());//FIXME Utilize Context.getResources instead
-            translator = new Translator(is);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        languageKeys = translator.getLanguages();
-
     }
 
     private Model(String origin, String target) {

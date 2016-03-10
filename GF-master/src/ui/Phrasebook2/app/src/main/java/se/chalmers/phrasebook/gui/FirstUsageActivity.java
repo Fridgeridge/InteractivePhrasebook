@@ -10,12 +10,16 @@ import android.widget.Spinner;
 
 import org.grammaticalframework.pgf.PGF;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Langs;
 import se.chalmers.phrasebook.backend.Model;
+import se.chalmers.phrasebook.backend.SyntaxTree;
+import se.chalmers.phrasebook.backend.XMLParser;
 
 public class FirstUsageActivity extends AppCompatActivity {
     private PGF pgf;
@@ -29,46 +33,46 @@ public class FirstUsageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-            model = Model.getInstance();
+        model = Model.getInstance();
 
-            setContentView(R.layout.activity_first_usage);
+        setContentView(R.layout.activity_first_usage);
 
-            final Spinner originSpinner = (Spinner) findViewById(R.id.origin_spinner);
-            final Spinner targetSpinner = (Spinner) findViewById(R.id.target_spinner);
+        final Spinner originSpinner = (Spinner) findViewById(R.id.origin_spinner);
+        final Spinner targetSpinner = (Spinner) findViewById(R.id.target_spinner);
 
-            languages = new ArrayList<String>();
-            languages = model.getLanguages();
+        languages = new ArrayList<String>();
+        languages.add("n");
 
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, languages);
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            originSpinner.setAdapter(adapter);
-            targetSpinner.setAdapter(adapter);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, languages);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        originSpinner.setAdapter(adapter);
+        targetSpinner.setAdapter(adapter);
 
-            Button startButton = (Button) findViewById(R.id.startButton);
+        Button startButton = (Button) findViewById(R.id.startButton);
 
-            View.OnClickListener startListener = new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+        View.OnClickListener startListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-                    model.setOriginLanguage(Langs.getKey(originSpinner.getSelectedItem().toString()));
-                    model.setTargetLanguage(Langs.getKey(targetSpinner.getSelectedItem().toString()));
+                model.setOriginLanguage(Langs.getKey(originSpinner.getSelectedItem().toString()));
+                model.setTargetLanguage(Langs.getKey(targetSpinner.getSelectedItem().toString()));
 
-                    startApplication();
+                startApplication();
 
-                }
-            };
+            }
+        };
 
-            startButton.setOnClickListener(startListener);
+        startButton.setOnClickListener(startListener);
 
 
-//        try {
-//            InputStream is = getAssets().open("Phrases/test.xml");
-//            XMLParser parser = new XMLParser(is);
-//            Document doc = parser.acquireDocument();
-//            SyntaxTree tree = parser.parseToSentence(doc,parser.jumpToChild(doc,"sentence"));
-//        } catch (IOException es) {
-//            es.printStackTrace();
-//        }
+        try {
+            InputStream is = getAssets().open("Phrases/sentences.xml");
+            XMLParser parser = new XMLParser(is);
+            SyntaxTree tree = parser.buildSyntaxTree(parser.jumpToChild("sentence", "QWhatName"));
+            System.out.println(tree.parseSentenceSyntax());
+        } catch (IOException es) {
+            es.printStackTrace();
+        }
 
 
     }

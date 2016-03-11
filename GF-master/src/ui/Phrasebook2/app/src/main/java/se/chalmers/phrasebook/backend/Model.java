@@ -17,6 +17,7 @@ public class Model {
     private String targetLanguage;
 
     private String currentPhrasebook;
+    private String currentPhrase;
 
     private Model() {
         phrasebooks = new ArrayList<PhraseBook>();
@@ -28,6 +29,7 @@ public class Model {
         targetLanguage = target;
 
         currentPhrasebook = "";
+        currentPhrase = "";
     }
 
     public ArrayList<String> getLanguages() {
@@ -66,6 +68,14 @@ public class Model {
 
     public String getCurrentPhrasebook(){
         return currentPhrasebook;
+    }
+
+    public String getCurrentPhrase(){
+        return currentPhrase;
+    }
+
+    public void setCurrentPhrase(String phrase){
+        currentPhrase = phrase;
     }
 
 }

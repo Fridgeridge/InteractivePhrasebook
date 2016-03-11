@@ -47,6 +47,9 @@ public class PhraseListActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                model.setCurrentPhrase((String)parent.getItemAtPosition(position));
+
                 Intent intent = new Intent(context, TranslatorActivity.class);
                 startActivity(intent);
             }

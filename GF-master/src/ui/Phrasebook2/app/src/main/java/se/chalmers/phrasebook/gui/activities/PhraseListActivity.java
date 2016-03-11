@@ -58,7 +58,7 @@ public class PhraseListActivity extends AppCompatActivity {
 
     //correct function
     private void initListView(){
- //       phrases = getPhrases(); //ArrayList with phrases needed
+        phrases = getPhrases(); 
 
         ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, phrases);
 

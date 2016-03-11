@@ -21,9 +21,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="67af53b6-2612-449d-9172-6a6dba1dcc4f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/se/chalmers/phrasebook/gui/activities/PhraseListActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/se/chalmers/phrasebook/gui/activities/PhraseListActivity.java" />
-    </list>
+    <list default="true" id="67af53b6-2612-449d-9172-6a6dba1dcc4f" name="Default" comment="" />
     <ignored path="Phrasebook2.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/build/classes/" />

@@ -21,7 +21,7 @@ import se.chalmers.phrasebook.backend.Model;
 import se.chalmers.phrasebook.backend.SyntaxTree;
 import se.chalmers.phrasebook.backend.XMLParser;
 
-public class FirstUsageActivity extends AppCompatActivity {
+public class FirstUsageActivity extends AppCompatActivity{
     private PGF pgf;
 
     private List<String> languages;
@@ -68,8 +68,8 @@ public class FirstUsageActivity extends AppCompatActivity {
         try {
             InputStream is = getAssets().open("Phrases/sentences.xml");
             XMLParser parser = new XMLParser(is);
-            SyntaxTree tree = parser.buildSyntaxTree(parser.jumpToChild("sentence", "QWhatName"));
-            System.out.println(tree.parseSentenceSyntax());
+            SyntaxTree tree = parser.buildSyntaxTree(parser.jumpToChild("sentence", "AHasName"));//AHasName
+            System.out.println(tree.parseString());
         } catch (IOException es) {
             es.printStackTrace();
         }

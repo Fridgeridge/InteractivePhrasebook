@@ -99,13 +99,15 @@ public class XMLParser {
 
                 if (attributes.getNamedItem("child") != null) {
                     option = attributes.getNamedItem("child").getNodeValue();
-                    constructSentence(jumpToChild("child", option), parent);
-
+                    SyntaxNode s = getChildLeaf( constructSentence(jumpToChild("child", option), parent));
+                    if(nl.item(i).hasChildNodes())
+                    constructSentence(nl.item(i).getChildNodes(),s);
                 }
                 if (!syntax.isEmpty()) {
                     SyntaxNode node = new SyntaxNode(syntax);
                     parent.addChild(node);
-                    constructSentence(nl.item(i).getChildNodes(), node);
+                    constructSentence(nl.item(i).getChildNodes(), node);//Do not return
+                    return node;
                 }
 
 
@@ -125,8 +127,13 @@ public class XMLParser {
             }
         }
         return result;
-
     }
+
+    public SyntaxNode getChildLeaf(SyntaxNode parent){
+        while (parent != null && parent.getSelectedChild()!=null) parent = parent.getSelectedChild();
+        return parent;
+    }
+
 
 }
 

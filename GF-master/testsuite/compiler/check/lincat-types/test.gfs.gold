@@ -1,7 +1,0 @@
-
-
-testsuite/compiler/check/lincat-types/TestCnc.gf:3:
-  Happened in linearization type of S
-    type of PTrue
-   expected: Type
-   inferred: PBool

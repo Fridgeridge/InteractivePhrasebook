@@ -1,4 +1,0 @@
-abstract AllGreAbs = 
-  Lang,
-  ExtraGreAbs
-  ** {} ;

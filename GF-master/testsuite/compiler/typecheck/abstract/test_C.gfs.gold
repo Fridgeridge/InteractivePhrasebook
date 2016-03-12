@@ -1,5 +1,0 @@
-
-
-testsuite/compiler/typecheck/abstract/C.gf:6:
-  Happened in the definition of function f
-   {Int <> S}

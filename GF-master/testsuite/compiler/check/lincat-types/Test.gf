@@ -1,5 +1,0 @@
-abstract Test = {
-
-cat S;
-
-}

@@ -1,4 +1,0 @@
-abstract AllPnbAbs =
-  Lang,
-  ExtraPnbAbs
-  ** {} ;

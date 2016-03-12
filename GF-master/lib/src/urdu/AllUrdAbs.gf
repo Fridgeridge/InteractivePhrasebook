@@ -1,4 +1,0 @@
-abstract AllUrdAbs =
-  Lang,
-  ExtraUrdAbs
-  ** {} ;

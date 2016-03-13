@@ -11,6 +11,8 @@ import org.xmlpull.v1.XmlPullParser;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -40,34 +42,39 @@ public class XMLParser {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
 
-    public NodeList getSentenceList(String sentenceTitle) {
+    public NodeList getSentence(String id) {
         NodeList result = null;
         NodeList nl = document.getElementsByTagName("sentence");
 
         for (int i = 0; i < nl.getLength(); i++) {
-            String s = nl.item(i).getFirstChild().getNodeValue();
-            if (nl.item(i).getNodeType() == Node.ELEMENT_NODE && sentenceTitle.equals(s)) {
-                result = nl.item(i).getChildNodes();
+            if (nl.item(i).getNodeType() == Node.ELEMENT_NODE) {
+                Node attr = nl.item(i).getAttributes().getNamedItem("id");
+                if (attr != null && attr.getNodeValue().equals(id))
+                    result = nl.item(i).getChildNodes();
             }
         }
         return result;
     }
 
-    public String[] getAllSentencesTitles() {
+    public HashMap<String,String> getSentencesData() {
         String[] result;
+        HashMap<String,String> sentenceMap = new HashMap<String,String>();
+
         NodeList sentences = document.getElementsByTagName("sentence");
         int nbrOfSentences = sentences.getLength();
         result = new String[nbrOfSentences];
 
         for (int i = 0; i < nbrOfSentences; i++) {
-            result[i] = sentences.item(i).getAttributes().item(1).getNodeValue();
-        }
+            String desc = sentences.item(i).getAttributes().getNamedItem("desc").getNodeValue();
+            String id = sentences.item(i).getAttributes().getNamedItem("id").getNodeValue();
 
-        return result;
+            if (desc != null & id != null)
+                sentenceMap.put(id,desc);
+        }
+        return sentenceMap;
     }
 
 
@@ -99,9 +106,9 @@ public class XMLParser {
 
                 if (attributes.getNamedItem("child") != null) {
                     option = attributes.getNamedItem("child").getNodeValue();
-                    SyntaxNode s = getChildLeaf( constructSentence(jumpToChild("child", option), parent));
-                    if(nl.item(i).hasChildNodes())
-                    constructSentence(nl.item(i).getChildNodes(),s);
+                    SyntaxNode s = getChildLeaf(constructSentence(jumpToChild("child", option), parent));
+                    if (nl.item(i).hasChildNodes())
+                        constructSentence(nl.item(i).getChildNodes(), s);
                 }
                 if (!syntax.isEmpty()) {
                     SyntaxNode node = new SyntaxNode(syntax);
@@ -129,8 +136,9 @@ public class XMLParser {
         return result;
     }
 
-    public SyntaxNode getChildLeaf(SyntaxNode parent){
-        while (parent != null && parent.getSelectedChild()!=null) parent = parent.getSelectedChild();
+    public SyntaxNode getChildLeaf(SyntaxNode parent) {
+        while (parent != null && parent.getSelectedChild() != null)
+            parent = parent.getSelectedChild();
         return parent;
     }
 

@@ -27,7 +27,6 @@ public class FirstUsageActivity extends AppCompatActivity{
     private List<String> languages;
 
     private Model model;
-    private Langs langs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +67,8 @@ public class FirstUsageActivity extends AppCompatActivity{
         try {
             InputStream is = getAssets().open("Phrases/sentences.xml");
             XMLParser parser = new XMLParser(is);
-            SyntaxTree tree = parser.buildSyntaxTree(parser.jumpToChild("sentence", "AHasName"));//AHasName
+            SyntaxTree tree = parser.buildSyntaxTree(parser.getSentence("AHasName"));//AHasName
+            System.out.println(parser.getSentencesData().values().toString());
             System.out.println(tree.parseString());
         } catch (IOException es) {
             es.printStackTrace();
@@ -77,7 +77,6 @@ public class FirstUsageActivity extends AppCompatActivity{
 
     }
 
-    //Starts the Home activity
     public void startApplication() {
         Intent intent = new Intent(this, HomeScreenActivity.class);
         startActivity(intent);

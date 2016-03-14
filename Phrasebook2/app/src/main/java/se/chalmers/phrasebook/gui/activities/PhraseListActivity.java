@@ -51,7 +51,6 @@ public class PhraseListActivity extends Activity {
      * Initializes the list view by dynamically add phrases from the XML file.
      */
     private void initListView(){
-        phrases = parser.getAllSentencesTitles();
 
         ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, phrases);
 

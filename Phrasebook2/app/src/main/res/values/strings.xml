@@ -4,13 +4,6 @@
     <string name="title_activity_home_screen">HomeScreenActivity</string>
 
 
-    <!--String arrays for adapters-->
-    <string-array name="phrases">
-        <item>What is somebody's name?</item>
-        <item>Somebody's name is...</item>
-        <item>How old is someone?</item>
-    </string-array>
-
     <string-array name="phrasebooks_default">
         <item>Tourism</item>
     </string-array>

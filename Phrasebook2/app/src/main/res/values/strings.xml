@@ -10,6 +10,7 @@
 
     <string-array name="my_phrasebooks">
         <item>Tourism</item>
+        <item>Hospital</item>
     </string-array>
 
 

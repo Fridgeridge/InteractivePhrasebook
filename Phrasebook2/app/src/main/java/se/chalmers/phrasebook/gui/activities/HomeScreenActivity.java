@@ -13,10 +13,10 @@ public class HomeScreenActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_screen);
+        setContentView(R.layout.content_home_screen);
 
         Resources res = getResources();
-        String[] buttonNames = res.getStringArray(R.array.phrasebooks_default);
+        String[] buttonNames = res.getStringArray(R.array.my_phrasebooks);
         GridView gridView = (GridView) findViewById(R.id.gridView);
         gridView.setAdapter(new PhrasebookButtonAdapter(this, buttonNames));
 

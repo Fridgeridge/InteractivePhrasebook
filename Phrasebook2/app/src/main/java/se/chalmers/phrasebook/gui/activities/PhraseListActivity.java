@@ -32,13 +32,15 @@ public class PhraseListActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         model = Model.getInstance();
-
+        phrases = new ArrayList<String>();
         try {
             InputStream is = getAssets().open("Phrases/sentences.xml");
             parser = new XMLParser(is);
         } catch (IOException es) {
             es.printStackTrace();
         }
+
+        phrases.addAll(parser.getSentencesData().values());
 
         setContentView(R.layout.activity_phrase_list);
         initListView();
@@ -50,7 +52,7 @@ public class PhraseListActivity extends Activity {
     /**
      * Initializes the list view by dynamically add phrases from the XML file.
      */
-    private void initListView(){
+    private void initListView() {
 
         ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, phrases);
 

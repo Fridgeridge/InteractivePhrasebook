@@ -15,7 +15,6 @@ public class HelperActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Perhaps set content view here
 
         prefs = getSharedPreferences("se.chalmers.phrasebook", MODE_PRIVATE);
 

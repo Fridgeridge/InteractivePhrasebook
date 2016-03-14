@@ -1,5 +1,6 @@
 package se.chalmers.phrasebook.backend;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -40,7 +41,7 @@ public enum Langs {
 
     private static final Map<String, String> langMap = Collections.unmodifiableMap(initializeMap());
 
-    private Langs(String spelling, String language, String key){
+    Langs(String spelling, String language, String key){
         this.nativeSpelling = spelling;
         this.language = language;
         this.key = key;
@@ -60,6 +61,17 @@ public enum Langs {
             map.put(l.key, l.language);
         }
         return map;
+    }
+
+    public static ArrayList<String> getLanguages() {
+        ArrayList<String> list = new ArrayList<>();
+        Langs[] langs = Langs.values();
+
+        for (int i = 0; i < langs.length; i++) {
+            if (Langs.getEngName(langs[i].getKey()) != null)
+                list.add(Langs.getEngName(langs[i].getKey()));
+        }
+        return list;
     }
 
     public static String getEngName(String key){

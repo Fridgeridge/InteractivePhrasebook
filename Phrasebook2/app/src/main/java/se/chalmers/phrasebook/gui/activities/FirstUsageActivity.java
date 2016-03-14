@@ -27,7 +27,6 @@ public class FirstUsageActivity extends Activity {
     private List<String> languages;
 
     private Model model;
-    private Langs langs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +40,7 @@ public class FirstUsageActivity extends Activity {
         final Spinner targetSpinner = (Spinner) findViewById(R.id.target_spinner);
 
         languages = new ArrayList<String>();
-        languages.add("n");
+        languages = Langs.getLanguages();
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, languages);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -82,5 +81,6 @@ public class FirstUsageActivity extends Activity {
         Intent intent = new Intent(this, HomeScreenActivity.class);
         startActivity(intent);
     }
+
 
 }

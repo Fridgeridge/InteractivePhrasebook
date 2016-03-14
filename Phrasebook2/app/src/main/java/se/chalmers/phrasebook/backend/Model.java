@@ -32,15 +32,6 @@ public class Model {
         currentPhrase = "";
     }
 
-    public ArrayList<String> getLanguages() {
-        ArrayList<String> list = new ArrayList<String>();
-        for (String key : languageKeys) {
-            if (Langs.getEngName(key) != null)
-                list.add(Langs.getEngName(key));
-        }
-        return list;
-
-    }
 
     public static Model getInstance() {
         return model;

@@ -1,0 +1,44 @@
++ Safety question before deleting a grammar
++ Check identifier syntax
++ Allow lincat for deleted cat to be deleted
++ Allow lin for deleted fun to be deleted
++ Apply category alpha conversion in concrete syntax
++ Remove a concrete syntax
++ Apply function alpha conversion in concrete syntax
++ Change lhs of lins when function type is changed
+
++ Allow languages other than the ones in the given list to be added
++ Export as plain text
++ Allow definitions to be reordered
+
++ 1. possibility to compile the grammar set, returning a URL to a translator app
++ 2a. possibility to import modules - resource libraries
+- 2b. possibility to import modules - user's own auxiliaries
+- 3. possibility to upload own modules
++ 4. access to the created files in an on-line shell (making testing possible)
+- 5. rule-to-rule type checking and guidance (e.g. with library oper
+     suggestions)
++    Try grammars in the Translation Quiz
++    Show lincat and lin before params and opers below
++    Create a new concrete syntax by copying an existing one.
+-    Easy access to compute_concrete from the editor
+-    Instead of starting with an empty grammar, start a new grammar by copying
+     an example.
++ Cloning grammars
+- Allow grammars to contain a resoure module. Create the resource module by
+ factoring out common parts of the concrete syntaxes.
+- Integrate example-based concrete syntax construction (using Ramona's tool)
+- Open lexicon modules? They are not installed by default!
+     DictEng, MorphalouFre, DictSwe, DictTur, DictBul, DictFun, DictLav
+
++ compile only the uploaded grammar even if other grammars are present
++ 'flags startcat' is needed for grammars with only one category (since the
+   default startcat is S, even if it doesn't exist)
+
+- Bug! After adding a 2nd def of a fun with a different type and then deleting
+  the old fun, the corresponding lin will have the wrong lhs.
+
++ Bug! The startcat menu shows the first category by default, but the startcat
+  flag is actually not set until a selection is made from the menu.
+
++ Always open a resizable text box when editing concrete syntax.

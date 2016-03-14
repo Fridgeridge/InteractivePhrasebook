@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html> <head>
+<title>Simple Translation Tool</title>
+<link rel="stylesheet" type="text/css" href="../gfse/editor.css" title="Cloud">
+<link rel="stylesheet" type="text/css" href="translator.css" title="Cloud">
+<link rel="stylesheet" type="text/css" href="../minibar/minibar.css">
+<link rel=stylesheet type="text/css" href="../syntax-editor/editor.css">
+<meta name = "viewport" content = "width = device-width">
+<meta charset="UTF-8">
+</head>
+
+<body class=hover>
+<div class=pagehead>
+  <h1><img src="../P/gf-cloud.png" alt="" title="GF Cloud Service">Simple Translation Tool</h1>
+<form name=options>
+<table class=menubar>
+  <tr><td><span onclick="">File</span>
+    <dl>
+      <dt onclick="translator.new(this)">New
+      <dt onclick="translator.browse(this)">Open...
+      <dt id="import_globalsight" onclick="translator.import_globalsight(this)">Import from GlobalSight...
+      <dt onclick="translator.save(this)">Save
+      <dt onclick="translator.saveAs(this)">Save As...
+	<!--
+      <dt onclick="translator.close(this)">Close
+	-->
+     <dt onclick="translator.open_in_wc(this)">Open in Wide Coverage Translation Demo
+    </dl>
+    <td><span onclick="">Edit</span>
+      <dl>
+	<dt id="edit_import" onclick="translator.import(this)">Import text...
+	<dt id="edit_add_segment" onclick="translator.add_segment(this)">Add a segment...
+	<dt id="edit_remove_segment" onclick="translator.remove(this)">Remove the last segment
+      </dl>
+    <td><span onclick="">View</span>
+      <dl>
+	<dt><label><input name=view value=segmentbysegment type=radio checked onchange="translator.change(this)">Segment by segment</label>
+	<dt><label><input name=view value=paralleltexts type=radio onchange="translator.change(this)">Parallel texts</label>
+      </dl>
+    <td><span onclick="">Options</span>
+      <dl>
+	<dt>
+	  <table class=submenu>
+	    <tr><td><span onclick="">Source Language</span>
+	      <dl id=source>
+		<dt><label><input name=source value=Eng type=radio onchange="translator.change(this)">English</label>
+		<dt><label><input name=source value=Swe type=radio onchange="translator.change(this)">Swedish</label>
+		<dt><label><input name=source value=Ita type=radio onchange="translator.change(this)">Italian</label>
+	      </dl>
+	    </table>
+	<dt>
+	  <table class=submenu>
+	    <tr><td><span onclick="">Target Language</span>
+	      <dl id=target>
+		<dt><label><input name=target value=Eng type=radio onchange="translator.change(this)">English</label>
+		<dt><label><input name=target value=Swe type=radio onchange="translator.change(this)">Swedish</label>
+		<dt><label><input name=target value=Ita type=radio onchange="translator.change(this)">Italian</label>
+	      </dl>
+	    </table>
+	<dt>
+	  <table class=submenu>
+	    <tr><td><span onclick="">Default translation method</span>
+	      <dl id=methods>
+		<dt><label><input name=method value=Manual type=radio onchange="translator.change(this)">Manual</label>
+		<dt><label><input name=method value=GFRobust type=radio onchange="translator.change(this)">GF Wide Coverage Translation</label>
+	      </dl>
+	  </table>
+	<dt><label><input name=cloud type=checkbox onchange="translator.change(this)"> Save in the cloud</label>
+      </dl>
+</table>
+</form>
+</div>
+<div class=overlay><div id=filebox class=filebox></div></div>
+
+<div id=document class=document>
+...
+  <noscript>This document translation editor requires JavaScript to work
+  </noscript>
+</div>
+<hr>
+<div class=modtime><small>HMTL
+<!-- hhmts start -->Last modified: Fri Mar  6 12:46:23 CET 2015 <!-- hhmts end -->
+</small></div>
+<a href="about.html">About</a>
+
+<script type="text/JavaScript" src="../js/grammar_manager.js"></script>
+<script type="text/javascript" src="../js/support.js"></script>
+<script type="text/javascript" src="../js/pgf_online.js"></script>
+<script type="text/javascript" src="../js/gftranslate.js"></script>
+<script type="text/javascript" src="../js/localstorage.js"></script>
+<script type="text/javascript" src="../js/langcode.js"></script>
+<script type="text/javascript" src="../gfse/localstorage.js"></script>
+<script type="text/javascript" src="../gfse/cloud2.js"></script>
+
+<script type="text/javascript" src="../minibar/minibar.js"></script>
+<script type="text/javascript" src="../minibar/minibar_input.js"></script>
+<script type="text/javascript" src="../minibar/minibar_translations.js"></script>
+<script type="text/javascript" src="../minibar/minibar_support.js"></script>
+<script type="text/javascript" src="../syntax-editor/ast.js"></script>
+<script type="text/javascript" src="../syntax-editor/editor_menu.js"></script>
+<script type="text/javascript" src="../syntax-editor/editor.js"></script>
+
+<script type="text/javascript" src="translator.js"></script>
+
+<script type="text/javascript" >
+var translator = new Translator()
+</script>
+<script defer async type="text/javascript" src="http://api.apertium.org/JSLibrary.js" onload="translator.add_apertium()"></script>
+</body>
+</html>

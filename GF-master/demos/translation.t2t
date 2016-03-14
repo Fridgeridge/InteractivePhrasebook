@@ -1,0 +1,100 @@
+Translation with GF
+Powered by multilingual grammars
+
+%!style:../css/style0.css
+%!postproc(html): <H1> <H1><a href="../"><IMG src="../doc/Logos/gf0.svg" alt=""></a>
+%!postproc(html): #GFWCT <iframe style="border: 0; width: 100%; height: 50ex;" src="http://cloud.grammaticalframework.org/wc.html#embed"></iframe>
+
+==Try it online==
+
+%**Coming soon**:
+%//Here you will be able to select your source and target language and translate% whatever you want.//
+#GFWCT
+
+
+==Download the app==
+
+[App description and download page ./app.html]
+
+
+==Colours==
+
+- **Green: semantic translation**, should be correct.
+                 But not necessarily the only correct one. 
+- **Yellow: syntactic translation**, should be grammatically correct.
+                 But can be very strange in its interpretation and choice of words.
+- **Light red: chunk translation**, probably incorrect.
+                 Builds the translation from small pieces.
+- **Dark red: word-by-word translation**, almost certainly incorrect.
+                 Builds the translation word by word and returns unknown words verbatim.
+
+
+The green translations currently come from a tourist phrasebook, which allows
+you to translate things like "hello" and "how far is the airport from
+the hotel". But this part can be easily adapted to other uses, such as
+technical language.
+
+
+==What you can expect==
+
+The program is designed to translate anything, just like Google translate and Bing. It has some advantages over them:
+- It uses **grammars** (as opposed to statistics), which makes it more correct in many cases.
+- It is **open source**, which means you can inspect, copy, and modify it in what ever way you want.
+- It is **light weight**, so that you can run it on your own computer and even on a smartphone.
+- It gives you **linguistic information**, such as word inflections.
+- It gives you **confidence information**, warning about translations that it is not so sure about.
+
+
+However, this is not a mature product but a research prototype. It therefore has some shortcomings:
+- It has **limited coverage**, which means that it misses many words and syntactic constructions.
+- It can be **clumsy**, for instance when it doesn't detect an idiom but translates too literally.
+- It can be **slow**, in particular with long sentences and with some input languages.
+
+
+Here are some hints to use it in a satisfactory way:
+- Start with short sentences (less than ten words), preferably from English or Swedish, to get an idea of the best performance.
+- Take a look at the alternative translations, in particular for sentences with low confidence level.
+- Send us feedback, and consider contributing to the improvement of the system!
+
+
+
+The following table gives a rough idea of what to expect for each
+language (the speech column refers to the Android app):
+'''
+<center>
+<table rules=all border=yes>
+<tr> <th></th>          <th>coverage</th> <th>quality</th> <th>speed</th> <th>speech</th> </tr>
+<tr> <th>Bulgarian</th> <td bgcolor=yellow></td> <td bgcolor=yellow></td><td bgcolor=palegreen></td> <td bgcolor=yellow>in only</td></tr>
+<tr> <th>Chinese</th>   <td bgcolor=pink></td> <td bgcolor=pink></td> <td bgcolor=palegreen></td> <td bgcolor=yellow>diff in/out</td> </tr>
+<tr> <th>Dutch</th>     <td bgcolor=yellow></td> <td bgcolor=yellow></td> <td bgcolor=yellow></td> <td bgcolor=palegreen></td> </tr>
+<tr> <th>English</th>   <td bgcolor=palegreen></td> <td bgcolor=palegreen></td> <td bgcolor=palegreen></td> <td bgcolor=palegreen></td> </tr>
+<tr> <th>Finnish</th>   <td bgcolor=yellow></td> <td bgcolor=yellow></td><td bgcolor=pink></td> <td bgcolor=palegreen></td></tr>
+<tr> <th>French</th>    <td bgcolor=pink></td> <td bgcolor=yellow></td><td bgcolor=pink></td> <td bgcolor=palegreen></td></tr>
+<tr> <th>German</th>    <td bgcolor=pink></td> <td bgcolor=yellow></td><td bgcolor=pink></td> <td bgcolor=palegreen></td></tr>
+<tr> <th>Hindi</th>     <td bgcolor=pink></td> <td bgcolor=pink></td> <td bgcolor=yellow></td> <td bgcolor=yellow>out only</td> </tr>
+<tr> <th>Italian</th>    <td bgcolor=pink></td> <td bgcolor=pink></td><td bgcolor=pink></td> <td bgcolor=palegreen></td></tr>
+<tr> <th>Spanish</th>    <td bgcolor=pink></td> <td bgcolor=yellow></td><td bgcolor=pink></td> <td bgcolor=palegreen></td></tr>
+<tr> <th>Swedish</th>   <td bgcolor=yellow></td> <td bgcolor=yellow></td> <td bgcolor=palegreen></td> <td bgcolor=palegreen></td> </tr>
+</table>
+</center>
+'''
+
+
+==How it works==
+
+Powered by [Grammatical Framework ../]
+
+[Slides https://docs.google.com/presentation/d/1545yYmTlWgzyV1uwUwuvAsOCzdD1AIUdV_NZbZ1qMEo/edit?usp=sharing]
+explaining the translation method:
+
+
+==Get the sources==
+
+Download from [here ../download/]
+
+
+==Send us feedback==
+
+
+
+

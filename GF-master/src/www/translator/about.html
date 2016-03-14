@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html> <head>
+<title>About: Simple Translation Tool</title>
+<link rel="stylesheet" type="text/css" href="../gfse/editor.css" title="Cloud">
+<link rel="alternate stylesheet" type="text/css" href="../gfse/molto.css" title="MOLTO">
+
+<link rel=author href="http://www.cse.chalmers.se/~hallgren/" title="Thomas Hallgren">
+
+<meta name = "viewport" content = "width = device-width">
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<meta charset="UTF-8">
+</head>
+
+<body>
+<h1><a href="../"><img src="../P/gf-cloud.png" alt="" title="GF Cloud Service"></a>About the Simple Translation Tool</h1>
+
+<p>
+
+<a href="./">This</a> is a simple bilingual document editor. Documents consist
+of a sequence of segments that are translated independently. The user can import
+text in the source language and obtain automatically translated text in the
+target language. Imported text can be segmented based on punctuation.
+Optionally, one can also use line breaks or blank lines to indicate segmentation
+in imported text. Text can be edited after it has been imported.
+
+<p>
+Through menu options, the user sets the source and target language
+for the document and chooses which translation method to use by default.
+The tool supports the following machine translation services:
+<ul>
+  <li>The <a href="http://www.grammaticalframework.org/">GF</a> web service.
+  The user picks which GF grammar to use from a menu of available grammars.
+  <li>The <a href="http://www.apertium.org/">Apertium</a> web service.
+  <li>The GF Robust Parser. This is an exprimental service that supports
+      translation from English to a few other languages.
+</ul>
+
+<p>
+If an unsatisfactory automatic translation is
+obtained, the user can click on it and replace it with a manual translation.
+If multiple translations are obtained, one of them is shown by default and
+the other ones are available in a popup menu.
+
+<p>
+Source segments can also be edited. If a GF grammar is used for translation,
+the <a href="../minibar/about.html">Minibar</a> and the
+<a href="../syntax-editor/about.html">Syntax Editor</a> can be used.
+A plain text box is also available, regardless of translation method.
+
+<p>
+The tool handles a set of documents. Documents can be named, saved,
+closed and reopened later. Documents can be saved locally or in the cloud.
+
+<h2>TODO</h2>
+<ul>
+  <li>Text can be imported by copying and pasting and from local files
+  (in browsers that support it, currently Chrome, Firefox and Opera, but
+  not Safari), but other ways could be added.
+  <li>Text can be exported by copying and pasting, but other ways could
+  be added.
+  <li>GF's lexer/unlexer is used to allow for more natural looking text, but
+  the unlexer does the wrong thing if the first word of a sentence is supposed
+  to be capitalized, e.g. "I am ready." and "Spanish wine is good."
+  <li>Document sharing in the cloud.
+  <li>Interface to other translation services.
+  <li>Interface to the grammar editor for grammar extension.
+  <li>More browser compatibility testing (Chrome,  Firefox, Safari &amp;
+  Opera Mobile tested so far).
+  <li>...
+  <li>...
+</ul>
+
+
+<hr>
+<div class=modtime><small>
+<!-- hhmts start -->Last modified: Fri Apr 19 15:58:50 CEST 2013 <!-- hhmts end -->
+  </small></div>
+<address>
+<a href="http://www.cse.chalmers.se/~hallgren/">TH</a>
+<img src="http://www.altocumulus.org/~hallgren/online.cgi?icon" alt="">
+</address>
+</body>
+  </html>

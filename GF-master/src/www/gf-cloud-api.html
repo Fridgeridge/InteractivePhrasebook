@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html> <head>
+<title>GF Cloud Service API (preliminary)</title>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="gfse/editor.css" title="Cloud">
+<meta name = "viewport" content = "width = device-width">
+<style type="text/css">
+dl.api>dt, .request { background-color: #cef; }
+.response { background-color: #ffc; }
+dd { margin-top: 0.5ex; margin-bottom: 0.5ex; }
+em { color: #36f; }
+</style>
+</head>
+
+<body>
+<h1><a href="./"><img src="P/gf-cloud.png" alt=""></a> GF Cloud Service API (preliminary)</h1>
+
+The GF cloud service API provides the following functionality:
+
+<ul>
+  <li>the functionality available in via the <strong>PGF service API</strong>,
+  <li>the functionality provided by the commands in the
+      <strong>GF shell</strong>,
+  <li>some additional services for
+  grammar compilation and persistent storage of files in the cloud.
+</ul>
+
+<p>
+<strong>This is preliminary and subject to change!</strong>
+
+<h2>Availability and protocol</h2>
+<p>
+The service is available from
+<a href="http://cloud.grammaticalframework.org/"><code>http://cloud.grammaticalframework.org/</code></a>.
+
+Users that have GF installed on their own computer can also
+run the service locally by starting GF with the command <code>gf -server</code>.
+
+<p>
+Requests are made via HTTP with the GET or POST method. (The examples below
+show GET requests, but POST is preferred for requests that change the state
+on the server.)
+<p>
+Data in requests is in the <code>application/x-www-form-urlencoded</code> format
+(the format used by default by web browsers when submitting form data).
+<p>
+Data in responses is usually in JSON format.
+The HTTP response code is usually 200, but can also be
+204 (after file upload),
+404 (file to download or remove was not found),
+400 (for unrecognized commands or missing/unacceptable parameters in requests)
+or
+501 (for unsupported HTTP request methods).
+Unrecognized parameters in requests are silently ignored.
+
+<h2>Requests</h2>
+
+<h3>PGF Service</h3>
+
+The GF Cloud Service supports the same set of PGF service requests as the
+already available PGF web service. For example, a request like
+
+<blockquote class=request>
+<code>http://cloud.grammaticalframework.org/grammars/Foods.pgf?command=random</code>
+</blockquote>
+
+might return a result like
+
+<blockquote class=response>
+<code>[{"tree":"Pred (That Pizza) (Very Boring)"}]</code>
+</blockquote>
+
+<p>
+For more info, see:
+<ul>
+  <li><a href="gf-web-api-examples.html">PGF web service API examples</a>.
+  <li><a href="http://code.google.com/p/grammatical-framework/wiki/GFWebServiceAPI">PGF web service API documentation</a>.
+</ul>
+
+<h3>GF Shell Service</h3>
+This service lets you execute arbitrary GF shell commands. Before you can do
+this, you need to use the <code class=request>/new</code> command to obtain a
+working directory (which also serves as a session identifier) on the server,
+see below.
+
+<dl class=api>
+  <dt><code>/gfshell?dir=</code>...<code>&amp;command=i+Foods.pgf</code>
+  <dd>&nbsp;
+  <dt><code>/gfshell?dir=</code>...<code>&amp;command=gr</code>
+  <dd class=response><code>Pred (That Pizza) (Very Boring)</code>
+  <dt><code>/gfshell?dir=</code>...<code>&amp;command=ps+-lextext+%22That+pizza+is+very+boring.%22</code>
+  <dd class=response><code>that pizza is very boring .</code>
+
+</dl>
+
+For documentation of GF shell commands, see:
+<ul>
+  <li><a href="http://www.grammaticalframework.org/doc/gf-shell-reference.html">GF Shell Reference</a>
+</ul>
+
+<h3>Additional cloud service</h3>
+
+<dl class=api>
+  <dt><code>/new</code>
+  <dd>This generates a new working directory on the server, e.g.
+    <code class=response>/tmp/gfse.123456</code>.
+    Most of the cloud service commands require that a working directory
+    is specified in the <code class=request>dir</code> parameter.
+    The working directory is persistent, so clients are expected
+    to remember and reuse it. Access to previously
+    uploaded files requires that the same working directory is used.
+
+  <dt><code>/parse?</code><var>path</var><code>=</code><var>source</var>
+  <dd>This command can be used to check GF source code for syntax errors.
+    It also converts GF source code to the JSON representation used in
+    GFSE (the cloud-based GF grammar editor).
+
+  <dt><code>/cloud?dir=</code>...<code>&amp;command=<strong>upload</strong>&amp;</code><var>path<sub>1</sub></var><code>=</code><var>source<sub>1</sub></var><code>&amp;</code><var>path<sub>2</sub></var><code>=</code><var>source<sub>2</sub></var><code>&amp;</code>...
+  <dd>Upload files to be stored in the cloud.
+    The response code is 204 if the upload was successful.
+
+  <dt><code>/cloud?dir=</code>...<code>&amp;command=<strong>make</strong>&amp;</code><var>path<sub>1</sub></var><code>=</code><var>source<sub>1</sub></var><code>&amp;</code><var>path<sub>2</sub></var><code>=</code><var>source<sub>2</sub></var><code>&amp;</code>...
+  <dd>Upload grammar files and compile them into a PGF file. Example response:
+    <blockquote class=response><code>
+    { "errorcode":"OK", <em>// "OK" or "Error"</em>
+    <br>  "command":"gf -s -make FoodsEng.gf FoodsSwe.gf FoodsChi.gf",
+    <br>  "output":"\n\n" <em>// Warnings and errors from GF</em>
+    <br>}</code></blockquote>
+
+  <dt><code>/cloud?dir=</code>...<code>&amp;command=<strong>remake</strong>&amp;</code><var>path<sub>1</sub></var><code>=</code><var>source<sub>1</sub></var><code>&amp;</code><var>path<sub>2</sub></var><code>=</code><var>source<sub>2</sub></var><code>&amp;</code>...
+  <dd>Like <code>command=<strong>make</strong></code>, except you can leave
+    the <var>source<sub>i</sub></var> parts empty to reuse previously uploaded
+    files.
+
+  <dt><code>/cloud?dir=</code>...<code>&amp;command=<strong>download</strong>&amp;file=</code><var>path</var>
+  <dd>Download the specified file.
+
+  <dt><code>/cloud?dir=</code>...<code>&amp;command=<strong>ls</strong>&amp;ext=.pgf</code>
+  <dd>List files with the specified extension, e.g.
+    <code class=response>["Foods.pgf","Letter.pgf"]</code>.
+
+  <dt><code>/cloud?dir=</code>...<code>&amp;command=<strong>rm</strong>&amp;file=</code><var>path</var>
+  <dd>Remove the specified file.
+
+  <dt><code>/cloud?dir=</code>...<code>&amp;command=<strong>link_directories</strong>&newdir=</code>...
+  <dd>Combine server directores. This is used by GFSE to share grammars
+    between multiple devices.
+</dl>
+
+<hr>
+<address></address>
+<div class=modtime><small>
+<!-- hhmts start -->Last modified: Tue Jun 17 10:42:21 CEST 2014 <!-- hhmts end -->
+  </small></div>
+<address>
+<a href="http://www.cse.chalmers.se/~hallgren/">TH</a>
+<img src="http://www.altocumulus.org/~hallgren/online.cgi?icon" alt="">
+</address>
+</body>
+  </html>

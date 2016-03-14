@@ -1,0 +1,10 @@
+Before compiling the Java binding you first need to have the C runtime 
+compiled and installed. You also need to find where your jni.h header
+is installed. It is part of the Java JDK, but it might be placed
+in different places on different platforms. The path to the jni.h 
+header should be assigned to the JNI_PATH variable in the beginning
+of the Makefile that you will find in the root directory of 
+the binding. Once this is done type:
+
+$ make
+$ make install

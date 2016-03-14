@@ -22,10 +22,8 @@ import se.chalmers.phrasebook.backend.SyntaxTree;
 import se.chalmers.phrasebook.backend.XMLParser;
 
 public class FirstUsageActivity extends Activity {
-    private PGF pgf;
 
     private List<String> languages;
-
     private Model model;
 
     @Override
@@ -39,7 +37,7 @@ public class FirstUsageActivity extends Activity {
         final Spinner originSpinner = (Spinner) findViewById(R.id.origin_spinner);
         final Spinner targetSpinner = (Spinner) findViewById(R.id.target_spinner);
 
-        languages = new ArrayList<String>();
+        languages = new ArrayList<>();
         languages = Langs.getLanguages();
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, languages);
@@ -64,6 +62,7 @@ public class FirstUsageActivity extends Activity {
         startButton.setOnClickListener(startListener);
 
 
+        //Remove
         try {
             InputStream is = getAssets().open("Phrases/sentences.xml");
             XMLParser parser = new XMLParser(is);

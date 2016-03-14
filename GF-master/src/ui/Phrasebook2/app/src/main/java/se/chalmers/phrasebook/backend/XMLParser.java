@@ -11,6 +11,7 @@ import org.xmlpull.v1.XmlPullParser;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -57,14 +58,14 @@ public class XMLParser {
         return result;
     }
 
-    public String[] getAllSentencesTitles(Document document) {
-        String[] result;
+    public ArrayList<String> getAllSentencesTitles() {
+        ArrayList<String> result;
         NodeList sentences = document.getElementsByTagName("sentence");
         int nbrOfSentences = sentences.getLength();
-        result = new String[nbrOfSentences];
+        result = new ArrayList<>();
 
         for (int i = 0; i < nbrOfSentences; i++) {
-            result[i] = sentences.item(i).getAttributes().item(1).getNodeValue();
+            result.add(sentences.item(i).getAttributes().item(1).getNodeValue());
         }
 
         return result;

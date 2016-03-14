@@ -1,8 +1,8 @@
 package se.chalmers.phrasebook.gui.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -21,7 +21,7 @@ import se.chalmers.phrasebook.backend.Model;
 import se.chalmers.phrasebook.backend.SyntaxTree;
 import se.chalmers.phrasebook.backend.XMLParser;
 
-public class FirstUsageActivity extends AppCompatActivity {
+public class FirstUsageActivity extends Activity {
     private PGF pgf;
 
     private List<String> languages;

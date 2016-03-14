@@ -13,10 +13,6 @@ import se.chalmers.phrasebook.R;
 
 public class OptionsFragment extends Fragment {
 
-    private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

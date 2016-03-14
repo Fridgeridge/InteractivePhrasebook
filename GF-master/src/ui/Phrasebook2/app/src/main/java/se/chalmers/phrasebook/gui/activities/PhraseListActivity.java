@@ -1,23 +1,29 @@
 package se.chalmers.phrasebook.gui.activities;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
+import se.chalmers.phrasebook.backend.XMLParser;
 
-public class PhraseListActivity extends AppCompatActivity {
+/**
+ * Activity where the user can choose what phrase they want to edit and see translation of.
+ */
+public class PhraseListActivity extends Activity {
 
     private Model model;
+    private XMLParser parser;
     private ArrayList<String> phrases;
     Context context;
 
@@ -27,43 +33,41 @@ public class PhraseListActivity extends AppCompatActivity {
 
         model = Model.getInstance();
 
+        try {
+            InputStream is = getAssets().open("Phrases/sentences.xml");
+            parser = new XMLParser(is);
+        } catch (IOException es) {
+            es.printStackTrace();
+        }
+
         setContentView(R.layout.activity_phrase_list);
-        initializeList(model.getCurrentPhrasebook());
+        initListView();
 
         context = this;
 
     }
 
-
-    //placeholder function
-    protected void initializeList(String phrasebookID) {
-
-        ArrayAdapter<CharSequence> phraseAdapter = ArrayAdapter.createFromResource(this, R.array.phrases,
-                android.R.layout.simple_list_item_1);
-
-        ListView listView = (ListView) findViewById(R.id.listView);
-        listView.setAdapter(phraseAdapter);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                model.setCurrentPhrase((String)parent.getItemAtPosition(position));
-
-                Intent intent = new Intent(context, TranslatorActivity.class);
-                startActivity(intent);
-            }
-        });
-    }
-
-    //correct function
+    /**
+     * Initializes the list view by dynamically add phrases from the XML file.
+     */
     private void initListView(){
-        phrases = getPhrases(); 
+        phrases = parser.getAllSentencesTitles();
 
         ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, phrases);
 
         ListView phraseListView = (ListView) findViewById(R.id.listView);
         phraseListView.setAdapter(adapter);
+
+        phraseListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                model.setCurrentPhrase((String) parent.getItemAtPosition(position));
+
+                Intent intent = new Intent(context, TranslatorActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 }

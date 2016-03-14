@@ -1,4 +1,0 @@
-abstract AllPesAbs =
-  Lang,
-  ExtraPesAbs
-  ** {} ;

@@ -1,3 +1,0 @@
-abstract AllRonAbs =
-  Lang, ExtraRonAbs
-  ** {} ;

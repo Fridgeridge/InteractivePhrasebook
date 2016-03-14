@@ -1,4 +1,0 @@
-abstract AllJpnAbs = 
-  Lang,
-  ExtraJpnAbs
-  ** {} ;

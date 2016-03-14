@@ -1,8 +1,12 @@
 package se.chalmers.phrasebook.backend;
 
-import java.util.ArrayList;
-import se.chalmers.phrasebook.App;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+
+import se.chalmers.phrasebook.App;
+import se.chalmers.phrasebook.R;
 
 /**
  * Created by Björn on 2016-03-03.
@@ -12,6 +16,10 @@ public class Model {
     private static Model model;
     private App instance;
 
+
+    private Translator translator;
+    private XMLParser parser;
+    
     private String originLanguage;
     private String targetLanguage;
 
@@ -21,6 +29,18 @@ public class Model {
 
     private Model() {
         instance = App.get();
+
+        try {
+            InputStream phrasesPath = instance.getAssets().open(instance.getResources().getString(R.string.phrases_path));
+            InputStream gfPath = instance.getAssets().open(instance.getResources().getString(R.string.grammatical_framework_path));
+
+            parser = new XMLParser(phrasesPath);
+            translator = new Translator(gfPath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
 
@@ -66,7 +86,6 @@ public class Model {
     public String getCurrentPhrase() {
         return currentPhrase;
     }
-
 
 
 }

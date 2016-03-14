@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="grammatical_framework_path">Grammars/Phrasebook.pgf</string>
+    <string name="phrases_path">Phrases/sentences.xml</string>
+</resources>

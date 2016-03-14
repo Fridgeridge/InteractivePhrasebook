@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import se.chalmers.phrasebook.backend.Model;
 
 /**
  * Created by matilda on 03/03/16.

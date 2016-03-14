@@ -1,11 +1,7 @@
 package se.chalmers.phrasebook.backend;
 
-
-
 import java.util.ArrayList;
-
 import se.chalmers.phrasebook.App;
-
 
 
 /**
@@ -16,10 +12,10 @@ public class Model {
     private static Model model;
     private App instance;
 
-    private ArrayList<PhraseBook> phrasebooks;
     private String originLanguage;
     private String targetLanguage;
 
+    private ArrayList<PhraseBook> phrasebooks;
     private String currentPhrasebook;
     private String currentPhrase;
 
@@ -39,16 +35,8 @@ public class Model {
     }
 
 
-    public String getOriginLanguage() {
-        return originLanguage;
-    }
-
     public void setOriginLanguage(String originLanguage) {
         this.originLanguage = originLanguage;
-    }
-
-    public String getTargetLanguage() {
-        return targetLanguage;
     }
 
     public void setTargetLanguage(String targetLanguage) {
@@ -59,6 +47,18 @@ public class Model {
         currentPhrasebook = phrasebook;
     }
 
+    public void setCurrentPhrase(String phrase) {
+        currentPhrase = phrase;
+    }
+
+    public String getOriginLanguage() {
+        return originLanguage;
+    }
+
+    public String getTargetLanguage() {
+        return targetLanguage;
+    }
+
     public String getCurrentPhrasebook() {
         return currentPhrasebook;
     }
@@ -67,8 +67,6 @@ public class Model {
         return currentPhrase;
     }
 
-    public void setCurrentPhrase(String phrase) {
-        currentPhrase = phrase;
-    }
+
 
 }

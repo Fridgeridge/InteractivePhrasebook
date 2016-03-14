@@ -6,28 +6,10 @@
     android:padding="16dp"
     tools:context=".gui.fragments.OptionsFragment">
 
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="25dp"
-        android:text="@string/talking_to"
-        android:textSize="20dp"
-        android:id="@+id/talking_to" />
-
-    <Spinner
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/persons" />
+        android:layout_height="match_parent"
+        android:id="@+id/child_fragments">
+    </FrameLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/how_to_phrase"
-        android:textSize="20dp"
-        android:id="@+id/how_phrase" />
-
-    <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/phrase_type" />
 </LinearLayout>

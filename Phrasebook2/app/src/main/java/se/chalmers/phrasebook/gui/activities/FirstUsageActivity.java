@@ -23,7 +23,6 @@ import se.chalmers.phrasebook.backend.XMLParser;
 
 public class FirstUsageActivity extends Activity {
 
-    private List<String> languages;
     private Model model;
 
     @Override
@@ -37,10 +36,7 @@ public class FirstUsageActivity extends Activity {
         final Spinner originSpinner = (Spinner) findViewById(R.id.origin_spinner);
         final Spinner targetSpinner = (Spinner) findViewById(R.id.target_spinner);
 
-        languages = new ArrayList<>();
-        languages = Langs.getLanguages();
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, languages);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, Langs.getLanguages());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         originSpinner.setAdapter(adapter);
         targetSpinner.setAdapter(adapter);

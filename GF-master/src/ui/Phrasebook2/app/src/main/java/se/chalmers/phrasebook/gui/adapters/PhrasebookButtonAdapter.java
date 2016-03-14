@@ -9,7 +9,8 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 
 import se.chalmers.phrasebook.R;
-import se.chalmers.phrasebook.gui.PhraseListActivity;
+import se.chalmers.phrasebook.backend.Model;
+import se.chalmers.phrasebook.gui.activities.PhraseListActivity;
 
 /**
  * Created by David on 2016-02-17.
@@ -19,9 +20,15 @@ public class PhrasebookButtonAdapter extends BaseAdapter {
     private Context context;
     private String[] phrasebookNames;
 
+    private Model model;
+
     public PhrasebookButtonAdapter(Context context, String[] names) {
         this.context = context;
+
+        //Ska hämtas nånstans ifrån istället för en statisk lista i xml
         phrasebookNames = names;
+
+        model = Model.getInstance();
     }
 
 
@@ -42,7 +49,9 @@ public class PhrasebookButtonAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Button button;
+
+        //Kan det bli knas?
+        final Button button;
 
         if (convertView == null) {
             button = new Button(context);
@@ -51,15 +60,20 @@ public class PhrasebookButtonAdapter extends BaseAdapter {
         }
         final View clickview = convertView;
 
-        button.setMinimumHeight(150);
-        button.setBackgroundColor(context.getResources().getColor(R.color.primary_color));
-        button.setTextColor(Color.WHITE);
+  //      button.setMinimumHeight(150);
+        button.setHeight(100);
+        button.setWidth(100);
+        button.setBackgroundResource(R.drawable.grid_phrasebook_button);
+        button.setTextColor(Color.BLACK);
         button.setText(phrasebookNames[position]);
         button.setId(position);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                model.setCurrentPhrasebook((String)button.getText());
+
                 Intent intent = new Intent(context, PhraseListActivity.class);
                 context.startActivity(intent);
             }
@@ -67,4 +81,5 @@ public class PhrasebookButtonAdapter extends BaseAdapter {
 
         return button;
     }
+
 }

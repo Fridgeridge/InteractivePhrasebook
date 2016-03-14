@@ -11,8 +11,12 @@ import org.xmlpull.v1.XmlPullParser;
 
 import java.io.IOException;
 import java.io.InputStream;
+<<<<<<< HEAD:GF-master/src/ui/Phrasebook2/app/src/main/java/se/chalmers/phrasebook/backend/XMLParser.java
+import java.util.ArrayList;
+=======
 import java.util.HashMap;
 import java.util.Map;
+>>>>>>> dev:Phrasebook2/app/src/main/java/se/chalmers/phrasebook/backend/XMLParser.java
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -59,17 +63,27 @@ public class XMLParser {
         return result;
     }
 
+<<<<<<< HEAD:GF-master/src/ui/Phrasebook2/app/src/main/java/se/chalmers/phrasebook/backend/XMLParser.java
+    public ArrayList<String> getAllSentencesTitles() {
+        ArrayList<String> result;
+=======
     public HashMap<String,String> getSentencesData() {
         String[] result;
         HashMap<String,String> sentenceMap = new HashMap<String,String>();
 
+>>>>>>> dev:Phrasebook2/app/src/main/java/se/chalmers/phrasebook/backend/XMLParser.java
         NodeList sentences = document.getElementsByTagName("sentence");
         int nbrOfSentences = sentences.getLength();
-        result = new String[nbrOfSentences];
+        result = new ArrayList<>();
 
         for (int i = 0; i < nbrOfSentences; i++) {
+<<<<<<< HEAD:GF-master/src/ui/Phrasebook2/app/src/main/java/se/chalmers/phrasebook/backend/XMLParser.java
+            result.add(sentences.item(i).getAttributes().item(1).getNodeValue());
+        }
+=======
             String desc = sentences.item(i).getAttributes().getNamedItem("desc").getNodeValue();
             String id = sentences.item(i).getAttributes().getNamedItem("id").getNodeValue();
+>>>>>>> dev:Phrasebook2/app/src/main/java/se/chalmers/phrasebook/backend/XMLParser.java
 
             if (desc != null & id != null)
                 sentenceMap.put(id,desc);

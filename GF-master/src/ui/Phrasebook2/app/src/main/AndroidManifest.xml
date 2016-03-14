@@ -6,10 +6,10 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        android:theme="@android:style/Theme.Material.Light">
         android:name="android.support.multidex.MultiDexApplication">
         <activity
-            android:name=".gui.HelperActivity"
+            android:name=".gui.activities.HelperActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,15 +17,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".gui.FirstUsageActivity" />
-        <activity android:name=".gui.HomeScreenActivity" />
+        <activity android:name=".gui.activities.FirstUsageActivity" />
+        <activity android:name=".gui.activities.HomeScreenActivity" />
         <activity android:name=".gui.MainActivity" />
-        <activity android:name=".gui.PhraseListActivity" />
-        <activity android:name="gui.TranslatorActivity" />
+        <activity android:name=".gui.activities.PhraseListActivity" />
+        <activity android:name=".gui.activities.TranslatorActivity" />
         <activity
             android:name=".gui.NavigationActivity"
             android:label="@string/title_activity_navigation"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+            android:theme="@android:style/Theme.Material.Light"></activity>
     </application>
 
 </manifest>

@@ -1,4 +1,0 @@
-abstract AllNepAbs =
-  Lang
---  ExtraNepAbs
-  ** {} ;

@@ -1,4 +1,0 @@
-abstract AllEstAbs = 
-  Lang,
-  ExtraEstAbs
-  ** {} ;

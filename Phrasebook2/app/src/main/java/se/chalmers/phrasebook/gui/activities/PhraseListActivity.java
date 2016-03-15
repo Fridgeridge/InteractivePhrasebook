@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
+import se.chalmers.phrasebook.backend.TestSentence;
 import se.chalmers.phrasebook.backend.XMLParser;
 
 /**
@@ -45,6 +46,8 @@ public class PhraseListActivity extends Activity {
         setContentView(R.layout.activity_phrase_list);
         initListView();
 
+        model.setTestSentence(new TestSentence(5));
+
         context = this;
 
     }
@@ -63,7 +66,7 @@ public class PhraseListActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                model.setCurrentPhrase((String) parent.getItemAtPosition(position));
+         //       model.setCurrentPhrase((String) parent.getItemAtPosition(position));
 
                 Intent intent = new Intent(context, TranslatorActivity.class);
                 startActivity(intent);

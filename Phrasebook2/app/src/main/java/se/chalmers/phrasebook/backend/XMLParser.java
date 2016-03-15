@@ -77,8 +77,7 @@ public class XMLParser {
 
     //Wrapper which constructs a syntax tree from a set of nodes extracted from XML.
     public SyntaxTree buildSyntaxTree2(Node root) {
-        return null;
-                //new SyntaxTree(constructSentence2(root));
+        return new SyntaxTree(constructSentence2(root));
     }
 
     //recursivly takes the data from the node and transers it to a SyntaxNode, finally

@@ -16,6 +16,7 @@ public class Model {
     private static Model model;
     private App instance;
 
+    private TestSentence testSentence;
 
     private Translator translator;
     private XMLParser parser;
@@ -85,6 +86,16 @@ public class Model {
 
     public SyntaxTree getCurrentPhrase() {
         return currentPhrase;
+    }
+
+
+
+    public TestSentence getTestSentence() {
+        return testSentence;
+    }
+
+    public void setTestSentence(TestSentence testSentence) {
+        this.testSentence = testSentence;
     }
 
 

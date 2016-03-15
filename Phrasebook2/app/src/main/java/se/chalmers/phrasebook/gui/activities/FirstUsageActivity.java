@@ -57,18 +57,6 @@ public class FirstUsageActivity extends Activity {
 
         startButton.setOnClickListener(startListener);
 
-
-        //Remove
-/*        try {
-            InputStream is = getAssets().open("Phrases/sentences.xml");
-            XMLParser parser = new XMLParser(is);
-            SyntaxTree tree = parser.buildSyntaxTree(parser.jumpToChild("sentence", "QWhatName"));
-            System.out.println(tree.parseSentenceSyntax());
-        } catch (IOException es) {
-            es.printStackTrace();
-        }*/
-
-
     }
 
     //Starts the Home activity

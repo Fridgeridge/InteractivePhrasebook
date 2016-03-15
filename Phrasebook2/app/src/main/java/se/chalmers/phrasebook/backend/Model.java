@@ -1,72 +1,102 @@
 package se.chalmers.phrasebook.backend;
 
-import java.util.ArrayList;
-import java.util.List;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+
+import se.chalmers.phrasebook.App;
+import se.chalmers.phrasebook.R;
 
 /**
  * Created by Björn on 2016-03-03.
  */
 public class Model {
 
-    private static Model model = new Model();
+    private static Model model;
+    private App instance;
 
-    private ArrayList<PhraseBook> phrasebooks;
-    private String[] languageKeys;
+    private TestSentence testSentence;
+
+    private Translator translator;
+    private XMLParser parser;
+    
     private String originLanguage;
     private String targetLanguage;
 
+    private ArrayList<PhraseBook> phrasebooks;
     private String currentPhrasebook;
-    private String currentPhrase;
+    private SyntaxTree currentPhrase;
 
     private Model() {
-        phrasebooks = new ArrayList<PhraseBook>();
-    }
+        instance = App.get();
 
-    private Model(String origin, String target) {
-        this();
-        originLanguage = origin;
-        targetLanguage = target;
+        try {
+            InputStream phrasesPath = instance.getAssets().open(instance.getResources().getString(R.string.phrases_path));
+            InputStream gfPath = instance.getAssets().open(instance.getResources().getString(R.string.grammatical_framework_path));
 
-        currentPhrasebook = "";
-        currentPhrase = "";
+            parser = new XMLParser(phrasesPath);
+            translator = new Translator(gfPath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
 
     public static Model getInstance() {
+        if (model == null) model = getSync();
         return model;
     }
 
-    public String getOriginLanguage() {
-        return originLanguage;
+    private synchronized static Model getSync() {
+        if (model == null) model = new Model();
+        return model;
     }
+
 
     public void setOriginLanguage(String originLanguage) {
         this.originLanguage = originLanguage;
-    }
-
-    public String getTargetLanguage() {
-        return targetLanguage;
     }
 
     public void setTargetLanguage(String targetLanguage) {
         this.targetLanguage = targetLanguage;
     }
 
-    public void setCurrentPhrasebook(String phrasebook){
+    public void setCurrentPhrasebook(String phrasebook) {
         currentPhrasebook = phrasebook;
     }
 
-    public String getCurrentPhrasebook(){
+    public void setCurrentPhrase(SyntaxTree phrase) {
+        currentPhrase = phrase;
+    }
+
+    public String getOriginLanguage() {
+        return originLanguage;
+    }
+
+    public String getTargetLanguage() {
+        return targetLanguage;
+    }
+
+    public String getCurrentPhrasebook() {
         return currentPhrasebook;
     }
 
-    public String getCurrentPhrase(){
+    public SyntaxTree getCurrentPhrase() {
         return currentPhrase;
     }
 
-    public void setCurrentPhrase(String phrase){
-        currentPhrase = phrase;
+
+
+    public TestSentence getTestSentence() {
+        return testSentence;
     }
+
+    public void setTestSentence(TestSentence testSentence) {
+        this.testSentence = testSentence;
+    }
+
 
 }

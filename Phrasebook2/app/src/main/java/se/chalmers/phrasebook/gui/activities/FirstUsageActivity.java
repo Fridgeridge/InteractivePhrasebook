@@ -22,9 +22,6 @@ import se.chalmers.phrasebook.backend.SyntaxTree;
 import se.chalmers.phrasebook.backend.XMLParser;
 
 public class FirstUsageActivity extends Activity {
-    private PGF pgf;
-
-    private List<String> languages;
 
     private Model model;
 
@@ -39,10 +36,7 @@ public class FirstUsageActivity extends Activity {
         final Spinner originSpinner = (Spinner) findViewById(R.id.origin_spinner);
         final Spinner targetSpinner = (Spinner) findViewById(R.id.target_spinner);
 
-        languages = new ArrayList<String>();
-        languages = Langs.getLanguages();
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, languages);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, Langs.getLanguages());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         originSpinner.setAdapter(adapter);
         targetSpinner.setAdapter(adapter);
@@ -62,17 +56,6 @@ public class FirstUsageActivity extends Activity {
         };
 
         startButton.setOnClickListener(startListener);
-
-
-        try {
-            InputStream is = getAssets().open("Phrases/sentences.xml");
-            XMLParser parser = new XMLParser(is);
-            SyntaxTree tree = parser.buildSyntaxTree(parser.jumpToChild("sentence", "QWhatName"));
-            System.out.println(tree.parseSentenceSyntax());
-        } catch (IOException es) {
-            es.printStackTrace();
-        }
-
 
     }
 

@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
+import se.chalmers.phrasebook.backend.TestSentence;
 import se.chalmers.phrasebook.backend.XMLParser;
 
 /**
@@ -32,7 +33,7 @@ public class PhraseListActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         model = Model.getInstance();
-
+        phrases = new ArrayList<String>();
         try {
             InputStream is = getAssets().open("Phrases/sentences.xml");
             parser = new XMLParser(is);
@@ -40,8 +41,12 @@ public class PhraseListActivity extends Activity {
             es.printStackTrace();
         }
 
+        phrases.addAll(parser.getSentencesData().values());
+
         setContentView(R.layout.activity_phrase_list);
         initListView();
+
+        model.setTestSentence(new TestSentence(5));
 
         context = this;
 
@@ -50,7 +55,7 @@ public class PhraseListActivity extends Activity {
     /**
      * Initializes the list view by dynamically add phrases from the XML file.
      */
-    private void initListView(){
+    private void initListView() {
 
         ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, phrases);
 
@@ -61,7 +66,7 @@ public class PhraseListActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                model.setCurrentPhrase((String) parent.getItemAtPosition(position));
+         //       model.setCurrentPhrase((String) parent.getItemAtPosition(position));
 
                 Intent intent = new Intent(context, TranslatorActivity.class);
                 startActivity(intent);

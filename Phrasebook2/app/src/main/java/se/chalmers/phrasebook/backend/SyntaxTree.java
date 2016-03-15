@@ -1,5 +1,7 @@
 package se.chalmers.phrasebook.backend;
 
+
+
 /**
  * Created by Björn on 2016-02-26.
  */
@@ -19,35 +21,21 @@ public class SyntaxTree {
      *
      * @param node The current node
      * @return A String representing the syntax of the sentence
-     */
-    public String getSentenceSyntax(SyntaxNode node) {
-        if (node == null) {
-            return "";
-        } else if (node.getSelectedChild() == null) {
-            return " " + node.getData();
+     *
+     **/
+    public String parseSentenceSyntax(SyntaxNode node) {
+        if(!node.hasChildren()) {
+            return node.getData();
         } else {
-            return node.getData() + " (" + getSentenceSyntax(node.getSelectedChild()) + ")";
+            String syntax = node.getData() + "(";
+            for(int i = 0; i < node.getSelectedChild().length; i++) {
+                syntax = syntax + parseSentenceSyntax(node.getSelectedChild()[i]);
+                if(node.getSelectedChild().length > 1) {
+                    syntax = syntax + " ";
+                }
+            }
+            return syntax + ")";
         }
-
-    }
-
-    //Non-recursive way of parsing, still not
-    //usable with several input arguments
-    public String parseSentenceSyntax() {
-        SyntaxNode current = getSentenceHead();
-        String parsed = current.getData();
-        String end = "";
-        while(current.getSelectedChild() != null) {
-            current = current.getSelectedChild();
-            parsed = parsed + "(" + current.getData();
-            end = end + ")";
-        }
-        return parsed + end;
-    }
-
-    public String parseString() {
-        String s = getSentenceSyntax(this.getSentenceHead());
-        return s;
     }
 
     //TODO Fix method
@@ -67,7 +55,7 @@ public class SyntaxTree {
 
         return node;
     }
-
+/*
     public void addChild(SyntaxNode node, SyntaxNode child) {
         if (node.getChildren().isEmpty())
             root.setSelectedChild(child);
@@ -75,7 +63,7 @@ public class SyntaxTree {
         child.setParent(node);
         node.getChildren().add(child);
     }
-
+*/
     public boolean removeChild(SyntaxNode node, SyntaxNode child) {
         boolean status = node.getChildren().remove(child);
         if (status && node.getChildren().isEmpty()) {
@@ -84,13 +72,13 @@ public class SyntaxTree {
 
         return status;
     }
-
+/*
     public boolean setSelectedChild(SyntaxNode node, SyntaxNode child) {
         boolean status = node.getChildren().contains(child);
         if (status)
             node.setSelectedChild(child);
         return status;
-    }
+    }*/
 
     public boolean isNodeModular(SyntaxNode node) {
         return node.getParent().getChildren().size() > 1;
@@ -98,7 +86,7 @@ public class SyntaxTree {
 
     public SyntaxNode getSentenceHead() {
         if (root != null) {
-            return root.getSelectedChild();
+            return root.getSelectedChild()[1];
         }else {
             return null;
         }

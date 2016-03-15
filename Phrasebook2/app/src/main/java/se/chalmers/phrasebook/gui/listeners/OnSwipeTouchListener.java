@@ -1,4 +1,4 @@
-package se.chalmers.phrasebook.gui.listners;
+package se.chalmers.phrasebook.gui.listeners;
 
 import android.content.Context;
 import android.view.GestureDetector;

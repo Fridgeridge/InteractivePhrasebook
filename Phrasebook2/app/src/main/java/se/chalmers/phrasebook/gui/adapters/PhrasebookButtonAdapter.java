@@ -60,8 +60,8 @@ public class PhrasebookButtonAdapter extends BaseAdapter {
         }
         final View clickview = convertView;
 
-  //      button.setMinimumHeight(150);
-        button.setHeight(100);
+        button.setMinimumHeight(250);
+//        button.setHeight(100);
         button.setWidth(100);
         button.setBackgroundResource(R.drawable.grid_phrasebook_button);
         button.setTextColor(Color.BLACK);

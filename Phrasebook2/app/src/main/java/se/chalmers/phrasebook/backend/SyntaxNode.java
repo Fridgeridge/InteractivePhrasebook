@@ -11,7 +11,53 @@ public class SyntaxNode {
     private String desc;
     private SyntaxNode parent;
     private List<SyntaxNode> children = new ArrayList<SyntaxNode>();
-    private SyntaxNode selectedChild;
+    private int nmbrOfSelectedChildren = 1;
+    private SyntaxNode[] selectedChild;
+
+    public SyntaxNode(String data) {
+        this.data = data;
+    }
+
+    public boolean addChild(SyntaxNode node) {
+        if (node != null) {
+            if(selectedChild == null) {
+                selectedChild = new SyntaxNode[1];
+            }
+            for(int i = 0; i < selectedChild.length; i++) {
+                if(selectedChild[i] == null) {
+                    selectedChild[i] = node;
+                    break;
+                }
+            }
+        }
+        children.add(node);
+        return true;
+    }
+
+    public boolean hasChildren() {
+        if (children.isEmpty()) {
+            return true;
+        }
+        return false;
+    }
+
+
+
+    public boolean setDescription(String desc) {
+        if (desc == null || desc.isEmpty()) {
+            return false;
+        } else {
+            this.desc = desc;
+            return true;
+        }
+    }
+
+    public int getNmbrOfSelectedChildren() {return nmbrOfSelectedChildren;}
+
+    public void setNmbrOfSelectedChildren(int nmbrOfSelectedChildren) {
+        this.nmbrOfSelectedChildren = nmbrOfSelectedChildren;
+        selectedChild = new SyntaxNode[nmbrOfSelectedChildren];
+    }
 
     public String getData() {
         return data;
@@ -41,48 +87,19 @@ public class SyntaxNode {
         return children;
     }
 
-    public boolean addChild(SyntaxNode node) {
-        if (node != null) {
-            if(children.isEmpty()) {
-                selectedChild = node;
-            }
-            children.add(node);
-            return true;
-        }
-        return false;
-    }
-
     public void setChildren(List<SyntaxNode> children) {
         this.children = children;
     }
 
-    public SyntaxNode getSelectedChild() {
+    public SyntaxNode[] getSelectedChild() {
         return selectedChild;
     }
 
-    public void setSelectedChild(SyntaxNode selectedChild) {
+    public void setSelectedChild(SyntaxNode[] selectedChild) {
         this.selectedChild = selectedChild;
     }
 
-    public SyntaxNode(String data) {
-        this.data = data;
-    }
 
-    public boolean hasChildren() {
-        if (children.isEmpty()) {
-            return true;
-        }
-        return false;
-    }
-
-    public boolean setDescription(String desc) {
-        if (desc == null || desc.isEmpty()) {
-            return false;
-        } else {
-            this.desc = desc;
-            return true;
-        }
-    }
 
     public boolean equals(Object o) {
 

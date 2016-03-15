@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import se.chalmers.phrasebook.backend.Model;
+
+
 /**
  * Created by matilda on 03/03/16.
  */
@@ -15,7 +18,7 @@ public class HelperActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Model.getInstance();
         prefs = getSharedPreferences("se.chalmers.phrasebook", MODE_PRIVATE);
 
     }
@@ -23,7 +26,6 @@ public class HelperActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-
         if (prefs.getBoolean("firstrun", true)) {
             // Do first run stuff here then set 'firstrun' as false
             //strat  DataActivity beacuase its your app first run

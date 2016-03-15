@@ -11,7 +11,15 @@ public class SyntaxNode {
     private String desc;
     private SyntaxNode parent;
     private List<SyntaxNode> children = new ArrayList<SyntaxNode>();
-    private SyntaxNode selectedChild;
+    private int nmbrOfSelectedChildren = 1;
+    private SyntaxNode[] selectedChild;
+
+    public int getNmbrOfSelectedChildren() {return nmbrOfSelectedChildren;}
+
+    public void setNmbrOfSelectedChildren(int nmbrOfSelectedChildren) {
+        this.nmbrOfSelectedChildren = nmbrOfSelectedChildren;
+        selectedChild = new SyntaxNode[nmbrOfSelectedChildren];
+    }
 
     public String getData() {
         return data;
@@ -43,24 +51,29 @@ public class SyntaxNode {
 
     public boolean addChild(SyntaxNode node) {
         if (node != null) {
-            if(children.isEmpty()) {
-                selectedChild = node;
+            if(selectedChild == null) {
+                selectedChild = new SyntaxNode[1];
             }
-            children.add(node);
-            return true;
+            for(int i = 0; i < selectedChild.length; i++) {
+                if(selectedChild[i] == null) {
+                    selectedChild[i] = node;
+                    break;
+                }
+            }
         }
-        return false;
+        children.add(node);
+        return true;
     }
 
     public void setChildren(List<SyntaxNode> children) {
         this.children = children;
     }
 
-    public SyntaxNode getSelectedChild() {
+    public SyntaxNode[] getSelectedChild() {
         return selectedChild;
     }
 
-    public void setSelectedChild(SyntaxNode selectedChild) {
+    public void setSelectedChild(SyntaxNode[] selectedChild) {
         this.selectedChild = selectedChild;
     }
 

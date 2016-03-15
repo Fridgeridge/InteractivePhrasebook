@@ -76,6 +76,51 @@ public class XMLParser {
         return sentenceMap;
     }
 
+    //Wrapper which constructs a syntax tree from a set of nodes extracted from XML. 
+    public SyntaxTree buildSyntaxTree2(Node root) {
+        return new SyntaxTree(constructSentence2(root));
+    }
+
+    //recursivly takes the data from the node and transers it to a SyntaxNode, finally
+    //adding it as a child to the current syntax root. When all children are added, the root
+    //is returned to the wrapper which uses this SyntaxNode to create a SyntaxTree.
+    private SyntaxNode constructSentence2(Node current) {
+
+        //These may be subject to change if we alter the XML-file structure
+        SyntaxNode currentRoot = new SyntaxNode(current.getNodeValue());
+        currentRoot.setDescription(current.getNodeName());
+
+
+        if(current.hasChildNodes()) {
+            NodeList children = current.getChildNodes();
+
+            for(int i = 0; i < children.getLength(); i++) {
+                if (children.item(i) != null && (children.item(i).getNodeType()
+                        == Node.ELEMENT_NODE) && children.item(i).getAttributes() != null) {
+                    String syntax = "", desc = "", question = "", option;
+                    NamedNodeMap attributes = children.item(i).getAttributes();
+
+                    if (attributes.getNamedItem("syntax") != null) {
+                        syntax = attributes.getNamedItem("syntax").getNodeValue();
+                    }
+
+                    if (attributes.getNamedItem("desc") != null) {
+                        desc = attributes.getNamedItem("desc").getNodeValue();
+                    }
+
+                    if (attributes.getNamedItem("question") != null) {
+                        question = attributes.getNamedItem("question").getNodeValue();
+                    }
+
+                    if (attributes.getNamedItem("child") != null) {
+                        option = attributes.getNamedItem("child").getNodeValue();
+                        currentRoot.addChild(constructSentence2(children.item(i)));
+                    }
+                }
+            }
+        }
+        return currentRoot;
+    }
 
     public SyntaxTree buildSyntaxTree(NodeList currentRoot) {
         return new SyntaxTree(constructSentence(currentRoot, new SyntaxNode("root")));

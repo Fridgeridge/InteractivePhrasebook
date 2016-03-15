@@ -11,14 +11,19 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import se.chalmers.phrasebook.R;
+import se.chalmers.phrasebook.backend.Model;
 
 public class OptionsFragment extends Fragment {
+
+    private Model model;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addFragments();
+        model = Model.getInstance();
+
+        addFragments(model.getCurrentPhrase());
 
     }
 
@@ -30,11 +35,17 @@ public class OptionsFragment extends Fragment {
 
     }
 
-    private void addFragments(){
+
+    //Tanken är att skicka in en instans av phrase klassen vi pratade om och hämta all gui data därifrån på nåt vänster
+    //Då kan vi nog lägga till de fragmenten som ska vara där med rätt data.
+    private void addFragments(String currentPhrase){
 
         Fragment spinnerFragment = new SpinnerFragment();
+    //    Fragment textFieldFragment = new TextFieldFragment();
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        transaction.add(R.id.child_fragments, spinnerFragment).commit();
+        transaction.add(R.id.child_fragments, spinnerFragment);
+    //    transaction.add(R.id.child_fragments, textFieldFragment);
+        transaction.commit();
 
     }
 

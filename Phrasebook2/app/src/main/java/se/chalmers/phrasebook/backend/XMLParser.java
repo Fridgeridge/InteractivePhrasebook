@@ -76,7 +76,7 @@ public class XMLParser {
         return sentenceMap;
     }
 
-    //Wrapper which constructs a syntax tree from a set of nodes extracted from XML. 
+    //Wrapper which constructs a syntax tree from a set of nodes extracted from XML.
     public SyntaxTree buildSyntaxTree2(Node root) {
         return new SyntaxTree(constructSentence2(root));
     }
@@ -179,11 +179,4 @@ public class XMLParser {
         }
         return result;
     }
-
-    public SyntaxNode getChildLeaf(SyntaxNode parent){
-        while (parent != null && parent.getSelectedChild()!=null) parent = parent.getSelectedChild();
-        return parent;
-    }
-
-
 }

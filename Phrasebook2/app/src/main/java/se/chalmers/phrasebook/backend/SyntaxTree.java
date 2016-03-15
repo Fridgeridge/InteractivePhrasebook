@@ -36,11 +36,6 @@ public class SyntaxTree {
         }
     }
 
-    public String parseString() {
-        String s = getSentenceSyntax(this.getSentenceHead());
-        return s;
-    }
-
     //TODO Fix method
     public SyntaxNode findNode(SyntaxNode node, String syntax) {
         if (node == null) {
@@ -58,7 +53,7 @@ public class SyntaxTree {
 
         return node;
     }
-
+/*
     public void addChild(SyntaxNode node, SyntaxNode child) {
         if (node.getChildren().isEmpty())
             root.setSelectedChild(child);
@@ -66,7 +61,7 @@ public class SyntaxTree {
         child.setParent(node);
         node.getChildren().add(child);
     }
-
+*/
     public boolean removeChild(SyntaxNode node, SyntaxNode child) {
         boolean status = node.getChildren().remove(child);
         if (status && node.getChildren().isEmpty()) {
@@ -75,13 +70,13 @@ public class SyntaxTree {
 
         return status;
     }
-
+/*
     public boolean setSelectedChild(SyntaxNode node, SyntaxNode child) {
         boolean status = node.getChildren().contains(child);
         if (status)
             node.setSelectedChild(child);
         return status;
-    }
+    }*/
 
     public boolean isNodeModular(SyntaxNode node) {
         return node.getParent().getChildren().size() > 1;
@@ -89,7 +84,7 @@ public class SyntaxTree {
 
     public SyntaxNode getSentenceHead() {
         if (root != null) {
-            return root.getSelectedChild();
+            return root.getSelectedChild()[1];
         }else {
             return null;
         }

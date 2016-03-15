@@ -41,12 +41,13 @@ public class OptionsFragment extends Fragment {
     private void addFragments(String currentPhrase){
 
         Fragment spinnerFragment = new SpinnerFragment();
-    //    Fragment textFieldFragment = new TextFieldFragment();
-        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        transaction.add(R.id.child_fragments, spinnerFragment);
-    //    transaction.add(R.id.child_fragments, textFieldFragment);
-        transaction.commit();
+        Fragment textFieldFragment = new TextFieldFragment();
+        Fragment spinnerFrag = new SpinnerFragment();
 
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.add(R.id.child_fragment1, spinnerFragment);
+        transaction.add(R.id.child_fragment2, spinnerFrag);
+        transaction.commit();
     }
 
 }

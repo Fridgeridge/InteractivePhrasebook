@@ -59,14 +59,14 @@ public class FirstUsageActivity extends Activity {
 
 
         //Remove
-        try {
+/*        try {
             InputStream is = getAssets().open("Phrases/sentences.xml");
             XMLParser parser = new XMLParser(is);
             SyntaxTree tree = parser.buildSyntaxTree(parser.jumpToChild("sentence", "QWhatName"));
             System.out.println(tree.parseSentenceSyntax());
         } catch (IOException es) {
             es.printStackTrace();
-        }
+        }*/
 
 
     }

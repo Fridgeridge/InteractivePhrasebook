@@ -23,7 +23,7 @@ public class TextFieldFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_spinner, container, false);
+        return inflater.inflate(R.layout.fragment_text_field, container, false);
     }
 
 }

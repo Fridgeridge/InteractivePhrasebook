@@ -4,7 +4,7 @@ package se.chalmers.phrasebook.backend;
  * Created by Björn on 2016-02-26.
  */
 public class SyntaxTree {
-    private SyntaxNode root;
+/*    private SyntaxNode root;
 
     public SyntaxTree(String rootData) {
         root = new SyntaxNode(rootData);
@@ -14,12 +14,12 @@ public class SyntaxTree {
         this.root = root;
     }
 
-    /**
+    *//**
      * Build recursively from root node to parse syntax
      *
      * @param node The current node
      * @return A String representing the syntax of the sentence
-     */
+     *//*
     public String getSentenceSyntax(SyntaxNode node) {
         if (node == null) {
             return "";
@@ -102,6 +102,6 @@ public class SyntaxTree {
         }else {
             return null;
         }
-    }
+    }*/
 
 }

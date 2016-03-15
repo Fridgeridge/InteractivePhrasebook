@@ -22,7 +22,6 @@ import javax.xml.parsers.ParserConfigurationException;
  */
 public class XMLParser {
 
-
     private XmlPullParser parser;
     private PhraseBook phraseBook;
     private DocumentBuilder documentBuilder;
@@ -78,7 +77,8 @@ public class XMLParser {
 
     //Wrapper which constructs a syntax tree from a set of nodes extracted from XML.
     public SyntaxTree buildSyntaxTree2(Node root) {
-        return new SyntaxTree(constructSentence2(root));
+        return null;
+                //new SyntaxTree(constructSentence2(root));
     }
 
     //recursivly takes the data from the node and transers it to a SyntaxNode, finally
@@ -123,11 +123,12 @@ public class XMLParser {
     }
 
     public SyntaxTree buildSyntaxTree(NodeList currentRoot) {
-        return new SyntaxTree(constructSentence(currentRoot, new SyntaxNode("root")));
+ //       return new SyntaxTree(constructSentence(currentRoot, new SyntaxNode("root")));
+        return null;
     }
 
     private SyntaxNode constructSentence(NodeList nl, SyntaxNode parent) {
-        if (nl == null || nl.getLength() < 1)
+/*        if (nl == null || nl.getLength() < 1)
             return parent;
         int length = nl.getLength();
         for (int i = 0; i < length; i++) {
@@ -164,7 +165,8 @@ public class XMLParser {
 
             }
         }
-        return parent;
+        return parent;*/
+        return null;
     }
 
     public NodeList jumpToChild(String tag, String id) {

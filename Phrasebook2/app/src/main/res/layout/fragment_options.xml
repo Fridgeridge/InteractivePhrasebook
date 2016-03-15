@@ -8,8 +8,14 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/child_fragments">
+        android:layout_height="wrap_content"
+        android:id="@+id/child_fragment1">
     </FrameLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/child_fragment2">
+    </FrameLayout>
+
 
 </LinearLayout>

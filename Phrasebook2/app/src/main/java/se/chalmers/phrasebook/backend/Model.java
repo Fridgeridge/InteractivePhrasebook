@@ -25,7 +25,7 @@ public class Model {
 
     private ArrayList<PhraseBook> phrasebooks;
     private String currentPhrasebook;
-    private String currentPhrase;
+    private SyntaxTree currentPhrase;
 
     private Model() {
         instance = App.get();
@@ -67,7 +67,7 @@ public class Model {
         currentPhrasebook = phrasebook;
     }
 
-    public void setCurrentPhrase(String phrase) {
+    public void setCurrentPhrase(SyntaxTree phrase) {
         currentPhrase = phrase;
     }
 
@@ -83,7 +83,7 @@ public class Model {
         return currentPhrasebook;
     }
 
-    public String getCurrentPhrase() {
+    public SyntaxTree getCurrentPhrase() {
         return currentPhrase;
     }
 

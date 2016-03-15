@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
+import se.chalmers.phrasebook.backend.SyntaxTree;
 
 public class OptionsFragment extends Fragment {
 
@@ -35,10 +36,7 @@ public class OptionsFragment extends Fragment {
 
     }
 
-
-    //Tanken är att skicka in en instans av phrase klassen vi pratade om och hämta all gui data därifrån på nåt vänster
-    //Då kan vi nog lägga till de fragmenten som ska vara där med rätt data.
-    private void addFragments(String currentPhrase){
+    private void addFragments(SyntaxTree currentPhrase){
 
         Fragment spinnerFragment = new SpinnerFragment();
         Fragment textFieldFragment = new TextFieldFragment();

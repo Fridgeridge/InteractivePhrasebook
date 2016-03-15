@@ -19,30 +19,21 @@ public class SyntaxTree {
      *
      * @param node The current node
      * @return A String representing the syntax of the sentence
-     */
-    public String getSentenceSyntax(SyntaxNode node) {
-        if (node == null) {
-            return "";
-        } else if (node.getSelectedChild() == null) {
-            return " " + node.getData();
+     *
+     **/
+    public String parseSentenceSyntax(SyntaxNode node) {
+        if(!node.hasChildren()) {
+            return node.getData();
         } else {
-            return node.getData() + " (" + getSentenceSyntax(node.getSelectedChild()) + ")";
+            String syntax = node.getData() + "(";
+            for(int i = 0; i < node.getSelectedChild().length; i++) {
+                syntax = syntax + parseSentenceSyntax(node.getSelectedChild()[i]);
+                if(node.getSelectedChild().length > 1) {
+                    syntax = syntax + " ";
+                }
+            }
+            return syntax + ")";
         }
-
-    }
-
-    //Non-recursive way of parsing, still not
-    //usable with several input arguments
-    public String parseSentenceSyntax() {
-        SyntaxNode current = getSentenceHead();
-        String parsed = current.getData();
-        String end = "";
-        while(current.getSelectedChild() != null) {
-            current = current.getSelectedChild();
-            parsed = parsed + "(" + current.getData();
-            end = end + ")";
-        }
-        return parsed + end;
     }
 
     public String parseString() {

@@ -11,19 +11,16 @@ public class SyntaxTree {
     private String sentenceDescription = "";
     private ArrayList<ArrayList> options = new ArrayList<>();
 
-    public SyntaxTree(String rootData) {
-        root = new SyntaxNode(rootData);
-    }
-
     public SyntaxTree(SyntaxNode root) {
         this.root = root;
+        initializeOptions(this.root);
     }
 
     public ArrayList<ArrayList> getOptions() {
         return options;
     }
 
-    public void initializeOptions(SyntaxNode currentRoot) {
+    private void initializeOptions(SyntaxNode currentRoot) {
         if(currentRoot.isModular()) {
             ArrayList<String> selection = new ArrayList<>();
             selection.add(currentRoot.getDesc());

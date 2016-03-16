@@ -7,8 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.io.IOException;
+
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
+import se.chalmers.phrasebook.backend.SyntaxNode;
 
 /**
  * Created by matilda on 10/03/16.

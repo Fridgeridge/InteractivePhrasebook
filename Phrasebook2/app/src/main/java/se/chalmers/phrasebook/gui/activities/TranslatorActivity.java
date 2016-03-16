@@ -37,11 +37,5 @@ public class TranslatorActivity extends FragmentActivity {
     }
 
 
-    private void update(){
-
-    };
-
-
-
 
 }

@@ -39,6 +39,7 @@ public class OptionsFragment extends Fragment {
 
         model = Model.getInstance();
         nbrChoices = getArguments().getInt("nbrChoices");
+        containers = new int[3];
         addContainers();
 
 

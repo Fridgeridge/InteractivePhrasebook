@@ -41,9 +41,9 @@ public class SpinnerFragment extends Fragment {
         model = Model.getInstance();
         currentPhrase = model.getCurrentPhrase();
 
-        spinnerItem = new ArrayList<>();
-        spinnerItem = getArguments().getStringArrayList("spinnerItems");
-        label = getArguments().getString("label");
+//        spinnerItem = new ArrayList<>();
+//        spinnerItem = getArguments().getStringArrayList("spinnerItems");
+//        label = getArguments().getString("label");
 
     }
 

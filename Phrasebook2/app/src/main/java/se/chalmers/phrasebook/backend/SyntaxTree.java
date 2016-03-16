@@ -17,6 +17,20 @@ public class SyntaxTree {
         this.root = root;
     }
 
+    public int numberOfModularNodes() {
+        return nmbrModNode(0, root);
+    }
+
+    public int nmbrModNode(int count, SyntaxNode currentRoot) {
+        if(currentRoot.isModular()) {
+            count++;
+        }
+        for(SyntaxNode n: currentRoot.getChildren()) {
+            count = nmbrModNode(count, n);
+        }
+        return count;
+    }
+
     /**
      * Build recursively from root node to parse syntax
      *

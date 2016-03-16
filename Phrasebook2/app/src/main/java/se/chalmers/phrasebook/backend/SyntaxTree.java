@@ -17,11 +17,17 @@ public class SyntaxTree {
         this.root = root;
     }
 
+    /**
+     * Checks all the trees nodes to find modular nodes.
+     *
+     * @return the number of modular nodes
+     *
+     **/
     public int numberOfModularNodes() {
         return nmbrModNode(0, root);
     }
-
-    public int nmbrModNode(int count, SyntaxNode currentRoot) {
+    
+    private int nmbrModNode(int count, SyntaxNode currentRoot) {
         if(currentRoot.isModular()) {
             count++;
         }

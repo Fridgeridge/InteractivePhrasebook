@@ -7,6 +7,7 @@ package se.chalmers.phrasebook.backend;
  */
 public class SyntaxTree {
     private SyntaxNode root;
+    private String sentenceDiscription = "";
 
     public SyntaxTree(String rootData) {
         root = new SyntaxNode(rootData);
@@ -80,16 +81,20 @@ public class SyntaxTree {
         return status;
     }*/
 
-    public boolean isNodeModular(SyntaxNode node) {
-        return node.getParent().getChildren().size() > 1;
-    }
-
     public SyntaxNode getSentenceHead() {
         if (root != null) {
             return root.getSelectedChild()[1];
         }else {
             return null;
         }
+    }
+
+    public String getSentenceDiscription() {
+        return sentenceDiscription;
+    }
+
+    public void setSentenceDiscription(String newDiscription) {
+        sentenceDiscription = newDiscription;
     }
 
 }

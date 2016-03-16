@@ -49,7 +49,8 @@ public class XMLParser {
         NodeList nl = document.getElementsByTagName("sentence");
 
         for (int i = 0; i < nl.getLength(); i++) {
-            String s = nl.item(i).getFirstChild().getNodeValue();
+            NamedNodeMap attr = nl.item(i).getAttributes();
+            String s = attr.getNamedItem("id").getNodeValue();
             if (nl.item(i).getNodeType() == Node.ELEMENT_NODE && sentenceTitle.equals(s)) {
                 result = nl.item(i).getChildNodes();
             }
@@ -126,7 +127,7 @@ public class XMLParser {
     }
 
     private SyntaxNode constructSentence(NodeList nl, SyntaxNode parent) {
-/*        if (nl == null || nl.getLength() < 1)
+       if (nl == null || nl.getLength() < 1)
             return parent;
         int length = nl.getLength();
         for (int i = 0; i < length; i++) {
@@ -149,22 +150,18 @@ public class XMLParser {
 
                 if (attributes.getNamedItem("child") != null) {
                     option = attributes.getNamedItem("child").getNodeValue();
-                    SyntaxNode s = getChildLeaf( constructSentence(jumpToChild("child", option), parent));
-                    if(nl.item(i).hasChildNodes())
-                        constructSentence(nl.item(i).getChildNodes(),s);
+                    constructSentence(jumpToChild("child", option), parent);
                 }
                 if (!syntax.isEmpty()) {
                     SyntaxNode node = new SyntaxNode(syntax);
                     parent.addChild(node);
                     constructSentence(nl.item(i).getChildNodes(), node);//Do not return
-                    return node;
                 }
 
 
             }
         }
-        return parent;*/
-        return null;
+        return parent;
     }
 
     public NodeList jumpToChild(String tag, String id) {

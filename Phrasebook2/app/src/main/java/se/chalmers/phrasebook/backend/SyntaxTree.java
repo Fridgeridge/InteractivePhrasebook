@@ -1,6 +1,7 @@
 package se.chalmers.phrasebook.backend;
 
 
+import java.util.ArrayList;
 
 /**
  * Created by Björn on 2016-02-26.
@@ -8,6 +9,7 @@ package se.chalmers.phrasebook.backend;
 public class SyntaxTree {
     private SyntaxNode root;
     private String sentenceDescription = "";
+    private ArrayList<ArrayList> options = new ArrayList<>();
 
     public SyntaxTree(String rootData) {
         root = new SyntaxNode(rootData);
@@ -17,6 +19,23 @@ public class SyntaxTree {
         this.root = root;
     }
 
+    public ArrayList<ArrayList> getOptions() {
+        return options;
+    }
+
+    public void initializeOptions(SyntaxNode currentRoot) {
+        if(currentRoot.isModular()) {
+            ArrayList<String> selection = new ArrayList<>();
+            selection.add(currentRoot.getDesc());
+            for(SyntaxNode n: currentRoot.getChildren()) {
+                selection.add(n.getDesc());
+            }
+            options.add(selection);
+        }
+        for(SyntaxNode n: currentRoot.getChildren()) {
+            initializeOptions(n);
+        }
+    }
     /**
      * Checks all the trees nodes to find modular nodes.
      *

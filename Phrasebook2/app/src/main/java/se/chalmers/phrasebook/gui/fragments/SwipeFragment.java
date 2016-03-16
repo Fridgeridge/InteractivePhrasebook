@@ -19,8 +19,8 @@ import se.chalmers.phrasebook.gui.adapters.SwipeAdapter;
 
 public class SwipeFragment extends Fragment {
 
-    View view;
-    ViewPager pager;
+    private View view;
+    private ViewPager pager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

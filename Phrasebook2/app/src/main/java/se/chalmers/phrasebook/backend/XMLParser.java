@@ -122,8 +122,7 @@ public class XMLParser {
     }
 
     public SyntaxTree buildSyntaxTree(NodeList currentRoot) {
- //       return new SyntaxTree(constructSentence(currentRoot, new SyntaxNode("root")));
-        return null;
+        return new SyntaxTree(constructSentence(currentRoot, new SyntaxNode("root")));
     }
 
     private SyntaxNode constructSentence(NodeList nl, SyntaxNode parent) {

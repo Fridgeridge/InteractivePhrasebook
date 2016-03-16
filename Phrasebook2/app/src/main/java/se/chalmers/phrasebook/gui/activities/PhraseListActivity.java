@@ -59,14 +59,14 @@ public class PhraseListActivity extends Activity {
 
         ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, phrases);
 
-        ListView phraseListView = (ListView) findViewById(R.id.listView);
+        final ListView phraseListView = (ListView) findViewById(R.id.listView);
         phraseListView.setAdapter(adapter);
 
         phraseListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-         //       model.setCurrentPhrase((String) parent.getItemAtPosition(position));
+                model.setCurrentPhrase(parser.buildSyntaxTree(parser.getSentence((String)phraseListView.getItemAtPosition(position))));
 
                 Intent intent = new Intent(context, TranslatorActivity.class);
                 startActivity(intent);

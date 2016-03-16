@@ -75,6 +75,13 @@ public class Model {
         return null;
     }
 
+    public String translateToOrigin(){
+        return translator.translateToOrigin(getCurrentPhrase().getSyntax());
+    }
+
+    public String translateToTarget(){
+        return translator.translateToTarget(getCurrentPhrase().getSyntax());
+    }
 
     public void setOriginLanguage(String originLanguage) {
         this.originLanguage = originLanguage;
@@ -95,6 +102,7 @@ public class Model {
         String id = getKey(phraseDescription, this.getSentences());
 
         currentPhrase = parser.buildSyntaxTree(parser.getSentence(id));
+        System.out.println();
     }
 
     public String getOriginLanguage() {

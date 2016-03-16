@@ -7,7 +7,7 @@ package se.chalmers.phrasebook.backend;
  */
 public class SyntaxTree {
     private SyntaxNode root;
-    private String sentenceDiscription = "";
+    private String sentenceDescription = "";
 
     public SyntaxTree(String rootData) {
         root = new SyntaxNode(rootData);
@@ -67,12 +67,16 @@ public class SyntaxTree {
         }
     }
 
-    public String getSentenceDiscription() {
-        return sentenceDiscription;
+    public String getSyntax(){
+        return parseSentenceSyntax(getSentenceHead());
     }
 
-    public void setSentenceDiscription(String newDiscription) {
-        sentenceDiscription = newDiscription;
+    public String getSentenceDescription() {
+        return sentenceDescription;
+    }
+
+    public void setSentenceDescription(String newDiscription) {
+        sentenceDescription = newDiscription;
     }
 
 }

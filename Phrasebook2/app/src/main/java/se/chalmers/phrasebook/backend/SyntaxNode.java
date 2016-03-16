@@ -35,10 +35,7 @@ public class SyntaxNode {
     }
 
     public boolean hasChildren() {
-        if (children.isEmpty()) {
-            return true;
-        }
-        return false;
+       return !this.children.isEmpty();
     }
 
     public boolean isModular() {

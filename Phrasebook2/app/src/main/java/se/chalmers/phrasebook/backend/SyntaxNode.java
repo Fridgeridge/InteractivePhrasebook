@@ -41,7 +41,9 @@ public class SyntaxNode {
         return false;
     }
 
-
+    public boolean isModular() {
+        return children.size() > 1;
+    }
 
     public boolean setDescription(String desc) {
         if (desc == null || desc.isEmpty()) {

@@ -17,11 +17,17 @@ public class SyntaxTree {
         this.root = root;
     }
 
+    /**
+     * Checks all the trees nodes to find modular nodes.
+     *
+     * @return the number of modular nodes
+     *
+     **/
     public int numberOfModularNodes() {
         return nmbrModNode(0, root);
     }
 
-    public int nmbrModNode(int count, SyntaxNode currentRoot) {
+    private int nmbrModNode(int count, SyntaxNode currentRoot) {
         if(currentRoot.isModular()) {
             count++;
         }
@@ -52,48 +58,6 @@ public class SyntaxTree {
             return syntax + ")";
         }
     }
-
-    //TODO Fix method
-    public SyntaxNode findNode(SyntaxNode node, String syntax) {
-        if (node == null) {
-            return null;
-        }
-        if (node.getData().equals(syntax)) {
-            return node;
-        } else if (node.getChildren().isEmpty()) {
-            return null;//Unsure
-        } else {
-            for (SyntaxNode n : node.getChildren()) {
-                return findNode(n, syntax);
-            }
-        }
-
-        return node;
-    }
-/*
-    public void addChild(SyntaxNode node, SyntaxNode child) {
-        if (node.getChildren().isEmpty())
-            root.setSelectedChild(child);
-
-        child.setParent(node);
-        node.getChildren().add(child);
-    }
-*/
-    public boolean removeChild(SyntaxNode node, SyntaxNode child) {
-        boolean status = node.getChildren().remove(child);
-        if (status && node.getChildren().isEmpty()) {
-            node.setSelectedChild(null);
-        }
-
-        return status;
-    }
-/*
-    public boolean setSelectedChild(SyntaxNode node, SyntaxNode child) {
-        boolean status = node.getChildren().contains(child);
-        if (status)
-            node.setSelectedChild(child);
-        return status;
-    }*/
 
     public SyntaxNode getSentenceHead() {
         if (root != null) {

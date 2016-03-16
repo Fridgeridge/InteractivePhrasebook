@@ -21,7 +21,8 @@ public class OptionsFragment extends Fragment {
     private int nbrChoices;
 
 
-    //Skapa ett fragment med argument! :D
+    //Skapa ett fragment med argument! :D Borde ta en array eller nåt med vilken
+    // typ av val som ska göras så fragmenten kan skapan
     public static OptionsFragment newInstance(int nbrChoices) {
         OptionsFragment optionsFragment = new OptionsFragment();
         Bundle args = new Bundle();

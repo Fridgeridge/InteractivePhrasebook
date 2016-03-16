@@ -5,10 +5,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import se.chalmers.phrasebook.backend.Model;
+import se.chalmers.phrasebook.backend.SyntaxTree;
 import se.chalmers.phrasebook.backend.TestSentence;
 import se.chalmers.phrasebook.gui.fragments.OptionsFragment;
-import se.chalmers.phrasebook.gui.fragments.Swipe1;
-import se.chalmers.phrasebook.gui.fragments.Swipe2;
 
 /**
  * Created by matilda on 15/03/16.
@@ -17,14 +16,17 @@ public class SwipeAdapter extends FragmentPagerAdapter {
 
         private int pages;
         private Model model;
+        private SyntaxTree phrase;
         private TestSentence testSentence;
 
         public SwipeAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
             model = Model.getInstance();
+            phrase = model.getCurrentPhrase();
+
             testSentence = model.getTestSentence();
 
-            //Går nog definifivt att göra snyggare nån annan dag
+            //Går nog definifivt att göra snyggare nån annan dag när vi har ett riktigt syntaxträd
             if(testSentence.getNbrOptions() <= 3) {
                 pages = 1;
             }else if(testSentence.getNbrOptions() <=6){

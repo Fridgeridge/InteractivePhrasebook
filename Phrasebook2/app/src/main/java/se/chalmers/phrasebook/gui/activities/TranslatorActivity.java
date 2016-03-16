@@ -14,7 +14,6 @@ import se.chalmers.phrasebook.gui.fragments.TranslationFragment;
 public class TranslatorActivity extends FragmentActivity {
 
     TranslationFragment translationFragment;
-    OptionsFragment optionsFragment;
     SwipeFragment swipeFragment;
 
     @Override

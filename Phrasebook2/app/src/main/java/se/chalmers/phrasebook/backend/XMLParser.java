@@ -70,7 +70,7 @@ public class XMLParser {
             String desc = sentences.item(i).getAttributes().getNamedItem("desc").getNodeValue();
             String id = sentences.item(i).getAttributes().getNamedItem("id").getNodeValue();
 
-            if (desc != null & id != null)
+            if (desc != null && id != null)
                 sentenceMap.put(id,desc);
         }
         return sentenceMap;

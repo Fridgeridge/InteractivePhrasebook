@@ -97,7 +97,7 @@ public class SyntaxTree {
 
     public SyntaxNode getSentenceHead() {
         if (root != null) {
-            return root.getSelectedChild()[1];
+            return root.getSelectedChild()[0];
         }else {
             return null;
         }

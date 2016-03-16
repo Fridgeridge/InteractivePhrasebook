@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import se.chalmers.phrasebook.R;
+import se.chalmers.phrasebook.backend.Model;
 import se.chalmers.phrasebook.gui.fragments.OptionsFragment;
 import se.chalmers.phrasebook.gui.fragments.SwipeFragment;
 import se.chalmers.phrasebook.gui.fragments.TranslationFragment;
@@ -15,11 +16,14 @@ public class TranslatorActivity extends FragmentActivity {
 
     TranslationFragment translationFragment;
     SwipeFragment swipeFragment;
+    private Model model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_translator);
+
+        model = Model.getInstance();
 
         translationFragment = new TranslationFragment();
         swipeFragment = new SwipeFragment();

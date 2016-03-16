@@ -24,7 +24,6 @@ import se.chalmers.phrasebook.backend.XMLParser;
 public class PhraseListActivity extends Activity {
 
     private Model model;
-    private XMLParser parser;
     private ArrayList<String> phrases;
     Context context;
 
@@ -34,14 +33,9 @@ public class PhraseListActivity extends Activity {
 
         model = Model.getInstance();
         phrases = new ArrayList<String>();
-        try {
-            InputStream is = getAssets().open("Phrases/sentences.xml");
-            parser = new XMLParser(is);
-        } catch (IOException es) {
-            es.printStackTrace();
-        }
 
-        phrases.addAll(parser.getSentencesData().values());
+
+        phrases.addAll(model.getSentences().values());
 
         setContentView(R.layout.activity_phrase_list);
         initListView();
@@ -66,7 +60,7 @@ public class PhraseListActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                model.setCurrentPhrase(parser.buildSyntaxTree(parser.getSentence((String)phraseListView.getItemAtPosition(position))));
+                model.setCurrentPhrase((String)phraseListView.getItemAtPosition(position));
 
                 Intent intent = new Intent(context, TranslatorActivity.class);
                 startActivity(intent);

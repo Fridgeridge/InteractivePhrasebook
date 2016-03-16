@@ -1,7 +1,5 @@
 package se.chalmers.phrasebook.backend;
 
-import android.util.Log;
-
 import org.grammaticalframework.pgf.Concr;
 import org.grammaticalframework.pgf.Expr;
 import org.grammaticalframework.pgf.PGF;
@@ -9,7 +7,6 @@ import org.grammaticalframework.pgf.PGFError;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Map;
 import java.util.Set;
 
 /**
@@ -30,8 +27,35 @@ public class Translator {
         return lang.linearize(e);
     }
 
+    public String translateToOrigin(String abstractSyntax){
+        return translate(originLanguage,abstractSyntax);
+    }
 
-    public String[] getLanguages(){
+    public String translateToTarget(String abstractSyntax){
+        return translate(targetLanguage,abstractSyntax);
+    }
+
+    public boolean setOriginLanguage(String lang) {
+        try {
+            Concr origin = pgf.getLanguages().get(Langs.getKey(lang));
+            originLanguage = origin;
+        } catch (NullPointerException e) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean setTargetLanguage(String lang) {
+        try {
+            Concr target = pgf.getLanguages().get(Langs.getKey(lang));
+            targetLanguage= target;
+        } catch (NullPointerException e) {
+            return false;
+        }
+        return true;
+    }
+
+    public String[] getLanguages() {
         Set<String> strings = pgf.getLanguages().keySet();
 
         return strings.toArray(new String[strings.size()]);

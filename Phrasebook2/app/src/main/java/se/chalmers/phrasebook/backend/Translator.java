@@ -35,9 +35,9 @@ public class Translator {
         return translate(targetLanguage,abstractSyntax);
     }
 
-    public boolean setOriginLanguage(String lang) {
+    public boolean setOriginLanguage(String langID) {
         try {
-            Concr origin = pgf.getLanguages().get(Langs.getKey(lang));
+            Concr origin = pgf.getLanguages().get(langID);
             originLanguage = origin;
         } catch (NullPointerException e) {
             return false;
@@ -45,9 +45,9 @@ public class Translator {
         return true;
     }
 
-    public boolean setTargetLanguage(String lang) {
+    public boolean setTargetLanguage(String langID) {
         try {
-            Concr target = pgf.getLanguages().get(Langs.getKey(lang));
+            Concr target = pgf.getLanguages().get((langID));
             targetLanguage= target;
         } catch (NullPointerException e) {
             return false;

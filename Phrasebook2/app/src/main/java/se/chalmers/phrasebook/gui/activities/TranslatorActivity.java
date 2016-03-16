@@ -24,7 +24,7 @@ public class TranslatorActivity extends FragmentActivity {
         setContentView(R.layout.activity_translator);
 
         model = Model.getInstance();
-        System.out.println(model.translateToOrigin());
+
         translationFragment = new TranslationFragment();
         swipeFragment = new SwipeFragment();
 

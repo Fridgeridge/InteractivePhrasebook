@@ -102,7 +102,6 @@ public class Model {
         String id = getKey(phraseDescription, this.getSentences());
 
         currentPhrase = parser.buildSyntaxTree(parser.getSentence(id));
-        System.out.println();
     }
 
     public String getOriginLanguage() {

@@ -5,8 +5,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
@@ -19,6 +22,17 @@ public class SpinnerFragment extends Fragment {
 
     Model model;
     SyntaxTree currentPhrase;
+    ArrayList<String> spinnerItem;
+    String label;
+
+    public static SpinnerFragment newInstance(ArrayList spinnerItems, String label) {
+        SpinnerFragment spinnerFragment = new SpinnerFragment();
+        Bundle args = new Bundle();
+        args.putStringArrayList("spinnerItems", spinnerItems);
+        args.putString("label", label);
+        spinnerFragment.setArguments(args);
+        return spinnerFragment;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -26,6 +40,10 @@ public class SpinnerFragment extends Fragment {
 
         model = Model.getInstance();
         currentPhrase = model.getCurrentPhrase();
+
+        spinnerItem = new ArrayList<>();
+        spinnerItem = getArguments().getStringArrayList("spinnerItems");
+        label = getArguments().getString("label");
 
     }
 
@@ -37,13 +55,11 @@ public class SpinnerFragment extends Fragment {
         TextView textView = (TextView)view.findViewById(R.id.text_view_spinner);
         Spinner spinner = (Spinner)view.findViewById(R.id.choice_spinner);
 
-        //Hämta namnen på barnen som ska utgöra valen från currentPhrase
-        //Lägg in dom i en ArrayList
-        //Lägg in listan i spinnern
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, spinnerItem);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
 
-        //På nåt sätt borde man få fram vad det är för val som görs i just det här fragmentet och hämta motsvarande
-        //string från xml res strings och sätta till textview
-
+        textView.setText(label);
 
         return view;
 

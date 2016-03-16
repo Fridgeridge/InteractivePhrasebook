@@ -20,13 +20,15 @@ public class OptionsFragment extends Fragment {
 
     private int nbrChoices;
 
+    private int[] containers;
+
 
     //Skapa ett fragment med argument! :D Borde ta en array eller nåt med vilken
     // typ av val som ska göras så fragmenten kan skapan
     public static OptionsFragment newInstance(int nbrChoices) {
         OptionsFragment optionsFragment = new OptionsFragment();
         Bundle args = new Bundle();
-        args.putInt("someInt", nbrChoices);
+        args.putInt("nbrChoices", nbrChoices);
         optionsFragment.setArguments(args);
         return optionsFragment;
     }
@@ -36,7 +38,9 @@ public class OptionsFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         model = Model.getInstance();
-        nbrChoices = getArguments().getInt("someInt");
+        nbrChoices = getArguments().getInt("nbrChoices");
+        addContainers();
+
 
         //Måste ha typ av choices också
         addFragments(nbrChoices);
@@ -51,11 +55,24 @@ public class OptionsFragment extends Fragment {
 
     }
 
-    private void addFragments(int nbrChoices){
+    //Array med int id:s till fragmentcontainers
+    //Loopa igenom och lägga till de fragment som ska läggas till
+    //Typen av fragmenten skulle också vara nice att ha i nån form av lite eller array
+
+
+    private void addFragments(int nbrChoices) {
 
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
 
-        switch(nbrChoices){
+        //En schysst hashmap med en nice sträng och en array? :D
+        for(int i = 0; i < nbrChoices; i++){
+
+        }
+
+
+
+
+        switch (nbrChoices) {
             case 1:
                 Fragment spinnerFragment = new SpinnerFragment();
                 transaction.add(R.id.child_fragment1, spinnerFragment);
@@ -67,6 +84,7 @@ public class OptionsFragment extends Fragment {
                 transaction.add(R.id.child_fragment2, spinnerFragment3);
                 break;
             case 3:
+
                 Fragment spinnerFragment4 = new SpinnerFragment();
                 Fragment spinnerFragment5 = new SpinnerFragment();
                 Fragment spinnerFragment6 = new SpinnerFragment();
@@ -79,7 +97,14 @@ public class OptionsFragment extends Fragment {
         transaction.commit();
     }
 
-    //How many nodes with multiple children - for deciding how many fragments to add
+    private void addContainers() {
+
+        containers[0] = R.id.child_fragment1;
+        containers[1] = R.id.child_fragment2;
+        containers[2] = R.id.child_fragment3;
+
+    }
+
     //What type each fragment should be, preferably in a nice order
     //Spinner fragments need to know what attributes there are to choose from and what it is that you are altering
     //Textfield fragments need to know what you are altering

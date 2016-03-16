@@ -59,7 +59,7 @@ public class PhraseListActivity extends Activity {
         phraseListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                
                 model.setCurrentPhrase((String)phraseListView.getItemAtPosition(position));
 
                 Intent intent = new Intent(context, TranslatorActivity.class);

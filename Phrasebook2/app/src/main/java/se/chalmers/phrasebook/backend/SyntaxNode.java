@@ -1,5 +1,6 @@
 package se.chalmers.phrasebook.backend;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,8 +95,31 @@ public class SyntaxNode {
         return selectedChild;
     }
 
-    public void setSelectedChild(SyntaxNode[] selectedChild) {
-        this.selectedChild = selectedChild;
+    //Replaces the specified previous child with the new updated selected child
+    public void setSelectedChild(SyntaxNode previous, SyntaxNode updated) throws IOException {
+        int position = 0;
+        boolean contains = false;
+        for(int i = 0; i < selectedChild.length; i++) {
+            if(selectedChild[i] == previous) {
+                contains = true;
+                position = i;
+                break;
+            }
+        }
+        if(!contains) {
+            throw new IOException("previous node not a selected child");
+        }
+       contains = false;
+        for(SyntaxNode c: children) {
+            if(c == updated) {
+                contains = true;
+                break;
+            }
+        }
+        if(!contains) {
+            throw new IOException("new node is not a child");
+        }
+        selectedChild[position] = updated;
     }
 
 

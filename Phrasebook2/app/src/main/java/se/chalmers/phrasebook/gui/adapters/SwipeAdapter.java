@@ -22,7 +22,10 @@ public class SwipeAdapter extends FragmentPagerAdapter {
         model = Model.getInstance();
         phrase = model.getCurrentPhrase();
 
-        pages = (int) Math.ceil((double) (phrase.numberOfModularNodes() + 1 / 3));
+        System.out.println("Number of modular nodes = " + phrase.getOptions().size());
+
+        pages = (int) Math.ceil((double) phrase.getOptions().size() / 3);
+        System.out.println("Antalet sidor = " + pages);
 
     }
 
@@ -39,27 +42,27 @@ public class SwipeAdapter extends FragmentPagerAdapter {
         if (pages == 1) {
             switch (position) {
                 case 0:
-                    return OptionsFragment.newInstance(phrase.numberOfModularNodes() + 1);
+                    return OptionsFragment.newInstance(1);
                 default:
                     return null;
             }
         } else if (pages == 2) {
             switch (position) {
                 case 0:
-                    return OptionsFragment.newInstance(3);
+                    return OptionsFragment.newInstance(1);
                 case 1:
-                    return OptionsFragment.newInstance(phrase.numberOfModularNodes() + 1 - 3);
+                    return OptionsFragment.newInstance(2);
                 default:
                     return null;
             }
         } else {
             switch (position) {
                 case 0:
-                    return OptionsFragment.newInstance(3);
+                    return OptionsFragment.newInstance(1);
                 case 1:
-                    return OptionsFragment.newInstance(3);
+                    return OptionsFragment.newInstance(2);
                 case 2:
-                    return OptionsFragment.newInstance(phrase.numberOfModularNodes() + 1 - 6);
+                    return OptionsFragment.newInstance(3);
                 default:
                     return null;
             }

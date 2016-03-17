@@ -22,6 +22,32 @@ public class SyntaxTree {
 
     private void initializeOptions(SyntaxNode currentRoot) {
         if(currentRoot.isModular()) {
+
+                if (currentRoot.getParent().isModular()) {
+                    if (currentRoot.isSelected()) {
+                        ArrayList<String> selection = new ArrayList<>();
+                        selection.add(currentRoot.getDesc());
+                        for (SyntaxNode n : currentRoot.getChildren()) {
+                            selection.add(n.getDesc());
+                        }
+                        options.add(selection);
+                    }
+                } else {
+                    ArrayList<String> selection = new ArrayList<>();
+                    selection.add(currentRoot.getDesc());
+                    for (SyntaxNode n : currentRoot.getChildren()) {
+                        selection.add(n.getDesc());
+                    }
+                    options.add(selection);
+                }
+
+        }
+        for(SyntaxNode n: currentRoot.getChildren()) {
+            initializeOptions(n);
+        }
+    }
+
+/*        if(currentRoot.isModular()) {
             ArrayList<String> selection = new ArrayList<>();
             selection.add(currentRoot.getDesc());
             for(SyntaxNode n: currentRoot.getChildren()) {
@@ -32,7 +58,7 @@ public class SyntaxTree {
         for(SyntaxNode n: currentRoot.getChildren()) {
             initializeOptions(n);
         }
-    }
+    }*/
     /**
      * Checks all the trees nodes to find modular nodes.
      *

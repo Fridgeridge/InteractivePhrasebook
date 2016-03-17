@@ -21,6 +21,7 @@ import se.chalmers.phrasebook.backend.Langs;
 import se.chalmers.phrasebook.backend.Model;
 import se.chalmers.phrasebook.backend.SyntaxTree;
 import se.chalmers.phrasebook.backend.XMLParser;
+import se.chalmers.phrasebook.gui.NavigationActivity;
 
 public class FirstUsageActivity extends Activity {
 

@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -22,14 +23,13 @@ public class SpinnerFragment extends Fragment {
 
     Model model;
     SyntaxTree currentPhrase;
-    ArrayList<String> spinnerItem;
+    ArrayList<String> data;
     String label;
 
-    public static SpinnerFragment newInstance(ArrayList spinnerItems, String label) {
+    public static SpinnerFragment newInstance(ArrayList<String> options) {
         SpinnerFragment spinnerFragment = new SpinnerFragment();
         Bundle args = new Bundle();
-        args.putStringArrayList("spinnerItems", spinnerItems);
-        args.putString("label", label);
+        args.putStringArrayList("data", options);
         spinnerFragment.setArguments(args);
         return spinnerFragment;
     }
@@ -41,9 +41,11 @@ public class SpinnerFragment extends Fragment {
         model = Model.getInstance();
         currentPhrase = model.getCurrentPhrase();
 
-//        spinnerItem = new ArrayList<>();
-//        spinnerItem = getArguments().getStringArrayList("spinnerItems");
-//        label = getArguments().getString("label");
+        data = new ArrayList<>();
+        data = getArguments().getStringArrayList("data");
+
+        label = data.get(0);
+        data.remove(0);
 
     }
 
@@ -55,11 +57,27 @@ public class SpinnerFragment extends Fragment {
         TextView textView = (TextView)view.findViewById(R.id.text_view_spinner);
         Spinner spinner = (Spinner)view.findViewById(R.id.choice_spinner);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, spinnerItem);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, data);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
         textView.setText(label);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                //Uppdatera översättingarna, egentligen bara text som behöver sättas till textFields, behöver nog inte
+                //bygga om hela fragmentet
+                //Funderar på om man ska bygga om OptionsFragment för att kunna fånga upp om det ska till fler småfragment
+                //Man kanske skulle kunna kolla om det valda objektet ska generera ett till fragment så man slipper
+                //Bygga om i onödan
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         return view;
 

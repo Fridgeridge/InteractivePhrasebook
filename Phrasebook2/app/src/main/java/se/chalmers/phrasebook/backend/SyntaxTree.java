@@ -1,6 +1,7 @@
 package se.chalmers.phrasebook.backend;
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.LinkedHashMap;
@@ -32,7 +33,7 @@ public class SyntaxTree {
             }
             options.add(selection);
         }
-        for(SyntaxNode n: currentRoot.getChildren()) {
+        for(SyntaxNode n: currentRoot.getSelectedChild()) {
             initializeOptions(n);
         }
     }
@@ -55,6 +56,15 @@ public class SyntaxTree {
             count = nmbrModNode(count, n);
         }
         return count;
+    }
+
+    public void setSelectedChild(SyntaxNode parent, SyntaxNode oldChild, SyntaxNode newChild) {
+        try {
+            parent.setSelectedChild(oldChild, newChild);
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+        this.initializeOptions(root);
     }
 
     /**

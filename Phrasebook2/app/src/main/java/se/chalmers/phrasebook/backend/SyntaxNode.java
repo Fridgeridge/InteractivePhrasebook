@@ -15,8 +15,6 @@ public class SyntaxNode {
     private int nmbrOfSelectedChildren = 1;
     private SyntaxNode[] selectedChild;
 
-    private boolean isSelected;
-
     public SyntaxNode(String data) {
         this.data = data;
     }
@@ -139,14 +137,5 @@ public class SyntaxNode {
 
         return this.data.equals(n.data) && this.parent.equals(n.parent);
     }
-
-    public void setIsSelected(){
-        isSelected = true;
-    }
-
-    public boolean isSelected(){
-        return isSelected;
-    }
-
 
 }

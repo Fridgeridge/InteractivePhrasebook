@@ -3,6 +3,7 @@ package se.chalmers.phrasebook.gui.fragments;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +34,11 @@ public class SwipeFragment extends Fragment {
         pager.setAdapter(new SwipeAdapter(getChildFragmentManager()));
 
         return view;
+    }
+
+    private void updateFragment(){
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.detach(this).attach(this).commit();
     }
 
 }

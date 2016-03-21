@@ -75,6 +75,11 @@ public class Model {
         return null;
     }
 
+    public void update(){
+
+    }
+
+
     public String translateToOrigin(){
         return translator.translateToOrigin(getCurrentPhrase().getSyntax());
     }

@@ -3,6 +3,7 @@ package se.chalmers.phrasebook.backend;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.LinkedHashMap;
 
 /**
  * Created by Björn on 2016-02-26.
@@ -10,22 +11,22 @@ import java.util.Hashtable;
 public class SyntaxTree {
     private SyntaxNode root;
     private String sentenceDescription = "";
-    private ArrayList<Hashtable> options = new ArrayList<>();
+    private ArrayList<LinkedHashMap> options = new ArrayList<>();
 
     public SyntaxTree(SyntaxNode root) {
         this.root = root;
         initializeOptions(this.root);
     }
 
-    public ArrayList<Hashtable> getOptions() {
+    public ArrayList<LinkedHashMap> getOptions() {
         return options;
     }
 
     private void initializeOptions(SyntaxNode currentRoot) {
         if(currentRoot.isModular()) {
-            Hashtable<String, SyntaxNode> selection
-                    = new Hashtable<String, SyntaxNode>();
-            selection.put("description", currentRoot);
+            LinkedHashMap<String, SyntaxNode> selection
+                    = new LinkedHashMap<>();
+            selection.put(currentRoot.getDesc(), currentRoot);
             for (SyntaxNode n : currentRoot.getChildren()) {
                 selection.put(n.getDesc(), n);
             }
@@ -36,18 +37,6 @@ public class SyntaxTree {
         }
     }
 
-/*        if(currentRoot.isModular()) {
-            ArrayList<String> selection = new ArrayList<>();
-            selection.add(currentRoot.getDesc());
-            for(SyntaxNode n: currentRoot.getChildren()) {
-                selection.add(n.getDesc());
-            }
-            options.add(selection);
-        }
-        for(SyntaxNode n: currentRoot.getChildren()) {
-            initializeOptions(n);
-        }
-    }*/
     /**
      * Checks all the trees nodes to find modular nodes.
      *

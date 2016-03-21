@@ -1,6 +1,7 @@
 package se.chalmers.phrasebook.gui.fragments;
 
 import android.os.Bundle;
+import android.os.DropBoxManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +12,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import se.chalmers.phrasebook.R;
@@ -28,7 +33,7 @@ public class SpinnerFragment extends Fragment {
     private int dataIndex;
     private String label;
 
-    private ArrayList<Hashtable> optionsList;
+    private ArrayList<LinkedHashMap> optionsList;
 
     private ArrayList<String> guiOptions;
 
@@ -46,7 +51,7 @@ public class SpinnerFragment extends Fragment {
 
         model = Model.getInstance();
 
-        guiOptions = new ArrayList();
+        guiOptions = new ArrayList<>();
 
         optionsList = new ArrayList();
         optionsList = model.getCurrentPhrase().getOptions();
@@ -65,6 +70,9 @@ public class SpinnerFragment extends Fragment {
         TextView textView = (TextView)view.findViewById(R.id.text_view_spinner);
         Spinner spinner = (Spinner)view.findViewById(R.id.choice_spinner);
 
+        label = guiOptions.get(0);
+        guiOptions.remove(0);
+
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, guiOptions);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
@@ -74,6 +82,9 @@ public class SpinnerFragment extends Fragment {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                model.update();
+
                 //Uppdatera översättingarna, egentligen bara text som behöver sättas till textFields, behöver nog inte
                 //bygga om hela fragmentet
                 //Funderar på om man ska bygga om OptionsFragment för att kunna fånga upp om det ska till fler småfragment
@@ -92,16 +103,14 @@ public class SpinnerFragment extends Fragment {
     }
 
     private void initOptionsInfo(){
-        Map map = optionsList.get(dataIndex);
+        LinkedHashMap map = optionsList.get(dataIndex);
 
-        Object[] keys = map.keySet().toArray();
+        Iterator entries = map.entrySet().iterator();
 
-        for(int i = 0; i < keys.length; i++){
-            if(i == 0){
-                label = (String)keys[i];
-            }else {
-                guiOptions.add((String)keys[i]);
-            }
+        while (entries.hasNext()) {
+            Map.Entry thisEntry = (Map.Entry) entries.next();
+            Object key = thisEntry.getKey();
+            guiOptions.add((String)key);
         }
 
     }

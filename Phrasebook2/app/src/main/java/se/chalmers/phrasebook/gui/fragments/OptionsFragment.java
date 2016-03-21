@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.LinkedHashMap;
 
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
@@ -22,7 +23,7 @@ public class OptionsFragment extends Fragment {
     private Model model;
 
     private int swipePageNbr;
-    private ArrayList<Hashtable> options;
+    private ArrayList<LinkedHashMap> options;
     private ArrayList<ArrayList> spinnerData;
 
     private int[] containers;

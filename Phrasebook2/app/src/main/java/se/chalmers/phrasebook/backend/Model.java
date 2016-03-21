@@ -46,7 +46,6 @@ public class Model {
             e.printStackTrace();
         }
 
-
     }
 
     public static Model getInstance() {
@@ -78,12 +77,16 @@ public class Model {
         return null;
     }
 
-    public void update(){
-
+    public void update(int listIndex, String parent, String oldOption, String newOption){
+        currentPhrase.setSelectedChild(((SyntaxNode)currentPhrase.getOptions().get(listIndex).get(parent)),
+                ((SyntaxNode)currentPhrase.getOptions().get(listIndex).get(oldOption)),
+                ((SyntaxNode)(currentPhrase.getOptions().get(listIndex).get(newOption))));
     }
 
 
     public ArrayList<String> getNodeOptions(int index){
+        optionsList = currentPhrase.getOptions();
+
         LinkedHashMap map = optionsList.get(index);
 
         Iterator entries = map.entrySet().iterator();

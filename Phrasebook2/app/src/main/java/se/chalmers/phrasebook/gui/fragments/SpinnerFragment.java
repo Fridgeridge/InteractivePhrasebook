@@ -80,7 +80,7 @@ public class SpinnerFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                model.update(dataIndex, currentChoice, spinner.getSelectedItem().toString());
+                model.update(dataIndex, label,  currentChoice, spinner.getSelectedItem().toString());
                 updateFragments();
 
             }

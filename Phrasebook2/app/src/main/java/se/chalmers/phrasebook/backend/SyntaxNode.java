@@ -103,7 +103,7 @@ public class SyntaxNode {
         int position = 0;
         boolean contains = false;
         for(int i = 0; i < selectedChild.length; i++) {
-            if(selectedChild[i] == previous) {
+            if(selectedChild[i].equals(previous)) {
                 contains = true;
                 position = i;
                 break;
@@ -114,7 +114,7 @@ public class SyntaxNode {
         }
        contains = false;
         for(SyntaxNode c: children) {
-            if(c == updated) {
+            if(c.equals(updated)) {
                 contains = true;
                 break;
             }

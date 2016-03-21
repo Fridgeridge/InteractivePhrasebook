@@ -2,6 +2,7 @@ package se.chalmers.phrasebook.backend;
 
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 /**
  * Created by Björn on 2016-02-26.
@@ -9,38 +10,26 @@ import java.util.ArrayList;
 public class SyntaxTree {
     private SyntaxNode root;
     private String sentenceDescription = "";
-    private ArrayList<ArrayList> options = new ArrayList<>();
+    private ArrayList<Hashtable> options = new ArrayList<>();
 
     public SyntaxTree(SyntaxNode root) {
         this.root = root;
         initializeOptions(this.root);
     }
 
-    public ArrayList<ArrayList> getOptions() {
+    public ArrayList<Hashtable> getOptions() {
         return options;
     }
 
     private void initializeOptions(SyntaxNode currentRoot) {
         if(currentRoot.isModular()) {
-
-                if (currentRoot.getParent().isModular()) {
-                    if (currentRoot.isSelected()) {
-                        ArrayList<String> selection = new ArrayList<>();
-                        selection.add(currentRoot.getDesc());
-                        for (SyntaxNode n : currentRoot.getChildren()) {
-                            selection.add(n.getDesc());
-                        }
-                        options.add(selection);
-                    }
-                } else {
-                    ArrayList<String> selection = new ArrayList<>();
-                    selection.add(currentRoot.getDesc());
-                    for (SyntaxNode n : currentRoot.getChildren()) {
-                        selection.add(n.getDesc());
-                    }
-                    options.add(selection);
-                }
-
+            Hashtable<String, SyntaxNode> selection
+                    = new Hashtable<String, SyntaxNode>();
+            selection.put("description", currentRoot);
+            for (SyntaxNode n : currentRoot.getChildren()) {
+                selection.put(n.getDesc(), n);
+            }
+            options.add(selection);
         }
         for(SyntaxNode n: currentRoot.getChildren()) {
             initializeOptions(n);

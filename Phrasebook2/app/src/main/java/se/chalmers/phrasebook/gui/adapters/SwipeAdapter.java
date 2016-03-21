@@ -15,16 +15,14 @@ public class SwipeAdapter extends FragmentPagerAdapter {
 
     private int pages;
     private Model model;
-    private SyntaxTree phrase;
 
     public SwipeAdapter(FragmentManager fragmentManager) {
         super(fragmentManager);
         model = Model.getInstance();
-        phrase = model.getCurrentPhrase();
 
-        System.out.println("Number of modular nodes = " + phrase.getOptions().size());
+        System.out.println("Number of modular nodes = " + model.getCurrentPhrase().getOptions().size());
 
-        pages = (int) Math.ceil((double) phrase.getOptions().size() / 3);
+        pages = (int) Math.ceil((double) model.getCurrentPhrase().getOptions().size() / 3);
         System.out.println("Antalet sidor = " + pages);
 
     }

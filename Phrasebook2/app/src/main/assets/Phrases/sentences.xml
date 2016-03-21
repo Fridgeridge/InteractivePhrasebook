@@ -12,7 +12,7 @@
         </node>
     </sentence>
 
-
+<!--abstract sytax!-->
     <sentence desc="Somebody's name is..." id="AHasName">
         <node child="phraseit">
             <node syntax="PropAction">

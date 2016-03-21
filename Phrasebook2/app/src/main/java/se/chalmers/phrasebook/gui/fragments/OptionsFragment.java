@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
@@ -21,7 +22,7 @@ public class OptionsFragment extends Fragment {
     private Model model;
 
     private int swipePageNbr;
-    private ArrayList<ArrayList> options;
+    private ArrayList<Hashtable> options;
     private ArrayList<ArrayList> spinnerData;
 
     private int[] containers;
@@ -47,8 +48,6 @@ public class OptionsFragment extends Fragment {
         containers = new int[3];
 
         addContainers();
-        initSpinnerFragmentInfo(swipePageNbr);
-
         addFragments();
 
     }
@@ -65,8 +64,35 @@ public class OptionsFragment extends Fragment {
 
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
 
-        for(int i = 0; i < spinnerData.size(); i++){
-            transaction.add(containers[i], SpinnerFragment.newInstance(spinnerData.get(i)));
+        if(swipePageNbr == 1){
+            if(options.size() >= 3) {
+                for(int i = 0; i < 3; i++){
+                    if(options.get(i) != null)
+                    transaction.add(containers[i], SpinnerFragment.newInstance(i));
+                }
+            }else{
+                for (int i = 0; i < options.size(); i++) {
+                    if (options.get(i) != null && options.size() != 0)
+                        transaction.add(containers[i], SpinnerFragment.newInstance(i));
+                }
+            }
+        }else if(swipePageNbr == 2){
+            if(options.size() >= 6) {
+                for (int i = 3; i < 6; i++) {
+                    if (options.get(i) != null)
+                        transaction.add(containers[i-3], SpinnerFragment.newInstance(i));
+                }
+            }else{
+                for (int i = 3; i < options.size(); i++) {
+                    if (options.get(i) != null)
+                        transaction.add(containers[i-3], SpinnerFragment.newInstance(i));
+                }
+            }
+        }else if(swipePageNbr == 3){
+            for(int i = 6; i < options.size(); i++) {
+                if(options.get(i) != null)
+                    transaction.add(containers[i-6], SpinnerFragment.newInstance(i));
+            }
         }
 
         transaction.commit();
@@ -78,40 +104,6 @@ public class OptionsFragment extends Fragment {
         containers[1] = R.id.child_fragment2;
         containers[2] = R.id.child_fragment3;
 
-    }
-
-    private void initSpinnerFragmentInfo(int swipePageNbr){
-
-        if(swipePageNbr == 1){
-            if(options.size() >= 3) {
-                for (int i = 0; i < 3; i++) {
-                    if (options.get(i) != null && options.size() != 0)
-                        spinnerData.add(options.get(i));
-                }
-            }else{
-                for (int i = 0; i < options.size(); i++) {
-                    if (options.get(i) != null && options.size() != 0)
-                        spinnerData.add(options.get(i));
-                }
-            }
-        }else if(swipePageNbr == 2){
-            if(options.size() >= 6) {
-                for (int i = 3; i < 6; i++) {
-                    if (options.get(i) != null)
-                        spinnerData.add(options.get(i));
-                }
-            }else{
-                for (int i = 3; i < options.size(); i++) {
-                    if (options.get(i) != null)
-                        spinnerData.add(options.get(i));
-                }
-            }
-        }else if(swipePageNbr == 3){
-            for(int i = 6; i < options.size(); i++) {
-                if(options.get(i) != null)
-                spinnerData.add(options.get(i));
-            }
-        }
     }
 
 }

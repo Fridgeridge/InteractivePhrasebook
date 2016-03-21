@@ -11,6 +11,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.Map;
 
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
@@ -21,15 +23,19 @@ import se.chalmers.phrasebook.backend.SyntaxTree;
  */
 public class SpinnerFragment extends Fragment {
 
-    Model model;
-    SyntaxTree currentPhrase;
-    ArrayList<String> data;
-    String label;
+    private Model model;
 
-    public static SpinnerFragment newInstance(ArrayList<String> options) {
+    private int dataIndex;
+    private String label;
+
+    private ArrayList<Hashtable> optionsList;
+
+    private ArrayList<String> guiOptions;
+
+    public static SpinnerFragment newInstance(int mapIndex) {
         SpinnerFragment spinnerFragment = new SpinnerFragment();
         Bundle args = new Bundle();
-        args.putStringArrayList("data", options);
+        args.putInt("index", mapIndex);
         spinnerFragment.setArguments(args);
         return spinnerFragment;
     }
@@ -39,13 +45,15 @@ public class SpinnerFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         model = Model.getInstance();
-        currentPhrase = model.getCurrentPhrase();
 
-        data = new ArrayList<>();
-        data = getArguments().getStringArrayList("data");
+        guiOptions = new ArrayList();
 
-        label = data.get(0);
-        data.remove(0);
+        optionsList = new ArrayList();
+        optionsList = model.getCurrentPhrase().getOptions();
+
+        dataIndex = getArguments().getInt("index");
+
+        initOptionsInfo();
 
     }
 
@@ -57,7 +65,7 @@ public class SpinnerFragment extends Fragment {
         TextView textView = (TextView)view.findViewById(R.id.text_view_spinner);
         Spinner spinner = (Spinner)view.findViewById(R.id.choice_spinner);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, data);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, guiOptions);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
@@ -80,6 +88,21 @@ public class SpinnerFragment extends Fragment {
         });
 
         return view;
+
+    }
+
+    private void initOptionsInfo(){
+        Map map = optionsList.get(dataIndex);
+
+        Object[] keys = map.keySet().toArray();
+
+        for(int i = 0; i < keys.length; i++){
+            if(i == 0){
+                label = (String)keys[i];
+            }else {
+                guiOptions.add((String)keys[i]);
+            }
+        }
 
     }
 

@@ -33,8 +33,10 @@ public class SyntaxTree {
             }
             options.add(selection);
         }
-        for(SyntaxNode n: currentRoot.getSelectedChild()) {
-            initializeOptions(n);
+        if(currentRoot.getSelectedChild() != null) {
+            for(SyntaxNode n: currentRoot.getSelectedChild()) {
+                initializeOptions(n);
+            }
         }
     }
 

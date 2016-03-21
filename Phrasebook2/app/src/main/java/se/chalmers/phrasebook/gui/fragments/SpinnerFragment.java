@@ -21,7 +21,9 @@ import java.util.Map;
 
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
+import se.chalmers.phrasebook.backend.SyntaxNode;
 import se.chalmers.phrasebook.backend.SyntaxTree;
+import se.chalmers.phrasebook.gui.adapters.SwipeAdapter;
 
 /**
  * Created by matilda on 14/03/16.
@@ -29,13 +31,11 @@ import se.chalmers.phrasebook.backend.SyntaxTree;
 public class SpinnerFragment extends Fragment {
 
     private Model model;
-
     private int dataIndex;
     private String label;
-
-    private ArrayList<LinkedHashMap> optionsList;
-
     private ArrayList<String> guiOptions;
+    private String currentChoice;
+    private Spinner spinner;
 
     public static SpinnerFragment newInstance(int mapIndex) {
         SpinnerFragment spinnerFragment = new SpinnerFragment();
@@ -51,14 +51,9 @@ public class SpinnerFragment extends Fragment {
 
         model = Model.getInstance();
 
-        guiOptions = new ArrayList<>();
-
-        optionsList = new ArrayList();
-        optionsList = model.getCurrentPhrase().getOptions();
-
         dataIndex = getArguments().getInt("index");
 
-        initOptionsInfo();
+        guiOptions = model.getNodeOptions(dataIndex);
 
     }
 
@@ -68,7 +63,7 @@ public class SpinnerFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_spinner, container, false);
 
         TextView textView = (TextView)view.findViewById(R.id.text_view_spinner);
-        Spinner spinner = (Spinner)view.findViewById(R.id.choice_spinner);
+        spinner = (Spinner)view.findViewById(R.id.choice_spinner);
 
         label = guiOptions.get(0);
         guiOptions.remove(0);
@@ -77,19 +72,17 @@ public class SpinnerFragment extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
+        currentChoice = spinner.getSelectedItem().toString();
+
         textView.setText(label);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                model.update();
+                model.update(dataIndex, currentChoice, spinner.getSelectedItem().toString());
+                updateFragments();
 
-                //Uppdatera översättingarna, egentligen bara text som behöver sättas till textFields, behöver nog inte
-                //bygga om hela fragmentet
-                //Funderar på om man ska bygga om OptionsFragment för att kunna fånga upp om det ska till fler småfragment
-                //Man kanske skulle kunna kolla om det valda objektet ska generera ett till fragment så man slipper
-                //Bygga om i onödan
             }
 
             @Override
@@ -102,17 +95,9 @@ public class SpinnerFragment extends Fragment {
 
     }
 
-    private void initOptionsInfo(){
-        LinkedHashMap map = optionsList.get(dataIndex);
-
-        Iterator entries = map.entrySet().iterator();
-
-        while (entries.hasNext()) {
-            Map.Entry thisEntry = (Map.Entry) entries.next();
-            Object key = thisEntry.getKey();
-            guiOptions.add((String)key);
-        }
-
+    private void updateFragments(){
+        SwipeFragment swipeFragment = (SwipeFragment)this.getParentFragment().getParentFragment();
+        swipeFragment.getSwipeAdapter().updateData();
     }
 
 }

@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import se.chalmers.phrasebook.App;
@@ -29,6 +31,7 @@ public class Model {
     private ArrayList<PhraseBook> phrasebooks;
     private String currentPhrasebook;
     private SyntaxTree currentPhrase;
+    private ArrayList<LinkedHashMap> optionsList;
 
     private Model() {
         instance = App.get();
@@ -76,6 +79,24 @@ public class Model {
     }
 
     public void update(){
+
+    }
+
+
+    public ArrayList<String> getNodeOptions(int index){
+        LinkedHashMap map = optionsList.get(index);
+
+        Iterator entries = map.entrySet().iterator();
+
+        ArrayList<String> guiOptions = new ArrayList<>();
+
+        while (entries.hasNext()) {
+            Map.Entry thisEntry = (Map.Entry) entries.next();
+            Object key = thisEntry.getKey();
+            guiOptions.add((String)key);
+
+        }
+        return guiOptions;
 
     }
 

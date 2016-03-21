@@ -22,6 +22,7 @@ public class SwipeFragment extends Fragment {
 
     private View view;
     private ViewPager pager;
+    private SwipeAdapter swipeAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -31,14 +32,15 @@ public class SwipeFragment extends Fragment {
 
         pager = (ViewPager)view.findViewById(R.id.vpPager);
 
-        pager.setAdapter(new SwipeAdapter(getChildFragmentManager()));
+        swipeAdapter = new SwipeAdapter(getChildFragmentManager());
+
+        pager.setAdapter(swipeAdapter);
 
         return view;
     }
 
-    private void updateFragment(){
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.detach(this).attach(this).commit();
+    public SwipeAdapter getSwipeAdapter(){
+        return swipeAdapter;
     }
 
 }

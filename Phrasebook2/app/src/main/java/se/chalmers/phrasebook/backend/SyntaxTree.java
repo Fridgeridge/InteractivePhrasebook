@@ -2,6 +2,7 @@ package se.chalmers.phrasebook.backend;
 
 
 import java.io.IOException;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.LinkedHashMap;
@@ -64,8 +65,10 @@ public class SyntaxTree {
     public void setSelectedChild(SyntaxNode parent, SyntaxNode oldChild, SyntaxNode newChild) {
         try {
             parent.setSelectedChild(oldChild, newChild);
+            System.out.println("det funka");
         } catch(IOException e) {
             e.printStackTrace();
+            System.out.println("det blev fel");
         }
         this.initializeOptions(root);
     }

@@ -121,6 +121,7 @@ public class SyntaxNode {
             throw new IOException("new node is not a child");
         }
         selectedChild[position] = updated;
+        System.out.println("ehhhhh");
     }
 
 

@@ -11,12 +11,21 @@ public class SyntaxNode {
     private String data;
     private String desc;
     private SyntaxNode parent;
+    private boolean isSelected = false;
     private List<SyntaxNode> children = new ArrayList<SyntaxNode>();
     private int nmbrOfSelectedChildren = 1;
     private SyntaxNode[] selectedChild;
 
     public SyntaxNode(String data) {
         this.data = data;
+    }
+
+    public boolean getIsSelected() {
+        return isSelected;
+    }
+
+    public void setIsSelected(boolean selected) {
+        isSelected = selected;
     }
 
     public boolean addChild(SyntaxNode node, SyntaxNode parent) {

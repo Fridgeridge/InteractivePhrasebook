@@ -25,7 +25,6 @@ public class SyntaxTree {
     }
 
     private void initializeOptions(SyntaxNode currentRoot) {
-        options.clear();
         if(currentRoot.isModular()) {
             LinkedHashMap<String, SyntaxNode> selection
                     = new LinkedHashMap<>();
@@ -71,6 +70,7 @@ public class SyntaxTree {
             e.printStackTrace();
             System.out.println("det blev fel");
         }
+        options.clear();
         this.initializeOptions(root);
     }
 

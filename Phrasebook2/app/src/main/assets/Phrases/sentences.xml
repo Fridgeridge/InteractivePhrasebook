@@ -12,7 +12,6 @@
         </node>
     </sentence>
 
-<!--abstract sytax!-->
     <sentence desc="Somebody's name is..." id="AHasName">
         <node child="phraseit">
             <node syntax="PropAction">
@@ -37,16 +36,21 @@
         </node>
     </sentence>
 
-    <!--
-<sentence desc="Someone's age is..." id="QWhatAge">
-    <node syntax="PQuestion">
-        <node desc="Who are we talking about?" syntax="QWhatAge">
-            <node child="persons"></node>
-            <node child="familypersons"></node>
+    <sentence desc="Someone's age is..." id="AHasAge">
+        <node syntax="PQuestion">
+            <node syntax="QProp">
+                <node syntax="PropAction">
+                    <node syntax="AHasAge">
+                        <node child="persons"></node>
+                        <node child="familypersons"></node>
+                        <node syntax="NNumeral">
+                            <node child=""></node>
+                        </node>
+                    </node>
+                </node>
+            </node>
         </node>
-    </node>
-</sentence>
--->
+    </sentence>
 
     <sentence desc="Someone loves someone" id="ALove">
         <node child="phraseit">
@@ -86,7 +90,7 @@
         </node>
     </sentence>
 
-    <sentence desc="How old is someone?" id="QWhatAge">
+    <sentence desc="How far is something?" id="HowFar">
         <node syntax="PQuestion">
             <node desc="What place are we asking about?" syntax="HowFar">
                 <node child="superlative"></node>

@@ -39,13 +39,4 @@ public class SwipeFragment extends Fragment {
         return view;
     }
 
-    public SwipeAdapter getSwipeAdapter(){
-        return swipeAdapter;
-    }
-
-    public void updateFragments(){
-        swipeAdapter = new SwipeAdapter(getFragmentManager());
-        pager.setAdapter(swipeAdapter);
-    }
-
 }

@@ -96,7 +96,13 @@ public class Model {
         while (entries.hasNext()) {
             Map.Entry thisEntry = (Map.Entry) entries.next();
             Object key = thisEntry.getKey();
-            guiOptions.add((String)key);
+            Object value = thisEntry.getValue();
+
+            if(((SyntaxNode)value).getIsSelected()){
+                guiOptions.add(1, (String)key);
+            }else {
+                guiOptions.add((String) key);
+            }
 
         }
         return guiOptions;

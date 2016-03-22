@@ -68,6 +68,7 @@ public class SyntaxTree {
             System.out.println("det funka");
         } catch(IOException e) {
             e.printStackTrace();
+            System.out.println(e.getMessage());
             System.out.println("det blev fel");
         }
         options.clear();

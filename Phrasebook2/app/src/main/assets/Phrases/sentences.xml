@@ -46,8 +46,8 @@
     <sentence desc="How far is something?" id="HowFar">
         <node syntax="PQuestion">
             <node desc="What place are we asking about?" syntax="HowFar">
-                <node child="places"></node>
                 <node child="superlative"></node>
+                <node child="places"></node>
             </node>
         </node>
     </sentence>

@@ -25,6 +25,7 @@ public class SyntaxTree {
     }
 
     private void initializeOptions(SyntaxNode currentRoot) {
+        options.clear();
         if(currentRoot.isModular()) {
             LinkedHashMap<String, SyntaxNode> selection
                     = new LinkedHashMap<>();

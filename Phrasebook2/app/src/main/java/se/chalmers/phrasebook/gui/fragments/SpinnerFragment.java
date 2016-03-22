@@ -82,9 +82,10 @@ public class SpinnerFragment extends Fragment {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                mCallback.onOptionSelected(dataIndex, label, currentChoice, spinner.getSelectedItem().toString());
-
+                if(spinner.getSelectedItem().toString() != currentChoice) {
+                    mCallback.onOptionSelected(dataIndex, label, currentChoice, spinner.getSelectedItem().toString());
+                    currentChoice = spinner.getSelectedItem().toString();
+                }
             }
 
             @Override

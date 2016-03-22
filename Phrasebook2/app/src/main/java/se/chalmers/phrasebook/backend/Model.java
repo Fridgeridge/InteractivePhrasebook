@@ -99,7 +99,12 @@ public class Model {
             Object value = thisEntry.getValue();
 
             if(((SyntaxNode)value).getIsSelected()){
-                guiOptions.add(1, (String)key);
+                if(guiOptions.size() > 1) {
+                    guiOptions.add(1, (String) key);
+                }else{
+                    guiOptions.add((String)key);
+                }
+
             }else {
                 guiOptions.add((String) key);
             }

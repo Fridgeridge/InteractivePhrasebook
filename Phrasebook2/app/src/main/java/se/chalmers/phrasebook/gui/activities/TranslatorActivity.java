@@ -47,8 +47,7 @@ public class TranslatorActivity extends FragmentActivity implements SpinnerFragm
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
-        transaction.remove(swipeFragment);
-        transaction.add(R.id.fragment_options, new SwipeFragment());
+        transaction.replace(R.id.fragment_options, new SwipeFragment());
         transaction.commit();
 
     }

@@ -1,5 +1,6 @@
 package se.chalmers.phrasebook.gui.fragments;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.os.DropBoxManager;
 import android.support.v4.app.Fragment;
@@ -37,6 +38,8 @@ public class SpinnerFragment extends Fragment {
     private String currentChoice;
     private Spinner spinner;
 
+    OnChangeListener mCallback;
+
     public static SpinnerFragment newInstance(int mapIndex) {
         SpinnerFragment spinnerFragment = new SpinnerFragment();
         Bundle args = new Bundle();
@@ -62,8 +65,8 @@ public class SpinnerFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_spinner, container, false);
 
-        TextView textView = (TextView)view.findViewById(R.id.text_view_spinner);
-        spinner = (Spinner)view.findViewById(R.id.choice_spinner);
+        TextView textView = (TextView) view.findViewById(R.id.text_view_spinner);
+        spinner = (Spinner) view.findViewById(R.id.choice_spinner);
 
         label = guiOptions.get(0);
         guiOptions.remove(0);
@@ -80,8 +83,7 @@ public class SpinnerFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                model.update(dataIndex, label,  currentChoice, spinner.getSelectedItem().toString());
-                updateFragments();
+                mCallback.onOptionSelected(dataIndex, label, currentChoice, spinner.getSelectedItem().toString());
 
             }
 
@@ -95,9 +97,18 @@ public class SpinnerFragment extends Fragment {
 
     }
 
-    private void updateFragments(){
-        SwipeFragment swipeFragment = (SwipeFragment)this.getParentFragment().getParentFragment();
-        swipeFragment.getSwipeAdapter().updateData();
+    public interface OnChangeListener {
+        public void onOptionSelected(int dataIndex, String label, String currentChoice, String newChoice);
     }
 
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        try {
+             mCallback = (OnChangeListener) activity;
+        } catch (ClassCastException e){
+            throw new ClassCastException(activity.toString() + " must implement OnChangeListener");
+        }
+    }
 }

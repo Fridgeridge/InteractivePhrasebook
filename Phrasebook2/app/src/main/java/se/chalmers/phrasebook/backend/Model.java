@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 import se.chalmers.phrasebook.App;
@@ -68,7 +67,6 @@ public class Model {
     }
 
 
-
     //TODO Consider moving to a separate class
     public static String getKey(String name,Map<String,String> map){
         for(Map.Entry<String,String> e:map.entrySet()){
@@ -77,11 +75,10 @@ public class Model {
         return null;
     }
 
-    public void update(int listIndex, String parent, String oldOption, String newOption) {
-        currentPhrase.setSelectedChild(((SyntaxNode)currentPhrase.getOptions().get(listIndex).get(parent)),
-                ((SyntaxNode)currentPhrase.getOptions().get(listIndex).get(oldOption)),
-                ((SyntaxNode)(currentPhrase.getOptions().get(listIndex).get(newOption))));
+    public void update(){
+
     }
+
 
     public String translateToOrigin(){
         return translator.translateToOrigin(getCurrentPhrase().getSyntax());

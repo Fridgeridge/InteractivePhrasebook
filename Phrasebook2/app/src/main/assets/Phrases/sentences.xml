@@ -77,7 +77,16 @@
         </node>
     </sentence>
 
-    <sentence desc="How far is something?" id="HowFar">
+    <sentence desc="Someone is scared" id="AScared">
+        <node syntax="Psentence">
+            <node child="phraseit">
+                <node child="persons"></node>
+                <node child="familypersons"></node>
+            </node>
+        </node>
+    </sentence>
+
+    <sentence desc="How old is someone?" id="QWhatAge">
         <node syntax="PQuestion">
             <node desc="What place are we asking about?" syntax="HowFar">
                 <node child="superlative"></node>

@@ -2,6 +2,8 @@ package se.chalmers.phrasebook.backend;
 
 import org.grammaticalframework.pgf.Expr;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 
 /**
@@ -11,11 +13,34 @@ import java.util.HashSet;
 public class PhraseBook {
 
     private String title;
+    private ArrayList<SyntaxTree> phrases;
 
-    public PhraseBook(String name, Expr[] sentences) {
+    public PhraseBook(String name) {
         title = name;
-
+        phrases = new ArrayList<>();
     }
 
+    public void addPhrase(SyntaxTree phrase) {
+        phrases.add(phrase);
+    }
 
+    public void removePhrase(SyntaxTree phrase) throws IOException{
+        if(phrases.contains(phrase)) {
+            phrases.remove(phrase);
+        } else {
+            throw new IOException("phrase does not exist in phrasebook");
+        }
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public ArrayList<SyntaxTree> getPhrases() {
+        return phrases;
+    }
 }

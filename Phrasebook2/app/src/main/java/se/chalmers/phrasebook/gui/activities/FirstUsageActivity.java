@@ -33,6 +33,8 @@ public class FirstUsageActivity extends Activity {
 
         model = Model.getInstance();
 
+        getActionBar().hide();
+
         setContentView(R.layout.activity_first_usage);
 
         final Spinner originSpinner = (Spinner) findViewById(R.id.origin_spinner);

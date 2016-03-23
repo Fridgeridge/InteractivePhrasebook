@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.widget.GridView;
+import android.widget.Toolbar;
 
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.gui.adapters.PhrasebookButtonAdapter;
@@ -20,9 +21,6 @@ public class HomeScreenActivity extends Activity {
         GridView gridView = (GridView) findViewById(R.id.gridView);
         gridView.setAdapter(new PhrasebookButtonAdapter(this, buttonNames));
 
-
-
     }
-
 
 }

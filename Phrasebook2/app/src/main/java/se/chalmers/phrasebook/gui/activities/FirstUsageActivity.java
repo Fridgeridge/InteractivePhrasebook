@@ -13,6 +13,7 @@ import org.grammaticalframework.pgf.PGF;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import se.chalmers.phrasebook.R;
@@ -20,6 +21,7 @@ import se.chalmers.phrasebook.backend.Langs;
 import se.chalmers.phrasebook.backend.Model;
 import se.chalmers.phrasebook.backend.SyntaxTree;
 import se.chalmers.phrasebook.backend.XMLParser;
+import se.chalmers.phrasebook.gui.NavigationActivity;
 
 public class FirstUsageActivity extends Activity {
 
@@ -36,10 +38,13 @@ public class FirstUsageActivity extends Activity {
         final Spinner originSpinner = (Spinner) findViewById(R.id.origin_spinner);
         final Spinner targetSpinner = (Spinner) findViewById(R.id.target_spinner);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, Langs.getLanguages());
+        ArrayList al = Langs.getLanguages();
+        Collections.sort(al);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, al);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         originSpinner.setAdapter(adapter);
         targetSpinner.setAdapter(adapter);
+
 
         Button startButton = (Button) findViewById(R.id.startButton);
 

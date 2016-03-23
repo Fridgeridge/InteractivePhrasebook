@@ -5,13 +5,12 @@
 
     <sentence desc="What is somebody's name?" id="QWhatName">
         <node syntax="PQuestion">
-            <node syntax="QWhatName">
+            <node desc="Who are we talking about?" syntax="QWhatName">
                 <node child="persons"></node>
                 <node child="familypersons"></node>
             </node>
         </node>
     </sentence>
-
 
     <sentence desc="Somebody's name is..." id="AHasName">
         <node child="phraseit">
@@ -28,16 +27,80 @@
         </node>
     </sentence>
 
-
     <sentence desc="How old is someone?" id="QWhatAge">
         <node syntax="PQuestion">
-            <node syntax="QWhatAge">
+            <node desc="Who are we talking about?" syntax="QWhatAge">
                 <node child="persons"></node>
                 <node child="familypersons"></node>
             </node>
         </node>
     </sentence>
 
+    <sentence desc="Someone's age is..." id="AHasAge">
+        <node syntax="PQuestion">
+            <node syntax="QProp">
+                <node syntax="PropAction">
+                    <node syntax="AHasAge">
+                        <node child="persons"></node>
+                        <node child="familypersons"></node>
+                        <node syntax="NNumeral">
+                            <node child=""></node>
+                        </node>
+                    </node>
+                </node>
+            </node>
+        </node>
+    </sentence>
+
+    <sentence desc="Someone loves someone" id="ALove">
+        <node child="phraseit">
+            <node syntax="PropAction">
+                <node syntax="ALove">
+                    <node child="persons">
+                        <node syntax="NameNN"></node>
+                    </node>
+                    <node child="familypersons">
+                        <node syntax="NameNN"></node>
+                    </node>
+                </node>
+            </node>
+        </node>
+    </sentence>
+
+    <sentence desc="Someone is married" id="AMarried">
+        <node syntax="PQuestion">
+            <node desc="How do you want to phrase it?" syntax="QProp">
+                <node child="phraseit"></node>
+                <node syntax="PropAction">
+                    <node desc="Who are we talking about?" syntax="AMarried">
+                        <node child="persons"></node>
+                        <node child="familypersons"></node>
+                    </node>
+                </node>
+            </node>
+        </node>
+    </sentence>
+
+    <sentence desc="Someone is scared" id="AScared">
+        <node syntax="Psentence">
+            <node child="phraseit">
+                <node child="persons"></node>
+                <node child="familypersons"></node>
+            </node>
+        </node>
+    </sentence>
+
+    <sentence desc="How far is something?" id="HowFar">
+        <node syntax="PQuestion">
+            <node desc="What place are we asking about?" syntax="HowFar">
+                <node child="superlative"></node>
+                <node child="places"></node>
+            </node>
+        </node>
+    </sentence>
+
+
+    <!--Option lists -->
     <child id="phraseit" question="How do you want phrase it?">
         <node desc="statement" syntax="PSentence">
             <node syntax="SProp"></node>
@@ -50,6 +113,59 @@
         </node>
     </child>
 
+    <child id="nationality" question="What nationality?">
+        <node desc="Belgian" syntax="Belgian"></node>
+        <node desc="Bulgarian" syntax="CitiNat Bulgarian"></node>
+        <node desc="Catalan" syntax="CitiNat Catalan"></node>
+        <node desc="Dutch" syntax="CitiNat Dutch"></node>
+        <node desc="Danish" syntax="CitiNat Danish"></node>
+        <node desc="English" syntax="CitiNat English"></node>
+        <node desc="Finnish" syntax="CitiNat Finnish"></node>
+        <node desc="French" syntax="CitiNat French"></node>
+        <node desc="German" syntax="CitiNat German"></node>
+        <node desc="Italian" syntax="CitiNat Italian"></node>
+        <node desc="Norwegian" syntax="CitiNat Norwegian"></node>
+        <node desc="Polish" syntax="CitiNat Polish"></node>
+        <node desc="Romanian" syntax="CitiNat Romanian"></node>
+        <node desc="Russian" syntax="CitiNat Russian"></node>
+        <node desc="Spanish" syntax="CitiNat Spanish"></node>
+        <node desc="Swedish" syntax="CitiNat Swedish"></node>
+    </child>
+
+    <child id="places" question="What place are we asking about?">
+        <node desc="supermarket" syntax="Supermarket"></node>
+        <node desc="bank" syntax="Bank"></node>
+        <node desc="amusment park" syntax="AmusmentPark"></node>
+        <node desc="bar" syntax="Bar"></node>
+        <node desc="Cafeteria" syntax="Cafeteria"></node>
+        <node desc="car park" syntax="Parking"></node>
+        <node desc="center" syntax="Center"></node>
+        <node desc="cinema" syntax="Cinema"></node>
+        <node desc="church" syntax="Church"></node>
+        <node desc="disco" syntax="Disco"></node>
+        <node desc="hospital" syntax="Hospital"></node>
+        <node desc="hotel" syntax="Hotel"></node>
+        <node desc="museum" syntax="Museum"></node>
+        <node desc="park" syntax="Park"></node>
+        <node desc="pharmacy" syntax="Pharmacy"></node>
+        <node desc="post office" syntax="PostOffice"></node>
+        <node desc="pub" syntax="Pub"></node>
+        <node desc="restaurant" syntax="CitRestaurant">
+            <node child="nationality"></node>
+        </node>
+        <node desc="school" syntax="School"></node>
+        <node desc="shop" syntax="Shop"></node>
+    </child>
+
+    <child id="superlative" question="">
+        <node desc="(no superlative)" syntax="ThePlace"></node>
+        <node desc="best" syntax="SuperIPlace TheBest"></node>
+        <node desc="worst" syntax="SuperIPlace TheWorst"></node>
+        <node desc="nearest" syntax="SuperIPlace TheClosest"></node>
+        <node desc="cheapest" syntax="SuperIPlace TheCheapest"></node>
+        <node desc="most expensive" syntax="SuperIPlace TheMostExpensive"></node>
+        <node desc="most popular" syntax="SuperIPlace TheMostPopular"></node>
+    </child>
 
     <child id="persons" question="Who are we asking about?">
         <node desc="me (male)" syntax="IMale"></node>

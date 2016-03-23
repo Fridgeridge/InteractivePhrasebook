@@ -1,5 +1,6 @@
 package se.chalmers.phrasebook.backend;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +11,7 @@ public class SyntaxNode {
     private String data;
     private String desc;
     private SyntaxNode parent;
+    private boolean isSelected = false;
     private List<SyntaxNode> children = new ArrayList<SyntaxNode>();
     private int nmbrOfSelectedChildren = 1;
     private SyntaxNode[] selectedChild;
@@ -18,8 +20,17 @@ public class SyntaxNode {
         this.data = data;
     }
 
-    public boolean addChild(SyntaxNode node) {
+    public boolean getIsSelected() {
+        return isSelected;
+    }
+
+    public void setIsSelected(boolean selected) {
+        isSelected = selected;
+    }
+
+    public boolean addChild(SyntaxNode node, SyntaxNode parent) {
         if (node != null) {
+            node.setParent(parent);
             if(selectedChild == null) {
                 selectedChild = new SyntaxNode[1];
             }
@@ -35,10 +46,7 @@ public class SyntaxNode {
     }
 
     public boolean hasChildren() {
-        if (children.isEmpty()) {
-            return true;
-        }
-        return false;
+       return !this.children.isEmpty();
     }
 
     public boolean isModular() {
@@ -97,8 +105,34 @@ public class SyntaxNode {
         return selectedChild;
     }
 
-    public void setSelectedChild(SyntaxNode[] selectedChild) {
-        this.selectedChild = selectedChild;
+    //Replaces the specified previous child with the new updated selected child
+    public void setSelectedChild(SyntaxNode previous, SyntaxNode updated) throws IOException {
+        int position = 0;
+        boolean contains = false;
+        for(int i = 0; i < selectedChild.length; i++) {
+            if(selectedChild[i].equals(previous)) {
+                contains = true;
+                position = i;
+                break;
+            }
+        }
+        if(!contains) {
+            throw new IOException("previous node not a selected child");
+        }
+       contains = false;
+        for(SyntaxNode c: children) {
+            if(c.equals(updated)) {
+                contains = true;
+                break;
+            }
+        }
+        if(!contains) {
+            throw new IOException("new node is not a child");
+        }
+        selectedChild[position] = updated;
+        updated.setIsSelected(true);
+        previous.setIsSelected(false);
+        System.out.println("ehhhhh");
     }
 
 
@@ -115,4 +149,5 @@ public class SyntaxNode {
 
         return this.data.equals(n.data) && this.parent.equals(n.parent);
     }
+
 }

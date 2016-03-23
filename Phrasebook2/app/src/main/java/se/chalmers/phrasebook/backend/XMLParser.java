@@ -70,7 +70,7 @@ public class XMLParser {
             String desc = sentences.item(i).getAttributes().getNamedItem("desc").getNodeValue();
             String id = sentences.item(i).getAttributes().getNamedItem("id").getNodeValue();
 
-            if (desc != null & id != null)
+            if (desc != null && id != null)
                 sentenceMap.put(id,desc);
         }
         return sentenceMap;
@@ -114,7 +114,9 @@ public class XMLParser {
 
                     if (attributes.getNamedItem("child") != null) {
                         option = attributes.getNamedItem("child").getNodeValue();
-                        currentRoot.addChild(constructSentence2(children.item(i)));
+
+         //Här har parent lagts till
+                        currentRoot.addChild(constructSentence2(children.item(i)), currentRoot);
                     }
                 }
             }
@@ -154,7 +156,8 @@ public class XMLParser {
                 }
                 if (!syntax.isEmpty()) {
                     SyntaxNode node = new SyntaxNode(syntax);
-                    parent.addChild(node);
+                    parent.addChild(node, parent);
+                    node.setDesc(desc);
                     constructSentence(nl.item(i).getChildNodes(), node);//Do not return
                 }
 

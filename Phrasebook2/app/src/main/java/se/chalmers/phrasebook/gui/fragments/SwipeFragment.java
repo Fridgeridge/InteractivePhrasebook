@@ -3,6 +3,7 @@ package se.chalmers.phrasebook.gui.fragments;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,8 +20,9 @@ import se.chalmers.phrasebook.gui.adapters.SwipeAdapter;
 
 public class SwipeFragment extends Fragment {
 
-    View view;
-    ViewPager pager;
+    private View view;
+    private ViewPager pager;
+    private SwipeAdapter swipeAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -30,7 +32,9 @@ public class SwipeFragment extends Fragment {
 
         pager = (ViewPager)view.findViewById(R.id.vpPager);
 
-        pager.setAdapter(new SwipeAdapter(getChildFragmentManager()));
+        swipeAdapter = new SwipeAdapter(getChildFragmentManager());
+
+        pager.setAdapter(swipeAdapter);
 
         return view;
     }

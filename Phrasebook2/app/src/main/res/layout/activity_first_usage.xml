@@ -24,20 +24,6 @@
         android:layout_centerHorizontal="true"
         android:onClick="sendMessage" />
 
-    <Spinner
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/origin_spinner"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
-
-    <Spinner
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/target_spinner"
-        android:layout_below="@+id/origin_spinner"
-        android:layout_alignParentLeft="true" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -48,6 +34,49 @@
         android:textSize="48dp"
         android:textAlignment="textEnd"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="73dp" />
+        android:layout_alignParentStart="true" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/titleText"
+        android:layout_alignParentEnd="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Origin Language"
+            android:id="@+id/textView6" />
+
+        <Spinner
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/origin_spinner"
+            android:spinnerMode="dropdown"
+            android:layout_above="@+id/target_spinner"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center_horizontal" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Target Language"
+            android:id="@+id/textView5" />
+
+        <Spinner
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/target_spinner"
+            android:spinnerMode="dropdown"
+            android:layout_above="@+id/startButton"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center_horizontal" />
+    </LinearLayout>
 </RelativeLayout>

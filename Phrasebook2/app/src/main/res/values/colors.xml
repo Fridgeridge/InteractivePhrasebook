@@ -5,6 +5,6 @@
     <item name="highlight_color" type="color">#ff7043</item>
     <item name="background_color" type="color">#FAFAFA</item>
     
-    <color name="ColorPrimary">#4db6ac</color>
-    <color name="ColorPrimaryDark">#26A69A</color>
+    <color name="colorPrimary">#4db6ac</color>
+    <color name="colorPrimaryDark">#26A69A</color>
 </resources>

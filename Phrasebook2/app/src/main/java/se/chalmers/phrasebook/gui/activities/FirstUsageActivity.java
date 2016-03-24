@@ -7,21 +7,12 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-
-import org.grammaticalframework.pgf.PGF;
-
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
-
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Langs;
 import se.chalmers.phrasebook.backend.Model;
-import se.chalmers.phrasebook.backend.SyntaxTree;
-import se.chalmers.phrasebook.backend.XMLParser;
-import se.chalmers.phrasebook.gui.NavigationActivity;
+
 
 public class FirstUsageActivity extends Activity {
 

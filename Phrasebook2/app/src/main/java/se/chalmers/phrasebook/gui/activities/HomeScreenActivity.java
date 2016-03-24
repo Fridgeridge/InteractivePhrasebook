@@ -2,6 +2,8 @@ package se.chalmers.phrasebook.gui.activities;
 
 import android.app.Activity;
 import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.widget.GridView;
 import android.widget.Toolbar;
@@ -15,6 +17,8 @@ public class HomeScreenActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_home_screen);
+
+     //   getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#4db6ac")));
 
         Resources res = getResources();
         String[] buttonNames = res.getStringArray(R.array.my_phrasebooks);

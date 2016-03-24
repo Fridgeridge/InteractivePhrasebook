@@ -16,7 +16,7 @@ public class HomeScreenActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.content_home_screen);
+        setContentView(R.layout.activity_home_screen);
 
      //   getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#4db6ac")));
 

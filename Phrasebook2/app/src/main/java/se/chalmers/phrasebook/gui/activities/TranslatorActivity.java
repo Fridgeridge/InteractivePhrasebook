@@ -38,8 +38,8 @@ public class TranslatorActivity extends FragmentActivity implements SpinnerFragm
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
 
-        ft.add(R.id.fragment_translation, translationFragment);
-        ft.add(R.id.fragment_options, swipeFragment);
+        ft.add(R.id.container_translation, translationFragment);
+        ft.add(R.id.container_options, swipeFragment);
         ft.commit();
 
         //FAB
@@ -94,12 +94,12 @@ public class TranslatorActivity extends FragmentActivity implements SpinnerFragm
     public void onOptionSelected(int dataIndex, String label, String currentChoice, String newChoice) {
         model.update(dataIndex, label, currentChoice, newChoice);
 
-        TranslationFragment translationFragment = (TranslationFragment)getSupportFragmentManager().findFragmentById(R.id.fragment_translation);
+        TranslationFragment translationFragment = (TranslationFragment)getSupportFragmentManager().findFragmentById(R.id.container_translation);
         translationFragment.updateData();
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
-        transaction.replace(R.id.fragment_options, new SwipeFragment());
+        transaction.replace(R.id.container_options, new SwipeFragment());
         transaction.commit();
 
     }

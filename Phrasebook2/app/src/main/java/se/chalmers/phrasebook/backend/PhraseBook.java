@@ -20,16 +20,12 @@ public class PhraseBook {
         phrases = new ArrayList<>();
     }
 
-    public void addPhrase(SyntaxTree phrase) {
-        phrases.add(phrase);
+    public boolean addPhrase(SyntaxTree phrase) {
+        return phrases.add(phrase);
     }
 
-    public void removePhrase(SyntaxTree phrase) throws IOException{
-        if(phrases.contains(phrase)) {
-            phrases.remove(phrase);
-        } else {
-            throw new IOException("phrase does not exist in phrasebook");
-        }
+    public boolean removePhrase(SyntaxTree phrase) {
+            return phrases.remove(phrase);
     }
 
     public String getTitle() {

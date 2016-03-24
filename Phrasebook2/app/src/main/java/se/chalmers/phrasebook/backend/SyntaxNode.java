@@ -13,11 +13,15 @@ public class SyntaxNode {
     private SyntaxNode parent;
     private boolean isSelected = false;
     private List<SyntaxNode> children = new ArrayList<SyntaxNode>();
-    private int nmbrOfSelectedChildren = 1;
+    private int nmbrOfSelectedChildren = 0;
     private SyntaxNode[] selectedChild;
 
     public SyntaxNode(String data) {
         this.data = data;
+    }
+
+    public void setSelectedChild(SyntaxNode[] selectedChild) {
+        this.selectedChild = selectedChild;
     }
 
     public boolean getIsSelected() {

@@ -150,6 +150,11 @@ public class XMLParser {
                     question = attributes.getNamedItem("question").getNodeValue();
                 }
 
+                if (nl.item(i).getNodeName().equals("option")) {
+                    parent.setNmbrOfSelectedChildren(parent.getNmbrOfSelectedChildren()+1);
+                    constructSentence(nl.item(i).getChildNodes(), parent);
+                }
+
                 if (attributes.getNamedItem("child") != null) {
                     option = attributes.getNamedItem("child").getNodeValue();
                     constructSentence(jumpToChild("child", option), parent);

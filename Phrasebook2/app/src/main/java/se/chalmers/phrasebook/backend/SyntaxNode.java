@@ -7,12 +7,17 @@ import java.util.List;
 /**
  * Created by Björn on 2016-03-03.
  */
+//TODO a refactor is in order
 public class SyntaxNode {
+    //TODO make as tuple
     private String data;
     private String desc;
+    //TODO remove
     private SyntaxNode parent;
+    //TODO propoably not neccessary, can be smartly rewritten
     private boolean isSelected = false;
     private List<SyntaxNode> children = new ArrayList<SyntaxNode>();
+    //TODO consider reworking to an ArrayList, remove size and check list length instead
     private int nmbrOfSelectedChildren = 0;
     private SyntaxNode[] selectedChild;
 
@@ -66,6 +71,7 @@ public class SyntaxNode {
         }
     }
 
+    //TODO propoably remove these after rework
     public int getNmbrOfSelectedChildren() {return nmbrOfSelectedChildren;}
 
     public void setNmbrOfSelectedChildren(int nmbrOfSelectedChildren) {
@@ -73,6 +79,7 @@ public class SyntaxNode {
         selectedChild = new SyntaxNode[nmbrOfSelectedChildren];
     }
 
+    //TODO look over all setters, getters
     public String getData() {
         return data;
     }
@@ -109,6 +116,7 @@ public class SyntaxNode {
         return selectedChild;
     }
 
+    //TODO remove all bugchecking code
     //Replaces the specified previous child with the new updated selected child
     public void setSelectedChild(SyntaxNode previous, SyntaxNode updated) throws IOException {
         int position = 0;

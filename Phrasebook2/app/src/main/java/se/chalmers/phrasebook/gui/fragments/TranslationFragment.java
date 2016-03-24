@@ -45,8 +45,8 @@ public class TranslationFragment extends Fragment {
 
         String originTranslation = model.translateToOrigin();
         String targetTranslation = model.translateToTarget();
-        origin.setText(originTranslation);
-        target.setText(targetTranslation);
+        origin.setText(originTranslation.substring(0,1).toUpperCase() + originTranslation.substring(1));
+        target.setText(targetTranslation.substring(0,1).toUpperCase() + targetTranslation.substring(1));
 
     }
 
@@ -54,8 +54,8 @@ public class TranslationFragment extends Fragment {
 
         String originTranslation = model.translateToOrigin();
         String targetTranslation = model.translateToTarget();
-        origin.setText(originTranslation);
-        target.setText(targetTranslation);
+        origin.setText(originTranslation.substring(0,1).toUpperCase() + originTranslation.substring(1));
+        target.setText(targetTranslation.substring(0,1).toUpperCase() + targetTranslation.substring(1));
 
     }
 

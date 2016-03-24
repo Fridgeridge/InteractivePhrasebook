@@ -87,8 +87,7 @@ public class OptionsFragment extends Fragment {
 
         containers[0] = R.id.child_fragment1;
         containers[1] = R.id.child_fragment2;
-
-
+        containers[2] = R.id.child_fragment3;
 
     }
 

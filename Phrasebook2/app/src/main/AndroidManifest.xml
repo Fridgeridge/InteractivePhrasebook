@@ -22,6 +22,10 @@
             android:label="@string/Phrases_activity"/>
         <activity android:name=".gui.activities.TranslatorActivity"
             android:label="@string/translator_activity"/>
+        <activity android:name=".gui.activities.LanguageActivity"
+            android:label="Language"/>
+        <activity android:name=".gui.activities.AddToPhrasebookActivity"
+            android:label="Add Phrase"/>
     </application>
 
 </manifest>

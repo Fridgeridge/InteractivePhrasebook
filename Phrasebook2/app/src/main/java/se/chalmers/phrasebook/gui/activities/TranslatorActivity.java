@@ -71,7 +71,7 @@ public class TranslatorActivity extends FragmentActivity implements SpinnerFragm
         buttonFirst.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Lägg till i frasbok
+                changeActivity(AddToPhrasebookActivity.class);
             }
         });
 

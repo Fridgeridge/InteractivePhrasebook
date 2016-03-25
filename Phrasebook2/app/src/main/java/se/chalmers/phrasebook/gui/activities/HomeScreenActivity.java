@@ -22,9 +22,17 @@ public class HomeScreenActivity extends Activity {
 
         Resources res = getResources();
         String[] buttonNames = res.getStringArray(R.array.my_phrasebooks);
-        GridView gridView = (GridView) findViewById(R.id.gridView);
+        GridView gridView = (GridView) findViewById(R.id.standard_gridView);
         gridView.setAdapter(new PhrasebookButtonAdapter(this, buttonNames));
 
+        //GridView gridView1 = (GridView) findViewById(R.id.custom_gridView);
+        //gridView1.setAdapter(new PhrasebookButtonAdapter(this, buttonNames));
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
     }
 
 }

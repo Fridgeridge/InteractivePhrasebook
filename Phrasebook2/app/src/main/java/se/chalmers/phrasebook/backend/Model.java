@@ -4,6 +4,7 @@ package se.chalmers.phrasebook.backend;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -83,6 +84,17 @@ public class Model {
                 ((SyntaxNode)(currentPhrase.getOptions().get(listIndex).get(newOption))));
     }
 
+    public boolean isNodeSelected(SyntaxNode node, LinkedHashMap options) {
+        Iterator iterate = options.entrySet().iterator();
+        if(iterate.hasNext()) {
+            SyntaxNode parent = (SyntaxNode)iterate.next();
+            if(parent.getSelectedChildren().contains(node)) {
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }
 
     public ArrayList<String> getNodeOptions(int index){
         optionsList = currentPhrase.getOptions();
@@ -97,8 +109,7 @@ public class Model {
             Map.Entry thisEntry = (Map.Entry) entries.next();
             Object key = thisEntry.getKey();
             Object value = thisEntry.getValue();
-
-            if(((SyntaxNode)value).getIsSelected()){
+            if(isNodeSelected((SyntaxNode)value, map)) {
                 if(guiOptions.size() > 1) {
                     guiOptions.add(1, (String) key);
                 }else{

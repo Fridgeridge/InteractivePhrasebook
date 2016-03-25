@@ -32,7 +32,7 @@ public class SyntaxTree {
                 for (SyntaxNode n : currentRoot.getChildren()) {
                     selection.put(n.getDesc(), n);
                 }
-                options.add(selection);
+                options.add((LinkedHashMap<String, SyntaxNode>)selection.clone());
                 selection.clear();
             }
         }

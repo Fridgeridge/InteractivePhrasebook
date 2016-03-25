@@ -23,7 +23,7 @@ public class SyntaxNode {
         if (node != null) {
             if(selectedChildren.isEmpty()) {
                 selectedChildren.add(node);
-            } else if(nmbrOfSelectedChildren < selectedChildren.size()) {
+            } else if(nmbrOfSelectedChildren > selectedChildren.size()) {
                 selectedChildren.add(node);
             }
             children.add(node);
@@ -75,9 +75,15 @@ public class SyntaxNode {
     public boolean setSelectedChild(SyntaxNode previous, SyntaxNode updated) {
         if(selectedChildren.contains(previous) && children.contains(updated)) {
             selectedChildren.add(selectedChildren.indexOf(previous), updated);
+            removeSelectedChild(previous);
             return true;
         }
         return false;
+    }
+
+
+    public boolean removeSelectedChild(SyntaxNode selectedChild){
+        return selectedChildren.remove(selectedChild);
     }
 
     public int getNmbrOfSelectedChildren() {

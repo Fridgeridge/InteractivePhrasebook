@@ -2,9 +2,7 @@ package se.chalmers.phrasebook.backend;
 
 
 import java.io.IOException;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.LinkedHashMap;
 
 /**
@@ -12,7 +10,6 @@ import java.util.LinkedHashMap;
  */
 public class SyntaxTree {
     private SyntaxNode root;
-    private String sentenceDescription = "";
     private ArrayList<LinkedHashMap> options = new ArrayList<>();
 
     public SyntaxTree(SyntaxNode root) {
@@ -24,6 +21,8 @@ public class SyntaxTree {
         return options;
     }
 
+    //creates an ArrayList och LinkedHashMaps, each representing
+    //a currently available option to be customized.
     private void initializeOptions(SyntaxNode currentRoot) {
         if(currentRoot.isModular()) {
             LinkedHashMap<String, SyntaxNode> selection
@@ -43,46 +42,37 @@ public class SyntaxTree {
     }
 
     /**
-     * Checks all the trees nodes to find modular nodes.
-     *
-     * @return the number of modular nodes
-     *
-     **/
-    public int numberOfModularNodes() {
-        return nmbrModNode(0, root);
-    }
-
-    private int nmbrModNode(int count, SyntaxNode currentRoot) {
-        if(currentRoot.isModular()) {
-            count++;
-        }
-        for(SyntaxNode n: currentRoot.getChildren()) {
-            count = nmbrModNode(count, n);
-        }
-        return count;
-    }
-
-    public void setSelectedChild(SyntaxNode parent, SyntaxNode oldChild, SyntaxNode newChild) {
+     * Replaces an old selectedChild with a new one.
+     * The method returns true if it succesfully managed to replace a
+     * selected child, otherwise it returns false.
+     * @param parent the modular SyntaxNode containing the two children
+     * @param oldChild the child to be replaced
+     * @param newChild the child which replaces the old one
+     * @return if the operations was succesful or not
+     */
+    public boolean setSelectedChild(SyntaxNode parent, SyntaxNode oldChild, SyntaxNode newChild) {
         try {
             parent.setSelectedChild(oldChild, newChild);
-            System.out.println("det funka");
         } catch(IOException e) {
-            e.printStackTrace();
-            System.out.println(e.getMessage());
-            System.out.println("det blev fel");
+            return false;
         }
         options.clear();
         this.initializeOptions(root);
+        return true;
     }
 
     /**
-     * Build recursively from root node to parse syntax
-     *
-     * @param node The current node
-     * @return A String representing the syntax of the sentence
-     *
-     **/
-    public String parseSentenceSyntax(SyntaxNode node) {
+     * Parses the selected children into a text syntax usable by the grammar to
+     * generate a translation. Bulilds recursivly.
+     * @return The syntax usable by the GF-grammar to generate a translation
+     */
+    public String getSyntax(){
+        return parseSentenceSyntax(getSentenceHead());
+    }
+
+     // Builds recursively from root node to parse syntax
+    //the getSyntax() method acts as a wrapper
+    private String parseSentenceSyntax(SyntaxNode node) {
         if(!node.hasChildren()) {
             return node.getData();
         } else {
@@ -97,24 +87,11 @@ public class SyntaxTree {
         }
     }
 
-    public SyntaxNode getSentenceHead() {
+    private SyntaxNode getSentenceHead() {
         if (root != null) {
             return root.getSelectedChild()[0];
         }else {
             return null;
         }
     }
-
-    public String getSyntax(){
-        return parseSentenceSyntax(getSentenceHead());
-    }
-
-    public String getSentenceDescription() {
-        return sentenceDescription;
-    }
-
-    public void setSentenceDescription(String newDiscription) {
-        sentenceDescription = newDiscription;
-    }
-
 }

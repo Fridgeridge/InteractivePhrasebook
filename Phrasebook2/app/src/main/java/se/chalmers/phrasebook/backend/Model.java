@@ -4,7 +4,6 @@ package se.chalmers.phrasebook.backend;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -21,15 +20,12 @@ public class Model {
     private static Model model;
     private App instance;
 
-    private TestSentence testSentence;
 
     private Translator translator;
     private XMLParser parser;
-    
-    private String originLanguage;
-    private String targetLanguage;
 
     private ArrayList<PhraseBook> phrasebooks;
+    private String originLanguage, targetLanguage;
     private String currentPhrasebook;
     private SyntaxTree currentPhrase;
     private ArrayList<LinkedHashMap> optionsList;
@@ -46,7 +42,8 @@ public class Model {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        originLanguage = Langs.getKey("English");
+        targetLanguage = Langs.getKey("English");
     }
 
     public static Model getInstance() {
@@ -59,36 +56,38 @@ public class Model {
         return model;
     }
 
-    public HashMap<String,String> getSentences(){
+    public HashMap<String, String> getSentences() {
         return parser.getSentencesData();
     }
 
 
     //TODO Remove method and find suitable abstraction layer
-    public XMLParser getParser(){
+    public XMLParser getParser() {
         return parser;
     }
 
 
     //TODO Consider moving to a separate class
-    public static String getKey(String name,Map<String,String> map){
-        for(Map.Entry<String,String> e:map.entrySet()){
-            if(e.getValue().equals(name)) return e.getKey();
+    public static String getKey(String name, Map<String, String> map) {
+        for (Map.Entry<String, String> e : map.entrySet()) {
+            if (e.getValue().equals(name)) return e.getKey();
         }
         return null;
     }
 
-    public void update(int listIndex, String parent, String oldOption, String newOption){
-        currentPhrase.setSelectedChild(((SyntaxNode)currentPhrase.getOptions().get(listIndex).get(parent)),
-                ((SyntaxNode)currentPhrase.getOptions().get(listIndex).get(oldOption)),
-                ((SyntaxNode)(currentPhrase.getOptions().get(listIndex).get(newOption))));
+    public void update(int listIndex, String parent, String oldOption, String newOption) {
+        currentPhrase.setSelectedChild(((SyntaxNode) currentPhrase.getOptions().get(listIndex).get(parent)),
+                ((SyntaxNode) currentPhrase.getOptions().get(listIndex).get(oldOption)),
+                ((SyntaxNode) (currentPhrase.getOptions().get(listIndex).get(newOption))));
     }
 
     public boolean isNodeSelected(SyntaxNode node, LinkedHashMap options) {
         Iterator iterate = options.entrySet().iterator();
-        if(iterate.hasNext()) {
-            SyntaxNode parent = (SyntaxNode)iterate.next();
-            if(parent.getSelectedChildren().contains(node)) {
+        if (iterate.hasNext()) {
+            Map.Entry entry = (Map.Entry) iterate.next();
+            SyntaxNode parent = (SyntaxNode) entry.getValue();
+
+            if (parent.getSelectedChildren().contains(node)) {
                 return true;
             }
             return false;
@@ -96,7 +95,7 @@ public class Model {
         return false;
     }
 
-    public ArrayList<String> getNodeOptions(int index){
+    public ArrayList<String> getNodeOptions(int index) {
         optionsList = currentPhrase.getOptions();
 
         LinkedHashMap map = optionsList.get(index);
@@ -109,14 +108,14 @@ public class Model {
             Map.Entry thisEntry = (Map.Entry) entries.next();
             Object key = thisEntry.getKey();
             Object value = thisEntry.getValue();
-            if(isNodeSelected((SyntaxNode)value, map)) {
-                if(guiOptions.size() > 1) {
+            if (isNodeSelected((SyntaxNode) value, map)) {
+                if (guiOptions.size() > 1) {
                     guiOptions.add(1, (String) key);
-                }else{
-                    guiOptions.add((String)key);
+                } else {
+                    guiOptions.add((String) key);
                 }
 
-            }else {
+            } else {
                 guiOptions.add((String) key);
             }
 
@@ -126,11 +125,11 @@ public class Model {
     }
 
 
-    public String translateToOrigin(){
+    public String translateToOrigin() {
         return translator.translateToOrigin(getCurrentPhrase().getSyntax());
     }
 
-    public String translateToTarget(){
+    public String translateToTarget() {
         return translator.translateToTarget(getCurrentPhrase().getSyntax());
     }
 
@@ -171,13 +170,6 @@ public class Model {
         return currentPhrase;
     }
 
-    public TestSentence getTestSentence() {
-        return testSentence;
-    }
-
-    public void setTestSentence(TestSentence testSentence) {
-        this.testSentence = testSentence;
-    }
-
 
 }
+

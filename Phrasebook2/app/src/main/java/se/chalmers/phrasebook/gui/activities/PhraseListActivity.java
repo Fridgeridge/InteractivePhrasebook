@@ -40,8 +40,6 @@ public class PhraseListActivity extends Activity {
         setContentView(R.layout.activity_phrase_list);
         initListView();
 
-        model.setTestSentence(new TestSentence(5));
-
         context = this;
 
     }

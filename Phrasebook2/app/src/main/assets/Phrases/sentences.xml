@@ -71,23 +71,6 @@
         </node>
     </sentence>
 
-    <sentence desc="Someone loves someone" id="ALove2">
-        <node child="PSentence">
-            <node syntax="PropAction">
-                <node syntax="ALove">
-                    <option desc="Who loves someone?">
-                        <node child="persons"></node>
-                        <node child="familypersons"></node>
-                    </option>
-                    <option desc="Who is being loved?">
-                        <node child="persons"></node>
-                        <node child="familypersons"></node>
-                    </option>
-                </node>
-            </node>
-        </node>
-    </sentence>
-
     <sentence desc="Someone is married" id="AMarried">
         <node syntax="PQuestion">
             <node desc="How do you want to phrase it?" syntax="QProp">

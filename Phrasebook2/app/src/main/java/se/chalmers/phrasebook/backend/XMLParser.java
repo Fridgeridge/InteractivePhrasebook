@@ -58,9 +58,9 @@ public class XMLParser {
         return result;
     }
 
-    public HashMap<String,String> getSentencesData() {
+    public HashMap<String, String> getSentencesData() {
         String[] result;
-        HashMap<String,String> sentenceMap = new HashMap<String,String>();
+        HashMap<String, String> sentenceMap = new HashMap<String, String>();
 
         NodeList sentences = document.getElementsByTagName("sentence");
         int nbrOfSentences = sentences.getLength();
@@ -71,7 +71,7 @@ public class XMLParser {
             String id = sentences.item(i).getAttributes().getNamedItem("id").getNodeValue();
 
             if (desc != null && id != null)
-                sentenceMap.put(id,desc);
+                sentenceMap.put(id, desc);
         }
         return sentenceMap;
     }
@@ -91,10 +91,10 @@ public class XMLParser {
         currentRoot.setDescription(current.getNodeName());
 
 
-        if(current.hasChildNodes()) {
+        if (current.hasChildNodes()) {
             NodeList children = current.getChildNodes();
 
-            for(int i = 0; i < children.getLength(); i++) {
+            for (int i = 0; i < children.getLength(); i++) {
                 if (children.item(i) != null && (children.item(i).getNodeType()
                         == Node.ELEMENT_NODE) && children.item(i).getAttributes() != null) {
                     String syntax = "", desc = "", question = "", option;
@@ -115,8 +115,8 @@ public class XMLParser {
                     if (attributes.getNamedItem("child") != null) {
                         option = attributes.getNamedItem("child").getNodeValue();
 
-         //Här har parent lagts till
-                  //      currentRoot.addChild(constructSentence2(children.item(i)), currentRoot);
+                        //Här har parent lagts till
+                        //      currentRoot.addChild(constructSentence2(children.item(i)), currentRoot);
                     }
                 }
             }
@@ -129,12 +129,12 @@ public class XMLParser {
     }
 
     private SyntaxNode constructSentence(NodeList nl, SyntaxNode parent) {
-       if (nl == null || nl.getLength() < 1)
+        if (nl == null || nl.getLength() < 1)
             return parent;
         int length = nl.getLength();
         for (int i = 0; i < length; i++) {
             if (nl.item(i) != null && (nl.item(i).getNodeType() == Node.ELEMENT_NODE) && nl.item(i).getAttributes() != null) {
-                String syntax = "", desc = "", question = "", option;
+                String syntax = "", desc = "", question = "", option = "";
                 NamedNodeMap attributes = nl.item(i).getAttributes();
 
                 if (attributes.getNamedItem("syntax") != null) {
@@ -150,9 +150,11 @@ public class XMLParser {
                     question = attributes.getNamedItem("question").getNodeValue();
                 }
 
-                if (nl.item(i).getNodeName().equals("option")) {
-                    parent.setNmbrOfSelectedChildren(parent.getNmbrOfSelectedChildren()+1);
-                    parent.addQuestion(//TODO ADD THE QUESTION EXTRACTED FROM THE OPTIONS TAG HERE)
+                if (attributes.getNamedItem("option") != null) {
+                    option = attributes.getNamedItem("option").getNodeValue();
+                    parent.setNmbrOfSelectedChildren(parent.getNmbrOfSelectedChildren() + 1);
+                    
+                    //TODO ADD THE QUESTION EXTRACTED FROM THE OPTIONS TAG HERE)
                     constructSentence(nl.item(i).getChildNodes(), parent);
                 }
 

@@ -152,6 +152,7 @@ public class XMLParser {
 
                 if (nl.item(i).getNodeName().equals("option")) {
                     parent.setNmbrOfSelectedChildren(parent.getNmbrOfSelectedChildren()+1);
+                    parent.addQuestion(//TODO ADD THE QUESTION EXTRACTED FROM THE OPTIONS TAG HERE)
                     constructSentence(nl.item(i).getChildNodes(), parent);
                 }
 

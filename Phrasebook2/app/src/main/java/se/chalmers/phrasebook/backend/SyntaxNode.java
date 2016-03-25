@@ -13,6 +13,7 @@ public class SyntaxNode {
     private String desc;
     private List<SyntaxNode> children = new ArrayList<SyntaxNode>();
     private List<SyntaxNode> selectedChildren = new ArrayList<SyntaxNode>();
+    private List<String> questions = new ArrayList<String>();
     private int nmbrOfSelectedChildren = 0;
 
     public SyntaxNode(String data) {
@@ -33,6 +34,13 @@ public class SyntaxNode {
         }
     }
 
+    public boolean addQuestion(String question) {
+        if(questions.add(question)) {
+            return true;
+        }
+        return false;
+    }
+
     public boolean hasChildren() {
        return !this.children.isEmpty();
     }
@@ -50,7 +58,6 @@ public class SyntaxNode {
         }
     }
 
-    //TODO look over all setters, getters
     public String getData() {
         return data;
     }
@@ -86,6 +93,10 @@ public class SyntaxNode {
 
     public void setNmbrOfSelectedChildren(int nmbrOfSelectedChildren) {
         this.nmbrOfSelectedChildren = nmbrOfSelectedChildren;
+    }
+
+    public List<String> getQuestions() {
+        return questions;
     }
 
     public boolean equals(Object o) {

@@ -19,11 +19,7 @@ public class SwipeAdapter extends FragmentPagerAdapter {
     public SwipeAdapter(FragmentManager fragmentManager) {
         super(fragmentManager);
         model = Model.getInstance();
-
-        System.out.println("Number of modular nodes = " + model.getCurrentPhrase().getOptions().size());
-
-        pages = (int) Math.ceil((double) model.getCurrentPhrase().getOptions().size() / 3);
-        System.out.println("Antalet sidor = " + pages);
+        pages = 2;
 
     }
 
@@ -37,34 +33,15 @@ public class SwipeAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
 
-        if (pages == 1) {
-            switch (position) {
-                case 0:
-                    return OptionsFragment.newInstance(1);
-                default:
-                    return null;
-            }
-        } else if (pages == 2) {
-            switch (position) {
-                case 0:
-                    return OptionsFragment.newInstance(1);
-                case 1:
-                    return OptionsFragment.newInstance(2);
-                default:
-                    return null;
-            }
-        } else {
-            switch (position) {
-                case 0:
-                    return OptionsFragment.newInstance(1);
-                case 1:
-                    return OptionsFragment.newInstance(2);
-                case 2:
-                    return OptionsFragment.newInstance(3);
-                default:
-                    return null;
-            }
+        switch(position){
+            case 0:
+                return OptionsFragment.newInstance(1);
+            case 1:
+                return OptionsFragment.newInstance(1);
+            default:
+                return null;
         }
+
     }
 
     public void updateData(){

@@ -22,16 +22,17 @@ public class OptionsFragment extends Fragment {
 
     private Model model;
 
-    private int swipePageNbr;
     private ArrayList<LinkedHashMap> options;
-    private ArrayList<ArrayList> spinnerData;
+    private ArrayList<LinkedHashMap> advancedOptions;
+
+    private int type;
 
     private int[] containers;
 
-    public static OptionsFragment newInstance(int swipePageNbr) {
+    public static OptionsFragment newInstance(int type) {
         OptionsFragment optionsFragment = new OptionsFragment();
         Bundle args = new Bundle();
-        args.putInt("swipePageNbr", swipePageNbr);
+        args.putInt("index", type);
         optionsFragment.setArguments(args);
         return optionsFragment;
     }
@@ -42,10 +43,10 @@ public class OptionsFragment extends Fragment {
 
         model = Model.getInstance();
 
-        spinnerData = new ArrayList<>();
+        type = getArguments().getInt("index");
 
-        swipePageNbr = getArguments().getInt("swipePageNbr");
         options = model.getCurrentPhrase().getOptions();
+        advancedOptions = new ArrayList<>();
         containers = new int[3];
 
         addContainers();
@@ -56,7 +57,7 @@ public class OptionsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_options, container, false);
 
     }
@@ -65,38 +66,21 @@ public class OptionsFragment extends Fragment {
 
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
 
-        if(swipePageNbr == 1){
-            if(options.size() >= 3) {
-                for(int i = 0; i < 3; i++){
-                    if(options.get(i) != null)
+        if(type == 1) {
+            for (int i = 0; i < options.size(); i++) {
+                if (options.get(i) != null) {
                     transaction.add(containers[i], SpinnerFragment.newInstance(i));
                 }
-            }else{
-                for (int i = 0; i < options.size(); i++) {
-                    if (options.get(i) != null && options.size() != 0)
-                        transaction.add(containers[i], SpinnerFragment.newInstance(i));
-                }
             }
-        }else if(swipePageNbr == 2){
-            if(options.size() >= 6) {
-                for (int i = 3; i < 6; i++) {
-                    if (options.get(i) != null)
-                        transaction.add(containers[i-3], SpinnerFragment.newInstance(i));
-                }
-            }else{
-                for (int i = 3; i < options.size(); i++) {
-                    if (options.get(i) != null)
-                        transaction.add(containers[i-3], SpinnerFragment.newInstance(i));
-                }
-            }
-        }else if(swipePageNbr == 3){
-            for(int i = 6; i < options.size(); i++) {
-                if(options.get(i) != null)
-                    transaction.add(containers[i-6], SpinnerFragment.newInstance(i));
+        }else if(type == 2){
+            for (int i = 0; i < advancedOptions.size(); i++) {
+                if (advancedOptions.get(i) != null)
+                    transaction.add(containers[i], SpinnerFragment.newInstance(i));
             }
         }
 
         transaction.commit();
+
     }
 
     private void addContainers() {

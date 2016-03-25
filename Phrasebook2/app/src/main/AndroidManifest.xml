@@ -6,26 +6,26 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@android:style/Theme.Material.Light"
+        android:theme="@style/AppTheme"
         android:name="se.chalmers.phrasebook.App" >
         <activity
-            android:name=".gui.activities.HelperActivity"
-            android:label="@string/app_name">
+            android:name=".gui.activities.HelperActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".gui.activities.FirstUsageActivity" />
-        <activity android:name=".gui.activities.HomeScreenActivity" />
-        <activity android:name=".gui.MainActivity" />
-        <activity android:name=".gui.activities.PhraseListActivity" />
-        <activity android:name=".gui.activities.TranslatorActivity" />
-        <activity
-            android:name=".gui.NavigationActivity"
-            android:label="@string/title_activity_navigation"
-            android:theme="@android:style/Theme.Material.Light"></activity>
+        <activity android:name=".gui.activities.HomeScreenActivity"
+            android:label="@string/phrasebook_activity"/>
+        <activity android:name=".gui.activities.PhraseListActivity"
+            android:label="@string/Phrases_activity"/>
+        <activity android:name=".gui.activities.TranslatorActivity"
+            android:label="@string/translator_activity"/>
+        <activity android:name=".gui.activities.LanguageActivity"
+            android:label="Language"/>
+        <activity android:name=".gui.activities.AddToPhrasebookActivity"
+            android:label="Add Phrase"/>
     </application>
 
 </manifest>

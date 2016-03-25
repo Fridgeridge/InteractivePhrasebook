@@ -151,10 +151,8 @@ public class XMLParser {
                 }
 
                 if (attributes.getNamedItem("option") != null) {
-                    option = attributes.getNamedItem("option").getNodeValue();
                     parent.setNmbrOfSelectedChildren(parent.getNmbrOfSelectedChildren() + 1);
-                    
-                    //TODO ADD THE QUESTION EXTRACTED FROM THE OPTIONS TAG HERE)
+                    parent.addQuestion(option = attributes.getNamedItem("option").getNodeValue());
                     constructSentence(nl.item(i).getChildNodes(), parent);
                 }
 

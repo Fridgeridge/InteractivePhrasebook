@@ -113,4 +113,10 @@ public class TranslatorActivity extends FragmentActivity implements SpinnerFragm
         startActivity(intent);
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, PhraseListActivity.class);
+        startActivity(intent);
+    }
+
 }

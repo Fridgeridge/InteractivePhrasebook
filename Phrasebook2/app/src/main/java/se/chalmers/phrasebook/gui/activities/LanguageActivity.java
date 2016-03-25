@@ -59,6 +59,7 @@ public class LanguageActivity extends Activity {
     private void changeActivity(){
         Intent intent = new Intent(this, TranslatorActivity.class);
         startActivity(intent);
+        finish();
     }
 
 }

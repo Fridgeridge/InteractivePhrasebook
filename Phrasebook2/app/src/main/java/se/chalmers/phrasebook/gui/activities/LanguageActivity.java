@@ -34,9 +34,9 @@ public class LanguageActivity extends Activity {
         final Spinner spinner1 = (Spinner) findViewById(R.id.spinner1);
         final Spinner spinner2 = (Spinner) findViewById(R.id.spinner2);
 
-        ArrayList al = Langs.getLanguages();
-        Collections.sort(al);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, al);
+        ArrayList languages = Langs.getLanguages();
+        Collections.sort(languages);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, languages);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner1.setAdapter(adapter);
         spinner2.setAdapter(adapter);
@@ -59,6 +59,7 @@ public class LanguageActivity extends Activity {
     private void changeActivity(){
         Intent intent = new Intent(this, TranslatorActivity.class);
         startActivity(intent);
+        finish();
     }
 
 }

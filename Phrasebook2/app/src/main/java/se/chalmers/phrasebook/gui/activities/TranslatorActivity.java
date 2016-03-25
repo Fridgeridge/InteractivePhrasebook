@@ -2,6 +2,8 @@ package se.chalmers.phrasebook.gui.activities;
 
 
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -76,7 +78,9 @@ public class TranslatorActivity extends FragmentActivity implements SpinnerFragm
         buttonSecond.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Ändra språk
+
+                changeActivity(LanguageActivity.class);
+
             }
         });
 
@@ -103,4 +107,10 @@ public class TranslatorActivity extends FragmentActivity implements SpinnerFragm
         transaction.commit();
 
     }
+
+    private void changeActivity(Class activity){
+        Intent intent = new Intent(this, activity);
+        startActivity(intent);
+    }
+
 }

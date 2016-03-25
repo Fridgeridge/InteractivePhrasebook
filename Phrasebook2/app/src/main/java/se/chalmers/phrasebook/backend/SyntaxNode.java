@@ -7,42 +7,27 @@ import java.util.List;
 /**
  * Created by Björn on 2016-03-03.
  */
+
 public class SyntaxNode {
     private String data;
     private String desc;
-    private SyntaxNode parent;
-    private boolean isSelected = false;
     private List<SyntaxNode> children = new ArrayList<SyntaxNode>();
-    private int nmbrOfSelectedChildren = 1;
-    private SyntaxNode[] selectedChild;
+    private List<SyntaxNode> selectedChildren = new ArrayList<SyntaxNode>();
 
     public SyntaxNode(String data) {
         this.data = data;
     }
 
-    public boolean getIsSelected() {
-        return isSelected;
-    }
-
-    public void setIsSelected(boolean selected) {
-        isSelected = selected;
-    }
-
-    public boolean addChild(SyntaxNode node, SyntaxNode parent) {
+    public boolean addChild(SyntaxNode node) {
         if (node != null) {
-            node.setParent(parent);
-            if(selectedChild == null) {
-                selectedChild = new SyntaxNode[1];
+            if(selectedChildren.isEmpty()) {
+                selectedChildren.add(node);
             }
-            for(int i = 0; i < selectedChild.length; i++) {
-                if(selectedChild[i] == null) {
-                    selectedChild[i] = node;
-                    break;
-                }
-            }
+            children.add(node);
+            return true;
+        } else {
+            return false;
         }
-        children.add(node);
-        return true;
     }
 
     public boolean hasChildren() {
@@ -62,19 +47,9 @@ public class SyntaxNode {
         }
     }
 
-    public int getNmbrOfSelectedChildren() {return nmbrOfSelectedChildren;}
-
-    public void setNmbrOfSelectedChildren(int nmbrOfSelectedChildren) {
-        this.nmbrOfSelectedChildren = nmbrOfSelectedChildren;
-        selectedChild = new SyntaxNode[nmbrOfSelectedChildren];
-    }
-
+    //TODO look over all setters, getters
     public String getData() {
         return data;
-    }
-
-    public void setData(String data) {
-        this.data = data;
     }
 
     public String getDesc() {
@@ -85,57 +60,22 @@ public class SyntaxNode {
         this.desc = desc;
     }
 
-    public SyntaxNode getParent() {
-        return parent;
-    }
-
-    public void setParent(SyntaxNode parent) {
-        this.parent = parent;
-    }
-
     public List<SyntaxNode> getChildren() {
         return children;
     }
 
-    public void setChildren(List<SyntaxNode> children) {
-        this.children = children;
-    }
-
-    public SyntaxNode[] getSelectedChild() {
-        return selectedChild;
+    public List<SyntaxNode> getSelectedChildren() {
+        return selectedChildren;
     }
 
     //Replaces the specified previous child with the new updated selected child
-    public void setSelectedChild(SyntaxNode previous, SyntaxNode updated) throws IOException {
-        int position = 0;
-        boolean contains = false;
-        for(int i = 0; i < selectedChild.length; i++) {
-            if(selectedChild[i].equals(previous)) {
-                contains = true;
-                position = i;
-                break;
-            }
+    public boolean setSelectedChild(SyntaxNode previous, SyntaxNode updated) {
+        if(selectedChildren.contains(previous) && children.contains(updated)) {
+            selectedChildren.add(selectedChildren.indexOf(previous), updated);
+            return true;
         }
-        if(!contains) {
-            throw new IOException("previous node not a selected child");
-        }
-       contains = false;
-        for(SyntaxNode c: children) {
-            if(c.equals(updated)) {
-                contains = true;
-                break;
-            }
-        }
-        if(!contains) {
-            throw new IOException("new node is not a child");
-        }
-        selectedChild[position] = updated;
-        updated.setIsSelected(true);
-        previous.setIsSelected(false);
-        System.out.println("ehhhhh");
+        return false;
     }
-
-
 
     public boolean equals(Object o) {
 
@@ -147,7 +87,7 @@ public class SyntaxNode {
         }
         SyntaxNode n = (SyntaxNode) o;
 
-        return this.data.equals(n.data) && this.parent.equals(n.parent);
+        return this.data.equals(n.data);
     }
 
 }

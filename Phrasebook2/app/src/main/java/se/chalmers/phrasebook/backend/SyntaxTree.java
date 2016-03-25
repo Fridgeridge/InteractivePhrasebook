@@ -51,9 +51,7 @@ public class SyntaxTree {
      * @return if the operations was succesful or not
      */
     public boolean setSelectedChild(SyntaxNode parent, SyntaxNode oldChild, SyntaxNode newChild) {
-        try {
-            parent.setSelectedChild(oldChild, newChild);
-        } catch(IOException e) {
+        if(!parent.setSelectedChild(oldChild, newChild)) {
             return false;
         }
         options.clear();

@@ -116,7 +116,7 @@ public class XMLParser {
                         option = attributes.getNamedItem("child").getNodeValue();
 
          //Här har parent lagts till
-                        currentRoot.addChild(constructSentence2(children.item(i)), currentRoot);
+                  //      currentRoot.addChild(constructSentence2(children.item(i)), currentRoot);
                     }
                 }
             }
@@ -161,7 +161,7 @@ public class XMLParser {
                 }
                 if (!syntax.isEmpty()) {
                     SyntaxNode node = new SyntaxNode(syntax);
-                    parent.addChild(node, parent);
+                    parent.addChild(node);
                     node.setDesc(desc);
                     constructSentence(nl.item(i).getChildNodes(), node);//Do not return
                 }

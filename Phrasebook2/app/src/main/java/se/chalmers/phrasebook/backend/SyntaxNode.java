@@ -13,6 +13,7 @@ public class SyntaxNode {
     private String desc;
     private List<SyntaxNode> children = new ArrayList<SyntaxNode>();
     private List<SyntaxNode> selectedChildren = new ArrayList<SyntaxNode>();
+    private int nmbrOfSelectedChildren = 0;
 
     public SyntaxNode(String data) {
         this.data = data;
@@ -21,6 +22,8 @@ public class SyntaxNode {
     public boolean addChild(SyntaxNode node) {
         if (node != null) {
             if(selectedChildren.isEmpty()) {
+                selectedChildren.add(node);
+            } else if(nmbrOfSelectedChildren < selectedChildren.size()) {
                 selectedChildren.add(node);
             }
             children.add(node);
@@ -75,6 +78,14 @@ public class SyntaxNode {
             return true;
         }
         return false;
+    }
+
+    public int getNmbrOfSelectedChildren() {
+        return nmbrOfSelectedChildren;
+    }
+
+    public void setNmbrOfSelectedChildren(int nmbrOfSelectedChildren) {
+        this.nmbrOfSelectedChildren = nmbrOfSelectedChildren;
     }
 
     public boolean equals(Object o) {

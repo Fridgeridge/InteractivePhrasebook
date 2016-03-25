@@ -34,8 +34,8 @@ public class SyntaxTree {
             }
             options.add(selection);
         }
-        if(currentRoot.getSelectedChild() != null) {
-            for(SyntaxNode n: currentRoot.getSelectedChild()) {
+        if(currentRoot.getSelectedChildren() != null) {
+            for(SyntaxNode n: currentRoot.getSelectedChildren()) {
                 initializeOptions(n);
             }
         }
@@ -75,9 +75,9 @@ public class SyntaxTree {
             return node.getData();
         } else {
             String syntax = node.getData() + "(";
-            for(int i = 0; i < node.getSelectedChild().length; i++) {
-                syntax = syntax + parseSentenceSyntax(node.getSelectedChild()[i]);
-                if(node.getSelectedChild().length > 1) {
+            for(int i = 0; i < node.getSelectedChildren().size(); i++) {
+                syntax = syntax + parseSentenceSyntax(node.getSelectedChildren().get(i));
+                if(node.getSelectedChildren().size() > 1) {
                     syntax = syntax + " ";
                 }
             }
@@ -87,7 +87,7 @@ public class SyntaxTree {
 
     private SyntaxNode getSentenceHead() {
         if (root != null) {
-            return root.getSelectedChild()[0];
+            return root.getSelectedChildren().get(0);
         }else {
             return null;
         }

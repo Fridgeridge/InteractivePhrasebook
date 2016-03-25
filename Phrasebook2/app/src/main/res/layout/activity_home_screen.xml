@@ -23,7 +23,6 @@
         tools:listitem="@android:layout/list_content"
         android:layout_alignParentLeft="true"
         android:layout_margin="16dp"
-
         />
 
     <View
@@ -32,6 +31,29 @@
         android:id="@+id/divider"
         android:background="@android:color/darker_gray"
         android:layout_below="@+id/standard_gridView"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="My Phrasebooks"
+        android:textSize="20dp"
+        android:id="@+id/phrasebook_textView"
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/standard_gridView"/>
+
+    <GridView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:verticalSpacing="10dp"
+        android:horizontalSpacing="10dp"
+        android:id="@+id/custom_gridView"
+        android:numColumns="2"
+        android:choiceMode="singleChoice"
+        tools:listitem="@android:layout/list_content"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="16dp"
+        android:layout_below="@+id/phrasebook_textView"
+        />
 
 
 

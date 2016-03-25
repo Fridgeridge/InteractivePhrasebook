@@ -25,8 +25,8 @@ public class HomeScreenActivity extends Activity {
         GridView gridView = (GridView) findViewById(R.id.standard_gridView);
         gridView.setAdapter(new PhrasebookButtonAdapter(this, buttonNames));
 
-        //GridView gridView1 = (GridView) findViewById(R.id.custom_gridView);
-        //gridView1.setAdapter(new PhrasebookButtonAdapter(this, buttonNames));
+        GridView gridView1 = (GridView) findViewById(R.id.custom_gridView);
+        gridView1.setAdapter(new PhrasebookButtonAdapter(this, buttonNames));
 
     }
 

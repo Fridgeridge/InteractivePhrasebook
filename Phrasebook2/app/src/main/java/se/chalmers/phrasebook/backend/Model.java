@@ -84,7 +84,9 @@ public class Model {
     public boolean isNodeSelected(SyntaxNode node, LinkedHashMap options) {
         Iterator iterate = options.entrySet().iterator();
         if (iterate.hasNext()) {
-            SyntaxNode parent = (SyntaxNode) iterate.next();
+            Map.Entry entry = (Map.Entry) iterate.next();
+            SyntaxNode parent = (SyntaxNode) entry.getValue();
+
             if (parent.getSelectedChildren().contains(node)) {
                 return true;
             }

@@ -1,13 +1,10 @@
 package se.chalmers.phrasebook.backend;
 
-import android.util.Xml;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-import org.xmlpull.v1.XmlPullParser;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,13 +19,10 @@ import javax.xml.parsers.ParserConfigurationException;
  */
 public class XMLParser {
 
-    private XmlPullParser parser;
-    private PhraseBook phraseBook;
     private DocumentBuilder documentBuilder;
     private Document document;
 
     public XMLParser(InputStream is) {
-        parser = Xml.newPullParser();
         try {
             documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             document = documentBuilder.parse(is);
@@ -125,12 +119,15 @@ public class XMLParser {
     }
 
     public SyntaxTree buildSyntaxTree(NodeList currentRoot) {
-        return new SyntaxTree(constructSentence(currentRoot, new SyntaxNode("root")));
+
+        SyntaxTree s = new SyntaxTree(constructSentence(currentRoot, new SyntaxNode("root")));
+        return s;
     }
 
     private SyntaxNode constructSentence(NodeList nl, SyntaxNode parent) {
-        if (nl == null || nl.getLength() < 1)
+        if (nl == null || nl.getLength() < 1) {
             return parent;
+        }
         int length = nl.getLength();
         for (int i = 0; i < length; i++) {
             if (nl.item(i) != null && (nl.item(i).getNodeType() == Node.ELEMENT_NODE) && nl.item(i).getAttributes() != null) {
@@ -150,7 +147,7 @@ public class XMLParser {
                     question = attributes.getNamedItem("question").getNodeValue();
                 }
 
-                if (attributes.getNamedItem("option") != null) {
+                if (nl.item(i).getNodeName().equals("option") && attributes.getNamedItem("option") != null) {
                     parent.setNmbrOfSelectedChildren(parent.getNmbrOfSelectedChildren() + 1);
                     parent.addQuestion(option = attributes.getNamedItem("option").getNodeValue());
                     constructSentence(nl.item(i).getChildNodes(), parent);
@@ -158,13 +155,66 @@ public class XMLParser {
 
                 if (attributes.getNamedItem("child") != null) {
                     option = attributes.getNamedItem("child").getNodeValue();
-                    constructSentence(jumpToChild("child", option), parent);
+
+                    SyntaxNode nextSequence = new SyntaxNode("");
+                    constructSentence(nl.item(i).getChildNodes(), nextSequence);
+                    constructChildSequence(jumpToChild("child", option), parent, nextSequence);
+                    System.out.println(nextSequence);
                 }
                 if (!syntax.isEmpty()) {
                     SyntaxNode node = new SyntaxNode(syntax);
                     parent.addChild(node);
                     node.setDesc(desc);
+
                     constructSentence(nl.item(i).getChildNodes(), node);//Do not return
+                }
+
+
+            }
+        }
+        return parent;
+    }
+
+    private SyntaxNode constructChildSequence(NodeList nl, SyntaxNode parent, SyntaxNode nextSequence) {
+        if (nl == null || nl.getLength() < 1) {
+            parent.addChild(nextSequence);
+            return parent;
+        }
+        int length = nl.getLength();
+        for (int i = 0; i < length; i++) {
+            if (nl.item(i) != null && (nl.item(i).getNodeType() == Node.ELEMENT_NODE) && nl.item(i).getAttributes() != null) {
+                String syntax = "", desc = "", question = "", option = "";
+                NamedNodeMap attributes = nl.item(i).getAttributes();
+
+                if (attributes.getNamedItem("syntax") != null) {
+                    syntax = attributes.getNamedItem("syntax").getNodeValue();
+                }
+
+                if (attributes.getNamedItem("desc") != null) {
+                    desc = attributes.getNamedItem("desc").getNodeValue();
+                }
+
+
+                if (attributes.getNamedItem("question") != null) {
+                    question = attributes.getNamedItem("question").getNodeValue();
+                }
+
+                if (nl.item(i).getNodeName().equals("option") && attributes.getNamedItem("option") != null) {
+                    parent.setNmbrOfSelectedChildren(parent.getNmbrOfSelectedChildren() + 1);
+                    parent.addQuestion(option = attributes.getNamedItem("option").getNodeValue());
+                    SyntaxNode node = constructChildSequence(nl.item(i).getChildNodes(), parent, nextSequence);
+                }
+
+                if (attributes.getNamedItem("child") != null) {
+                    option = attributes.getNamedItem("child").getNodeValue();
+                    SyntaxNode node = constructChildSequence(jumpToChild("child", option), parent, nextSequence);
+                }
+                if (!syntax.isEmpty()) {
+                    SyntaxNode node = new SyntaxNode(syntax);
+                    parent.addChild(node);
+                    node.setDesc(desc);
+
+                    constructChildSequence(nl.item(i).getChildNodes(), node, nextSequence);//Do not return
                 }
 
 

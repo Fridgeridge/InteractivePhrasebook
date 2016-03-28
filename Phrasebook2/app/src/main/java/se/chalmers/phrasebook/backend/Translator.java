@@ -1,5 +1,7 @@
 package se.chalmers.phrasebook.backend;
 
+import android.util.Log;
+
 import org.grammaticalframework.pgf.Concr;
 import org.grammaticalframework.pgf.Expr;
 import org.grammaticalframework.pgf.PGF;
@@ -22,17 +24,24 @@ public class Translator {
         grammar.close();
     }
 
-    public String translate(Concr lang, String abstractSyntax) throws PGFError {
-        Expr e = Expr.readExpr(abstractSyntax);
-        return lang.linearize(e);
+    public String translate(Concr lang, String abstractSyntax) {
+        String s = "Error";
+        try {
+            Expr e = Expr.readExpr(abstractSyntax);
+            s = lang.linearize(e);
+        } catch (PGFError e) {
+            Log.e("TranslationError", "Error while parsing XML syntax: " + abstractSyntax + "\n and PGF syntax:"+e.toString());
+        }finally{
+            return s;
+        }
     }
 
-    public String translateToOrigin(String abstractSyntax){
-        return translate(originLanguage,abstractSyntax);
+    public String translateToOrigin(String abstractSyntax) {
+        return translate(originLanguage, abstractSyntax);
     }
 
-    public String translateToTarget(String abstractSyntax){
-        return translate(targetLanguage,abstractSyntax);
+    public String translateToTarget(String abstractSyntax) {
+        return translate(targetLanguage, abstractSyntax);
     }
 
     public boolean setOriginLanguage(String langID) {
@@ -48,7 +57,7 @@ public class Translator {
     public boolean setTargetLanguage(String langID) {
         try {
             Concr target = pgf.getLanguages().get((langID));
-            targetLanguage= target;
+            targetLanguage = target;
         } catch (NullPointerException e) {
             return false;
         }

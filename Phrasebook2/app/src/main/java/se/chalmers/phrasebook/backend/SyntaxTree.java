@@ -1,7 +1,6 @@
 package se.chalmers.phrasebook.backend;
 
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
@@ -32,7 +31,7 @@ public class SyntaxTree {
                 for (SyntaxNode n : currentRoot.getChildren()) {
                     selection.put(n.getDesc(), n);
                 }
-                options.add((LinkedHashMap<String, SyntaxNode>)selection.clone());
+                options.add((LinkedHashMap<String, SyntaxNode>) selection.clone());
                 selection.clear();
             }
         }
@@ -78,14 +77,18 @@ public class SyntaxTree {
         if (!node.hasChildren()) {
             return node.getData();
         } else {
-            String syntax = node.getData() + "(";
+            String syntax = node.getData();
             for (int i = 0; i < node.getSelectedChildren().size(); i++) {
-                syntax = syntax + parseSentenceSyntax(node.getSelectedChildren().get(i));
-                if (node.getSelectedChildren().size() > 1) {
-                    syntax = syntax + " ";
+                if (node.getSelectedChildren().get(i).getData().isEmpty()) {
+                    syntax = syntax + parseSentenceSyntax(node.getSelectedChildren().get(i));
+                } else {
+                    syntax = syntax + "(" + parseSentenceSyntax(node.getSelectedChildren().get(i)) + ")";
+                    if (node.getSelectedChildren().size() > 1) {
+                        syntax = syntax + " ";
+                    }
                 }
             }
-            return syntax + ")";
+            return syntax;
         }
     }
 

@@ -75,9 +75,9 @@ public class Model {
         return null;
     }
 
-    public void update(int listIndex, String parent, String oldOption, String newOption) {
+    public void update(int listIndex, String parent, String newOption) {
         currentPhrase.setSelectedChild(((SyntaxNode) currentPhrase.getOptions().get(listIndex).get(parent)),
-                ((SyntaxNode) currentPhrase.getOptions().get(listIndex).get(oldOption)),
+                parent,
                 ((SyntaxNode) (currentPhrase.getOptions().get(listIndex).get(newOption))));
     }
 

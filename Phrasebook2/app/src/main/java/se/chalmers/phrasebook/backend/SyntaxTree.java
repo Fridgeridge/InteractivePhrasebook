@@ -48,12 +48,11 @@ public class SyntaxTree {
      * selected child, otherwise it returns false.
      *
      * @param parent   the modular SyntaxNode containing the two children
-     * @param oldChild the child to be replaced
      * @param newChild the child which replaces the old one
      * @return if the operations was succesful or not
      */
-    public boolean setSelectedChild(SyntaxNode parent, SyntaxNode oldChild, SyntaxNode newChild) {
-        if (!parent.setSelectedChild(oldChild, newChild)) {
+    public boolean setSelectedChild(SyntaxNode parent, String question, SyntaxNode newChild) {
+        if (!parent.setSelectedChild(question, newChild)) {
             return false;
         }
         options.clear();

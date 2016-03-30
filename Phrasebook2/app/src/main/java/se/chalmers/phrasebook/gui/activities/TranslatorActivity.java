@@ -95,8 +95,8 @@ public class TranslatorActivity extends FragmentActivity implements SpinnerFragm
 
 
     @Override
-    public void onOptionSelected(int dataIndex, String label, String currentChoice, String newChoice) {
-        model.update(dataIndex, label, currentChoice, newChoice);
+    public void onOptionSelected(int dataIndex, String label, String newChoice) {
+        model.update(dataIndex, label, newChoice);
 
         TranslationFragment translationFragment = (TranslationFragment)getSupportFragmentManager().findFragmentById(R.id.container_translation);
         translationFragment.updateData();

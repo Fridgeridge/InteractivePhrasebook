@@ -49,9 +49,12 @@
         <node child="phraseit">
             <node syntax="PropAction">
                 <node syntax="ALove">
-                    <node child="allpersons">
-                        <node syntax="NameNN"></node>
-                    </node>
+                    <option option="Who loves someone?">
+                        <node child="allpersons"></node>
+                    </option>
+                    <option option="Who is loved?">
+                        <node child="allpersons"></node>
+                    </option>
                 </node>
             </node>
         </node>
@@ -86,10 +89,8 @@
 
     <!--Option lists -->
     <child id="allpersons">
-        <option option="Who are we talking about?">
             <node child="persons" />
             <node child="familypersons" />
-        </option>
     </child>
 
     <child id="superlative_places">

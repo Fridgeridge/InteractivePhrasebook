@@ -83,7 +83,7 @@ public class SpinnerFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(spinner.getSelectedItem().toString() != currentChoice) {
-                    mCallback.onOptionSelected(dataIndex, label, currentChoice, spinner.getSelectedItem().toString());
+                    mCallback.onOptionSelected(dataIndex, label, spinner.getSelectedItem().toString());
                     currentChoice = spinner.getSelectedItem().toString();
                 }
             }
@@ -99,7 +99,7 @@ public class SpinnerFragment extends Fragment {
     }
 
     public interface OnChangeListener {
-        public void onOptionSelected(int dataIndex, String label, String currentChoice, String newChoice);
+        public void onOptionSelected(int dataIndex, String label, String newChoice);
     }
 
     @Override

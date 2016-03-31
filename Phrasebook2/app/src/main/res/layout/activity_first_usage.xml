@@ -10,38 +10,12 @@
     tools:context=".gui.activities.FirstUsageActivity"
     >
 
-    <Button
-        android:layout_width="150dp"
-        android:layout_height="70dp"
-        android:text="START"
-        android:id="@+id/startButton"
-        android:layout_marginBottom="42dp"
-        android:clickable="true"
-        android:textColor="#ffffff"
-        android:background="@color/primary_color"
-        android:textSize="25dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="sendMessage" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Interactive Phrasebook"
-        android:id="@+id/titleText"
-        android:textColor="#232121"
-        android:textSize="48dp"
-        android:textAlignment="textEnd"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/titleText"
-        android:layout_alignParentEnd="true">
+        android:layout_alignParentEnd="true"
+        android:id="@+id/spinner_layout">
 
         <TextView
             android:layout_width="wrap_content"
@@ -79,4 +53,20 @@
             android:layout_alignParentEnd="true"
             android:layout_gravity="center_horizontal" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/startButton"
+        android:layout_width="150dp"
+        android:layout_height="70dp"
+        android:layout_below="@+id/spinner_layout"
+        android:layout_marginBottom="42dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="START"
+        android:clickable="true"
+        android:textColor="#ffffff"
+        android:background="@color/primary_color"
+        android:textSize="25dp"
+        android:onClick="sendMessage" />
+
 </RelativeLayout>

@@ -14,18 +14,22 @@ import android.widget.ImageView;
 import com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton;
 import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu;
 import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
+import java.util.Locale;
 
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
 import se.chalmers.phrasebook.gui.fragments.SpinnerFragment;
 import se.chalmers.phrasebook.gui.fragments.SwipeFragment;
 import se.chalmers.phrasebook.gui.fragments.TranslationFragment;
+import android.speech.tts.TextToSpeech;
+import android.widget.Toast;
 
 public class TranslatorActivity extends FragmentActivity implements SpinnerFragment.OnChangeListener{
 
     TranslationFragment translationFragment;
     SwipeFragment swipeFragment;
     private Model model;
+    private TextToSpeech t1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,11 +87,21 @@ public class TranslatorActivity extends FragmentActivity implements SpinnerFragm
 
             }
         });
+        t1=new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if(status != TextToSpeech.ERROR) {
+                    t1.setLanguage(Locale.UK);
+                }
+            }
+        });
 
         buttonThird.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Spela upp frasen
+                String toSpeak = translationFragment.getTargetTranslation();
+                Toast.makeText(getApplicationContext(), toSpeak, Toast.LENGTH_SHORT).show();
+                t1.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
             }
         });
 

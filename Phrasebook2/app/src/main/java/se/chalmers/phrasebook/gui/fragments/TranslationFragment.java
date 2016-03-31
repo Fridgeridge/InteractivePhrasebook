@@ -50,6 +50,10 @@ public class TranslationFragment extends Fragment {
 
     }
 
+    public String getTargetTranslation() {
+        return target.getText().toString();
+    }
+
     public void updateData(){
 
         String originTranslation = model.translateToOrigin();

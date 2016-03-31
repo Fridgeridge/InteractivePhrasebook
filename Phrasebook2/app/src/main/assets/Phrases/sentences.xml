@@ -107,7 +107,7 @@
         </node>
     </sentence>
 
-<<<<<<< HEAD
+
     <sentence desc="Someone has children" id="AHasChildren">
         <node syntax="PSentence">
             <node child="phraseit">
@@ -120,7 +120,11 @@
                             <node child="NNumeral"></node>
                         </option>
                     </node>
-=======
+                </node>
+            </node>
+        </node>
+    </sentence>
+
     <sentence desc="Someone lives somewhere" id="ALive">
         <node child="phraseit">
             <node syntax="PropAction">
@@ -131,13 +135,11 @@
                     <option option="Living where?">
                         <node child="country"></node>
                     </option>
->>>>>>> f4e7b8d09e215ef439fbd934a5173f142a08f2b5
                 </node>
             </node>
         </node>
     </sentence>
-<<<<<<< HEAD
-=======
+
 
     <!-- Someone wants to go somewhere -->
 
@@ -209,7 +211,6 @@
         </node>
     </sentence>
 
->>>>>>> f4e7b8d09e215ef439fbd934a5173f142a08f2b5
 
     <!--Option lists -->
     <child id="allpersons">

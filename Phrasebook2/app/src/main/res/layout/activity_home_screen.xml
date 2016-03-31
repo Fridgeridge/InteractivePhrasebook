@@ -55,7 +55,4 @@
         android:layout_below="@+id/phrasebook_textView"
         />
 
-
-
-
 </RelativeLayout>

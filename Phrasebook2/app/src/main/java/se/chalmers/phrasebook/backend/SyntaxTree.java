@@ -31,11 +31,16 @@ public class SyntaxTree {
                 for (SyntaxNode n : currentRoot.getChildren()) {
                     selection.put(n.getDesc(), n);
                 }
-                options.add((LinkedHashMap<String, SyntaxNode>) selection.clone());
-                selection.clear();
+
+                if(!options.contains(selection)) {
+                    options.add((LinkedHashMap<String, SyntaxNode>) selection.clone());
+                    selection.clear();
+                }
+                initializeOptions(currentRoot.getSelectedChildren().
+                        get(currentRoot.getQuestions().indexOf(s)));
             }
         }
-        if (currentRoot.getSelectedChildren() != null) {
+        else if (currentRoot.getSelectedChildren() != null) {
             for (SyntaxNode n : currentRoot.getSelectedChildren()) {
                 initializeOptions(n);
             }
@@ -87,6 +92,7 @@ public class SyntaxTree {
                     }
                 }
             }
+            System.out.println(syntax);
             return syntax;
         }
     }

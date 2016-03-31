@@ -107,6 +107,22 @@
         </node>
     </sentence>
 
+    <sentence desc="Someone has children" id="AHasChildren">
+        <node syntax="PSentence">
+            <node child="phraseit">
+                <node syntax="PropAction">
+                    <node syntax="AHasChildren">
+                        <option option="Who are we talking about?">
+                            <node child="allpersons"></node>
+                        </option>
+                        <option option="How many children?">
+                            <node child="NNumeral"></node>
+                        </option>
+                    </node>
+                </node>
+            </node>
+        </node>
+    </sentence>
 
     <!--Option lists -->
     <child id="allpersons">

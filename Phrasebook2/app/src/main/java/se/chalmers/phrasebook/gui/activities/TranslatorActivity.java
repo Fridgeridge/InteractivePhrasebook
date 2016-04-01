@@ -91,7 +91,9 @@ public class TranslatorActivity extends FragmentActivity implements SpinnerFragm
             @Override
             public void onInit(int status) {
                 if(status != TextToSpeech.ERROR) {
-                    t1.setLanguage(Locale.UK);
+                    Locale l = model.getTargetLang().getTTS();
+                    t1.setLanguage(l);
+
                 }
             }
         });

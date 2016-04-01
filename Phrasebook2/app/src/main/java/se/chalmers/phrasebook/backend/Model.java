@@ -143,7 +143,7 @@ public class Model {
     }
 
     public void setTargetLanguage(String targetLanguage) {
-        target = Langs.getLang(originLanguage);
+        target = Langs.getLang(targetLanguage);
         this.targetLanguage = targetLanguage;
         translator.setTargetLanguage(targetLanguage);
     }

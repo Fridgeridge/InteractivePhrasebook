@@ -78,10 +78,10 @@ public class SpinnerFragment extends Fragment {
 
         currentChoice = spinner.getSelectedItem().toString();
         if(label.equals("")) {
-            ((LinearLayout)((ViewGroup)textView.getParent()).getParent()).removeView(textView);
+            ((LinearLayout)textView.getParent()).removeView(textView);
         } else {
             textView.setText(label);
-        }    
+        }
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

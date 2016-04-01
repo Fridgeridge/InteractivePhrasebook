@@ -26,9 +26,9 @@ public class SyntaxTree {
         if (currentRoot.isModular()) {
             LinkedHashMap<String, SyntaxNode> selection
                     = new LinkedHashMap<>();
-            for (String s : currentRoot.getQuestions()) {
+            for (String s : currentRoot.getQuestionToChildren().keySet()) {
                 selection.put(s, currentRoot);
-                for (SyntaxNode n : currentRoot.getChildren()) {
+                for (SyntaxNode n : currentRoot.getQuestionToChildren().get(s)) {
                     selection.put(n.getDesc(), n);
                 }
 

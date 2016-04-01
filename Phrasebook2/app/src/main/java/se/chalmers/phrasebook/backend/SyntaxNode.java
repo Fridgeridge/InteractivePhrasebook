@@ -36,6 +36,10 @@ public class SyntaxNode {
         }
     }
 
+    public LinkedHashMap<String, List<SyntaxNode>> getQuestionToChildren() {
+        return questionToChildren;
+    }
+
     public boolean addQuestion(String question) {
         if(questions.add(question)) {
             return true;

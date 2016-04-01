@@ -36,6 +36,10 @@ public class SyntaxNode {
         }
     }
 
+    public void linkQuestionToChildren(String question, List<SyntaxNode> children) {
+        questionToChildren.put(question, children);
+    }
+
     public LinkedHashMap<String, List<SyntaxNode>> getQuestionToChildren() {
         return questionToChildren;
     }

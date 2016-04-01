@@ -61,6 +61,7 @@ public enum Langs {
         return this.ttsLang;
     }
 
+
     private static Map<String, String> initializeMap(){
         Map<String, String> map = new HashMap<String, String>();
         for (Langs l : Langs.values()) {
@@ -82,6 +83,13 @@ public enum Langs {
 
     public static String getEngName(String key){
         return langMap.get(key);
+    }
+
+    public static Langs getLang(String Language){
+        for(Langs l : Langs.values()){
+           if(l.getLang().equals(Language)) return l;
+        }
+        return null;
     }
 
     public static String getKey(String name){

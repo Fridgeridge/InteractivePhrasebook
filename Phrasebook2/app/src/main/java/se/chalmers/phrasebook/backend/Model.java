@@ -26,6 +26,7 @@ public class Model {
 
     private ArrayList<PhraseBook> phrasebooks;
     private String originLanguage, targetLanguage;
+    private Langs origin,target;
     private String currentPhrasebook;
     private SyntaxTree currentPhrase;
     private ArrayList<LinkedHashMap> optionsList;
@@ -44,6 +45,8 @@ public class Model {
         }
         originLanguage = Langs.getKey("English");
         targetLanguage = Langs.getKey("English");
+        origin = Langs.ENGLISH;
+        target = Langs.ENGLISH;
     }
 
     public static Model getInstance() {
@@ -134,11 +137,13 @@ public class Model {
     }
 
     public void setOriginLanguage(String originLanguage) {
+        origin = Langs.getLang(originLanguage);
         this.originLanguage = originLanguage;
         translator.setOriginLanguage(originLanguage);
     }
 
     public void setTargetLanguage(String targetLanguage) {
+        target = Langs.getLang(originLanguage);
         this.targetLanguage = targetLanguage;
         translator.setTargetLanguage(targetLanguage);
     }
@@ -161,6 +166,15 @@ public class Model {
     public String getTargetLanguage() {
         return targetLanguage;
     }
+
+    public Langs getOriginLang(){
+        return origin;
+    }
+
+    public Langs getTargetLang(){
+        return target;
+    }
+
 
     public String getCurrentPhrasebook() {
         return currentPhrasebook;

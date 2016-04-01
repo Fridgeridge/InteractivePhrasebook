@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -76,8 +77,11 @@ public class SpinnerFragment extends Fragment {
         spinner.setAdapter(adapter);
 
         currentChoice = spinner.getSelectedItem().toString();
-
-        textView.setText(label);
+        if(label.equals("")) {
+            ((LinearLayout)((ViewGroup)textView.getParent()).getParent()).removeView(textView);
+        } else {
+            textView.setText(label);
+        }    
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

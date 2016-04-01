@@ -2,6 +2,7 @@ package se.chalmers.phrasebook.backend;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
@@ -13,6 +14,7 @@ public class SyntaxNode {
     private String desc;
     private List<SyntaxNode> children = new ArrayList<SyntaxNode>();
     private List<SyntaxNode> selectedChildren = new ArrayList<SyntaxNode>();
+    private LinkedHashMap<String, List<SyntaxNode>> questionToChildren = new LinkedHashMap<>();
     private List<String> questions = new ArrayList<String>();
     private int nmbrOfSelectedChildren = 0;
 

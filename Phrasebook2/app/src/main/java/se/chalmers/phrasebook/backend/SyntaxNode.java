@@ -1,6 +1,5 @@
 package se.chalmers.phrasebook.backend;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -12,6 +11,9 @@ import java.util.List;
 public class SyntaxNode {
     private String data;
     private String desc;
+    public ArrayList<SyntaxNodeList> syntaxNodes;//TODO set as private
+
+
     private List<SyntaxNode> children = new ArrayList<SyntaxNode>();
     private List<SyntaxNode> selectedChildren = new ArrayList<SyntaxNode>();
     private LinkedHashMap<String, List<SyntaxNode>> questionToChildren = new LinkedHashMap<>();
@@ -19,14 +21,15 @@ public class SyntaxNode {
     private int nmbrOfSelectedChildren = 0;
 
     public SyntaxNode(String data) {
+        syntaxNodes = new ArrayList<SyntaxNodeList>();
         this.data = data;
     }
 
     public boolean addChild(SyntaxNode node) {
         if (node != null) {
-            if(selectedChildren.isEmpty()) {
+            if (selectedChildren.isEmpty()) {
                 selectedChildren.add(node);
-            } else if(nmbrOfSelectedChildren > selectedChildren.size()) {
+            } else if (nmbrOfSelectedChildren > selectedChildren.size()) {
                 selectedChildren.add(node);
             }
             children.add(node);
@@ -45,14 +48,14 @@ public class SyntaxNode {
     }
 
     public boolean addQuestion(String question) {
-        if(questions.add(question)) {
+        if (questions.add(question)) {
             return true;
         }
         return false;
     }
 
     public boolean hasChildren() {
-       return !this.children.isEmpty();
+        return !this.children.isEmpty();
     }
 
     public boolean isModular() {
@@ -92,7 +95,7 @@ public class SyntaxNode {
     public boolean setSelectedChild(String question, SyntaxNode updated) {
         System.out.println(question);
         System.out.println(updated.getData());
-        if(questions.contains(question) && children.contains(updated)) {
+        if (questions.contains(question) && children.contains(updated)) {
             int index = questions.indexOf(question);
             System.out.println(selectedChildren.get(index).getData());
             selectedChildren.set(index, updated);
@@ -103,7 +106,7 @@ public class SyntaxNode {
     }
 
 
-    public boolean removeSelectedChild(SyntaxNode selectedChild){
+    public boolean removeSelectedChild(SyntaxNode selectedChild) {
         return selectedChildren.remove(selectedChild);
     }
 

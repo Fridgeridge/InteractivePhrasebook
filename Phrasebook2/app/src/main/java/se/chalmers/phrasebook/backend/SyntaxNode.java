@@ -11,13 +11,14 @@ import java.util.List;
 public class SyntaxNode {
     private String data;
     private String desc;
+
     public ArrayList<SyntaxNodeList> syntaxNodes;//TODO set as private
 
 
-    private List<SyntaxNode> children = new ArrayList<SyntaxNode>();
-    private List<SyntaxNode> selectedChildren = new ArrayList<SyntaxNode>();
+    protected  List<SyntaxNode> children = new ArrayList<SyntaxNode>();
+    protected List<SyntaxNode> selectedChildren = new ArrayList<SyntaxNode>();
     private LinkedHashMap<String, List<SyntaxNode>> questionToChildren = new LinkedHashMap<>();
-    private List<String> questions = new ArrayList<String>();
+    protected List<String> questions = new ArrayList<String>();
     private int nmbrOfSelectedChildren = 0;
 
     public SyntaxNode(String data) {
@@ -105,13 +106,12 @@ public class SyntaxNode {
         return false;
     }
 
-
     public boolean removeSelectedChild(SyntaxNode selectedChild) {
         return selectedChildren.remove(selectedChild);
     }
 
     public int getNmbrOfSelectedChildren() {
-        return nmbrOfSelectedChildren;
+        return selectedChildren.size();
     }
 
     public void setNmbrOfSelectedChildren(int nmbrOfSelectedChildren) {

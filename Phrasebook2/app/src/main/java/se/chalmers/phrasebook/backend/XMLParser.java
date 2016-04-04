@@ -8,6 +8,7 @@ import org.xml.sax.SAXException;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -119,7 +120,7 @@ public class XMLParser {
     }
 
     public SyntaxTree buildSyntaxTree(NodeList currentRoot) {
-
+        SyntaxTree l = new SyntaxTree(constructSyntaxNodeList(currentRoot, new SyntaxNode("Root"), new SyntaxNodeList(), null));
         SyntaxTree s = new SyntaxTree(constructSentence(currentRoot, new SyntaxNode("root")));
         return s;
     }
@@ -149,7 +150,13 @@ public class XMLParser {
 
                 if (nl.item(i).getNodeName().equals("option") && attributes.getNamedItem("option") != null) {
                     parent.setNmbrOfSelectedChildren(parent.getNmbrOfSelectedChildren() + 1);
-                    parent.addQuestion(option = attributes.getNamedItem("option").getNodeValue());
+                    parent.addQuestion(question = attributes.getNamedItem("option").getNodeValue());
+
+
+                    SyntaxNodeList list = new SyntaxNodeList();
+                    list.setQuestion(question);
+
+
                     constructSentence(nl.item(i).getChildNodes(), parent);
                 }
 
@@ -173,6 +180,66 @@ public class XMLParser {
             }
         }
         return parent;
+    }
+
+
+    private SyntaxNode constructSyntaxNodeList(NodeList nl, SyntaxNode parent, SyntaxNodeList list, SyntaxNode nextSequence) {
+        if (nl == null || nl.getLength() < 1) {
+            if (nextSequence != null) {
+                list.add(nextSequence);
+                parent.syntaxNodes.add(list);
+            }
+            return null;
+        }
+        int length = nl.getLength();
+
+        //Precalc actual node length
+        for (int i = 0; i < length; i++) {
+            if (nl.item(i) != null && (nl.item(i).getNodeType() == Node.ELEMENT_NODE) && nl.item(i).getAttributes() != null) {
+                String syntax = "", desc = "", option = "", question = "";
+                NamedNodeMap attributes = nl.item(i).getAttributes();
+
+                if (attributes.getNamedItem("syntax") != null) {
+                    syntax = attributes.getNamedItem("syntax").getNodeValue();
+                }
+
+                if (attributes.getNamedItem("desc") != null) {
+                    desc = attributes.getNamedItem("desc").getNodeValue();
+                }
+
+                if (attributes.getNamedItem("option") != null) {
+                    question = attributes.getNamedItem("option").getNodeValue();
+                    list.setQuestion(question);
+                    constructSyntaxNodeList(nl.item(i).getChildNodes(), parent, list, nextSequence);
+                }
+
+                if (attributes.getNamedItem("child") != null) {
+                    option = attributes.getNamedItem("child").getNodeValue();
+
+                    SyntaxNode mNextSequence = new SyntaxNode("");
+                    SyntaxNodeList mList = new SyntaxNodeList();
+                    constructSyntaxNodeList(nl.item(i).getChildNodes(), mNextSequence, mList, nextSequence);
+
+                    constructSyntaxNodeList(jumpToChild("child", option), parent, list, mNextSequence);
+                }
+                if (!syntax.isEmpty()) {
+                    System.out.println(syntax);
+                    SyntaxNode node = new SyntaxNode(syntax);
+                    node.setDesc(desc);
+
+                    list.add(node);
+
+                    SyntaxNodeList mList = new SyntaxNodeList();
+
+                    constructSyntaxNodeList(nl.item(i).getChildNodes(), node, mList, nextSequence);
+                }
+
+            }
+            if(!parent.syntaxNodes.contains(list))
+                parent.syntaxNodes.add(list);
+        }
+        return parent;
+
     }
 
     private SyntaxNode constructChildSequence(NodeList nl, SyntaxNode parent, SyntaxNode nextSequence) {

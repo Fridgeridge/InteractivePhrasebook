@@ -56,7 +56,7 @@
     <sentence desc="Someone loves someone" id="ALove">
         <node child="phraseit">
             <node syntax="PropAction">
-                <node syntax="ALove">
+                <node syntax="ALove" args = "2">
                     <option option="Who loves someone?">
                         <node child="allpersons"></node>
                     </option>
@@ -96,7 +96,7 @@
 
     <sentence desc="How far is something?" id="HowFar">
         <node syntax="PQuestion">
-            <node syntax="HowFar">
+            <node syntax="HowFar" args ="2">
                 <option option="Superlative">
                     <node child="superlative" />
                 </option>
@@ -126,7 +126,7 @@
     <sentence desc="Someone lives somewhere" id="ALive">
         <node child="phraseit">
             <node syntax="PropAction">
-                <node syntax="ALive">
+                <node syntax="ALive" args ="2">
                     <option option="Who are we talking about?">
                         <node child="allpersons"></node>
                     </option>

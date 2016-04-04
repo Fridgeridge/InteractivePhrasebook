@@ -1,8 +1,7 @@
-package se.chalmers.phrasebook.gui.fragments;
+package se.chalmers.phrasebook.gui.smallFragments;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.os.DropBoxManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,18 +13,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
-import se.chalmers.phrasebook.backend.SyntaxNode;
-import se.chalmers.phrasebook.backend.SyntaxTree;
-import se.chalmers.phrasebook.gui.adapters.SwipeAdapter;
 
 /**
  * Created by matilda on 14/03/16.

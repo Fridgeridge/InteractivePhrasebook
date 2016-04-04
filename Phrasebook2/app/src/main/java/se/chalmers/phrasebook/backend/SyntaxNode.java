@@ -60,7 +60,12 @@ public class SyntaxNode {
     }
 
     public boolean isModular() {
-        return children.size() > 1;
+        if(children.size() > 1 ) {
+            return true;
+        } else if(children.size() == 1) {
+            return children.get(0) instanceof NumeralSyntaxNode;
+        }
+        return false;
     }
 
     public boolean setDescription(String desc) {

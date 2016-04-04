@@ -168,9 +168,14 @@ public class XMLParser {
                     System.out.println(nextSequence);
                 }
                 if (!syntax.isEmpty()) {
-                    SyntaxNode node = new SyntaxNode(syntax);
+                    SyntaxNode node;
+                    if(syntax.equals("NNumeral")) {
+                        node = new NumeralSyntaxNode();
+                    } else {
+                        node = new SyntaxNode(syntax);
+                        node.setDesc(desc);
+                    }
                     parent.addChild(node);
-                    node.setDesc(desc);
 
                     constructSentence(nl.item(i).getChildNodes(), node);//Do not return
                 }

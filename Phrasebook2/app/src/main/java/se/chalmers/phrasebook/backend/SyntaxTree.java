@@ -92,7 +92,7 @@ public class SyntaxTree {
 
     /**
      * Parses the selected children into a text syntax usable by the grammar to
-     * generate a translation. Bulilds recursivly.
+     * generate a translation. Builds recursivly.
      *
      * @return The syntax usable by the GF-grammar to generate a translation
      */
@@ -128,61 +128,5 @@ public class SyntaxTree {
         } else {
             return null;
         }
-    }
-
-    //Can propoably be moved to a helper-class
-    //Does not work for all numbers, something krasimir wrote doesnt really add up
-    //in the "pot2plus" category.
-    private String nmbrToSyntax(int nmbr) {
-        String syntax = "";
-        if(nmbr < 1000000) {
-            if (nmbr <=999) {
-                syntax = "(pot2as3 " + subs1000(nmbr) + ")";
-            } else if(nmbr % 1000 == 0) {
-                syntax = "(pot3 " + subs1000(nmbr/1000) + ")";
-            } else if(nmbr > 1000 && nmbr%1000 != 0) {
-                syntax = "(pot3plus " + subs1000(nmbr/1000) + " " +
-                        subs1000(nmbr%1000) + ")";
-            }
-        }
-        return syntax;
-    }
-
-    private String subs1000(int nmbr) {
-        String syntax = "";
-        if(nmbr < 100) {
-            syntax = "(pot1as2 " + subs100(nmbr) + ")";
-        } else if(nmbr % 100 == 0) {
-            syntax = "(pot2 " + subs100(nmbr/100) + ")";
-        } else if(nmbr > 100 && nmbr%100 != 0) {
-            syntax = "(pot2plus n" + nmbr/100 + " " + subs100(nmbr%100) + ")";
-        }
-        return syntax;
-    }
-
-    private String subs100(int nmbr) {
-        String syntax = "";
-        if(nmbr < 10) {
-            syntax = "(pot0as1 " + subs10(nmbr) + ")";
-        } else if(nmbr == 10 || nmbr == 11) {
-            syntax = "(pot0as1 " + "pot" + nmbr + ")";
-        } else if(nmbr >= 12 && nmbr <= 19) {
-            syntax = "(pot1to19 n" + nmbr%10 + ")";
-        } else if(nmbr >= 20 && nmbr%10 == 0) {
-            syntax = "(pot1 " + subs10(nmbr/10) + ")";
-        } else if(nmbr%10 != 0) {
-            syntax = "(pot1plus n" + nmbr/10 + subs10(nmbr%10) + ")";
-        }
-        return syntax;
-    }
-
-    private String subs10(int nmbr) {
-        String syntax = "";
-        if(nmbr == 1) {
-            syntax = "pot01";
-        } else if (nmbr >= 2 && nmbr <= 9) {
-            syntax = "(pot0 n" + nmbr + ")";
-        }
-        return syntax;
     }
 }

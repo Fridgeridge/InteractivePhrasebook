@@ -80,8 +80,7 @@ public class Model {
 
     public void update(int listIndex, String parent, String newOption) {
         currentPhrase.setSelectedChild(((SyntaxNode) currentPhrase.getOptions().get(listIndex).get(parent)),
-                parent,
-                ((SyntaxNode) (currentPhrase.getOptions().get(listIndex).get(newOption))));
+                listIndex, newOption, parent);
     }
 
     public boolean isNodeSelected(SyntaxNode node, LinkedHashMap options) {

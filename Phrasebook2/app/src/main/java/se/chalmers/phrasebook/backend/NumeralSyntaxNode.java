@@ -56,7 +56,7 @@ public class NumeralSyntaxNode extends SyntaxNode {
         } else if(nmbr % 100 == 0) {
             syntax = "(pot2 " + subs100(nmbr/100) + ")";
         } else if(nmbr > 100 && nmbr%100 != 0) {
-            syntax = "(pot2plus n" + nmbr/100 + " " + subs100(nmbr%100) + ")";
+            syntax = "(pot2plus " + subs10(nmbr/100) + " " + subs100(nmbr%100) + ")";
         }
         return syntax;
     }

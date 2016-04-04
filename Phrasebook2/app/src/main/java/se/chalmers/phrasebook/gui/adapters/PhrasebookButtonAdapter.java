@@ -83,7 +83,7 @@ public class PhrasebookButtonAdapter extends BaseAdapter {
 
                 model.setCurrentPhrasebook((String) button.getText());
 
-                sendMessage((String) button.getText());
+                sendMessage("Tourism");
 
             }
         });
@@ -93,13 +93,11 @@ public class PhrasebookButtonAdapter extends BaseAdapter {
 
     private void sendMessage(String phrasebook){
 
-        System.out.println("sending");
-
         Intent intent = new Intent();
         intent.setAction("phrasebook_event");
-        // add data
-        intent.putExtra("message", "data");
+        intent.putExtra("message", phrasebook);
         LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+
     }
 
 }

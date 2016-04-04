@@ -3,28 +3,28 @@ package se.chalmers.phrasebook.gui.activities;
 import android.app.Activity;
 
 import android.app.ActionBar;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
-import android.widget.Toast;
+
 
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.gui.fragments.DefaultPhrasebooksFragment;
 import se.chalmers.phrasebook.gui.fragments.PhraseListFragment;
+import se.chalmers.phrasebook.gui.fragments.TranslatorFragment;
+import se.chalmers.phrasebook.gui.smallFragments.SpinnerFragment;
+import se.chalmers.phrasebook.gui.smallFragments.SwipeFragment;
 
-public class NavigationActivity extends Activity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+public class NavigationActivity extends FragmentActivity
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks, SpinnerFragment.OnChangeListener {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -37,8 +37,6 @@ public class NavigationActivity extends Activity
     private CharSequence mTitle;
 
     private Fragment mContent;
-
-    private BroadcastReceiver mBroadcastReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,13 +57,12 @@ public class NavigationActivity extends Activity
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
-        FragmentManager fragmentManager = getFragmentManager();
 
         switch (position) {
             case 0:
 
-                fragmentManager.beginTransaction().replace(R.id.container, DefaultPhrasebooksFragment.newInstance(1))
-                        .commit();
+                switchContent(DefaultPhrasebooksFragment.newInstance(1));
+
                 break;
         }
 
@@ -73,8 +70,10 @@ public class NavigationActivity extends Activity
 
     public void switchContent(Fragment fragment) {
         mContent = fragment;
-        getFragmentManager().beginTransaction()
-                .replace(R.id.container, fragment).commit();
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.container, fragment);
+        transaction.commit();
 
     }
 
@@ -108,23 +107,22 @@ public class NavigationActivity extends Activity
         LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, new IntentFilter("phrase_list_event"));
     }
 
-    // handler for received Intents for the "my-event" event
+
     private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            // Extract data included in the Intent
 
             System.out.println("receiving");
 
-            String action = (String) intent.getAction();
+            String action = intent.getAction();
             String message;
 
             if(action.equals("phrasebook_event")){
                 message = intent.getStringExtra("message");
-                switchContent(new PhraseListFragment());
+                switchContent(PhraseListFragment.newInstance(message));
             }else if(action.equals("phrase_list_event")){
                 message = intent.getStringExtra("message");
-                switchContent(new PhraseListFragment());
+                switchContent(TranslatorFragment.newInstance(message));
             }else{
                 throw new IllegalArgumentException();
             }
@@ -134,10 +132,13 @@ public class NavigationActivity extends Activity
 
     @Override
     protected void onPause() {
-        // Unregister since the activity is not visible
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
         super.onPause();
     }
 
 
+    @Override
+    public void onOptionSelected(int dataIndex, String label, String newChoice) {
+
+    }
 }

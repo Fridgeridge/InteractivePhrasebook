@@ -22,23 +22,32 @@ import se.chalmers.phrasebook.gui.activities.TranslatorActivity;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PhraseListFragment extends android.app.Fragment {
+public class PhraseListFragment extends Fragment {
 
     private Model model;
     private ArrayList<String> phrases;
     Context context;
+    private String title;
 
     public PhraseListFragment() {
         // Required empty public constructor
     }
 
-    
+    public static PhraseListFragment newInstance(String title) {
+        PhraseListFragment fragment = new PhraseListFragment();
+        Bundle args = new Bundle();
+        args.putString("title", title);
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         model = Model.getInstance();
+
+        title = getArguments().getString("title");
 
         phrases = new ArrayList<>();
         phrases.addAll(model.getSentences().values());

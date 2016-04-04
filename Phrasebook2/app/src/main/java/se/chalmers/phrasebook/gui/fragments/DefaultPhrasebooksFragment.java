@@ -19,7 +19,7 @@ import se.chalmers.phrasebook.gui.adapters.PhrasebookButtonAdapter;
  * Use the {@link DefaultPhrasebooksFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DefaultPhrasebooksFragment extends android.app.Fragment {
+public class DefaultPhrasebooksFragment extends Fragment {
 
     private static final String ARG_SECTION_NBR = "ARG_SECTION_NBR";
 

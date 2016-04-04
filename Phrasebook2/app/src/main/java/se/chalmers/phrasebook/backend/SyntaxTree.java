@@ -78,11 +78,21 @@ public class SyntaxTree {
      * selected child, otherwise it returns false.
      *
      * @param parent   the modular SyntaxNode containing the two children
+     * @param question the question to be answered
      * @param newChild the child which replaces the old one
      * @return if the operations was succesful or not
      */
-    public boolean setSelectedChild(SyntaxNode parent, String question, SyntaxNode newChild) {
-        if (!parent.setSelectedChild(question, newChild)) {
+    //TODO REALLY UGLY SOLUTION, TRY TO FIX IT WITHOUT 'instanceof' FOR NUMERALSYNTAXNODE
+    public boolean setSelectedChild(SyntaxNode parent, int listIndex, String newChild, String question) {
+        if(parent.getChildren().get(0) instanceof NumeralSyntaxNode) {
+            if(!((NumeralSyntaxNode)parent).setSelectedChild(question, newChild)) {
+                return false;
+            }
+            options.clear();
+            this.initializeOptions(root);
+            return true;
+        }
+        if (!parent.setSelectedChild(question, (SyntaxNode)options.get(listIndex).get(newChild))) {
             return false;
         }
         options.clear();

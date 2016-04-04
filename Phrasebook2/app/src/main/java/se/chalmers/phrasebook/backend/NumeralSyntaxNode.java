@@ -30,11 +30,17 @@ public class NumeralSyntaxNode extends SyntaxNode {
         this.number = Integer.parseInt(number);
     }
 
-    //Does not work for all numbers, something krasimir wrote doesnt really add up
-    //in the "pot2plus" category.
+    public boolean setSelectedChild(String question, String updated) {
+        if (questions.contains(question)) {
+            setDesc(updated);
+            return true;
+        }
+        return false;
+    }
+
     private String nmbrToSyntax(int nmbr) throws IOException {
         String syntax = "";
-        if(nmbr < 1000000 && nmbr >= 0) {
+        if(nmbr < 1000000 && nmbr > 0) {
             if (nmbr <=999) {
                 syntax = "(NNumeral(num(pot2as3 " + subs1000(nmbr) + ")))";
             } else if(nmbr % 1000 == 0) {
@@ -44,7 +50,7 @@ public class NumeralSyntaxNode extends SyntaxNode {
                         subs1000(nmbr%1000) + ")))";
             }
         } else {
-            throw new IOException("Input must be between 0 and 999999");
+            throw new IOException("Input must be between 1 and 999999");
         }
         return syntax;
     }

@@ -99,13 +99,9 @@ public class SyntaxNode {
 
     //Replaces the specified previous child with the new updated selected child
     public boolean setSelectedChild(String question, SyntaxNode updated) {
-        System.out.println(question);
-        System.out.println(updated.getData());
         if (questions.contains(question) && children.contains(updated)) {
             int index = questions.indexOf(question);
-            System.out.println(selectedChildren.get(index).getData());
             selectedChildren.set(index, updated);
-            System.out.println(selectedChildren.get(index).getData());
             return true;
         }
         return false;

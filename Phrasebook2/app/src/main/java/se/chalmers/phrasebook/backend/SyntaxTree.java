@@ -1,7 +1,6 @@
 package se.chalmers.phrasebook.backend;
 
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
@@ -24,19 +23,51 @@ public class SyntaxTree {
     //creates an ArrayList och LinkedHashMaps, each representing
     //a currently available option to be customized.
     private void initializeOptions(SyntaxNode currentRoot) {
-        if(currentRoot.isModular()) {
+        if (currentRoot.isModular()) {
             LinkedHashMap<String, SyntaxNode> selection
                     = new LinkedHashMap<>();
+            for (String s : currentRoot.getQuestions()) {
+                selection.put(s, currentRoot);
+                for (SyntaxNode n : currentRoot.getChildren()) {
+                    selection.put(n.getDesc(), n);
+                }
 
-            selection.put(currentRoot.getDesc(), currentRoot);
-            for (SyntaxNode n : currentRoot.getChildren()) {
-                selection.put(n.getDesc(), n);
+                if(!options.contains(selection)) {
+                    options.add((LinkedHashMap<String, SyntaxNode>) selection.clone());
+                    selection.clear();
+                }
+                initializeOptions(currentRoot.getSelectedChildren().
+                        get(currentRoot.getQuestions().indexOf(s)));
             }
-            options.add(selection);
         }
-        if(currentRoot.getSelectedChild() != null) {
-            for(SyntaxNode n: currentRoot.getSelectedChild()) {
+        else if (currentRoot.getSelectedChildren() != null) {
+            for (SyntaxNode n : currentRoot.getSelectedChildren()) {
                 initializeOptions(n);
+            }
+        }
+    }
+
+    private void initializeOptions2(SyntaxNode currentRoot) {
+        if (currentRoot.isModular()) {
+            LinkedHashMap<String, SyntaxNode> selection
+                    = new LinkedHashMap<>();
+            for (String s : currentRoot.getQuestionToChildren().keySet()) {
+                selection.put(s, currentRoot);
+                for (SyntaxNode n : currentRoot.getQuestionToChildren().get(s)) {
+                    selection.put(n.getDesc(), n);
+                }
+
+                if(!options.contains(selection)) {
+                    options.add((LinkedHashMap<String, SyntaxNode>) selection.clone());
+                    selection.clear();
+                }
+                initializeOptions(currentRoot.getSelectedChildren().
+                        get(currentRoot.getQuestions().indexOf(s)));
+            }
+        }
+        else if (currentRoot.getSelectedChildren() != null) {
+            for (SyntaxNode n : currentRoot.getSelectedChildren()) {
+                initializeOptions2(n);
             }
         }
     }
@@ -45,13 +76,13 @@ public class SyntaxTree {
      * Replaces an old selectedChild with a new one.
      * The method returns true if it succesfully managed to replace a
      * selected child, otherwise it returns false.
-     * @param parent the modular SyntaxNode containing the two children
-     * @param oldChild the child to be replaced
+     *
+     * @param parent   the modular SyntaxNode containing the two children
      * @param newChild the child which replaces the old one
      * @return if the operations was succesful or not
      */
-    public boolean setSelectedChild(SyntaxNode parent, SyntaxNode oldChild, SyntaxNode newChild) {
-        if(!parent.setSelectedChild(oldChild, newChild)) {
+    public boolean setSelectedChild(SyntaxNode parent, String question, SyntaxNode newChild) {
+        if (!parent.setSelectedChild(question, newChild)) {
             return false;
         }
         options.clear();
@@ -61,34 +92,40 @@ public class SyntaxTree {
 
     /**
      * Parses the selected children into a text syntax usable by the grammar to
-     * generate a translation. Bulilds recursivly.
+     * generate a translation. Builds recursivly.
+     *
      * @return The syntax usable by the GF-grammar to generate a translation
      */
-    public String getSyntax(){
+    public String getSyntax() {
         return parseSentenceSyntax(getSentenceHead());
     }
 
-     // Builds recursively from root node to parse syntax
+    // Builds recursively from root node to parse syntax
     //the getSyntax() method acts as a wrapper
     private String parseSentenceSyntax(SyntaxNode node) {
-        if(!node.hasChildren()) {
+        if (!node.hasChildren()) {
             return node.getData();
         } else {
-            String syntax = node.getData() + "(";
-            for(int i = 0; i < node.getSelectedChild().length; i++) {
-                syntax = syntax + parseSentenceSyntax(node.getSelectedChild()[i]);
-                if(node.getSelectedChild().length > 1) {
-                    syntax = syntax + " ";
+            String syntax = node.getData();
+            for (int i = 0; i < node.getSelectedChildren().size(); i++) {
+                if (node.getSelectedChildren().get(i).getData().isEmpty()) {
+                    syntax = syntax + parseSentenceSyntax(node.getSelectedChildren().get(i));
+                } else {
+                    syntax = syntax + "(" + parseSentenceSyntax(node.getSelectedChildren().get(i)) + ")";
+                    if (node.getSelectedChildren().size() > 1) {
+                        syntax = syntax + " ";
+                    }
                 }
             }
-            return syntax + ")";
+            System.out.println(syntax);
+            return syntax;
         }
     }
 
     private SyntaxNode getSentenceHead() {
         if (root != null) {
-            return root.getSelectedChild()[0];
-        }else {
+            return root.getSelectedChildren().get(0);
+        } else {
             return null;
         }
     }

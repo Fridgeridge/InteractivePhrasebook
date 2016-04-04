@@ -2,6 +2,8 @@ package se.chalmers.phrasebook.gui.activities;
 
 
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -12,18 +14,22 @@ import android.widget.ImageView;
 import com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton;
 import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu;
 import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
+import java.util.Locale;
 
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
 import se.chalmers.phrasebook.gui.fragments.SpinnerFragment;
 import se.chalmers.phrasebook.gui.fragments.SwipeFragment;
 import se.chalmers.phrasebook.gui.fragments.TranslationFragment;
+import android.speech.tts.TextToSpeech;
+import android.widget.Toast;
 
 public class TranslatorActivity extends FragmentActivity implements SpinnerFragment.OnChangeListener{
 
     TranslationFragment translationFragment;
     SwipeFragment swipeFragment;
     private Model model;
+    private TextToSpeech t1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,21 +75,35 @@ public class TranslatorActivity extends FragmentActivity implements SpinnerFragm
         buttonFirst.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Lägg till i frasbok
+                changeActivity(AddToPhrasebookActivity.class);
             }
         });
 
         buttonSecond.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Ändra språk
+
+                changeActivity(LanguageActivity.class);
+
+            }
+        });
+        t1=new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if(status != TextToSpeech.ERROR) {
+                    Locale l = model.getTargetLang().getTTS();
+                    t1.setLanguage(l);
+
+                }
             }
         });
 
         buttonThird.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Spela upp frasen
+                String toSpeak = translationFragment.getTargetTranslation();
+                Toast.makeText(getApplicationContext(), toSpeak, Toast.LENGTH_SHORT).show();
+                t1.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
             }
         });
 
@@ -91,8 +111,8 @@ public class TranslatorActivity extends FragmentActivity implements SpinnerFragm
 
 
     @Override
-    public void onOptionSelected(int dataIndex, String label, String currentChoice, String newChoice) {
-        model.update(dataIndex, label, currentChoice, newChoice);
+    public void onOptionSelected(int dataIndex, String label, String newChoice) {
+        model.update(dataIndex, label, newChoice);
 
         TranslationFragment translationFragment = (TranslationFragment)getSupportFragmentManager().findFragmentById(R.id.container_translation);
         translationFragment.updateData();
@@ -103,4 +123,16 @@ public class TranslatorActivity extends FragmentActivity implements SpinnerFragm
         transaction.commit();
 
     }
+
+    private void changeActivity(Class activity){
+        Intent intent = new Intent(this, activity);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, PhraseListActivity.class);
+        startActivity(intent);
+    }
+
 }

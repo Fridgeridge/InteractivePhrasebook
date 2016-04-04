@@ -47,7 +47,7 @@ public class OptionsFragment extends Fragment {
 
         options = model.getCurrentPhrase().getOptions();
         advancedOptions = new ArrayList<>();
-        containers = new int[3];
+        containers = new int[6];
 
         addContainers();
         addFragments();
@@ -88,6 +88,9 @@ public class OptionsFragment extends Fragment {
         containers[0] = R.id.child_fragment1;
         containers[1] = R.id.child_fragment2;
         containers[2] = R.id.child_fragment3;
+        containers[3] = R.id.child_fragment4;
+        containers[4] = R.id.child_fragment5;
+        containers[5] = R.id.child_fragment6;
 
     }
 

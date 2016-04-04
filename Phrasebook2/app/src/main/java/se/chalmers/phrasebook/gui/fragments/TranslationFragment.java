@@ -45,17 +45,21 @@ public class TranslationFragment extends Fragment {
 
         String originTranslation = model.translateToOrigin();
         String targetTranslation = model.translateToTarget();
-        origin.setText(originTranslation.substring(0,1).toUpperCase() + originTranslation.substring(1));
-        target.setText(targetTranslation.substring(0,1).toUpperCase() + targetTranslation.substring(1));
+        origin.setText(originTranslation);
+        target.setText(targetTranslation);
 
+    }
+
+    public String getTargetTranslation() {
+        return target.getText().toString();
     }
 
     public void updateData(){
 
         String originTranslation = model.translateToOrigin();
         String targetTranslation = model.translateToTarget();
-        origin.setText(originTranslation.substring(0,1).toUpperCase() + originTranslation.substring(1));
-        target.setText(targetTranslation.substring(0,1).toUpperCase() + targetTranslation.substring(1));
+        origin.setText(originTranslation);
+        target.setText(targetTranslation);
 
     }
 

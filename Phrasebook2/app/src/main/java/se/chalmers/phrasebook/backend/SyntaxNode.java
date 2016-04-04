@@ -1,7 +1,7 @@
 package se.chalmers.phrasebook.backend;
 
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
@@ -11,16 +11,26 @@ import java.util.List;
 public class SyntaxNode {
     private String data;
     private String desc;
-    private List<SyntaxNode> children = new ArrayList<SyntaxNode>();
-    private List<SyntaxNode> selectedChildren = new ArrayList<SyntaxNode>();
+
+    public ArrayList<SyntaxNodeList> syntaxNodes;//TODO set as private
+
+
+    protected  List<SyntaxNode> children = new ArrayList<SyntaxNode>();
+    protected List<SyntaxNode> selectedChildren = new ArrayList<SyntaxNode>();
+    private LinkedHashMap<String, List<SyntaxNode>> questionToChildren = new LinkedHashMap<>();
+    protected List<String> questions = new ArrayList<String>();
+    private int nmbrOfSelectedChildren = 0;
 
     public SyntaxNode(String data) {
+        syntaxNodes = new ArrayList<SyntaxNodeList>();
         this.data = data;
     }
 
     public boolean addChild(SyntaxNode node) {
         if (node != null) {
-            if(selectedChildren.isEmpty()) {
+            if (selectedChildren.isEmpty()) {
+                selectedChildren.add(node);
+            } else if (nmbrOfSelectedChildren > selectedChildren.size()) {
                 selectedChildren.add(node);
             }
             children.add(node);
@@ -30,12 +40,32 @@ public class SyntaxNode {
         }
     }
 
+    public void linkQuestionToChildren(String question, List<SyntaxNode> children) {
+        questionToChildren.put(question, children);
+    }
+
+    public LinkedHashMap<String, List<SyntaxNode>> getQuestionToChildren() {
+        return questionToChildren;
+    }
+
+    public boolean addQuestion(String question) {
+        if (questions.add(question)) {
+            return true;
+        }
+        return false;
+    }
+
     public boolean hasChildren() {
-       return !this.children.isEmpty();
+        return !this.children.isEmpty();
     }
 
     public boolean isModular() {
-        return children.size() > 1;
+        if(children.size() > 1 ) {
+            return true;
+        } else if(children.size() == 1) {
+            return children.get(0) instanceof NumeralSyntaxNode;
+        }
+        return false;
     }
 
     public boolean setDescription(String desc) {
@@ -47,7 +77,6 @@ public class SyntaxNode {
         }
     }
 
-    //TODO look over all setters, getters
     public String getData() {
         return data;
     }
@@ -69,12 +98,33 @@ public class SyntaxNode {
     }
 
     //Replaces the specified previous child with the new updated selected child
-    public boolean setSelectedChild(SyntaxNode previous, SyntaxNode updated) {
-        if(selectedChildren.contains(previous) && children.contains(updated)) {
-            selectedChildren.add(selectedChildren.indexOf(previous), updated);
+    public boolean setSelectedChild(String question, SyntaxNode updated) {
+        System.out.println(question);
+        System.out.println(updated.getData());
+        if (questions.contains(question) && children.contains(updated)) {
+            int index = questions.indexOf(question);
+            System.out.println(selectedChildren.get(index).getData());
+            selectedChildren.set(index, updated);
+            System.out.println(selectedChildren.get(index).getData());
             return true;
         }
         return false;
+    }
+
+    public boolean removeSelectedChild(SyntaxNode selectedChild) {
+        return selectedChildren.remove(selectedChild);
+    }
+
+    public int getNmbrOfSelectedChildren() {
+        return selectedChildren.size();
+    }
+
+    public void setNmbrOfSelectedChildren(int nmbrOfSelectedChildren) {
+        this.nmbrOfSelectedChildren = nmbrOfSelectedChildren;
+    }
+
+    public List<String> getQuestions() {
+        return questions;
     }
 
     public boolean equals(Object o) {

@@ -20,10 +20,7 @@ public class SyntaxNodeList {
     public boolean add(SyntaxNode object) {
         if (selectedChild == null)
             selectedChild = object;
-
-        if(!altChildren.contains(object))
             return altChildren.add(object);
-        return false;
     }
 
     public SyntaxNode getSelectedChild() {

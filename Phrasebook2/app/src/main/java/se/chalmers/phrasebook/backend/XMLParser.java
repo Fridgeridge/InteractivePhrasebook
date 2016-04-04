@@ -8,7 +8,6 @@ import org.xml.sax.SAXException;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -192,6 +191,10 @@ public class XMLParser {
             return null;
         }
         int length = nl.getLength();
+        int actLength = 0;
+        int currentNode = 1;
+        for (int i = 0; i < length; i++)
+            if (nl.item(i) != null && (nl.item(i).getNodeType() == Node.ELEMENT_NODE)) actLength++;
 
         //Precalc actual node length
         for (int i = 0; i < length; i++) {
@@ -221,8 +224,7 @@ public class XMLParser {
                     constructSyntaxNodeList(nl.item(i).getChildNodes(), mNextSequence, mList, nextSequence);
 
                     constructSyntaxNodeList(jumpToChild("child", option), parent, list, mNextSequence);
-                }
-                if (!syntax.isEmpty()) {
+                } else if (!syntax.isEmpty()) {
                     System.out.println(syntax);
                     SyntaxNode node = new SyntaxNode(syntax);
                     node.setDesc(desc);
@@ -233,10 +235,14 @@ public class XMLParser {
 
                     constructSyntaxNodeList(nl.item(i).getChildNodes(), node, mList, nextSequence);
                 }
+                if ((currentNode <= actLength) && !parent.syntaxNodes.contains(list)) {
+                    parent.syntaxNodes.add(list);
+                    currentNode++;
+                    if (currentNode <= actLength)
+                        list = new SyntaxNodeList();
+                }
 
             }
-            if(!parent.syntaxNodes.contains(list))
-                parent.syntaxNodes.add(list);
         }
         return parent;
 

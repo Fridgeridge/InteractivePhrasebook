@@ -7,8 +7,10 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+
 import java.util.ArrayList;
 import java.util.Collections;
+
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Langs;
 import se.chalmers.phrasebook.backend.Model;
@@ -24,7 +26,8 @@ public class FirstUsageActivity extends Activity {
 
         model = Model.getInstance();
 
-        getActionBar().hide();
+        if (getActionBar() != null)
+            getActionBar().hide();
 
         setContentView(R.layout.activity_first_usage);
 

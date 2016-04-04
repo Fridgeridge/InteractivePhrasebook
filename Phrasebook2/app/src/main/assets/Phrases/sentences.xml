@@ -17,7 +17,7 @@
     <sentence desc="Somebody's name is..." id="AHasName">
         <node child="phraseit">
             <node syntax="PropAction">
-                <node syntax="AHasName">
+                <node syntax="AHasName" args ="2">
                     <option option="Who are we talking about?">
                         <node child="allpersons"></node>
                     </option>

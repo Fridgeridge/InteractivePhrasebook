@@ -30,21 +30,6 @@
         </activity>
 
         <activity
-            android:name=".gui.activities.HomeScreenActivity"
-            android:label="@string/phrasebook_activity" />
-        <activity
-            android:name=".gui.activities.PhraseListActivity"
-            android:label="@string/Phrases_activity" />
-        <activity
-            android:name=".gui.activities.TranslatorActivity"
-            android:label="@string/translator_activity" />
-        <activity
-            android:name=".gui.activities.LanguageActivity"
-            android:label="Language" />
-        <activity
-            android:name=".gui.activities.AddToPhrasebookActivity"
-            android:label="Add Phrase" />
-        <activity
             android:name=".gui.activities.FirstUsageActivity"
             android:label="@string/title_activity_main" />
     </application>

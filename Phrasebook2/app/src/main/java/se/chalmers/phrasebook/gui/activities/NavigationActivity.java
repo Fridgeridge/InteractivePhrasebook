@@ -1,11 +1,8 @@
 package se.chalmers.phrasebook.gui.activities;
 
-import android.app.Activity;
-
 import android.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -19,11 +16,9 @@ import android.support.v4.widget.DrawerLayout;
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
 import se.chalmers.phrasebook.gui.fragments.DefaultPhrasebooksFragment;
+import se.chalmers.phrasebook.gui.fragments.NavigationDrawerFragment;
 import se.chalmers.phrasebook.gui.fragments.PhraseListFragment;
 import se.chalmers.phrasebook.gui.fragments.TranslatorFragment;
-import se.chalmers.phrasebook.gui.smallFragments.SpinnerFragment;
-import se.chalmers.phrasebook.gui.smallFragments.SwipeFragment;
-import se.chalmers.phrasebook.gui.smallFragments.TranslationFragment;
 
 public class NavigationActivity extends FragmentActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {

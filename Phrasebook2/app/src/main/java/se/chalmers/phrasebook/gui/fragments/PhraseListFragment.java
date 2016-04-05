@@ -17,7 +17,6 @@ import java.util.ArrayList;
 
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
-import se.chalmers.phrasebook.gui.activities.TranslatorActivity;
 
 /**
  * A simple {@link Fragment} subclass.

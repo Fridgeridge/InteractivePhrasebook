@@ -1,10 +1,7 @@
 package se.chalmers.phrasebook.gui.adapters;
 
-import android.app.Activity;
-import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.graphics.Color;
 import android.support.v4.content.LocalBroadcastManager;
 import android.view.View;
@@ -15,9 +12,6 @@ import android.widget.Button;
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
 import se.chalmers.phrasebook.gui.activities.NavigationActivity;
-import se.chalmers.phrasebook.gui.activities.PhraseListActivity;
-import se.chalmers.phrasebook.gui.fragments.DefaultPhrasebooksFragment;
-import se.chalmers.phrasebook.gui.fragments.PhraseListFragment;
 
 /**
  * Created by David on 2016-02-17.

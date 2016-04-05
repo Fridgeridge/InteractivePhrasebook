@@ -119,7 +119,7 @@ public class XMLParser {
     }
 
     public SyntaxTree buildSyntaxTree(NodeList currentRoot) {
-        SyntaxTree l = new SyntaxTree(constructSyntaxNodeList(currentRoot, new SyntaxNode("Root"), new SyntaxNodeList(), null));
+        SyntaxTree l = new SyntaxTree(constructSyntaxNodeList(currentRoot, new SyntaxNode("Root"), new SyntaxNodeList(), null, 1));
         SyntaxTree s = new SyntaxTree(constructSentence(currentRoot, new SyntaxNode("root")));
         return s;
     }
@@ -169,7 +169,7 @@ public class XMLParser {
                 }
                 if (!syntax.isEmpty()) {
                     SyntaxNode node;
-                    if(syntax.equals("NNumeral")) {
+                    if (syntax.equals("NNumeral")) {
                         node = new NumeralSyntaxNode();
                     } else {
                         node = new SyntaxNode(syntax);
@@ -187,7 +187,7 @@ public class XMLParser {
     }
 
 
-    private SyntaxNode constructSyntaxNodeList(NodeList nl, SyntaxNode parent, SyntaxNodeList list, SyntaxNode nextSequence) {
+    private SyntaxNode constructSyntaxNodeList(NodeList nl, SyntaxNode parent, SyntaxNodeList list, SyntaxNode nextSequence, int nbrOfArgs) {
         if (nl == null || nl.getLength() < 1) {
             if (nextSequence != null) {
                 list.add(nextSequence);
@@ -196,17 +196,23 @@ public class XMLParser {
             return null;
         }
         int length = nl.getLength();
-        int actLength = 0;
-        int currentNode = 1;
-        for (int i = 0; i < length; i++)
-            if (nl.item(i) != null && (nl.item(i).getNodeType() == Node.ELEMENT_NODE)) actLength++;
 
-        //Precalc actual node length
+        //CurrentArgs counts the number of arguments for the current NodeList
+        int currentArgs = 0;
+
+        //If the parent node, or previous "recursion", calls for multiple args
+        if (nbrOfArgs > 1) {
+            currentArgs = nbrOfArgs;////Update currentArgs
+            nbrOfArgs = 0;//Reset nbrOfArgs, important due to the other recursive calls which will happen before nbrOfArgs is actually used.
+        }
+
+        int args = 0;
+
         for (int i = 0; i < length; i++) {
             if (nl.item(i) != null && (nl.item(i).getNodeType() == Node.ELEMENT_NODE) && nl.item(i).getAttributes() != null) {
                 String syntax = "", desc = "", option = "", question = "";
-                NamedNodeMap attributes = nl.item(i).getAttributes();
 
+                NamedNodeMap attributes = nl.item(i).getAttributes();
                 if (attributes.getNamedItem("syntax") != null) {
                     syntax = attributes.getNamedItem("syntax").getNodeValue();
                 }
@@ -215,22 +221,27 @@ public class XMLParser {
                     desc = attributes.getNamedItem("desc").getNodeValue();
                 }
 
+                if (attributes.getNamedItem("args") != null) {
+                    args = Integer.parseInt(attributes.getNamedItem("args").getNodeValue());
+                    nbrOfArgs = args;
+                }
+
                 if (attributes.getNamedItem("option") != null) {
                     question = attributes.getNamedItem("option").getNodeValue();
                     list.setQuestion(question);
-                    constructSyntaxNodeList(nl.item(i).getChildNodes(), parent, list, nextSequence);
+                    constructSyntaxNodeList(nl.item(i).getChildNodes(), parent, list, nextSequence, nbrOfArgs);
                 }
 
                 if (attributes.getNamedItem("child") != null) {
                     option = attributes.getNamedItem("child").getNodeValue();
 
-                    SyntaxNode mNextSequence = new SyntaxNode("");
+                    SyntaxNode mNextSequence = new SyntaxNode("");//This is a "holder" node to bind the child function calls nodes, contains no useful information in its syntax.
                     SyntaxNodeList mList = new SyntaxNodeList();
-                    constructSyntaxNodeList(nl.item(i).getChildNodes(), mNextSequence, mList, nextSequence);
+                    constructSyntaxNodeList(nl.item(i).getChildNodes(), mNextSequence, mList, nextSequence, nbrOfArgs);
 
-                    constructSyntaxNodeList(jumpToChild("child", option), parent, list, mNextSequence);
-                } else if (!syntax.isEmpty()) {
-                    System.out.println(syntax);
+                    constructSyntaxNodeList(jumpToChild("child", option), parent, list, mNextSequence, nbrOfArgs);
+                }
+                if (!syntax.isEmpty()) {
                     SyntaxNode node = new SyntaxNode(syntax);
                     node.setDesc(desc);
 
@@ -238,13 +249,16 @@ public class XMLParser {
 
                     SyntaxNodeList mList = new SyntaxNodeList();
 
-                    constructSyntaxNodeList(nl.item(i).getChildNodes(), node, mList, nextSequence);
+                    constructSyntaxNodeList(nl.item(i).getChildNodes(), node, mList, nextSequence, nbrOfArgs);
                 }
-                if ((currentNode <= actLength) && !parent.syntaxNodes.contains(list)) {
+
+                //Add the list to the current parent node list
+                if (!parent.syntaxNodes.contains(list)) {
                     parent.syntaxNodes.add(list);
-                    currentNode++;
-                    if (currentNode <= actLength)
-                        list = new SyntaxNodeList();
+                }
+                //Check if current node is multiple arg nodes i.e. add another list to its syntaxNodes.
+                if (currentArgs > 1 && parent.syntaxNodes.size() < currentArgs) {
+                    list = new SyntaxNodeList();
                 }
 
             }

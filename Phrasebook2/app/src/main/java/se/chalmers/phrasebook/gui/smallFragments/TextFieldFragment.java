@@ -1,4 +1,4 @@
-package se.chalmers.phrasebook.gui.fragments;
+package se.chalmers.phrasebook.gui.smallFragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

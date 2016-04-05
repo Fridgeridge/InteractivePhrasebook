@@ -2,7 +2,6 @@ package se.chalmers.phrasebook.gui.activities;
 
 
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -18,13 +17,12 @@ import java.util.Locale;
 
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
-import se.chalmers.phrasebook.gui.fragments.SpinnerFragment;
-import se.chalmers.phrasebook.gui.fragments.SwipeFragment;
-import se.chalmers.phrasebook.gui.fragments.TranslationFragment;
+import se.chalmers.phrasebook.gui.smallFragments.SwipeFragment;
+import se.chalmers.phrasebook.gui.smallFragments.TranslationFragment;
 import android.speech.tts.TextToSpeech;
 import android.widget.Toast;
 
-public class TranslatorActivity extends FragmentActivity implements SpinnerFragment.OnChangeListener{
+public class TranslatorActivity extends FragmentActivity {
 
     TranslationFragment translationFragment;
     SwipeFragment swipeFragment;
@@ -110,7 +108,6 @@ public class TranslatorActivity extends FragmentActivity implements SpinnerFragm
     }
 
 
-    @Override
     public void onOptionSelected(int dataIndex, String label, String newChoice) {
         model.update(dataIndex, label, newChoice);
 

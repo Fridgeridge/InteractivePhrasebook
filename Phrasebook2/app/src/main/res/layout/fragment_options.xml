@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="16dp"
-    tools:context=".gui.fragments.OptionsFragment">
+    tools:context=".gui.smallFragments.OptionsFragment">
 
     <ScrollView
         android:layout_width="match_parent"

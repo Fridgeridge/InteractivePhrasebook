@@ -25,8 +25,8 @@ public class ModularSyntaxNode extends SyntaxNode {
     public boolean setSelectedChild(String question, SyntaxNode updated) {
         if(questionToChildren.keySet().contains(question) &&
                 questionToChildren.get(question).contains(updated)) {
-            int index = super.questions.indexOf(question);
-            super.selectedChildren.set(index, updated);
+         //   int index = super.questions.indexOf(question);
+        //    super.selectedChildren.set(index, updated);
             return true;
         }
         return false;

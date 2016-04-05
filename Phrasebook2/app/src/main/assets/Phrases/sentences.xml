@@ -17,7 +17,7 @@
     <sentence desc="Somebody's name is..." id="AHasName">
         <node child="phraseit">
             <node syntax="PropAction">
-                <node syntax="AHasName" args ="2">
+                <node args="2" syntax="AHasName">
                     <option option="Who are we talking about?">
                         <node child="allpersons"></node>
                     </option>
@@ -56,7 +56,7 @@
     <sentence desc="Someone loves someone" id="ALove">
         <node child="phraseit">
             <node syntax="PropAction">
-                <node syntax="ALove" args = "2">
+                <node args="2" syntax="ALove">
                     <option option="Who loves someone?">
                         <node child="allpersons"></node>
                     </option>
@@ -82,24 +82,27 @@
     </sentence>
 
     <sentence desc="Adv" id="ADV">
-        <node syntax="PSentence (SProp (PropAction (AKnowSentence (Husband YouPolMale) (SProp (PropAction (AKnow (Wife YouPolMale)))))))"/>
+        <node
+            syntax="PSentence (SProp (PropAction (AKnowSentence (Husband YouPolMale) (SProp (PropAction (AKnow (Wife YouPolMale)))))))" />
     </sentence>
+
+
     <!-- works-->
     <sentence desc="Someone is scared" id="AScared">
-            <node syntax="SProp">
-                <node syntax="PropAction">
-                    <node syntax="AScared">
-                        <option option="Who are we talking about?">
-                            <node child="allpersons"></node>
-                        </option>
-                    </node>
+        <node child="phraseit">
+            <node syntax="PropAction">
+                <node syntax="AScared">
+                    <option option="Who are we talking about?">
+                        <node child="allpersons"></node>
+                    </option>
                 </node>
             </node>
+        </node>
     </sentence>
 
     <sentence desc="How far is something?" id="HowFar">
         <node syntax="PQuestion">
-            <node syntax="HowFar" args ="2">
+            <node args="2" syntax="HowFar">
                 <option option="Superlative">
                     <node child="superlative" />
                 </option>
@@ -112,24 +115,24 @@
 
 
     <sentence desc="Someone has children" id="AHasChildren">
-            <node child="phraseit">
-                <node syntax="PropAction">
-                    <node syntax="AHasChildren">
-                        <option option="Who are we talking about?">
-                            <node child="allpersons"></node>
-                        </option>
-                        <option option="How many children?">
-                            <node syntax="NNumeral"/>
-                        </option>
-                    </node>
+        <node child="phraseit">
+            <node syntax="PropAction">
+                <node args="2" syntax="AHasChildren">
+                    <option option="Who are we talking about?">
+                        <node child="allpersons"></node>
+                    </option>
+                    <option option="How many children?">
+                        <node syntax="NNumeral" />
+                    </option>
                 </node>
             </node>
+        </node>
     </sentence>
 
     <sentence desc="Someone lives somewhere" id="ALive">
         <node child="phraseit">
             <node syntax="PropAction">
-                <node syntax="ALive" args ="2">
+                <node args="2" syntax="ALive">
                     <option option="Who are we talking about?">
                         <node child="allpersons"></node>
                     </option>
@@ -185,12 +188,7 @@
     <sentence desc="Some place is closed" id="PropClosed">
         <node child="phraseit">
             <node syntax="PropClosed">
-                <option option="Superlative">
-                    <node child="superlative" />
-                </option>
-                <option option="What place are we asking about?">
-                    <node child="places" />
-                </option>
+                <node child="superlative_places" />
             </node>
         </node>
     </sentence>
@@ -198,13 +196,13 @@
     <sentence desc="Someone wants some food" id="AWant">
         <node child="phraseit">
             <node syntax="PropAction">
-                <node syntax="AWant">
+                <node args="2" syntax="AWant">
                     <option option="Who wants food?">
-                        <node child="allpersons" />
-                        <node syntax="OneObj">
-                            <option option="What is wanted?">
-                                <node child="objectsPrep" />
-                            </option>
+                        <node child="allpersons"></node>
+                    </option>
+                    <option option="What is wanted?">
+                        <node child="objectsPrep">
+                            <node child="food"></node>
                         </node>
                     </option>
                 </node>
@@ -219,26 +217,26 @@
     </child>
 
     <sentence desc="Adv options test" id="advancedStatement2">
-                <node child="phraseit">
-                    <node syntax="PropAction">
-                        <node syntax="AKnowSentence">
-                            <option option="Who knows this?">
-                                <node child="allpersons" />
-                            </option>
-                            <option option="">
-                                <node syntax="SProp">
-                                    <node syntax="PropAction">
-                                        <node syntax="AScared">
-                                            <option option="Who are we talking about?">
-                                                <node child="allpersons"></node>
-                                            </option>
-                                        </node>
-                                    </node>
+        <node child="phraseit">
+            <node syntax="PropAction">
+                <node syntax="AKnowSentence">
+                    <option option="Who knows this?">
+                        <node child="allpersons" />
+                    </option>
+                    <option option="">
+                        <node syntax="SProp">
+                            <node syntax="PropAction">
+                                <node syntax="AScared">
+                                    <option option="Who are we talking about?">
+                                        <node child="allpersons"></node>
+                                    </option>
                                 </node>
-                            </option>
+                            </node>
                         </node>
-                    </node>
+                    </option>
                 </node>
+            </node>
+        </node>
     </sentence>
 
     <child id="a sentence">
@@ -279,8 +277,10 @@
 
     <child id="superlative_places">
         <option option="What place are we asking about?">
-            <node child="superlative"></node>
-            <node child="places"></node>
+            <node child="superlative">
+                <node child="places"></node>
+            </node>
+
         </option>
     </child>
 
@@ -320,28 +320,30 @@
     </child>
 
     <child id="places">
-        <node desc="supermarket" syntax="Supermarket"></node>
-        <node desc="bank" syntax="Bank"></node>
-        <node desc="amusment park" syntax="AmusmentPark"></node>
-        <node desc="bar" syntax="Bar"></node>
-        <node desc="Cafeteria" syntax="Cafeteria"></node>
-        <node desc="car park" syntax="Parking"></node>
-        <node desc="center" syntax="Center"></node>
-        <node desc="cinema" syntax="Cinema"></node>
-        <node desc="church" syntax="Church"></node>
-        <node desc="disco" syntax="Disco"></node>
-        <node desc="hospital" syntax="Hospital"></node>
-        <node desc="hotel" syntax="Hotel"></node>
-        <node desc="museum" syntax="Museum"></node>
-        <node desc="park" syntax="Park"></node>
-        <node desc="pharmacy" syntax="Pharmacy"></node>
-        <node desc="post office" syntax="PostOffice"></node>
-        <node desc="pub" syntax="Pub"></node>
-        <node desc="restaurant" syntax="CitRestaurant">
-            <node child="nationality"></node>
-        </node>
-        <node desc="school" syntax="School"></node>
-        <node desc="shop" syntax="Shop"></node>
+        <option option="">
+            <node desc="supermarket" syntax="Supermarket"></node>
+            <node desc="bank" syntax="Bank"></node>
+            <node desc="amusment park" syntax="AmusmentPark"></node>
+            <node desc="bar" syntax="Bar"></node>
+            <node desc="Cafeteria" syntax="Cafeteria"></node>
+            <node desc="car park" syntax="Parking"></node>
+            <node desc="center" syntax="Center"></node>
+            <node desc="cinema" syntax="Cinema"></node>
+            <node desc="church" syntax="Church"></node>
+            <node desc="disco" syntax="Disco"></node>
+            <node desc="hospital" syntax="Hospital"></node>
+            <node desc="hotel" syntax="Hotel"></node>
+            <node desc="museum" syntax="Museum"></node>
+            <node desc="park" syntax="Park"></node>
+            <node desc="pharmacy" syntax="Pharmacy"></node>
+            <node desc="post office" syntax="PostOffice"></node>
+            <node desc="pub" syntax="Pub"></node>
+            <node desc="restaurant" syntax="CitRestaurant">
+                <node child="nationality"></node>
+            </node>
+            <node desc="school" syntax="School"></node>
+            <node desc="shop" syntax="Shop"></node>
+        </option>
     </child>
 
     <child id="superlative">
@@ -412,50 +414,41 @@
         </option>
     </child>
 
+
+    <!-- Not working fully with a/an-->
     <child id="objectsPrep">
-        <node desc="a/an">
-            <node syntax="ObjMass">
-                <option option="">
-                    <node child="objects" />
-                </option>
-            </node>
-        </node>
-        <node desc="the" syntax="ObjItem">
-            <node syntax="TheMass">
-                <option option="">
-                    <node child="objects" />
-                </option>
-            </node>
-        </node>
-        <node desc="this" syntax="ObjItem">
-            <node syntax="ThisMass">
-                <option option="">
-                    <node child="objects" />
-                </option>
-            </node>
-        </node>
-        <node desc="that" syntax="ObjItem">
-            <node syntax="ThatMass">
-                <option option="">
-                    <node child="objects" />
-                </option>
-            </node>
+
+        <node syntax="OneObj">
+            <option option="">
+                <node desc="a/an" syntax="ObjMass"></node>
+                <node desc="the" syntax="ObjItem">
+                    <node syntax="TheMass"></node>
+                </node>
+                <node desc="this" syntax="ObjItem">
+                    <node syntax="ThisMass"></node>
+                </node>
+                <node desc="that" syntax="ObjItem">
+                    <node syntax="ThatMass"></node>
+                </node>
+            </option>
         </node>
     </child>
 
-    <child id="objects">
-        <node desc="Beer" syntax="MassDrink Beer"></node>
-        <node desc="Bread" syntax="Bread"></node>
-        <node desc="Cheese" syntax="Cheese"></node>
-        <node desc="Chicken" syntax="Chicken"></node>
-        <node desc="Coffee" syntax="MassDrink Coffee"></node>
-        <node desc="Fish" syntax="Fish"></node>
-        <node desc="Meat" syntax="Meat"></node>
-        <node desc="Milk" syntax="Milk"></node>
-        <node desc="Salt" syntax="Salt"></node>
-        <node desc="Tea" syntax="MassDrink Tea"></node>
-        <node desc="Water" syntax="MassDrink Water"></node>
-        <node desc="Wine" syntax="MassDrink Wine"></node>
+    <child id="food">
+        <option option="">
+            <node desc="Beer" syntax="MassDrink Beer"></node>
+            <node desc="Bread" syntax="Bread"></node>
+            <node desc="Cheese" syntax="Cheese"></node>
+            <node desc="Chicken" syntax="Chicken"></node>
+            <node desc="Coffee" syntax="MassDrink Coffee"></node>
+            <node desc="Fish" syntax="Fish"></node>
+            <node desc="Meat" syntax="Meat"></node>
+            <node desc="Milk" syntax="Milk"></node>
+            <node desc="Salt" syntax="Salt"></node>
+            <node desc="Tea" syntax="MassDrink Tea"></node>
+            <node desc="Water" syntax="MassDrink Water"></node>
+            <node desc="Wine" syntax="MassDrink Wine"></node>
+        </option>
     </child>
 
 </phrasebook>

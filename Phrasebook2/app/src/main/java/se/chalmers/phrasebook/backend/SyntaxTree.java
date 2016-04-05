@@ -4,6 +4,7 @@ package se.chalmers.phrasebook.backend;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
+
 /**
  * Created by Björn on 2016-02-26.
  */
@@ -23,12 +24,13 @@ public class SyntaxTree {
     //creates an ArrayList och LinkedHashMaps, each representing
     //a currently available option to be customized.
     private void initializeOptions(SyntaxNode currentRoot) {
-        if (currentRoot.isModular()) {
+        if(currentRoot.isModular()) {
             LinkedHashMap<String, SyntaxNode> selection
                     = new LinkedHashMap<>();
-            for (String s : currentRoot.getQuestions()) {
-                selection.put(s, currentRoot);
-                for (SyntaxNode n : currentRoot.getChildren()) {
+            for(SyntaxNodeList l : currentRoot.getSyntaxNodes()) {
+                selection.put(l.getQuestion(), currentRoot);
+                for(SyntaxNode n : l.getChildren()) {
+                    System.out.println(n.getDesc() + " : " + n.getData());
                     selection.put(n.getDesc(), n);
                 }
 
@@ -36,38 +38,12 @@ public class SyntaxTree {
                     options.add((LinkedHashMap<String, SyntaxNode>) selection.clone());
                     selection.clear();
                 }
-                initializeOptions(currentRoot.getSelectedChildren().
-                        get(currentRoot.getQuestions().indexOf(s)));
+                initializeOptions(l.getSelectedChild());
             }
         }
-        else if (currentRoot.getSelectedChildren() != null) {
-            for (SyntaxNode n : currentRoot.getSelectedChildren()) {
-                initializeOptions(n);
-            }
-        }
-    }
-
-    private void initializeOptions2(SyntaxNode currentRoot) {
-        if (currentRoot.isModular()) {
-            LinkedHashMap<String, SyntaxNode> selection
-                    = new LinkedHashMap<>();
-            for (String s : currentRoot.getQuestionToChildren().keySet()) {
-                selection.put(s, currentRoot);
-                for (SyntaxNode n : currentRoot.getQuestionToChildren().get(s)) {
-                    selection.put(n.getDesc(), n);
-                }
-
-                if(!options.contains(selection)) {
-                    options.add((LinkedHashMap<String, SyntaxNode>) selection.clone());
-                    selection.clear();
-                }
-                initializeOptions(currentRoot.getSelectedChildren().
-                        get(currentRoot.getQuestions().indexOf(s)));
-            }
-        }
-        else if (currentRoot.getSelectedChildren() != null) {
-            for (SyntaxNode n : currentRoot.getSelectedChildren()) {
-                initializeOptions2(n);
+        else if (currentRoot.getSyntaxNodes() != null && currentRoot.getSyntaxNodes().size() > 0) {
+            for (SyntaxNodeList n : currentRoot.getSyntaxNodes()) {
+                initializeOptions(n.getSelectedChild());
             }
         }
     }
@@ -84,20 +60,21 @@ public class SyntaxTree {
      */
     //TODO REALLY UGLY SOLUTION, TRY TO FIX IT WITHOUT 'instanceof' FOR NUMERALSYNTAXNODE
     public boolean setSelectedChild(SyntaxNode parent, int listIndex, String newChild, String question) {
-        if(parent.getChildren().get(0) instanceof NumeralSyntaxNode) {
-            if(!((NumeralSyntaxNode)parent).setSelectedChild(question, newChild)) {
-                return false;
-            }
+        if(parent.getSyntaxNodes().get(0).getChildren().get(0) instanceof NumeralSyntaxNode) {
+            ((NumeralSyntaxNode)parent).setSelectedChild(newChild);
             options.clear();
             this.initializeOptions(root);
             return true;
         }
-        if (!parent.setSelectedChild(question, (SyntaxNode)options.get(listIndex).get(newChild))) {
-            return false;
+        for(int i = 0; i < parent.getSyntaxNodes().size(); i++) {
+            if(parent.getSyntaxNodes().get(i).getQuestion().equals(question)) {
+                parent.setSelectedChild(i, (SyntaxNode)options.get(listIndex).get(newChild));
+                options.clear();
+                this.initializeOptions(root);
+                return true;
+            }
         }
-        options.clear();
-        this.initializeOptions(root);
-        return true;
+        return false;
     }
 
     /**
@@ -113,16 +90,17 @@ public class SyntaxTree {
     // Builds recursively from root node to parse syntax
     //the getSyntax() method acts as a wrapper
     private String parseSentenceSyntax(SyntaxNode node) {
-        if (!node.hasChildren()) {
+
+        if (node.getSyntaxNodes().size() < 1) {
             return node.getData();
         } else {
             String syntax = node.getData();
-            for (int i = 0; i < node.getSelectedChildren().size(); i++) {
-                if (node.getSelectedChildren().get(i).getData().isEmpty()) {
-                    syntax = syntax + parseSentenceSyntax(node.getSelectedChildren().get(i));
+            for (int i = 0; i < node.getSyntaxNodes().size(); i++) {
+                if (node.getSyntaxNodes().get(i).getSelectedChild().getData().isEmpty()) {
+                    syntax = syntax + parseSentenceSyntax(node.getSyntaxNodes().get(i).getSelectedChild());
                 } else {
-                    syntax = syntax + "(" + parseSentenceSyntax(node.getSelectedChildren().get(i)) + ")";
-                    if (node.getSelectedChildren().size() > 1) {
+                    syntax = syntax + "(" + parseSentenceSyntax(node.getSyntaxNodes().get(i).getSelectedChild()) + ")";
+                    if (node.getSyntaxNodes().size() > 1) {
                         syntax = syntax + " ";
                     }
                 }
@@ -133,10 +111,8 @@ public class SyntaxTree {
     }
 
     private SyntaxNode getSentenceHead() {
-        if (root != null) {
-            return root.getSelectedChildren().get(0);
-        } else {
-            return null;
-        }
+        if(root.getSyntaxNodes().get(0)!=null)
+            return root.getSyntaxNodes().get(0).getSelectedChild();//TODO Might cause bugs
+        return null;
     }
 }

@@ -70,128 +70,20 @@ public class XMLParser {
         return sentenceMap;
     }
 
-    //Wrapper which constructs a syntax tree from a set of nodes extracted from XML.
-    public SyntaxTree buildSyntaxTree2(Node root) {
-        return new SyntaxTree(constructSentence2(root));
-    }
-
-    //recursivly takes the data from the node and transers it to a SyntaxNode, finally
-    //adding it as a child to the current syntax root. When all children are added, the root
-    //is returned to the wrapper which uses this SyntaxNode to create a SyntaxTree.
-    private SyntaxNode constructSentence2(Node current) {
-
-        //These may be subject to change if we alter the XML-file structure
-        SyntaxNode currentRoot = new SyntaxNode(current.getNodeValue());
-        currentRoot.setDescription(current.getNodeName());
-
-
-        if (current.hasChildNodes()) {
-            NodeList children = current.getChildNodes();
-
-            for (int i = 0; i < children.getLength(); i++) {
-                if (children.item(i) != null && (children.item(i).getNodeType()
-                        == Node.ELEMENT_NODE) && children.item(i).getAttributes() != null) {
-                    String syntax = "", desc = "", question = "", option;
-                    NamedNodeMap attributes = children.item(i).getAttributes();
-
-                    if (attributes.getNamedItem("syntax") != null) {
-                        syntax = attributes.getNamedItem("syntax").getNodeValue();
-                    }
-
-                    if (attributes.getNamedItem("desc") != null) {
-                        desc = attributes.getNamedItem("desc").getNodeValue();
-                    }
-
-                    if (attributes.getNamedItem("question") != null) {
-                        question = attributes.getNamedItem("question").getNodeValue();
-                    }
-
-                    if (attributes.getNamedItem("child") != null) {
-                        option = attributes.getNamedItem("child").getNodeValue();
-
-                        //Här har parent lagts till
-                        //      currentRoot.addChild(constructSentence2(children.item(i)), currentRoot);
-                    }
-                }
-            }
-        }
-        return currentRoot;
-    }
 
     public SyntaxTree buildSyntaxTree(NodeList currentRoot) {
-        SyntaxTree l = new SyntaxTree(constructSyntaxNodeList(currentRoot, new SyntaxNode("Root"), new SyntaxNodeList(), null, 1));
-        SyntaxTree s = new SyntaxTree(constructSentence(currentRoot, new SyntaxNode("root")));
+        SyntaxTree s = new SyntaxTree(constructSyntaxNodeList(currentRoot, new SyntaxNode("Root"), new SyntaxNodeList(), null, 1));
         return s;
     }
 
-    private SyntaxNode constructSentence(NodeList nl, SyntaxNode parent) {
-        if (nl == null || nl.getLength() < 1) {
-            return parent;
-        }
-        int length = nl.getLength();
-        for (int i = 0; i < length; i++) {
-            if (nl.item(i) != null && (nl.item(i).getNodeType() == Node.ELEMENT_NODE) && nl.item(i).getAttributes() != null) {
-                String syntax = "", desc = "", question = "", option = "";
-                NamedNodeMap attributes = nl.item(i).getAttributes();
-
-                if (attributes.getNamedItem("syntax") != null) {
-                    syntax = attributes.getNamedItem("syntax").getNodeValue();
-                }
-
-                if (attributes.getNamedItem("desc") != null) {
-                    desc = attributes.getNamedItem("desc").getNodeValue();
-                }
-
-
-                if (attributes.getNamedItem("question") != null) {
-                    question = attributes.getNamedItem("question").getNodeValue();
-                }
-
-                if (nl.item(i).getNodeName().equals("option") && attributes.getNamedItem("option") != null) {
-                    parent.setNmbrOfSelectedChildren(parent.getNmbrOfSelectedChildren() + 1);
-                    parent.addQuestion(question = attributes.getNamedItem("option").getNodeValue());
-
-
-                    SyntaxNodeList list = new SyntaxNodeList();
-                    list.setQuestion(question);
-
-
-                    constructSentence(nl.item(i).getChildNodes(), parent);
-                }
-
-                if (attributes.getNamedItem("child") != null) {
-                    option = attributes.getNamedItem("child").getNodeValue();
-
-                    SyntaxNode nextSequence = new SyntaxNode("");
-                    constructSentence(nl.item(i).getChildNodes(), nextSequence);
-                    constructChildSequence(jumpToChild("child", option), parent, nextSequence);
-                    System.out.println(nextSequence);
-                }
-                if (!syntax.isEmpty()) {
-                    SyntaxNode node;
-                    if (syntax.equals("NNumeral")) {
-                        node = new NumeralSyntaxNode();
-                    } else {
-                        node = new SyntaxNode(syntax);
-                        node.setDesc(desc);
-                    }
-                    parent.addChild(node);
-
-                    constructSentence(nl.item(i).getChildNodes(), node);//Do not return
-                }
-
-
-            }
-        }
-        return parent;
-    }
-
-
+    /*
+    "Abandon all hope, ye who enter here
+     */
     private SyntaxNode constructSyntaxNodeList(NodeList nl, SyntaxNode parent, SyntaxNodeList list, SyntaxNode nextSequence, int nbrOfArgs) {
         if (nl == null || nl.getLength() < 1) {
             if (nextSequence != null) {
                 list.add(nextSequence);
-                parent.syntaxNodes.add(list);
+                parent.getSyntaxNodes().add(list);
             }
             return null;
         }
@@ -242,8 +134,15 @@ public class XMLParser {
                     constructSyntaxNodeList(jumpToChild("child", option), parent, list, mNextSequence, nbrOfArgs);
                 }
                 if (!syntax.isEmpty()) {
-                    SyntaxNode node = new SyntaxNode(syntax);
-                    node.setDesc(desc);
+                    SyntaxNode node;
+
+                    if (syntax.equals("NNumeral")) {
+                        node = new NumeralSyntaxNode();
+                    } else {
+                        node = new SyntaxNode(syntax);
+                        node.setDesc(desc);
+                    }
+
 
                     list.add(node);
 
@@ -253,11 +152,11 @@ public class XMLParser {
                 }
 
                 //Add the list to the current parent node list
-                if (!parent.syntaxNodes.contains(list)) {
-                    parent.syntaxNodes.add(list);
+                if (!parent.getSyntaxNodes().contains(list)) {
+                    parent.getSyntaxNodes().add(list);
                 }
                 //Check if current node is multiple arg nodes i.e. add another list to its syntaxNodes.
-                if (currentArgs > 1 && parent.syntaxNodes.size() < currentArgs) {
+                if (currentArgs > 1 && parent.getSyntaxNodes().size() < currentArgs) {
                     list = new SyntaxNodeList();
                 }
 
@@ -265,54 +164,6 @@ public class XMLParser {
         }
         return parent;
 
-    }
-
-    private SyntaxNode constructChildSequence(NodeList nl, SyntaxNode parent, SyntaxNode nextSequence) {
-        if (nl == null || nl.getLength() < 1) {
-            parent.addChild(nextSequence);
-            return parent;
-        }
-        int length = nl.getLength();
-        for (int i = 0; i < length; i++) {
-            if (nl.item(i) != null && (nl.item(i).getNodeType() == Node.ELEMENT_NODE) && nl.item(i).getAttributes() != null) {
-                String syntax = "", desc = "", question = "", option = "";
-                NamedNodeMap attributes = nl.item(i).getAttributes();
-
-                if (attributes.getNamedItem("syntax") != null) {
-                    syntax = attributes.getNamedItem("syntax").getNodeValue();
-                }
-
-                if (attributes.getNamedItem("desc") != null) {
-                    desc = attributes.getNamedItem("desc").getNodeValue();
-                }
-
-
-                if (attributes.getNamedItem("question") != null) {
-                    question = attributes.getNamedItem("question").getNodeValue();
-                }
-
-                if (nl.item(i).getNodeName().equals("option") && attributes.getNamedItem("option") != null) {
-                    parent.setNmbrOfSelectedChildren(parent.getNmbrOfSelectedChildren() + 1);
-                    parent.addQuestion(option = attributes.getNamedItem("option").getNodeValue());
-                    SyntaxNode node = constructChildSequence(nl.item(i).getChildNodes(), parent, nextSequence);
-                }
-
-                if (attributes.getNamedItem("child") != null) {
-                    option = attributes.getNamedItem("child").getNodeValue();
-                    SyntaxNode node = constructChildSequence(jumpToChild("child", option), parent, nextSequence);
-                }
-                if (!syntax.isEmpty()) {
-                    SyntaxNode node = new SyntaxNode(syntax);
-                    parent.addChild(node);
-                    node.setDesc(desc);
-
-                    constructChildSequence(nl.item(i).getChildNodes(), node, nextSequence);//Do not return
-                }
-
-
-            }
-        }
-        return parent;
     }
 
     public NodeList jumpToChild(String tag, String id) {

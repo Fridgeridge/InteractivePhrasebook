@@ -7,28 +7,45 @@ import java.util.ArrayList;
  */
 public class SyntaxNodeList {
     private SyntaxNode selectedChild;
-    private ArrayList<SyntaxNode> altChildren;
-
+    private ArrayList<SyntaxNode> children;
     private String question;
 
 
     public SyntaxNodeList() {
-       altChildren = new ArrayList<SyntaxNode>();
+        children = new ArrayList<SyntaxNode>();
     }
 
+    public ArrayList<SyntaxNode> getChildren() {
+        System.out.println(children.size());
+        return children;
+    }
 
     public boolean add(SyntaxNode object) {
         if (selectedChild == null)
             selectedChild = object;
-            return altChildren.add(object);
+        return children.add(object);
     }
 
     public SyntaxNode getSelectedChild() {
         return selectedChild;
     }
 
-    public void setSelectedChild(SyntaxNode selectedChild) {
-        this.selectedChild = selectedChild;
+    public boolean setSelectedChild(SyntaxNode selectedChild) {
+        if(children.contains(selectedChild)) {
+            this.selectedChild = selectedChild;
+            return true;
+        }
+        return false;
+    }
+
+    public boolean selectChild(String description) {
+        for (SyntaxNode s : children) {
+            if (s.getDesc().equals(description)) {
+                setSelectedChild(s);
+                return true;
+            }
+        }
+        return false;
     }
 
     public String getQuestion() {

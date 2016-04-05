@@ -21,7 +21,7 @@ public class SwipeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.fragment_swipe, container, false);
+        view = inflater.inflate(R.layout.small_fragment_swipe, container, false);
 
         pager = (ViewPager)view.findViewById(R.id.vpPager);
 

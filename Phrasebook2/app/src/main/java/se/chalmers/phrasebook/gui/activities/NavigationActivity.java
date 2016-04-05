@@ -1,6 +1,8 @@
 package se.chalmers.phrasebook.gui.activities;
 
 import android.app.ActionBar;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
@@ -15,7 +17,9 @@ import android.support.v4.widget.DrawerLayout;
 
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
+import se.chalmers.phrasebook.gui.fragments.ChangeLanguageFragment;
 import se.chalmers.phrasebook.gui.fragments.DefaultPhrasebooksFragment;
+import se.chalmers.phrasebook.gui.fragments.MyPhrasebooksFragment;
 import se.chalmers.phrasebook.gui.fragments.NavigationDrawerFragment;
 import se.chalmers.phrasebook.gui.fragments.PhraseListFragment;
 import se.chalmers.phrasebook.gui.fragments.TranslatorFragment;
@@ -40,13 +44,16 @@ public class NavigationActivity extends FragmentActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_navigation);
 
         model = Model.getInstance();
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
+
+        getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#4db6ac")));
+
 
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(
@@ -61,9 +68,13 @@ public class NavigationActivity extends FragmentActivity
 
         switch (position) {
             case 0:
-
                 switchContent(DefaultPhrasebooksFragment.newInstance(1));
-
+                break;
+            case 1:
+                switchContent(new MyPhrasebooksFragment());
+                break;
+            case 2:
+                switchContent(new ChangeLanguageFragment());
                 break;
         }
 

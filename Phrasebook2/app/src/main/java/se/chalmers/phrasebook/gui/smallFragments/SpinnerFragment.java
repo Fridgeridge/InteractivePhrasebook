@@ -1,6 +1,5 @@
 package se.chalmers.phrasebook.gui.smallFragments;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -54,7 +53,7 @@ public class SpinnerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_spinner, container, false);
+        View view = inflater.inflate(R.layout.small_fragment_spinner, container, false);
 
         TextView textView = (TextView) view.findViewById(R.id.text_view_spinner);
         spinner = (Spinner) view.findViewById(R.id.choice_spinner);

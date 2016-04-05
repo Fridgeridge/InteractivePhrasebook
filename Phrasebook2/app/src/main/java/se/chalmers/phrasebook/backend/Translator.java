@@ -27,11 +27,11 @@ public class Translator {
     public String translate(Concr lang, String abstractSyntax) {
         String s = "Error";
         try {
-            Expr e = Expr.readExpr(abstractSyntax);
-            s = lang.linearize(e);
+            Expr expr = Expr.readExpr(abstractSyntax);
+            s = lang.linearize(expr);
         } catch (PGFError e) {
-            Log.e("TranslationError", "Error while parsing XML syntax: " + abstractSyntax + "\n and PGF syntax:"+e.toString());
-        }finally{
+            Log.e("TranslationError", "Error while parsing XML syntax: " + abstractSyntax + "\n with Error: " + e.toString());
+        } finally {
             return s;
         }
     }
@@ -63,6 +63,7 @@ public class Translator {
         }
         return true;
     }
+
 
     public String[] getLanguages() {
         Set<String> strings = pgf.getLanguages().keySet();

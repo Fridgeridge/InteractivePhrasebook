@@ -25,6 +25,8 @@ public class Model {
 
     private Translator translator;
     private XMLParser parser;
+    private TTSHandler ttsHandler;
+
 
     private ArrayList<PhraseBook> phrasebooks;
     private String originLanguage, targetLanguage;
@@ -49,6 +51,8 @@ public class Model {
         targetLanguage = Langs.getKey("English");
         origin = Langs.ENGLISH;
         target = Langs.ENGLISH;
+
+        ttsHandler = new TTSHandler(instance,target);
     }
 
     public static Model getInstance() {
@@ -83,6 +87,7 @@ public class Model {
     public void update(int listIndex, String parent, String newOption) {
         currentPhrase.setSelectedChild(((SyntaxNode) currentPhrase.getOptions().get(listIndex).get(parent)),
                 listIndex, newOption, parent);
+        playCurrentTargetPhrase();
     }
 
     public boolean isNodeSelected(SyntaxNode node, LinkedHashMap options) {
@@ -130,6 +135,12 @@ public class Model {
     }
 
 
+
+    public void playCurrentTargetPhrase(){
+        ttsHandler.playSentence(translateToTarget());
+    }
+
+
     public String translateToOrigin() {
         return translator.translateToOrigin(getCurrentPhrase().getSyntax());
     }
@@ -148,6 +159,7 @@ public class Model {
         target = Langs.getLang(targetLanguage);
         this.targetLanguage = targetLanguage;
         translator.setTargetLanguage(targetLanguage);
+        ttsHandler.setTargetTTSLanguage(target);
     }
 
     public void setCurrentPhrasebook(String phrasebook) {
@@ -176,7 +188,6 @@ public class Model {
     public Langs getTargetLang(){
         return target;
     }
-
 
     public String getCurrentPhrasebook() {
         return currentPhrasebook;

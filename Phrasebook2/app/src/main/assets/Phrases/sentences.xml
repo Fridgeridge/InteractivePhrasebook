@@ -13,6 +13,15 @@
         </node>
     </sentence>
 
+    <sentence desc="HelloStranger" id="HelloStranger">
+        <node syntax="Greetings">
+            <option option="Who are we talking about?">
+                <node child="allpersons"></node>
+            </option>
+        </node>
+    </sentence>
+
+
     <!--works-->
     <sentence desc="Somebody's name is..." id="AHasName">
         <node child="phraseit">
@@ -174,16 +183,16 @@
 
     <sentence desc="Some place is open" id="PropOpen">
         <node child="phraseit">
-                <node syntax="PropOpen">
-                    <node args="2" syntax=" ">
-                        <option option="Superlative">
-                            <node child="superlative" />
-                        </option>
-                        <option option="What place are we asking about?">
-                            <node child="places" />
-                        </option>
-                    </node>
+            <node syntax="PropOpen">
+                <node args="2" syntax=" ">
+                    <option option="Superlative">
+                        <node child="superlative" />
+                    </option>
+                    <option option="What place are we asking about?">
+                        <node child="places" />
+                    </option>
                 </node>
+            </node>
         </node>
     </sentence>
 
@@ -223,8 +232,7 @@
             <node syntax="PropAction">
                 <node args="2" syntax="AKnowSentence">
                     <option option="Who knows this?">
-                        <node child="allpersons">
-                        </node>
+                        <node child="allpersons"></node>
                     </option>
                     <option option=" ">
                         <node syntax="SProp">
@@ -323,38 +331,38 @@
     </child>
 
     <child id="places">
-            <node desc="supermarket" syntax="Supermarket"></node>
-            <node desc="bank" syntax="Bank"></node>
-            <node desc="amusment park" syntax="AmusmentPark"></node>
-            <node desc="bar" syntax="Bar"></node>
-            <node desc="Cafeteria" syntax="Cafeteria"></node>
-            <node desc="car park" syntax="Parking"></node>
-            <node desc="center" syntax="Center"></node>
-            <node desc="cinema" syntax="Cinema"></node>
-            <node desc="church" syntax="Church"></node>
-            <node desc="disco" syntax="Disco"></node>
-            <node desc="hospital" syntax="Hospital"></node>
-            <node desc="hotel" syntax="Hotel"></node>
-            <node desc="museum" syntax="Museum"></node>
-            <node desc="park" syntax="Park"></node>
-            <node desc="pharmacy" syntax="Pharmacy"></node>
-            <node desc="post office" syntax="PostOffice"></node>
-            <node desc="pub" syntax="Pub"></node>
-            <node desc="restaurant" syntax="CitRestaurant">
-                <node child="nationality"></node>
-            </node>
-            <node desc="school" syntax="School"></node>
-            <node desc="shop" syntax="Shop"></node>
+        <node desc="supermarket" syntax="Supermarket"></node>
+        <node desc="bank" syntax="Bank"></node>
+        <node desc="amusment park" syntax="AmusmentPark"></node>
+        <node desc="bar" syntax="Bar"></node>
+        <node desc="Cafeteria" syntax="Cafeteria"></node>
+        <node desc="car park" syntax="Parking"></node>
+        <node desc="center" syntax="Center"></node>
+        <node desc="cinema" syntax="Cinema"></node>
+        <node desc="church" syntax="Church"></node>
+        <node desc="disco" syntax="Disco"></node>
+        <node desc="hospital" syntax="Hospital"></node>
+        <node desc="hotel" syntax="Hotel"></node>
+        <node desc="museum" syntax="Museum"></node>
+        <node desc="park" syntax="Park"></node>
+        <node desc="pharmacy" syntax="Pharmacy"></node>
+        <node desc="post office" syntax="PostOffice"></node>
+        <node desc="pub" syntax="Pub"></node>
+        <node desc="restaurant" syntax="CitRestaurant">
+            <node child="nationality"></node>
+        </node>
+        <node desc="school" syntax="School"></node>
+        <node desc="shop" syntax="Shop"></node>
     </child>
 
     <child id="superlative">
         <node desc="(no superlative)" syntax="ThePlace"></node>
-        <node desc="best" syntax="SuperIPlace TheBest"></node>
-        <node desc="worst" syntax="SuperIPlace TheWorst"></node>
-        <node desc="nearest" syntax="SuperIPlace TheClosest"></node>
-        <node desc="cheapest" syntax="SuperIPlace TheCheapest"></node>
-        <node desc="most expensive" syntax="SuperIPlace TheMostExpensive"></node>
-        <node desc="most popular" syntax="SuperIPlace TheMostPopular"></node>
+        <node desc="best" syntax="SuperlPlace TheBest"></node>
+        <node desc="worst" syntax="SuperlPlace TheWorst"></node>
+        <node desc="nearest" syntax="SuperlPlace TheClosest"></node>
+        <node desc="cheapest" syntax="SuperlPlace TheCheapest"></node>
+        <node desc="most expensive" syntax="SuperlPlace TheMostExpensive"></node>
+        <node desc="most popular" syntax="SuperlPlace TheMostPopular"></node>
     </child>
 
     <child id="persons">

@@ -113,16 +113,17 @@ public class SyntaxTree {
     // Builds recursively from root node to parse syntax
     //the getSyntax() method acts as a wrapper
     private String parseSentenceSyntax(SyntaxNode node) {
-        if (!node.hasChildren()) {
+
+        if (node.getSyntaxNodes().size() < 1) {
             return node.getData();
         } else {
             String syntax = node.getData();
-            for (int i = 0; i < node.getSelectedChildren().size(); i++) {
-                if (node.getSelectedChildren().get(i).getData().isEmpty()) {
-                    syntax = syntax + parseSentenceSyntax(node.getSelectedChildren().get(i));
+            for (int i = 0; i < node.getSyntaxNodes().size(); i++) {
+                if (node.getSyntaxNodes().get(i).getSelectedChild().getData().isEmpty()) {
+                    syntax = syntax + parseSentenceSyntax(node.getSyntaxNodes().get(i).getSelectedChild());
                 } else {
-                    syntax = syntax + "(" + parseSentenceSyntax(node.getSelectedChildren().get(i)) + ")";
-                    if (node.getSelectedChildren().size() > 1) {
+                    syntax = syntax + "(" + parseSentenceSyntax(node.getSyntaxNodes().get(i).getSelectedChild()) + ")";
+                    if (node.getSyntaxNodes().size() > 1) {
                         syntax = syntax + " ";
                     }
                 }
@@ -133,10 +134,8 @@ public class SyntaxTree {
     }
 
     private SyntaxNode getSentenceHead() {
-        if (root != null) {
-            return root.getSelectedChildren().get(0);
-        } else {
-            return null;
-        }
+        if(root.getSyntaxNodes().get(0)!=null)
+            return root.getSyntaxNodes().get(0).getSelectedChild();//TODO Might cause bugs
+        return null;
     }
 }

@@ -36,6 +36,14 @@ public class PhraseBook {
         this.title = title;
     }
 
+    public boolean updatePhrase(SyntaxTree updated, SyntaxTree old) {
+        if(phrases.contains(old)) {
+            phrases.add(phrases.indexOf(old), updated);
+            return true;
+        }
+        return false;
+    }
+
     public ArrayList<SyntaxTree> getPhrases() {
         return phrases;
     }

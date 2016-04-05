@@ -174,14 +174,16 @@
 
     <sentence desc="Some place is open" id="PropOpen">
         <node child="phraseit">
-            <node syntax="PropOpen">
-                <option option="Superlative">
-                    <node child="superlative" />
-                </option>
-                <option option="What place are we asking about?">
-                    <node child="places" />
-                </option>
-            </node>
+                <node syntax="PropOpen">
+                    <node args="2" syntax=" ">
+                        <option option="Superlative">
+                            <node child="superlative" />
+                        </option>
+                        <option option="What place are we asking about?">
+                            <node child="places" />
+                        </option>
+                    </node>
+                </node>
         </node>
     </sentence>
 
@@ -219,11 +221,12 @@
     <sentence desc="Adv options test" id="advancedStatement2">
         <node child="phraseit">
             <node syntax="PropAction">
-                <node syntax="AKnowSentence">
+                <node args="2" syntax="AKnowSentence">
                     <option option="Who knows this?">
-                        <node child="allpersons" />
+                        <node child="allpersons">
+                        </node>
                     </option>
-                    <option option="">
+                    <option option=" ">
                         <node syntax="SProp">
                             <node syntax="PropAction">
                                 <node syntax="AScared">
@@ -320,7 +323,6 @@
     </child>
 
     <child id="places">
-        <option option="">
             <node desc="supermarket" syntax="Supermarket"></node>
             <node desc="bank" syntax="Bank"></node>
             <node desc="amusment park" syntax="AmusmentPark"></node>
@@ -343,7 +345,6 @@
             </node>
             <node desc="school" syntax="School"></node>
             <node desc="shop" syntax="Shop"></node>
-        </option>
     </child>
 
     <child id="superlative">

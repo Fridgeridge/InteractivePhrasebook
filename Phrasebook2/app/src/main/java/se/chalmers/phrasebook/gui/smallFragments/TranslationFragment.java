@@ -28,7 +28,7 @@ public class TranslationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        translateView = inflater.inflate(R.layout.fragment_translation, container, false);
+        translateView = inflater.inflate(R.layout.small_fragment_translation, container, false);
 
         origin = (TextView) translateView.findViewById(R.id.origin_phrase);
         target = (TextView) translateView.findViewById(R.id.target_phrase);

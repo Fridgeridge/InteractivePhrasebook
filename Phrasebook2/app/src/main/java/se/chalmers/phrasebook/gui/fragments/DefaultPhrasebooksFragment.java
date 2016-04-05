@@ -1,8 +1,6 @@
 package se.chalmers.phrasebook.gui.fragments;
 
-import android.content.Context;
 import android.content.res.Resources;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -57,10 +55,10 @@ public class DefaultPhrasebooksFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_blank, container, false);
+        View view = inflater.inflate(R.layout.fragment_phrasebooks, container, false);
 
         Resources res = getResources();
-        String[] buttonNames = res.getStringArray(R.array.my_phrasebooks);
+        String[] buttonNames = res.getStringArray(R.array.phrasebooks_default);
         GridView gridView = (GridView) view.findViewById(R.id.standard_gridView);
         gridView.setAdapter(new PhrasebookButtonAdapter(getActivity().getApplicationContext(), buttonNames));
 

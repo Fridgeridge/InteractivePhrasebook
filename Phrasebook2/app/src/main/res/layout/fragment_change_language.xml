@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/translate_from_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
+        android:text="I want to translate from..."
+        android:textSize="20dp"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Spinner
+        android:id="@+id/origin_spinner1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
+        android:padding="8dp"
+        android:layout_below="@+id/textView6"
+        android:layout_gravity="left"
+        android:spinnerMode="dropdown" />
+
+    <TextView
+        android:id="@+id/translate_to_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
+        android:layout_below="@+id/origin_spinner"
+        android:text="and translate to..."
+        android:textSize="20dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_marginTop="@dimen/activity_margin"/>
+
+    <Spinner
+        android:id="@+id/target_spinner1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
+        android:padding="8dp"
+        android:layout_below="@+id/textView5"
+        android:layout_gravity="left"
+        android:spinnerMode="dropdown" />
+
+    <Button
+        android:id="@+id/apply_button"
+        android:layout_width="150dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center_vertical"
+        android:background="@color/primary_color"
+        android:clickable="true"
+        android:onClick="sendMessage"
+        android:text="Apply"
+        android:textColor="#ffffff"
+        android:textSize="25dp" />
+
+</LinearLayout>

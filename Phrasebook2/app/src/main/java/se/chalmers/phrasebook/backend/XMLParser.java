@@ -14,6 +14,11 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import se.chalmers.phrasebook.backend.syntax.NumeralSyntaxNode;
+import se.chalmers.phrasebook.backend.syntax.SyntaxNode;
+import se.chalmers.phrasebook.backend.syntax.SyntaxNodeList;
+import se.chalmers.phrasebook.backend.syntax.SyntaxTree;
+
 /**
  * Created by David on 2016-02-19.
  */

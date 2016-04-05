@@ -11,6 +11,8 @@ import java.util.Map;
 
 import se.chalmers.phrasebook.App;
 import se.chalmers.phrasebook.R;
+import se.chalmers.phrasebook.backend.syntax.SyntaxNode;
+import se.chalmers.phrasebook.backend.syntax.SyntaxTree;
 
 /**
  * Created by Björn on 2016-03-03.

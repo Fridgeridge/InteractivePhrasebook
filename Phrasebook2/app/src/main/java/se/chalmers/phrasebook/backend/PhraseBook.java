@@ -1,10 +1,8 @@
 package se.chalmers.phrasebook.backend;
 
-import org.grammaticalframework.pgf.Expr;
-
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
+
+import se.chalmers.phrasebook.backend.syntax.SyntaxTree;
 
 /**
  * A class representing a phrasebook containing sentences

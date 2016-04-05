@@ -1,6 +1,8 @@
-package se.chalmers.phrasebook.backend;
+package se.chalmers.phrasebook.backend.syntax;
 
 import java.util.ArrayList;
+
+import se.chalmers.phrasebook.backend.syntax.SyntaxNode;
 
 /**
  * Created by David on 2016-04-01.

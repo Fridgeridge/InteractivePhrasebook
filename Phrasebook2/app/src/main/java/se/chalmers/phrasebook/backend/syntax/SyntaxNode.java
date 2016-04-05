@@ -1,8 +1,6 @@
-package se.chalmers.phrasebook.backend;
+package se.chalmers.phrasebook.backend.syntax;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 
 /**
  * Created by Björn on 2016-03-03.

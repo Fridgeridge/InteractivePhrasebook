@@ -1,4 +1,4 @@
-package se.chalmers.phrasebook.backend;
+package se.chalmers.phrasebook.backend.syntax;
 
 
 import java.util.ArrayList;

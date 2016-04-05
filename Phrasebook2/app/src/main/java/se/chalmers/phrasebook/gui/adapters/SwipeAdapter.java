@@ -5,8 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import se.chalmers.phrasebook.backend.Model;
-import se.chalmers.phrasebook.backend.SyntaxTree;
-import se.chalmers.phrasebook.gui.fragments.OptionsFragment;
+import se.chalmers.phrasebook.gui.smallFragments.OptionsFragment;
 
 /**
  * Created by matilda on 15/03/16.

@@ -62,7 +62,7 @@ public class FirstUsageActivity extends Activity {
 
     //Starts the Home activity
     public void startApplication() {
-        Intent intent = new Intent(this, HomeScreenActivity.class);
+        Intent intent = new Intent(this, NavigationActivity.class);
         startActivity(intent);
     }
 

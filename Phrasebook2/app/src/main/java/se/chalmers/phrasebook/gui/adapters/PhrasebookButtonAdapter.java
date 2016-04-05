@@ -3,6 +3,7 @@ package se.chalmers.phrasebook.gui.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.v4.content.LocalBroadcastManager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -10,7 +11,7 @@ import android.widget.Button;
 
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
-import se.chalmers.phrasebook.gui.activities.PhraseListActivity;
+import se.chalmers.phrasebook.gui.activities.NavigationActivity;
 
 /**
  * Created by David on 2016-02-17.
@@ -21,6 +22,7 @@ public class PhrasebookButtonAdapter extends BaseAdapter {
     private String[] phrasebookNames;
 
     private Model model;
+    private NavigationActivity na;
 
     public PhrasebookButtonAdapter(Context context, String[] names) {
         this.context = context;
@@ -29,6 +31,8 @@ public class PhrasebookButtonAdapter extends BaseAdapter {
         phrasebookNames = names;
 
         model = Model.getInstance();
+        na = new NavigationActivity();
+
     }
 
 
@@ -50,7 +54,6 @@ public class PhrasebookButtonAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        //Kan det bli knas?
         final Button button;
 
         if (convertView == null) {
@@ -72,14 +75,23 @@ public class PhrasebookButtonAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
 
-                model.setCurrentPhrasebook((String)button.getText());
+                model.setCurrentPhrasebook((String) button.getText());
 
-                Intent intent = new Intent(context, PhraseListActivity.class);
-                context.startActivity(intent);
+                sendMessage("Tourism");
+
             }
         });
 
         return button;
+    }
+
+    private void sendMessage(String phrasebook){
+
+        Intent intent = new Intent();
+        intent.setAction("phrasebook_event");
+        intent.putExtra("message", phrasebook);
+        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+
     }
 
 }

@@ -22,7 +22,7 @@ public class SyntaxTree {
 
     //creates an ArrayList och LinkedHashMaps, each representing
     //a currently available option to be customized.
-    private void initializeOptions(SyntaxNode currentRoot) {
+   /* private void initializeOptions(SyntaxNode currentRoot) {
         if (currentRoot.isModular()) {
             LinkedHashMap<String, SyntaxNode> selection
                     = new LinkedHashMap<>();
@@ -45,9 +45,9 @@ public class SyntaxTree {
                 initializeOptions(n);
             }
         }
-    }
+    */}
 
-    private void initializeOptions2(SyntaxNode currentRoot) {
+    private void initializeOptions(SyntaxNode currentRoot) {
         if (currentRoot.isModular()) {
             LinkedHashMap<String, SyntaxNode> selection
                     = new LinkedHashMap<>();

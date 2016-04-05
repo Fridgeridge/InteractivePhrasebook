@@ -12,7 +12,8 @@ public class SyntaxNode {
     private String data;
     private String desc;
 
-    public ArrayList<SyntaxNodeList> syntaxNodes;//TODO set as private
+
+    private ArrayList<SyntaxNodeList> syntaxNodes;
 
 
     protected  List<SyntaxNode> children = new ArrayList<SyntaxNode>();
@@ -24,6 +25,10 @@ public class SyntaxNode {
     public SyntaxNode(String data) {
         syntaxNodes = new ArrayList<SyntaxNodeList>();
         this.data = data;
+    }
+
+    public ArrayList<SyntaxNodeList> getSyntaxNodes() {
+        return syntaxNodes;
     }
 
     public boolean addChild(SyntaxNode node) {

@@ -118,6 +118,7 @@ public class XMLParser {
         return currentRoot;
     }
 
+
     public SyntaxTree buildSyntaxTree(NodeList currentRoot) {
         SyntaxTree l = new SyntaxTree(constructSyntaxNodeList(currentRoot, new SyntaxNode("Root"), new SyntaxNodeList(), null, 1));
         SyntaxTree s = new SyntaxTree(constructSentence(currentRoot, new SyntaxNode("root")));
@@ -186,12 +187,14 @@ public class XMLParser {
         return parent;
     }
 
-
+    /*
+    "Abandon all hope, ye who enter here
+     */
     private SyntaxNode constructSyntaxNodeList(NodeList nl, SyntaxNode parent, SyntaxNodeList list, SyntaxNode nextSequence, int nbrOfArgs) {
         if (nl == null || nl.getLength() < 1) {
             if (nextSequence != null) {
                 list.add(nextSequence);
-                parent.syntaxNodes.add(list);
+                parent.getSyntaxNodes().add(list);
             }
             return null;
         }
@@ -253,11 +256,11 @@ public class XMLParser {
                 }
 
                 //Add the list to the current parent node list
-                if (!parent.syntaxNodes.contains(list)) {
-                    parent.syntaxNodes.add(list);
+                if (!parent.getSyntaxNodes().contains(list)) {
+                    parent.getSyntaxNodes().add(list);
                 }
                 //Check if current node is multiple arg nodes i.e. add another list to its syntaxNodes.
-                if (currentArgs > 1 && parent.syntaxNodes.size() < currentArgs) {
+                if (currentArgs > 1 && parent.getSyntaxNodes().size() < currentArgs) {
                     list = new SyntaxNodeList();
                 }
 

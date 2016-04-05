@@ -196,15 +196,15 @@
     <sentence desc="Someone wants some food" id="AWant">
         <node child="phraseit">
             <node syntax="PropAction">
-                <node syntax="AWant">
+                <node args="2" syntax="AWant">
                     <option option="Who wants food?">
-                        <node child="allpersons" />
-                        <node syntax="OneObj">
-                            <option option="What is wanted?">
-                                <node child="objectsPrep" />
-                            </option>
-                        </node>
+                        <node child="allpersons"></node>
                     </option>
+                    <node syntax="OneObj">
+                        <option option="What is wanted?">
+                            <node child="objectsPrep" />
+                        </option>
+                    </node>
                 </node>
             </node>
         </node>
@@ -414,13 +414,14 @@
         </option>
     </child>
 
+
+
+    <!-- Not working fully with a/an-->
     <child id="objectsPrep">
-        <node desc="a/an">
-            <node syntax="ObjMass">
-                <option option="">
-                    <node child="objects" />
-                </option>
-            </node>
+        <node desc="a/an" syntax="ObjMass">
+            <option option="">
+                <node child="objects" />
+            </option>
         </node>
         <node desc="the" syntax="ObjItem">
             <node syntax="TheMass">

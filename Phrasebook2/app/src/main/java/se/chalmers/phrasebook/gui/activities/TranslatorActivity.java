@@ -17,13 +17,12 @@ import java.util.Locale;
 
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
-import se.chalmers.phrasebook.gui.smallFragments.SpinnerFragment;
 import se.chalmers.phrasebook.gui.smallFragments.SwipeFragment;
 import se.chalmers.phrasebook.gui.smallFragments.TranslationFragment;
 import android.speech.tts.TextToSpeech;
 import android.widget.Toast;
 
-public class TranslatorActivity extends FragmentActivity implements SpinnerFragment.OnChangeListener{
+public class TranslatorActivity extends FragmentActivity {
 
     TranslationFragment translationFragment;
     SwipeFragment swipeFragment;
@@ -109,7 +108,6 @@ public class TranslatorActivity extends FragmentActivity implements SpinnerFragm
     }
 
 
-    @Override
     public void onOptionSelected(int dataIndex, String label, String newChoice) {
         model.update(dataIndex, label, newChoice);
 

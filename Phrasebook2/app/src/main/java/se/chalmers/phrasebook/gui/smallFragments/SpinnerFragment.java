@@ -1,8 +1,10 @@
 package se.chalmers.phrasebook.gui.smallFragments;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.LocalBroadcastManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,8 +30,6 @@ public class SpinnerFragment extends Fragment {
     private ArrayList<String> guiOptions;
     private String currentChoice;
     private Spinner spinner;
-
-    OnChangeListener mCallback;
 
     public static SpinnerFragment newInstance(int mapIndex) {
         SpinnerFragment spinnerFragment = new SpinnerFragment();
@@ -77,7 +77,7 @@ public class SpinnerFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(spinner.getSelectedItem().toString() != currentChoice) {
-                    mCallback.onOptionSelected(dataIndex, label, spinner.getSelectedItem().toString());
+                    sendMessage(dataIndex, label, spinner.getSelectedItem().toString());
                     currentChoice = spinner.getSelectedItem().toString();
                 }
             }
@@ -92,18 +92,14 @@ public class SpinnerFragment extends Fragment {
 
     }
 
-    public interface OnChangeListener {
-        public void onOptionSelected(int dataIndex, String label, String newChoice);
-    }
+    private void sendMessage(int dataIndex, String label, String newChoice){
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+        Intent intent = new Intent();
+        intent.setAction("gui_update");
+        intent.putExtra("dataIndex", dataIndex);
+        intent.putExtra("label", label);
+        intent.putExtra("newChoice", newChoice);
+        LocalBroadcastManager.getInstance(getActivity().getApplicationContext()).sendBroadcast(intent);
 
-        try {
-             mCallback = (OnChangeListener) activity;
-        } catch (ClassCastException e){
-            throw new ClassCastException(activity.toString() + " must implement OnChangeListener");
-        }
     }
 }

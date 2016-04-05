@@ -17,14 +17,16 @@ import android.support.v4.widget.DrawerLayout;
 
 
 import se.chalmers.phrasebook.R;
+import se.chalmers.phrasebook.backend.Model;
 import se.chalmers.phrasebook.gui.fragments.DefaultPhrasebooksFragment;
 import se.chalmers.phrasebook.gui.fragments.PhraseListFragment;
 import se.chalmers.phrasebook.gui.fragments.TranslatorFragment;
 import se.chalmers.phrasebook.gui.smallFragments.SpinnerFragment;
 import se.chalmers.phrasebook.gui.smallFragments.SwipeFragment;
+import se.chalmers.phrasebook.gui.smallFragments.TranslationFragment;
 
 public class NavigationActivity extends FragmentActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks, SpinnerFragment.OnChangeListener {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -38,10 +40,14 @@ public class NavigationActivity extends FragmentActivity
 
     private Fragment mContent;
 
+    private Model model;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        model = Model.getInstance();
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getFragmentManager().findFragmentById(R.id.navigation_drawer);
@@ -136,9 +142,4 @@ public class NavigationActivity extends FragmentActivity
         super.onPause();
     }
 
-
-    @Override
-    public void onOptionSelected(int dataIndex, String label, String newChoice) {
-
-    }
 }

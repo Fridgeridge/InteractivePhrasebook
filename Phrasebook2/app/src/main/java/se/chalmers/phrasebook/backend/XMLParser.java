@@ -232,6 +232,8 @@ public class XMLParser {
                 if (attributes.getNamedItem("option") != null) {
                     question = attributes.getNamedItem("option").getNodeValue();
                     list.setQuestion(question);
+                    parent.getQuestionToChildren().put(question,list.getChildren());
+                    
                     constructSyntaxNodeList(nl.item(i).getChildNodes(), parent, list, nextSequence, nbrOfArgs);
                 }
 

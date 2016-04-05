@@ -15,10 +15,10 @@ public class SyntaxNode {
 
     private ArrayList<SyntaxNodeList> syntaxNodes;
 
+    private LinkedHashMap<String, List<SyntaxNode>> questionToChildren = new LinkedHashMap<>();
 
     protected  List<SyntaxNode> children = new ArrayList<SyntaxNode>();
     protected List<SyntaxNode> selectedChildren = new ArrayList<SyntaxNode>();
-    private LinkedHashMap<String, List<SyntaxNode>> questionToChildren = new LinkedHashMap<>();
     protected List<String> questions = new ArrayList<String>();
     private int nmbrOfSelectedChildren = 0;
 

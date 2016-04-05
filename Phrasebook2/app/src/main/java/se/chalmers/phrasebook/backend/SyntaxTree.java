@@ -4,6 +4,7 @@ package se.chalmers.phrasebook.backend;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
+}
 /**
  * Created by Björn on 2016-02-26.
  */
@@ -44,13 +45,14 @@ public class SyntaxTree {
             for (SyntaxNode n : currentRoot.getSelectedChildren()) {
                 initializeOptions(n);
             }
-        }
-    */}
+            }
+    */
 
     private void initializeOptions(SyntaxNode currentRoot) {
         if (currentRoot.isModular()) {
             LinkedHashMap<String, SyntaxNode> selection
                     = new LinkedHashMap<>();
+
             for (String s : currentRoot.getQuestionToChildren().keySet()) {
                 selection.put(s, currentRoot);
                 for (SyntaxNode n : currentRoot.getQuestionToChildren().get(s)) {
@@ -61,13 +63,14 @@ public class SyntaxTree {
                     options.add((LinkedHashMap<String, SyntaxNode>) selection.clone());
                     selection.clear();
                 }
-                initializeOptions(currentRoot.getSelectedChildren().
-                        get(currentRoot.getQuestions().indexOf(s)));
+
+                for(SyntaxNodeList n: currentRoot.getSyntaxNodes())
+                initializeOptions(n.getSelectedChild());
             }
         }
-        else if (currentRoot.getSelectedChildren() != null) {
-            for (SyntaxNode n : currentRoot.getSelectedChildren()) {
-                initializeOptions2(n);
+        else if (currentRoot.getSyntaxNodes() != null && currentRoot.getSyntaxNodes().size() > 0) {
+            for (SyntaxNodeList n : currentRoot.getSyntaxNodes()) {
+                initializeOptions(n.getSelectedChild());
             }
         }
     }

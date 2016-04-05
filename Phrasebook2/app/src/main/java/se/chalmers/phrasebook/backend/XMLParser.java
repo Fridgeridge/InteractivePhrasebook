@@ -137,8 +137,12 @@ public class XMLParser {
                 }
                 if (!syntax.isEmpty()) {
                     SyntaxNode node = new SyntaxNode(syntax);
-                    node.setDesc(desc);
 
+                    if (syntax.equals("NNumeral")) {
+                        node = new NumeralSyntaxNode();
+                    }
+                    
+                    node.setDesc(desc);
                     list.add(node);
 
                     SyntaxNodeList mList = new SyntaxNodeList();

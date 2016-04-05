@@ -19,6 +19,10 @@ public class SyntaxNode {
         this.data = data;
     }
 
+    public void setSelectedChild(int listIndex, SyntaxNode newChild) {
+        syntaxNodes.get(listIndex).setSelectedChild(newChild);
+    }
+
     public ArrayList<SyntaxNodeList> getSyntaxNodes() {
         return syntaxNodes;
     }
@@ -36,9 +40,12 @@ public class SyntaxNode {
     }
 
     public boolean isModular() {
-        if(questionToChildren.keySet() != null) {
+        System.out.println(this.desc);
+        if(syntaxNodes.size() > 0 && syntaxNodes.get(0).getChildren().size() > 1) {
+            System.out.println("Is modular");
             return true;
         }
+        System.out.println("Is NOT modular");
         return false;
     }
 

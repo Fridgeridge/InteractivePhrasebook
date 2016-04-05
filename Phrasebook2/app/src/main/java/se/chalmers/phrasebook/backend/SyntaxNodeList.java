@@ -7,10 +7,7 @@ import java.util.ArrayList;
  */
 public class SyntaxNodeList {
     private SyntaxNode selectedChild;
-
-
     private ArrayList<SyntaxNode> children;
-
     private String question;
 
 
@@ -19,6 +16,7 @@ public class SyntaxNodeList {
     }
 
     public ArrayList<SyntaxNode> getChildren() {
+        System.out.println(children.size());
         return children;
     }
 
@@ -32,8 +30,12 @@ public class SyntaxNodeList {
         return selectedChild;
     }
 
-    public void setSelectedChild(SyntaxNode selectedChild) {
-        this.selectedChild = selectedChild;
+    public boolean setSelectedChild(SyntaxNode selectedChild) {
+        if(children.contains(selectedChild)) {
+            this.selectedChild = selectedChild;
+            return true;
+        }
+        return false;
     }
 
     public String getQuestion() {

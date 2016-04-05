@@ -88,9 +88,10 @@ public class Model {
         if (iterate.hasNext()) {
             Map.Entry entry = (Map.Entry) iterate.next();
             SyntaxNode parent = (SyntaxNode) entry.getValue();
-
-            if (parent.getSelectedChildren().contains(node)) {
-                return true;
+            for(int i = 0; i < parent.getSyntaxNodes().size(); i++) {
+                if (parent.getSyntaxNodes().get(i).getSelectedChild() == node) {
+                    return true;
+                }
             }
             return false;
         }

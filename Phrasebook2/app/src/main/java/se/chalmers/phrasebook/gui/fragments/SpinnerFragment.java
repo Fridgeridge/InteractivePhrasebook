@@ -77,7 +77,7 @@ public class SpinnerFragment extends Fragment {
         spinner.setAdapter(adapter);
 
         currentChoice = spinner.getSelectedItem().toString();
-        if(label.equals("")) {
+        if(label!=null && label.equals("")) {
             ((LinearLayout)textView.getParent()).removeView(textView);
         } else {
             textView.setText(label);

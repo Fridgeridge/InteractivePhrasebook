@@ -200,11 +200,11 @@
                     <option option="Who wants food?">
                         <node child="allpersons"></node>
                     </option>
-                    <node syntax="OneObj">
-                        <option option="What is wanted?">
-                            <node child="objectsPrep" />
-                        </option>
-                    </node>
+                    <option option="What is wanted?">
+                        <node child="objectsPrep">
+                            <node child="food"></node>
+                        </node>
+                    </option>
                 </node>
             </node>
         </node>
@@ -415,50 +415,40 @@
     </child>
 
 
-
     <!-- Not working fully with a/an-->
     <child id="objectsPrep">
-        <node desc="a/an" syntax="ObjMass">
+
+        <node syntax="OneObj">
             <option option="">
-                <node child="objects" />
+                <node desc="a/an" syntax="ObjMass"></node>
+                <node desc="the" syntax="ObjItem">
+                    <node syntax="TheMass"></node>
+                </node>
+                <node desc="this" syntax="ObjItem">
+                    <node syntax="ThisMass"></node>
+                </node>
+                <node desc="that" syntax="ObjItem">
+                    <node syntax="ThatMass"></node>
+                </node>
             </option>
-        </node>
-        <node desc="the" syntax="ObjItem">
-            <node syntax="TheMass">
-                <option option="">
-                    <node child="objects" />
-                </option>
-            </node>
-        </node>
-        <node desc="this" syntax="ObjItem">
-            <node syntax="ThisMass">
-                <option option="">
-                    <node child="objects" />
-                </option>
-            </node>
-        </node>
-        <node desc="that" syntax="ObjItem">
-            <node syntax="ThatMass">
-                <option option="">
-                    <node child="objects" />
-                </option>
-            </node>
         </node>
     </child>
 
-    <child id="objects">
-        <node desc="Beer" syntax="MassDrink Beer"></node>
-        <node desc="Bread" syntax="Bread"></node>
-        <node desc="Cheese" syntax="Cheese"></node>
-        <node desc="Chicken" syntax="Chicken"></node>
-        <node desc="Coffee" syntax="MassDrink Coffee"></node>
-        <node desc="Fish" syntax="Fish"></node>
-        <node desc="Meat" syntax="Meat"></node>
-        <node desc="Milk" syntax="Milk"></node>
-        <node desc="Salt" syntax="Salt"></node>
-        <node desc="Tea" syntax="MassDrink Tea"></node>
-        <node desc="Water" syntax="MassDrink Water"></node>
-        <node desc="Wine" syntax="MassDrink Wine"></node>
+    <child id="food">
+        <option option="">
+            <node desc="Beer" syntax="MassDrink Beer"></node>
+            <node desc="Bread" syntax="Bread"></node>
+            <node desc="Cheese" syntax="Cheese"></node>
+            <node desc="Chicken" syntax="Chicken"></node>
+            <node desc="Coffee" syntax="MassDrink Coffee"></node>
+            <node desc="Fish" syntax="Fish"></node>
+            <node desc="Meat" syntax="Meat"></node>
+            <node desc="Milk" syntax="Milk"></node>
+            <node desc="Salt" syntax="Salt"></node>
+            <node desc="Tea" syntax="MassDrink Tea"></node>
+            <node desc="Water" syntax="MassDrink Water"></node>
+            <node desc="Wine" syntax="MassDrink Wine"></node>
+        </option>
     </child>
 
 </phrasebook>

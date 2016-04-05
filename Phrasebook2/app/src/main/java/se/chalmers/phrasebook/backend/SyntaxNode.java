@@ -11,10 +11,7 @@ import java.util.List;
 public class SyntaxNode {
     private String data;
     private String desc;
-
-
     private ArrayList<SyntaxNodeList> syntaxNodes;
-
     private LinkedHashMap<String, List<SyntaxNode>> questionToChildren = new LinkedHashMap<>();
 
     public SyntaxNode(String data) {
@@ -26,8 +23,6 @@ public class SyntaxNode {
         return syntaxNodes;
     }
 
-
-
     public void linkQuestionToChildren(String question, List<SyntaxNode> children) {
         questionToChildren.put(question, children);
     }
@@ -38,6 +33,13 @@ public class SyntaxNode {
 
     public String getData() {
         return data;
+    }
+
+    public boolean isModular() {
+        if(questionToChildren.keySet() != null) {
+            return true;
+        }
+        return false;
     }
 
     public String getDesc() {

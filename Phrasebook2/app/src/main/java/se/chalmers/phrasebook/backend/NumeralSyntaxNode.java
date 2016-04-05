@@ -13,6 +13,11 @@ public class NumeralSyntaxNode extends SyntaxNode {
         super("NNumeral");
     }
 
+    @Override
+    public boolean isModular() {
+        return true;
+    }
+
     public String getData() {
         try {
             return nmbrToSyntax(number);
@@ -30,12 +35,8 @@ public class NumeralSyntaxNode extends SyntaxNode {
         this.number = Integer.parseInt(number);
     }
 
-    public boolean setSelectedChild(String question, String updated) {
-        if (questions.contains(question)) {
-            setDesc(updated);
-            return true;
-        }
-        return false;
+    public void setSelectedChild(String updated) {
+        setDesc(updated);
     }
 
     private String nmbrToSyntax(int nmbr) throws IOException {

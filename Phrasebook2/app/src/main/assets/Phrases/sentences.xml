@@ -84,9 +84,11 @@
     <sentence desc="Adv" id="ADV">
         <node syntax="PSentence (SProp (PropAction (AKnowSentence (Husband YouPolMale) (SProp (PropAction (AKnow (Wife YouPolMale)))))))"/>
     </sentence>
+
+
     <!-- works-->
     <sentence desc="Someone is scared" id="AScared">
-            <node syntax="SProp">
+            <node child = "phraseit">
                 <node syntax="PropAction">
                     <node syntax="AScared">
                         <option option="Who are we talking about?">

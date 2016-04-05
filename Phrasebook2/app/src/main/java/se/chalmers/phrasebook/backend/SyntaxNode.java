@@ -12,7 +12,6 @@ public class SyntaxNode {
     private String data;
     private String desc;
     private ArrayList<SyntaxNodeList> syntaxNodes;
-    private LinkedHashMap<String, List<SyntaxNode>> questionToChildren = new LinkedHashMap<>();
 
     public SyntaxNode(String data) {
         syntaxNodes = new ArrayList<SyntaxNodeList>();
@@ -25,14 +24,6 @@ public class SyntaxNode {
 
     public ArrayList<SyntaxNodeList> getSyntaxNodes() {
         return syntaxNodes;
-    }
-
-    public void linkQuestionToChildren(String question, List<SyntaxNode> children) {
-        questionToChildren.put(question, children);
-    }
-
-    public LinkedHashMap<String, List<SyntaxNode>> getQuestionToChildren() {
-        return questionToChildren;
     }
 
     public String getData() {

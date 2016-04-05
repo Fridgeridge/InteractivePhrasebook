@@ -121,8 +121,6 @@ public class XMLParser {
                 if (attributes.getNamedItem("option") != null) {
                     question = attributes.getNamedItem("option").getNodeValue();
                     list.setQuestion(question);
-                    parent.getQuestionToChildren().put(question,list.getChildren());
-
                     constructSyntaxNodeList(nl.item(i).getChildNodes(), parent, list, nextSequence, nbrOfArgs);
                 }
 
@@ -136,13 +134,16 @@ public class XMLParser {
                     constructSyntaxNodeList(jumpToChild("child", option), parent, list, mNextSequence, nbrOfArgs);
                 }
                 if (!syntax.isEmpty()) {
-                    SyntaxNode node = new SyntaxNode(syntax);
+                    SyntaxNode node;
 
                     if (syntax.equals("NNumeral")) {
                         node = new NumeralSyntaxNode();
+                    } else {
+                        node = new SyntaxNode(syntax);
+                        node.setDesc(desc);
                     }
-                    
-                    node.setDesc(desc);
+
+
                     list.add(node);
 
                     SyntaxNodeList mList = new SyntaxNodeList();

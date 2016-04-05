@@ -23,30 +23,6 @@ public class SyntaxTree {
 
     //creates an ArrayList och LinkedHashMaps, each representing
     //a currently available option to be customized.
-   /* private void initializeOptions(SyntaxNode currentRoot) {
-        if (currentRoot.isModular()) {
-            LinkedHashMap<String, SyntaxNode> selection
-                    = new LinkedHashMap<>();
-            for (String s : currentRoot.getQuestions()) {
-                selection.put(s, currentRoot);
-                for (SyntaxNode n : currentRoot.getChildren()) {
-                    selection.put(n.getDesc(), n);
-                }
-
-                if(!options.contains(selection)) {
-                    options.add((LinkedHashMap<String, SyntaxNode>) selection.clone());
-                    selection.clear();
-                }
-                initializeOptions(currentRoot.getSelectedChildren().
-                        get(currentRoot.getQuestions().indexOf(s)));
-            }
-        }
-        else if (currentRoot.getSelectedChildren() != null) {
-            for (SyntaxNode n : currentRoot.getSelectedChildren()) {
-                initializeOptions(n);
-            }
-            }
-    */
     private void initializeOptions(SyntaxNode currentRoot) {
         if(currentRoot.isModular()) {
             LinkedHashMap<String, SyntaxNode> selection
@@ -72,35 +48,6 @@ public class SyntaxTree {
         }
     }
 
-    private void initializeOptions2(SyntaxNode currentRoot) {
-        if (currentRoot.isModular()) {
-            LinkedHashMap<String, SyntaxNode> selection
-                    = new LinkedHashMap<>();
-
-            for (String s : currentRoot.getQuestionToChildren().keySet()) {
-                selection.put(s, currentRoot);
-                for (SyntaxNode n : currentRoot.getQuestionToChildren().get(s)) {
-                    selection.put(n.getDesc(), n);
-                    System.out.println(n.getDesc());
-                }
-
-                if(!options.contains(selection)) {
-                    options.add((LinkedHashMap<String, SyntaxNode>) selection.clone());
-                    selection.clear();
-                }
-
-                for(SyntaxNodeList n: currentRoot.getSyntaxNodes()) {
-                    initializeOptions(n.getSelectedChild());
-                }
-            }
-        }
-        else if (currentRoot.getSyntaxNodes() != null && currentRoot.getSyntaxNodes().size() > 0) {
-            for (SyntaxNodeList n : currentRoot.getSyntaxNodes()) {
-                initializeOptions(n.getSelectedChild());
-            }
-        }
-    }
-
     /**
      * Replaces an old selectedChild with a new one.
      * The method returns true if it succesfully managed to replace a
@@ -113,12 +60,12 @@ public class SyntaxTree {
      */
     //TODO REALLY UGLY SOLUTION, TRY TO FIX IT WITHOUT 'instanceof' FOR NUMERALSYNTAXNODE
     public boolean setSelectedChild(SyntaxNode parent, int listIndex, String newChild, String question) {
-       /* if(parent.getQuestionToChildren().get(0).get(0) instanceof NumeralSyntaxNode) {
+        if(parent.getSyntaxNodes().get(0).getChildren().get(0) instanceof NumeralSyntaxNode) {
             ((NumeralSyntaxNode)parent).setSelectedChild(newChild);
             options.clear();
             this.initializeOptions(root);
             return true;
-        }*/
+        }
         for(int i = 0; i < parent.getSyntaxNodes().size(); i++) {
             if(parent.getSyntaxNodes().get(i).getQuestion().equals(question)) {
                 parent.setSelectedChild(i, (SyntaxNode)options.get(listIndex).get(newChild));

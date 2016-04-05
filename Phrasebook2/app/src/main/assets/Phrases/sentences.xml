@@ -117,7 +117,7 @@
     <sentence desc="Someone has children" id="AHasChildren">
         <node child="phraseit">
             <node syntax="PropAction">
-                <node syntax="AHasChildren">
+                <node args="2" syntax="AHasChildren">
                     <option option="Who are we talking about?">
                         <node child="allpersons"></node>
                     </option>

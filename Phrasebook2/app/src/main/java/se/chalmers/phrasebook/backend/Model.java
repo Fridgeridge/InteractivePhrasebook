@@ -232,9 +232,9 @@ public class Model {
     }
 
     public void setCurrentPhrase(int position) {
-        //String id = getKey(phraseDescription, this.getSentences());
-        //currentPhrase = parser.buildSyntaxTree(parser.getSentence(id));
-        currentPhrase = currentPhrasebook.getPhrases().get(position);
+            currentPhrase = parser.buildSyntaxTree(parser.getSentence
+                    ((String)(parser.getSentencesData().keySet().toArray()[position])));
+
     }
 
     public Langs getOriginLang() {

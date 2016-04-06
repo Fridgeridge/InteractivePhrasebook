@@ -9,6 +9,7 @@ import java.util.LinkedHashMap;
  * Created by Björn on 2016-02-26.
  */
 public class SyntaxTree {
+    private String id;
     private SyntaxNode root;
     private ArrayList<LinkedHashMap> options = new ArrayList<>();
 

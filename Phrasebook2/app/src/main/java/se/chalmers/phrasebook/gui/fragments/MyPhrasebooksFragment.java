@@ -34,7 +34,7 @@ public class MyPhrasebooksFragment extends Fragment {
         Resources res = getResources();
         String[] buttonNames = res.getStringArray(R.array.my_phrasebooks);
         GridView gridView = (GridView) view.findViewById(R.id.standard_gridView);
-        gridView.setAdapter(new PhrasebookButtonAdapter(getActivity().getApplicationContext(), buttonNames));
+        gridView.setAdapter(new PhrasebookButtonAdapter(getActivity().getApplicationContext()));
 
         return view;
     }

@@ -14,12 +14,12 @@ public class TTSHandler {
 
     private TextToSpeech tts;
 
-    public TTSHandler(Application app, final Langs targetLanguage) {
+    public TTSHandler(Application app) {
         tts = new TextToSpeech(app.getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
                 if (status != TextToSpeech.ERROR) {
-                    Locale l = targetLanguage.getTTS();
+                    Locale l = Locale.ENGLISH;
                     tts.setLanguage(l);
 
                 }

@@ -5,7 +5,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import se.chalmers.phrasebook.App;
+import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
+import se.chalmers.phrasebook.gui.fragments.MyPhrasebooksFragment;
 
 
 /**
@@ -19,7 +22,7 @@ public class HelperActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Model.getInstance();
-        prefs = getSharedPreferences("se.chalmers.phrasebook", MODE_PRIVATE);
+        prefs = getSharedPreferences(App.get().getString(R.string.preference_file_key), MODE_PRIVATE);
 
     }
 
@@ -37,9 +40,7 @@ public class HelperActivity extends Activity {
             finish();
         }
         else {
-            //startActivity(new Intent(HelperActivity.ths , HomeScreenActivity.class));
-            Intent intent = new Intent(this, FirstUsageActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(HelperActivity.this , NavigationActivity.class));
             finish();
         }
     }

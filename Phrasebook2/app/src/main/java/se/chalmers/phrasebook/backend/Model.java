@@ -31,7 +31,7 @@ public class Model {
     private XMLParser parser;
     private TTSHandler ttsHandler;
     private ArrayList<PhraseBook> phrasebooks;
-    private Langs origin,target;
+    private Langs origin, target;
     private PhraseBook currentPhrasebook;
     private SyntaxTree currentPhrase;
     private ArrayList<LinkedHashMap> optionsList;
@@ -40,11 +40,8 @@ public class Model {
         instance = App.get();
 
         sharedPref = instance.getSharedPreferences(instance.getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        String originKeyDef= (instance.getString(R.string.saved_origin_language_default));
-        String targetKeyDef= (instance.getString(R.string.saved_target_language_default));
-
-        origin = Langs.getLang(sharedPref.getString(instance.getString(R.string.saved_origin_language),originKeyDef));
-        target = Langs.getLang(sharedPref.getString(instance.getString(R.string.saved_origin_language),targetKeyDef));
+        String originKeyDef = (instance.getString(R.string.saved_origin_language_default));
+        String targetKeyDef = (instance.getString(R.string.saved_target_language_default));
 
 
         try {
@@ -56,13 +53,17 @@ public class Model {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        ttsHandler = new TTSHandler(instance);
+
+        //Do not move up
+        setTargetLanguage(sharedPref.getString(instance.getString(R.string.saved_target_language), targetKeyDef));
+        setOriginLanguage(sharedPref.getString(instance.getString(R.string.saved_origin_language), originKeyDef));
 
 
-        ttsHandler = new TTSHandler(instance,target);
         phrasebooks = new ArrayList<>();
         //Hardcoded default testing phrasebook
         PhraseBook tourism = new PhraseBook("Tourism");
-        for(String s : parser.getSentencesData().keySet()) {
+        for (String s : parser.getSentencesData().keySet()) {
             tourism.addPhrase(parser.buildSyntaxTree(parser.getSentence(s)));
         }
         phrasebooks.add(tourism);
@@ -75,8 +76,8 @@ public class Model {
 
     //Requires unique name
     public boolean addPhrasebook(String name) {
-        for(PhraseBook book : phrasebooks) {
-            if(book.getTitle().equals(name)) {
+        for (PhraseBook book : phrasebooks) {
+            if (book.getTitle().equals(name)) {
                 return false;
             }
         }
@@ -86,8 +87,8 @@ public class Model {
     }
 
     public PhraseBook getPhrasebookByTitle(String title) {
-        for(PhraseBook book : phrasebooks) {
-            if(book.getTitle().equals(title)) {
+        for (PhraseBook book : phrasebooks) {
+            if (book.getTitle().equals(title)) {
                 return book;
             }
         }
@@ -103,17 +104,19 @@ public class Model {
     public void savePreferences() {
         SharedPreferences.Editor editor = sharedPref.edit();
 
-        editor.putString(instance.getString(R.string.saved_origin_language), origin.getKey());
+        if (origin != null)
+            editor.putString(instance.getString(R.string.saved_origin_language), origin.getKey());
 
-        editor.putString(instance.getString(R.string.saved_target_language), target.getKey());
+        if (target != null)
+            editor.putString(instance.getString(R.string.saved_target_language), target.getKey());
 
         editor.apply();
     }
 
-    
+
     public ArrayList<String> getPhrasebookTitles() {
         ArrayList<String> names = new ArrayList<String>();
-        for(PhraseBook book : phrasebooks) {
+        for (PhraseBook book : phrasebooks) {
             names.add(book.getTitle());
         }
         return names;
@@ -149,7 +152,7 @@ public class Model {
         if (iterate.hasNext()) {
             Map.Entry entry = (Map.Entry) iterate.next();
             SyntaxNode parent = (SyntaxNode) entry.getValue();
-            for(int i = 0; i < parent.getSyntaxNodes().size(); i++) {
+            for (int i = 0; i < parent.getSyntaxNodes().size(); i++) {
                 if (parent.getSyntaxNodes().get(i).getSelectedChild() == node) {
                     return true;
                 }
@@ -189,14 +192,13 @@ public class Model {
     }
 
 
-
-    public void playCurrentTargetPhrase(){
+    public void playCurrentTargetPhrase() {
         ttsHandler.playSentence(translateToTarget());
     }
 
     public ArrayList<String> getSentencesInCurrentPhrasebook() {
-        ArrayList<String> phrases= new ArrayList<String>();
-        for(SyntaxTree tree : currentPhrasebook.getPhrases()) {
+        ArrayList<String> phrases = new ArrayList<String>();
+        for (SyntaxTree tree : currentPhrasebook.getPhrases()) {
             phrases.add(translator.translateToOrigin(tree.getSyntax()));
         }
         return phrases;
@@ -232,11 +234,11 @@ public class Model {
         currentPhrase = parser.buildSyntaxTree(parser.getSentence(id));
     }
 
-    public Langs getOriginLang(){
+    public Langs getOriginLang() {
         return origin;
     }
 
-    public Langs getTargetLang(){
+    public Langs getTargetLang() {
         return target;
     }
 

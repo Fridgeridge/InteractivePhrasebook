@@ -16,10 +16,10 @@
     <string name="preference_file_key"><xliff:g id="se.chalmers.phrasebook2.PREFERENCE_FILE_KEY">enable</xliff:g></string>
 
     <string name="saved_target_language_default">PhrasebookEng</string>
-    <string name="saved_target_language">PhrasebookEng</string>
+    <string name="saved_target_language">se.chalmers.phrasebook2.saved_target</string>
 
     <string name="saved_origin_language_default">PhrasebookEng</string>
-    <string name="saved_origin_language">PhrasebookEng</string>
+    <string name="saved_origin_language">se.chalmers.phrasebook2.saved_origin</string>
 
 
 

@@ -31,7 +31,6 @@ public class SyntaxTree {
             for(SyntaxNodeList l : currentRoot.getSyntaxNodes()) {
                 selection.put(l.getQuestion(), currentRoot);
                 for(SyntaxNode n : l.getChildren()) {
-                    System.out.println(n.getDesc() + " : " + n.getData());
                     selection.put(n.getDesc(), n);
                 }
 

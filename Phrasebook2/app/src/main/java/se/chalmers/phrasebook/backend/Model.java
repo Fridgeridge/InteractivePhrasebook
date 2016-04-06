@@ -1,6 +1,9 @@
 package se.chalmers.phrasebook.backend;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -21,7 +24,7 @@ public class Model {
 
     private static Model model;
     private App instance;
-
+    SharedPreferences sharedPref;
 
     private Translator translator;
     private XMLParser parser;
@@ -29,7 +32,6 @@ public class Model {
 
 
     private ArrayList<PhraseBook> phrasebooks;
-    private String originLanguage, targetLanguage;
     private Langs origin,target;
     private String currentPhrasebook;
     private SyntaxTree currentPhrase;
@@ -37,6 +39,14 @@ public class Model {
 
     private Model() {
         instance = App.get();
+
+        sharedPref = instance.getSharedPreferences(instance.getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        String originKeyDef= (instance.getString(R.string.saved_origin_language_default));
+        String targetKeyDef= (instance.getString(R.string.saved_target_language_default));
+
+        origin = Langs.getLang(sharedPref.getString(instance.getString(R.string.saved_origin_language),originKeyDef));
+        target = Langs.getLang(sharedPref.getString(instance.getString(R.string.saved_origin_language),targetKeyDef));
+
 
         try {
             InputStream phrasesPath = instance.getAssets().open(instance.getResources().getString(R.string.phrases_path));
@@ -47,10 +57,7 @@ public class Model {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        originLanguage = Langs.getKey("English");
-        targetLanguage = Langs.getKey("English");
-        origin = Langs.ENGLISH;
-        target = Langs.ENGLISH;
+
 
         ttsHandler = new TTSHandler(instance,target);
     }
@@ -63,6 +70,18 @@ public class Model {
     private synchronized static Model getSync() {
         if (model == null) model = new Model();
         return model;
+    }
+
+
+    public void savePreferences(){
+        SharedPreferences.Editor editor = sharedPref.edit();
+
+        editor.putString(instance.getString(R.string.saved_origin_language),origin.getKey());
+
+        editor.putString(instance.getString(R.string.saved_target_language),target.getKey());
+
+        editor.apply();
+
     }
 
     public HashMap<String, String> getSentences() {
@@ -149,17 +168,17 @@ public class Model {
         return translator.translateToTarget(getCurrentPhrase().getSyntax());
     }
 
-    public void setOriginLanguage(String originLanguage) {
-        origin = Langs.getLang(originLanguage);
-        this.originLanguage = originLanguage;
-        translator.setOriginLanguage(originLanguage);
+    public void setOriginLanguage(String originLanguageKey) {
+        origin = Langs.getLang(originLanguageKey);
+        translator.setOriginLanguage(originLanguageKey);
+        savePreferences();
     }
 
-    public void setTargetLanguage(String targetLanguage) {
-        target = Langs.getLang(targetLanguage);
-        this.targetLanguage = targetLanguage;
-        translator.setTargetLanguage(targetLanguage);
+    public void setTargetLanguage(String targetLanguageKey) {
+        target = Langs.getLang(targetLanguageKey);
+        translator.setTargetLanguage(targetLanguageKey);
         ttsHandler.setTargetTTSLanguage(target);
+        savePreferences();
     }
 
     public void setCurrentPhrasebook(String phrasebook) {
@@ -171,14 +190,6 @@ public class Model {
         String id = getKey(phraseDescription, this.getSentences());
 
         currentPhrase = parser.buildSyntaxTree(parser.getSentence(id));
-    }
-
-    public String getOriginLanguage() {
-        return originLanguage;
-    }
-
-    public String getTargetLanguage() {
-        return targetLanguage;
     }
 
     public Langs getOriginLang(){

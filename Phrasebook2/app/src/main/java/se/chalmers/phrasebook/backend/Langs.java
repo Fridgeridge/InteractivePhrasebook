@@ -89,7 +89,7 @@ public enum Langs {
         for(Langs l : Langs.values()){
            if(l.getKey().equals(Language)) return l;
         }
-        return null;
+        return Langs.ENGLISH;
     }
 
     public static String getKey(String name){

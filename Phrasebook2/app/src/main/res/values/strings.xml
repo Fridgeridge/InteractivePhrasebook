@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:xliff="http://schemas.android.com/tools">
     <string name="app_name">Phrasebook</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_home_screen">HomeScreenActivity</string>
@@ -12,24 +12,16 @@
         <item>Tourism</item>
     </string-array>
 
+    <!-- Preferences data-->
+    <string name="preference_file_key"><xliff:g id="se.chalmers.phrasebook2.PREFERENCE_FILE_KEY">enable</xliff:g></string>
 
-    <!--Strings for option fragments-->
-    <string name="talking_to">Who are you talking to?</string>
-    <string name="how_to_phrase">Do you want to...</string>
+    <string name="saved_target_language_default">PhrasebookEng</string>
+    <string name="saved_target_language">PhrasebookEng</string>
+
+    <string name="saved_origin_language_default">PhrasebookEng</string>
+    <string name="saved_origin_language">PhrasebookEng</string>
 
 
-    <!--Strings arrays for option spinners-->
-    <string-array name="persons">
-        <item>Female friend</item>
-        <item>Male friend</item>
-        <item>Stranger</item>
-    </string-array>
-
-    <string-array name="phrase_types">
-        <item>ask a question?</item>
-        <item>make a statement?</item>
-        <item>make a negation?</item>
-    </string-array>
 
 
     <!--Headers-->

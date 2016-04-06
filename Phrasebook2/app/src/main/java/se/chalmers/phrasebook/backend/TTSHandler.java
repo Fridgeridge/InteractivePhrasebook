@@ -26,9 +26,6 @@ public class TTSHandler {
             }
         });
 
-        for (TextToSpeech.EngineInfo s : tts.getEngines())
-            System.out.println(s.name);
-
     }
 
     public void setTargetTTSLanguage(Langs target) {

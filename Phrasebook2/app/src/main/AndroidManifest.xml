@@ -21,7 +21,8 @@
 
         <activity
             android:name=".gui.activities.FirstUsageActivity"
-            android:label="@string/title_activity_main" />
+            android:label="@string/title_activity_main"
+            android:noHistory="true"/>
     </application>
 
 </manifest>

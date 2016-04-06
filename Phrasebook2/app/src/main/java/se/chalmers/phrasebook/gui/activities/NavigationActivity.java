@@ -1,6 +1,7 @@
 package se.chalmers.phrasebook.gui.activities;
 
 import android.app.ActionBar;
+import android.app.FragmentManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v4.app.Fragment;
@@ -68,23 +69,24 @@ public class NavigationActivity extends FragmentActivity
 
         switch (position) {
             case 0:
-                switchContent(DefaultPhrasebooksFragment.newInstance(1));
+                switchContent(DefaultPhrasebooksFragment.newInstance(1), "default");
                 break;
             case 1:
-                switchContent(new MyPhrasebooksFragment());
+                switchContent(new MyPhrasebooksFragment(), "");
                 break;
             case 2:
-                switchContent(new ChangeLanguageFragment());
+                switchContent(new ChangeLanguageFragment(), "");
                 break;
         }
 
     }
 
-    public void switchContent(Fragment fragment) {
+    public void switchContent(Fragment fragment, String message) {
         mContent = fragment;
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.container, fragment);
+        transaction.addToBackStack(message);
         transaction.commit();
 
     }
@@ -131,10 +133,10 @@ public class NavigationActivity extends FragmentActivity
 
             if(action.equals("phrasebook_event")){
                 message = intent.getStringExtra("message");
-                switchContent(PhraseListFragment.newInstance(message));
+                switchContent(PhraseListFragment.newInstance(message), "");
             }else if(action.equals("phrase_list_event")){
                 message = intent.getStringExtra("message");
-                switchContent(TranslatorFragment.newInstance(message));
+                switchContent(TranslatorFragment.newInstance(message), "");
             }else{
                 throw new IllegalArgumentException();
             }
@@ -146,6 +148,17 @@ public class NavigationActivity extends FragmentActivity
     protected void onPause() {
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
         super.onPause();
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        if(getFragmentManager().getBackStackEntryCount() > 0) {
+            getFragmentManager().popBackStack();
+        }
+        else {
+            super.onBackPressed();
+        }
     }
 
 }

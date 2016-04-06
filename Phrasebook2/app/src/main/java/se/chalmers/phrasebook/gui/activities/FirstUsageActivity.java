@@ -66,5 +66,4 @@ public class FirstUsageActivity extends Activity {
         startActivity(intent);
     }
 
-
 }

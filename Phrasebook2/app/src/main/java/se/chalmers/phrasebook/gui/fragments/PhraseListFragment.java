@@ -1,6 +1,7 @@
 package se.chalmers.phrasebook.gui.fragments;
 
 
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -90,5 +91,6 @@ public class PhraseListFragment extends Fragment {
         intent.putExtra("message", "data");
         LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
     }
+
 
 }

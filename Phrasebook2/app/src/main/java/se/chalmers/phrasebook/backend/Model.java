@@ -114,6 +114,11 @@ public class Model {
         editor.apply();
     }
 
+    public void deleteAllPreferences(){
+        SharedPreferences.Editor editor= sharedPref.edit();
+        editor.clear();
+        editor.commit();
+    }
 
     public ArrayList<String> getPhrasebookTitles() {
         ArrayList<String> names = new ArrayList<String>();

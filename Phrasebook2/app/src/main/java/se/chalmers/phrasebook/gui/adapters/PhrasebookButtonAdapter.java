@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 
+import java.util.ArrayList;
+
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
 import se.chalmers.phrasebook.gui.activities.NavigationActivity;
@@ -19,18 +21,19 @@ import se.chalmers.phrasebook.gui.activities.NavigationActivity;
 public class PhrasebookButtonAdapter extends BaseAdapter {
 
     private Context context;
-    private String[] phrasebookNames;
+    private ArrayList<String> phrasebookNames;
 
     private Model model;
     private NavigationActivity na;
 
-    public PhrasebookButtonAdapter(Context context, String[] names) {
+    public PhrasebookButtonAdapter(Context context) {
         this.context = context;
 
         //Ska hämtas nånstans ifrån istället för en statisk lista i xml
-        phrasebookNames = names;
-
+        //SNART FIXAT
+        phrasebookNames = new ArrayList<>();
         model = Model.getInstance();
+        phrasebookNames.addAll(model.getPhrasebookTitles());
         na = new NavigationActivity();
 
     }
@@ -38,7 +41,7 @@ public class PhrasebookButtonAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return phrasebookNames.length;
+        return phrasebookNames.size();
     }
 
     @Override
@@ -68,17 +71,14 @@ public class PhrasebookButtonAdapter extends BaseAdapter {
         button.setWidth(100);
         button.setBackgroundResource(R.drawable.grid_phrasebook_button);
         button.setTextColor(Color.BLACK);
-        button.setText(phrasebookNames[position]);
+        button.setText(phrasebookNames.get(position));
         button.setId(position);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                model.setCurrentPhrasebook((String) button.getText());
-
+                model.setCurrentPhrasebook(model.getPhrasebookByTitle((String)button.getText()));
                 sendMessage("Tourism");
-
             }
         });
 

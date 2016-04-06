@@ -21,17 +21,13 @@ public class Model {
 
     private static Model model;
     private App instance;
-
-
     private Translator translator;
     private XMLParser parser;
     private TTSHandler ttsHandler;
-
-
     private ArrayList<PhraseBook> phrasebooks;
     private String originLanguage, targetLanguage;
     private Langs origin,target;
-    private String currentPhrasebook;
+    private PhraseBook currentPhrasebook;
     private SyntaxTree currentPhrase;
     private ArrayList<LinkedHashMap> optionsList;
 
@@ -53,6 +49,13 @@ public class Model {
         target = Langs.ENGLISH;
 
         ttsHandler = new TTSHandler(instance,target);
+        phrasebooks = new ArrayList<>();
+        //Hardcoded default testing phrasebook
+        PhraseBook tourism = new PhraseBook("Tourism");
+        for(String s : parser.getSentencesData().keySet()) {
+            tourism.addPhrase(parser.buildSyntaxTree(parser.getSentence(s)));
+        }
+        phrasebooks.add(tourism);
     }
 
     public static Model getInstance() {
@@ -60,9 +63,38 @@ public class Model {
         return model;
     }
 
+    //Requires unique name
+    public boolean addPhrasebook(String name) {
+        for(PhraseBook book : phrasebooks) {
+            if(book.getTitle().equals(name)) {
+                return false;
+            }
+        }
+        PhraseBook pb = new PhraseBook(name);
+        phrasebooks.add(pb);
+        return true;
+    }
+
+    public PhraseBook getPhrasebookByTitle(String title) {
+        for(PhraseBook book : phrasebooks) {
+            if(book.getTitle().equals(title)) {
+                return book;
+            }
+        }
+        return null;
+    }
+
     private synchronized static Model getSync() {
         if (model == null) model = new Model();
         return model;
+    }
+
+    public ArrayList<String> getPhrasebookTitles() {
+        ArrayList<String> names = new ArrayList<String>();
+        for(PhraseBook book : phrasebooks) {
+            names.add(book.getTitle());
+        }
+        return names;
     }
 
     public HashMap<String, String> getSentences() {
@@ -140,6 +172,13 @@ public class Model {
         ttsHandler.playSentence(translateToTarget());
     }
 
+    public ArrayList<String> getSentencesInCurrentPhrasebook() {
+        ArrayList<String> phrases= new ArrayList<String>();
+        for(SyntaxTree tree : currentPhrasebook.getPhrases()) {
+            phrases.add(translator.translateToOrigin(tree.getSyntax()));
+        }
+        return phrases;
+    }
 
     public String translateToOrigin() {
         return translator.translateToOrigin(getCurrentPhrase().getSyntax());
@@ -162,14 +201,12 @@ public class Model {
         ttsHandler.setTargetTTSLanguage(target);
     }
 
-    public void setCurrentPhrasebook(String phrasebook) {
+    public void setCurrentPhrasebook(PhraseBook phrasebook) {
         currentPhrasebook = phrasebook;
     }
 
     public void setCurrentPhrase(String phraseDescription) {
-
         String id = getKey(phraseDescription, this.getSentences());
-
         currentPhrase = parser.buildSyntaxTree(parser.getSentence(id));
     }
 
@@ -189,7 +226,7 @@ public class Model {
         return target;
     }
 
-    public String getCurrentPhrasebook() {
+    public PhraseBook getCurrentPhrasebook() {
         return currentPhrasebook;
     }
 

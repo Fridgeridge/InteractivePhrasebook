@@ -49,6 +49,7 @@ public class PhraseListFragment extends Fragment {
         title = getArguments().getString("title");
 
         phrases = new ArrayList<>();
+        //phrases.addAll(model.getSentencesInCurrentPhrasebook());
         phrases.addAll(model.getSentences().values());
 
         context = getActivity().getApplicationContext();

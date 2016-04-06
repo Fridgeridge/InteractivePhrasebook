@@ -58,9 +58,8 @@ public class DefaultPhrasebooksFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_phrasebooks, container, false);
 
         Resources res = getResources();
-        String[] buttonNames = res.getStringArray(R.array.phrasebooks_default);
         GridView gridView = (GridView) view.findViewById(R.id.standard_gridView);
-        gridView.setAdapter(new PhrasebookButtonAdapter(getActivity().getApplicationContext(), buttonNames));
+        gridView.setAdapter(new PhrasebookButtonAdapter(getActivity().getApplicationContext()));
 
         return view;
 

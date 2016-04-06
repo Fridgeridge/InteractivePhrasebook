@@ -50,8 +50,8 @@ public class PhraseListFragment extends Fragment {
         title = getArguments().getString("title");
 
         phrases = new ArrayList<>();
-        //phrases.addAll(model.getSentencesInCurrentPhrasebook());
-        phrases.addAll(model.getSentences().values());
+        phrases.addAll(model.getSentencesInCurrentPhrasebook());
+        //phrases.addAll(model.getSentences().values());
 
         context = getActivity().getApplicationContext();
 
@@ -72,9 +72,10 @@ public class PhraseListFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                model.setCurrentPhrase((String) phraseListView.getItemAtPosition(position));
+                model.setCurrentPhrase(position);
 
-                sendMessage((String) phraseListView.getItemAtPosition(position));
+                //sendMessage((String) phraseListView.getItemAtPosition(position));
+                sendMessage(position);
             }
         });
 
@@ -84,6 +85,15 @@ public class PhraseListFragment extends Fragment {
 
     private void sendMessage(String phrase){
 
+        System.out.println("sending");
+
+        Intent intent = new Intent("phrase_list_event");
+        // add data
+        intent.putExtra("message", "data");
+        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+    }
+
+    private void sendMessage(int position) {
         System.out.println("sending");
 
         Intent intent = new Intent("phrase_list_event");

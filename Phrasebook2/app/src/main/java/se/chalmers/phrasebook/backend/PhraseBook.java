@@ -1,6 +1,7 @@
 package se.chalmers.phrasebook.backend;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 import se.chalmers.phrasebook.backend.syntax.SyntaxTree;
 
@@ -12,14 +13,32 @@ public class PhraseBook {
 
     private String title;
     private ArrayList<SyntaxTree> phrases;
+    private LinkedHashMap<String, SyntaxTree> syntaxToTree = new LinkedHashMap<>();
 
     public PhraseBook(String name) {
         title = name;
         phrases = new ArrayList<>();
     }
 
-    public boolean addPhrase(SyntaxTree phrase) {
-        return phrases.add(phrase);
+    public SyntaxTree getPhrase(String syntax) {
+        System.out.println(syntax + " : this is the syntax");
+        System.out.println(syntaxToTree.keySet().toString());
+        if(syntaxToTree.get(syntax) != null) {
+            return syntaxToTree.get(syntax);
+        }
+        return phrases.get(0);
+    }
+
+    public void setSyntaxToTree(LinkedHashMap<String, SyntaxTree> map) {
+        syntaxToTree = map;
+    }
+
+    public boolean addPhrase(String desc, SyntaxTree phrase) {
+        if(phrases.add(phrase)) {
+            syntaxToTree.put(desc, phrase);
+            return true;
+        }
+        return false;
     }
 
     public boolean removePhrase(SyntaxTree phrase) {

@@ -64,7 +64,8 @@ public class Model {
         //Hardcoded default testing phrasebook
         PhraseBook tourism = new PhraseBook("Tourism");
         for (String s : parser.getSentencesData().keySet()) {
-            tourism.addPhrase(parser.buildSyntaxTree(parser.getSentence(s)));
+            tourism.addPhrase(translator.translateToOrigin(parser.buildSyntaxTree(parser.getSentence(s)).getSyntax())
+                    ,parser.buildSyntaxTree(parser.getSentence(s)));
         }
         phrasebooks.add(tourism);
     }
@@ -205,6 +206,7 @@ public class Model {
     }
 
     public String translateToOrigin() {
+        System.out.println(getCurrentPhrase() == null);
         return translator.translateToOrigin(getCurrentPhrase().getSyntax());
     }
 
@@ -229,9 +231,10 @@ public class Model {
         currentPhrasebook = phrasebook;
     }
 
-    public void setCurrentPhrase(String phraseDescription) {
-        String id = getKey(phraseDescription, this.getSentences());
-        currentPhrase = parser.buildSyntaxTree(parser.getSentence(id));
+    public void setCurrentPhrase(int position) {
+        //String id = getKey(phraseDescription, this.getSentences());
+        //currentPhrase = parser.buildSyntaxTree(parser.getSentence(id));
+        currentPhrase = currentPhrasebook.getPhrases().get(position);
     }
 
     public Langs getOriginLang() {

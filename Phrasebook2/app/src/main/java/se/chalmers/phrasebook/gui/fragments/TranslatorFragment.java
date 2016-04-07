@@ -31,6 +31,8 @@ public class TranslatorFragment extends Fragment {
 
     private Model model;
 
+    private FloatingActionButton floatingActionButton;
+
     public TranslatorFragment() {
         // Required empty public constructor
     }
@@ -69,7 +71,7 @@ public class TranslatorFragment extends Fragment {
         ImageView imageView = new ImageView(App.get());
         imageView.setImageResource(R.drawable.ic_menu_camera);
 
-        FloatingActionButton floatingActionButton = new FloatingActionButton.Builder(getActivity()).setContentView(imageView).build();
+        floatingActionButton = new FloatingActionButton.Builder(getActivity()).setContentView(imageView).build();
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,6 +135,13 @@ public class TranslatorFragment extends Fragment {
     public void onPause() {
         LocalBroadcastManager.getInstance(getActivity().getApplicationContext()).unregisterReceiver(mMessageReceiver);
         super.onPause();
+        floatingActionButton.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        floatingActionButton.setVisibility(View.GONE);
     }
 
 

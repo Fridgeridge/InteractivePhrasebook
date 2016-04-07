@@ -109,6 +109,47 @@
         </node>
     </sentence>
 
+    <!--WORKS-->
+    <sentence desc="Someone is ill" id="AIll">
+        <node child="phraseit">
+            <node syntax="PropAction">
+                <node syntax="AIll">
+                    <option option="Who are we talking about?">
+                        <node child="allpersons"></node>
+                    </option>
+                </node>
+            </node>
+        </node>
+    </sentence>
+
+    <!--WORKS-->
+    <sentence desc="Someone is ready" id="AReady">
+        <node child="phraseit">
+            <node syntax="PropAction">
+                <node syntax="AReady">
+                    <option option="Who are we talking about?">
+                        <node child="allpersons"></node>
+                    </option>
+                </node>
+            </node>
+        </node>
+    </sentence>
+
+    <sentence desc="Someone speaks a language" id="ASpeak">
+        <node child="phraseit">
+            <node syntax="PropAction">
+                <node args="2" syntax="ASpeak">
+                    <option option="Who speaks it?">
+                        <node child="allpersons"></node>
+                    </option>
+                    <option option="What language?">
+                        <node child="language"/>
+                    </option>
+                </node>
+            </node>
+        </node>
+    </sentence>
+    <!--ASK KRASIMIR-->
     <sentence desc="How far is something?" id="HowFar">
         <node syntax="PQuestion">
             <node args="2" syntax="HowFar">
@@ -122,7 +163,7 @@
         </node>
     </sentence>
 
-
+    <!--WORKS-->
     <sentence desc="Someone has children" id="AHasChildren">
         <node child="phraseit">
             <node syntax="PropAction">
@@ -138,6 +179,7 @@
         </node>
     </sentence>
 
+    <!--WORKS-->
     <sentence desc="Someone lives somewhere" id="ALive">
         <node child="phraseit">
             <node syntax="PropAction">
@@ -157,7 +199,7 @@
     <!-- Someone wants to go somewhere -->
 
     <!-- Someone is somewhere -->
-
+    <!-- ASK KRASIMIR-->
     <sentence desc="How far is something from somewhere?" id="HowFarFrom">
         <node syntax="PQuestion">
             <node syntax="HowFarFrom">
@@ -181,6 +223,7 @@
         </node>
     </sentence>
 
+    <!--WORKS-->
     <sentence desc="Some place is open" id="PropOpen">
         <node child="phraseit">
             <node syntax="PropOpen">
@@ -196,14 +239,23 @@
         </node>
     </sentence>
 
+    <!--WORKS-->
     <sentence desc="Some place is closed" id="PropClosed">
         <node child="phraseit">
             <node syntax="PropClosed">
-                <node child="superlative_places" />
+                <node args="2" syntax=" ">
+                    <option option="Superlative">
+                        <node child="superlative" />
+                    </option>
+                    <option option="What place are we asking about?">
+                        <node child="places" />
+                    </option>
+                </node>
             </node>
         </node>
     </sentence>
 
+    <!-- GETS EMPTY DROPDOWNLISTS-->
     <sentence desc="Someone wants some food" id="AWant">
         <node child="phraseit">
             <node syntax="PropAction">
@@ -221,6 +273,33 @@
         </node>
     </sentence>
 
+    <sentence desc="Someone likes some food" id="ALike">
+        <node child="phraseit">
+            <node syntax="PropAction">
+                <node args="2" syntax="ALike">
+                    <option option="Who likes it?">
+                        <node child="allpersons"></node>
+                    </option>
+                    <option option="What is being liked?">
+                        <node child="prep">
+                            <node child="food"></node>
+                        </node>
+                    </option>
+                </node>
+            </node>
+        </node>
+    </sentence>
+
+    <sentence desc="How much does something cost?" id="HowMuchCost">
+        <node syntax="PQuestion">
+            <node syntax="HowMuchCost">
+                    <node child="prep">
+                        <node child="food" />
+                    </node>
+            </node>
+        </node>
+    </sentence>
+<!-- ___________________________________________________________________________________________ -->
     <!--Option lists -->
     <child id="allpersons">
         <node child="persons" />
@@ -309,6 +388,26 @@
         </option>
     </child>
 
+    <child id="language">
+        <option option="What language?">
+            <node desc="Bulgarian" syntax="(LangNat Bulgarian)"/>
+            <node desc="Catalan" syntax="(LangNat Catalan)"/>
+            <node desc="Danish" syntax="(LangNat Danish)"/>
+            <node desc="Dutch" syntax="(LangNat Dutch)"/>
+            <node desc="English" syntax="(LangNat English)"/>
+            <node desc="Finnish" syntax="(LangNat Finnish)"/>
+            <node desc="Flemish" syntax="Flemish"/>
+            <node desc="French" syntax="(LangNat Frech)"/>
+            <node desc="German" syntax="(LangNat German)"/>
+            <node desc="Italian" syntax="(LangNat Italian)"/>
+            <node desc="Norwegian" syntax="(LangNat Norwegian)"/>
+            <node desc="Polish" syntax="(LangNat Polish)"/>
+            <node desc="Romanian" syntax="(LangNat Romanian)"/>
+            <node desc="Russian" syntax="(LangNat Russian)"/>
+            <node desc="Spanish" syntax="(LangNat Spanish)"/>
+            <node desc="Swedish" syntax="(LangNat Swedish)"/>
+        </option>
+    </child>
     <child id="nationality">
         <option option="What nationality">
             <node desc="Belgian" syntax="Belgian"></node>
@@ -333,7 +432,7 @@
     <child id="places">
         <node desc="supermarket" syntax="Supermarket"></node>
         <node desc="bank" syntax="Bank"></node>
-        <node desc="amusment park" syntax="AmusmentPark"></node>
+        <node desc="amusement park" syntax="AmusementPark"></node>
         <node desc="bar" syntax="Bar"></node>
         <node desc="Cafeteria" syntax="Cafeteria"></node>
         <node desc="car park" syntax="Parking"></node>
@@ -423,10 +522,7 @@
         </option>
     </child>
 
-
-    <!-- Not working fully with a/an-->
     <child id="objectsPrep">
-
         <node syntax="OneObj">
             <option option="">
                 <node desc="a/an" syntax="ObjMass"></node>
@@ -443,8 +539,16 @@
         </node>
     </child>
 
+    <child id="prep">
+        <option option="Preposition">
+            <node desc="The" syntax="TheMass" />
+            <node desc="This" syntax="ThisMass" />
+            <node desc="That" syntax="ThatMass" />
+        </option>
+    </child>
+
     <child id="food">
-        <option option="">
+        <option option="What are we talking about?">
             <node desc="Beer" syntax="MassDrink Beer"></node>
             <node desc="Bread" syntax="Bread"></node>
             <node desc="Cheese" syntax="Cheese"></node>

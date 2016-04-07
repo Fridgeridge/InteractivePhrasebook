@@ -1,21 +1,24 @@
 package se.chalmers.phrasebook.gui.fragments;
 
+import android.support.v4.app.FragmentManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ImageView;
+import com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton;
 
+import se.chalmers.phrasebook.App;
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
-import se.chalmers.phrasebook.gui.smallFragments.SpinnerFragment;
+import se.chalmers.phrasebook.gui.smallFragments.DialogFragment;
 import se.chalmers.phrasebook.gui.smallFragments.SwipeFragment;
 import se.chalmers.phrasebook.gui.smallFragments.TranslationFragment;
 
@@ -56,12 +59,27 @@ public class TranslatorFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_translator, container, false);
 
-        FragmentTransaction fm = getChildFragmentManager().beginTransaction();
+        final FragmentTransaction fm = getChildFragmentManager().beginTransaction();
         
         fm.add(R.id.containerfor_translation, new TranslationFragment());
         fm.add(R.id.containerfor_options, new SwipeFragment());
 
         fm.commit();
+
+        ImageView imageView = new ImageView(App.get());
+        imageView.setImageResource(R.drawable.ic_menu_camera);
+
+        FloatingActionButton floatingActionButton = new FloatingActionButton.Builder(getActivity()).setContentView(imageView).build();
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fm = getFragmentManager();
+                DialogFragment dialogFragment = new DialogFragment();
+                dialogFragment.show(fm, "dialog_fragment");
+            }
+        });
+
 
 
         return view;

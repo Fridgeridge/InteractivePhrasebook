@@ -1,7 +1,6 @@
 package se.chalmers.phrasebook.gui.activities;
 
 import android.app.ActionBar;
-import android.app.FragmentManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v4.app.Fragment;
@@ -14,7 +13,6 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.DrawerLayout;
-
 
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
@@ -153,6 +151,7 @@ public class NavigationActivity extends FragmentActivity
     @Override
     public void onBackPressed() {
 
+        //Nån konstig bug...
         if(getFragmentManager().getBackStackEntryCount() > 0) {
             getFragmentManager().popBackStack();
         }

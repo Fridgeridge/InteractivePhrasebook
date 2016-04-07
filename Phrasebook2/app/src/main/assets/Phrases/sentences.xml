@@ -90,11 +90,44 @@
         </node>
     </sentence>
 
-    <sentence desc="Adv" id="ADV">
-        <node
-            syntax="PSentence (SProp (PropAction (AKnowSentence (Husband YouPolMale) (SProp (PropAction (AKnow (Wife YouPolMale)))))))" />
+    <!--works-->
+    <sentence desc="Someone is hungry" id="AHungry">
+        <node child="phraseit">
+            <node syntax="PropAction">
+                <node syntax="AHungry">
+                    <option option="Who are we talking about?">
+                        <node child="allpersons" />
+                    </option>
+                </node>
+            </node>
+        </node>
     </sentence>
 
+    <!--works-->
+    <sentence desc="Someone is thirsty" id="AThirsty">
+        <node child="phraseit">
+            <node syntax="PropAction">
+                <node syntax="AThirsty">
+                    <option option="Who are we talking about?">
+                        <node child="allpersons" />
+                    </option>
+                </node>
+            </node>
+        </node>
+    </sentence>
+
+    <!--works-->
+    <sentence desc="Someone is tired" id="ATired">
+        <node child="phraseit">
+            <node syntax="PropAction">
+                <node syntax="ATired">
+                    <option option="Who are we talking about?">
+                        <node child="allpersons" />
+                    </option>
+                </node>
+            </node>
+        </node>
+    </sentence>
 
     <!-- works-->
     <sentence desc="Someone is scared" id="AScared">
@@ -114,6 +147,32 @@
         <node child="phraseit">
             <node syntax="PropAction">
                 <node syntax="AIll">
+                    <option option="Who are we talking about?">
+                        <node child="allpersons"></node>
+                    </option>
+                </node>
+            </node>
+        </node>
+    </sentence>
+
+    <!--WORKS-->
+    <sentence desc="Someone understands" id="AUnderstand">
+        <node child="phraseit">
+            <node syntax="PropAction">
+                <node syntax="AUnderstand">
+                    <option option="Who are we talking about?">
+                        <node child="allpersons"></node>
+                    </option>
+                </node>
+            </node>
+        </node>
+    </sentence>
+
+    <!--WORKS-->
+    <sentence desc="Someone knows" id="AKnow">
+        <node child="phraseit">
+            <node syntax="PropAction">
+                <node syntax="AKnow">
                     <option option="Who are we talking about?">
                         <node child="allpersons"></node>
                     </option>
@@ -197,6 +256,7 @@
 
 
     <!-- Someone wants to go somewhere -->
+    <sentence desc="Someone wants to go somewhere" id="AWantGo"
 
     <!-- Someone is somewhere -->
     <!-- ASK KRASIMIR-->

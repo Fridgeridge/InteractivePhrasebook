@@ -256,20 +256,35 @@
 
 
     <!-- Someone wants to go somewhere -->
-    <!--<sentence desc="Someone wants to go somewhere" id="AWantGo">
+    <sentence desc="Someone wants to go somewhere" id="AWantGo">
         <node child="phraseit">
             <node syntax="PropAction">
-                <node syntax="AWantGo">
-                    <option options="Who are we talking about?">
+                <node args="2" syntax="AWantGo">
+                    <option option="Who are we talking about?">
                         <node child="allpersons"></node>
                     </option>
-                    <option option="Preposition">
-                        <node child="a/an/the"/>
+                    <option option="Going where?">
+                        <node child="a/an/the"></node>
                     </option>
                 </node>
             </node>
         </node>
-    </sentence>-->
+    </sentence>
+
+    <sentence desc="Someone is somewhere" id="ABePlace">
+        <node child="phraseit">
+            <node syntax="PropAction">
+                <node args="2" syntax="ABePlace">
+                    <option option="Who are we talking about?">
+                        <node child="allpersons"></node>
+                    </option>
+                    <option option="Going where?">
+                        <node child="a/an/the"></node>
+                    </option>
+                </node>
+            </node>
+        </node>
+    </sentence>
 
     <!-- Someone is somewhere -->
     <!-- ASK KRASIMIR-->
@@ -378,9 +393,13 @@
     </child>
 
     <child id="a/an/the">
-            <node desc="a/an" syntax="APlace" />
-            <node desc="The" syntax="">
-                <option option="What place are we talking about?">
+            <node desc="a/an" syntax="APlace">
+                <option option="">
+                    <node child="places" />
+                </option>
+            </node>
+            <node desc="The" syntax=" ">
+                <option option="">
                     <node child="superlative_places" />
                 </option>
             </node>

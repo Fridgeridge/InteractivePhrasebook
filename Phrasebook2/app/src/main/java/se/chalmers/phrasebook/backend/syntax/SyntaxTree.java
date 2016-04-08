@@ -99,13 +99,7 @@ public class SyntaxTree {
                 if (node.getSyntaxNodes().get(i).getSelectedChild().getData().isEmpty()) {
                     syntax = syntax + parseSentenceSyntax(node.getSyntaxNodes().get(i).getSelectedChild());
                 } else {
-                    if (node.getSyntaxNodes().size() > 1 && (node.getSyntaxNodes().get(i).
-                            getSelectedChild().getSyntaxNodes().size() > 0 && (node.getSyntaxNodes().get(i).
-                            getSelectedChild().getSyntaxNodes().get(0).getSelectedChild().getData().isEmpty()))) {
-                        syntax = syntax + " " + parseSentenceSyntax(node.getSyntaxNodes().get(i).getSelectedChild()) + " ";
-                    } else {
-                        syntax = syntax + " (" + parseSentenceSyntax(node.getSyntaxNodes().get(i).getSelectedChild()) + ")";
-                    }
+                    syntax = syntax + " (" + parseSentenceSyntax(node.getSyntaxNodes().get(i).getSelectedChild()) + ")";
                 }
             }
             System.out.println(syntax);

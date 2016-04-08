@@ -8,8 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
+import android.widget.TextView;
 
 import se.chalmers.phrasebook.R;
+import se.chalmers.phrasebook.backend.Model;
 import se.chalmers.phrasebook.gui.adapters.PhrasebookButtonAdapter;
 
 /**
@@ -21,6 +23,8 @@ import se.chalmers.phrasebook.gui.adapters.PhrasebookButtonAdapter;
 public class DefaultPhrasebooksFragment extends Fragment {
 
     private static final String ARG_SECTION_NBR = "ARG_SECTION_NBR";
+
+    private Model model;
 
     private int sectionNumber;
 
@@ -47,6 +51,7 @@ public class DefaultPhrasebooksFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        model = Model.getInstance();
         if (getArguments() != null) {
             sectionNumber = getArguments().getInt(ARG_SECTION_NBR);
         }
@@ -58,9 +63,12 @@ public class DefaultPhrasebooksFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_phrasebooks, container, false);
 
+        TextView text = (TextView) view.findViewById(R.id.my_phrasebooks_textView);
+        text.setVisibility(View.GONE);
+
         Resources res = getResources();
         GridView gridView = (GridView) view.findViewById(R.id.standard_gridView);
-        gridView.setAdapter(new PhrasebookButtonAdapter(getActivity().getApplicationContext()));
+        gridView.setAdapter(new PhrasebookButtonAdapter(getActivity().getApplicationContext(), model.getDefaultPhrasebookTitles()));
 
         return view;
 

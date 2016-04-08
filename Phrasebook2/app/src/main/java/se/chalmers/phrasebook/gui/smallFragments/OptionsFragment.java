@@ -12,13 +12,15 @@ import java.util.LinkedHashMap;
 
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
+import se.chalmers.phrasebook.backend.syntax.SyntaxNode;
+import se.chalmers.phrasebook.backend.syntax.SyntaxNodeList;
 
 public class OptionsFragment extends Fragment {
 
     private Model model;
 
-    private ArrayList<LinkedHashMap> options;
-    private ArrayList<LinkedHashMap> advancedOptions;
+    private ArrayList<SyntaxNodeList> options;
+    private ArrayList<SyntaxNodeList> advancedOptions;
 
     private int type;
 
@@ -64,13 +66,13 @@ public class OptionsFragment extends Fragment {
         if(type == 1) {
             for (int i = 0; i < options.size(); i++) {
                 if (options.get(i) != null) {
-                    transaction.add(containers[i], SpinnerFragment.newInstance(i));
+                    transaction.add(containers[i], SpinnerInputFragment.newInstance(i));
                 }
             }
         }else if(type == 2){
             for (int i = 0; i < advancedOptions.size(); i++) {
                 if (advancedOptions.get(i) != null)
-                    transaction.add(containers[i], SpinnerFragment.newInstance(i));
+                    transaction.add(containers[i], SpinnerInputFragment.newInstance(i));
             }
         }
 

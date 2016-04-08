@@ -15,6 +15,7 @@ import java.util.Map;
 import se.chalmers.phrasebook.App;
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.syntax.SyntaxNode;
+import se.chalmers.phrasebook.backend.syntax.SyntaxNodeList;
 import se.chalmers.phrasebook.backend.syntax.SyntaxTree;
 
 /**
@@ -34,7 +35,7 @@ public class Model {
     private Langs origin, target;
     private PhraseBook currentPhrasebook;
     private SyntaxTree currentPhrase;
-    private ArrayList<LinkedHashMap> optionsList;
+    private ArrayList<SyntaxNodeList> optionsList;
 
     private Model() {
         instance = App.get();
@@ -147,9 +148,8 @@ public class Model {
         return null;
     }
 
-    public void update(int listIndex, String parent, String newOption) {
-        currentPhrase.setSelectedChild(((SyntaxNode) currentPhrase.getOptions().get(listIndex).get(parent)),
-                listIndex, newOption, parent);
+    public void update(int optionIndex, int childIndex) {
+        currentPhrase.setSelectedChild(optionIndex,childIndex);
         playCurrentTargetPhrase();
     }
 
@@ -170,31 +170,14 @@ public class Model {
 
     public ArrayList<String> getNodeOptions(int index) {
         optionsList = currentPhrase.getOptions();
-
-        LinkedHashMap map = optionsList.get(index);
-
-        Iterator entries = map.entrySet().iterator();
-
         ArrayList<String> guiOptions = new ArrayList<>();
 
-        while (entries.hasNext()) {
-            Map.Entry thisEntry = (Map.Entry) entries.next();
-            Object key = thisEntry.getKey();
-            Object value = thisEntry.getValue();
-            if (isNodeSelected((SyntaxNode) value, map)) {
-                if (guiOptions.size() > 1) {
-                    guiOptions.add(1, (String) key);
-                } else {
-                    guiOptions.add((String) key);
-                }
-
-            } else {
-                guiOptions.add((String) key);
-            }
-
+        for (SyntaxNodeList l: optionsList) {
+            if (l.getQuestion() != null && !l.getQuestion().isEmpty())
+                guiOptions.add(l.getQuestion());
         }
-        return guiOptions;
 
+        return guiOptions;
     }
 
 

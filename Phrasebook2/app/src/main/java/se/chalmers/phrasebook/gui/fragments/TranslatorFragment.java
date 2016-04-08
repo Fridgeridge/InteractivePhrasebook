@@ -11,11 +11,9 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
-import se.chalmers.phrasebook.gui.smallFragments.SpinnerFragment;
 import se.chalmers.phrasebook.gui.smallFragments.SwipeFragment;
 import se.chalmers.phrasebook.gui.smallFragments.TranslationFragment;
 
@@ -85,15 +83,15 @@ public class TranslatorFragment extends Fragment {
 
             String action = intent.getAction();
             int dataIndex;
-            String label;
+            int childIndex;
             String newChoice;
 
             if(action.equals("gui_update")){
-                dataIndex = intent.getIntExtra("dataIndex", -1);
-                label = intent.getStringExtra("label");
-                newChoice = intent.getStringExtra("newChoice");
 
-                model.update(dataIndex, label, newChoice);
+                dataIndex = intent.getIntExtra("optionIndex", -1);
+                childIndex = intent.getIntExtra("childIndex", -1);
+                model.update(dataIndex, childIndex);
+
 
                 TranslationFragment translationFragment = (TranslationFragment)getChildFragmentManager().findFragmentById(R.id.containerfor_translation);
                 translationFragment.updateData();

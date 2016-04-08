@@ -46,7 +46,6 @@ public class SyntaxNode {
         this.desc = desc;
     }
 
-
     public boolean equals(Object o) {
 
         if (this == o) {

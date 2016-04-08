@@ -11,14 +11,14 @@ import java.util.LinkedHashMap;
 public class SyntaxTree {
     private String id;
     private SyntaxNode root;
-    private ArrayList<LinkedHashMap> options = new ArrayList<>();
+    private ArrayList<SyntaxNodeList> options = new ArrayList<>();
 
     public SyntaxTree(SyntaxNode root) {
         this.root = root;
         initializeOptions(this.root);
     }
 
-    public ArrayList<LinkedHashMap> getOptions() {
+    public ArrayList<SyntaxNodeList> getOptions() {
         return options;
     }
 
@@ -26,17 +26,9 @@ public class SyntaxTree {
     //a currently available option to be customized.
     private void initializeOptions(SyntaxNode currentRoot) {
         if(currentRoot.isModular()) {
-            LinkedHashMap<String, SyntaxNode> selection
-                    = new LinkedHashMap<>();
             for(SyntaxNodeList l : currentRoot.getSyntaxNodes()) {
-                selection.put(l.getQuestion(), currentRoot);
-                for(SyntaxNode n : l.getChildren()) {
-                    selection.put(n.getDesc(), n);
-                }
-
-                if(!options.contains(selection)) {
-                    options.add((LinkedHashMap<String, SyntaxNode>) selection.clone());
-                    selection.clear();
+                if(l.getQuestion()!=null && !options.contains(l)) {
+                    options.add(l);
                 }
                 initializeOptions(l.getSelectedChild());
             }
@@ -48,34 +40,55 @@ public class SyntaxTree {
         }
     }
 
-    /**
-     * Replaces an old selectedChild with a new one.
-     * The method returns true if it succesfully managed to replace a
-     * selected child, otherwise it returns false.
-     *
-     * @param parent   the modular SyntaxNode containing the two children
-     * @param question the question to be answered
-     * @param newChild the child which replaces the old one
-     * @return if the operations was succesful or not
-     */
-    //TODO REALLY UGLY SOLUTION, TRY TO FIX IT WITHOUT 'instanceof' FOR NUMERALSYNTAXNODE
-    public boolean setSelectedChild(SyntaxNode parent, int listIndex, String newChild, String question) {
-        if(parent.getSyntaxNodes().get(0).getChildren().get(0) instanceof NumeralSyntaxNode) {
-            ((NumeralSyntaxNode)parent).setSelectedChild(newChild);
-            options.clear();
-            this.initializeOptions(root);
-            return true;
+
+    public boolean setSelectedChild(int optionIndex, int childIndex) {
+        boolean status = false;
+
+        if(options.get(optionIndex)!= null){
+            if(options.get(optionIndex).getChildren().get(childIndex)!= null)
+                status = options.get(optionIndex).setSelectedChild(options.get(optionIndex).getChildren().get(childIndex));
         }
-        for(int i = 0; i < parent.getSyntaxNodes().size(); i++) {
-            if(parent.getSyntaxNodes().get(i).getQuestion().equals(question)) {
-                parent.setSelectedChild(i, (SyntaxNode)options.get(listIndex).get(newChild));
-                options.clear();
-                this.initializeOptions(root);
-                return true;
-            }
-        }
-        return false;
+
+        return status;
     }
+
+
+    public boolean setSelectedChild(SyntaxNodeList l, SyntaxNode s){
+        boolean status = false;
+        if(options.contains(l)){
+            status = l.setSelectedChild(s);
+        }
+        return status;
+    }
+
+//    /**
+//     * Replaces an old selectedChild with a new one.
+//     * The method returns true if it succesfully managed to replace a
+//     * selected child, otherwise it returns false.
+//     *
+//     * @param parent   the modular SyntaxNode containing the two children
+//     * @param question the question to be answered
+//     * @param newChild the child which replaces the old one
+//     * @return if the operations was succesful or not
+//     */
+//    //TODO REALLY UGLY SOLUTION, TRY TO FIX IT WITHOUT 'instanceof' FOR NUMERALSYNTAXNODE
+//    public boolean setSelectedChild(SyntaxNode parent, int listIndex, String newChild, String question) {
+//        if(parent.getSyntaxNodes().get(0).getChildren().get(0) instanceof NumeralSyntaxNode) {
+//            ((NumeralSyntaxNode)parent).setSelectedChild(newChild);
+//            options.clear();
+//            this.initializeOptions(root);
+//            return true;
+//        }
+//        for(int i = 0; i < parent.getSyntaxNodes().size(); i++) {
+//            if(parent.getSyntaxNodes().get(i).getQuestion().equals(question)) {
+//                parent.setSelectedChild(i, (SyntaxNode)options.get(listIndex).get(newChild));
+//                options.clear();
+//                this.initializeOptions(root);
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 
     /**
      * Parses the selected children into a text syntax usable by the grammar to
@@ -115,4 +128,5 @@ public class SyntaxTree {
             return root.getSyntaxNodes().get(0).getSelectedChild();//TODO Might cause bugs
         return null;
     }
+
 }

@@ -14,7 +14,7 @@
     </sentence>
 
     <sentence desc="HelloStranger" id="HelloStranger">
-        <node syntax="Greetings">
+        <node syntax="GPleaseGivePol">
             <option option="Who are we talking about?">
                 <node child="allpersons"></node>
             </option>

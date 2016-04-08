@@ -30,7 +30,8 @@ public class Model {
     private Translator translator;
     private XMLParser parser;
     private TTSHandler ttsHandler;
-    private ArrayList<PhraseBook> phrasebooks;
+    private ArrayList<PhraseBook> myPhrasebooks;
+    private ArrayList<PhraseBook> defaultPhrasebooks;
     private Langs origin, target;
     private PhraseBook currentPhrasebook;
     private SyntaxTree currentPhrase;
@@ -60,14 +61,16 @@ public class Model {
         setOriginLanguage(sharedPref.getString(instance.getString(R.string.saved_origin_language), originKeyDef));
 
 
-        phrasebooks = new ArrayList<>();
+        myPhrasebooks = new ArrayList<>();
+        defaultPhrasebooks = new ArrayList<>();
+
         //Hardcoded default testing phrasebook
         PhraseBook tourism = new PhraseBook("Tourism");
         for (String s : parser.getSentencesData().keySet()) {
             tourism.addPhrase(translator.translateToOrigin(parser.buildSyntaxTree(parser.getSentence(s)).getSyntax())
                     ,parser.buildSyntaxTree(parser.getSentence(s)));
         }
-        phrasebooks.add(tourism);
+        defaultPhrasebooks.add(tourism);
     }
 
     public static Model getInstance() {
@@ -77,22 +80,29 @@ public class Model {
 
     //Requires unique name
     public boolean addPhrasebook(String name) {
-        for (PhraseBook book : phrasebooks) {
+        for (PhraseBook book : myPhrasebooks) {
             if (book.getTitle().equals(name)) {
                 return false;
             }
         }
         PhraseBook pb = new PhraseBook(name);
-        phrasebooks.add(pb);
+        myPhrasebooks.add(pb);
         return true;
     }
 
     public PhraseBook getPhrasebookByTitle(String title) {
-        for (PhraseBook book : phrasebooks) {
+        for (PhraseBook book : myPhrasebooks) {
             if (book.getTitle().equals(title)) {
                 return book;
             }
         }
+
+        for (PhraseBook book : defaultPhrasebooks) {
+            if (book.getTitle().equals(title)) {
+                return book;
+            }
+        }
+
         return null;
     }
 
@@ -120,9 +130,17 @@ public class Model {
         editor.commit();
     }
 
-    public ArrayList<String> getPhrasebookTitles() {
+    public ArrayList<String> getMyPhrasebookTitles() {
         ArrayList<String> names = new ArrayList<String>();
-        for (PhraseBook book : phrasebooks) {
+        for (PhraseBook book : myPhrasebooks) {
+            names.add(book.getTitle());
+        }
+        return names;
+    }
+
+    public ArrayList<String> getDefaultPhrasebookTitles() {
+        ArrayList<String> names = new ArrayList<String>();
+        for (PhraseBook book : defaultPhrasebooks) {
             names.add(book.getTitle());
         }
         return names;

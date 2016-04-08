@@ -4,6 +4,13 @@
     android:layout_height="match_parent"
     tools:context=".gui.fragments.DefaultPhrasebooksFragment">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/my_phrasebooks_textView"
+        android:layout_gravity="center_horizontal|top" />
+
     <GridView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

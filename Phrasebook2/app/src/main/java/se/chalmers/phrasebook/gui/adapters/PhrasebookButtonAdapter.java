@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import se.chalmers.phrasebook.R;
@@ -26,14 +27,14 @@ public class PhrasebookButtonAdapter extends BaseAdapter {
     private Model model;
     private NavigationActivity na;
 
-    public PhrasebookButtonAdapter(Context context) {
+    public PhrasebookButtonAdapter(Context context, ArrayList<String> phrasebooks) {
         this.context = context;
 
         //Ska hämtas nånstans ifrån istället för en statisk lista i xml
         //SNART FIXAT
         phrasebookNames = new ArrayList<>();
+        phrasebookNames = phrasebooks;
         model = Model.getInstance();
-        phrasebookNames.addAll(model.getPhrasebookTitles());
         na = new NavigationActivity();
 
     }

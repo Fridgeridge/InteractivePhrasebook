@@ -86,7 +86,7 @@ public class XMLParser {
      */
     private SyntaxNode constructSyntaxNodeList(NodeList nl, SyntaxNode parent, SyntaxNodeList list, SyntaxNode nextSequence, int nbrOfArgs) {
         if (nl == null || nl.getLength() < 1) {
-            if (nextSequence != null) {
+            if (nextSequence != null && !(parent.getData().isEmpty() && nextSequence.getSyntaxNodes().isEmpty())) {
                 list.add(nextSequence);
                 parent.getSyntaxNodes().add(list);
             }

@@ -13,16 +13,7 @@
         </node>
     </sentence>
 
-    <sentence desc="HelloStranger" id="HelloStranger">
-        <node syntax="Greetings">
-            <option option="Who are we talking about?">
-                <node child="allpersons"></node>
-            </option>
-        </node>
-    </sentence>
-
-
-    <!--works-->
+    <!--SOMETHING IS UP WITH THE NAMEPARSING; WE CAN TRANSLATE ONCE BUT NOT INITIALIZE-->
     <sentence desc="Somebody's name is..." id="AHasName">
         <node child="phraseit">
             <node syntax="PropAction">
@@ -30,7 +21,9 @@
                     <option option="Who are we talking about?">
                         <node child="allpersons"></node>
                     </option>
-                    <node syntax="NName"></node>
+                    <option option="">
+                        <node syntax="NameNN"/>
+                    </option>
                 </node>
             </node>
         </node>
@@ -48,14 +41,15 @@
     </sentence>
 
     <sentence desc="Someone's age is..." id="AHasAge">
-        <node syntax="PQuestion">
-            <node syntax="QProp">
-                <node syntax="PropAction">
-                    <node syntax="NNumeral">
-                        <node syntax="AHasAge">
-                            <node child="allpersons" />
-                        </node>
-                    </node>
+        <node child="phraseit">
+            <node syntax="PropAction">
+                <node args="2" syntax="AHasAge">
+                    <option option="Who are we talking about?">
+                        <node child="allpersons"/>
+                    </option>
+                    <option option="How many years?">
+                        <node syntax="NNumeral"/>
+                    </option>
                 </node>
             </node>
         </node>
@@ -208,15 +202,13 @@
             </node>
         </node>
     </sentence>
-    <!--ASK KRASIMIR-->
+
+    <!--WORKS-->
     <sentence desc="How far is something?" id="HowFar">
         <node syntax="PQuestion">
-            <node args="2" syntax="HowFar">
-                <option option="Superlative">
-                    <node child="superlative" />
-                </option>
+            <node syntax="HowFar">
                 <option option="What place are we asking about?">
-                    <node child="places" />
+                    <node child="superlative_places" />
                 </option>
             </node>
         </node>
@@ -255,7 +247,7 @@
     </sentence>
 
 
-    <!-- Someone wants to go somewhere -->
+    <!-- Works-->
     <sentence desc="Someone wants to go somewhere" id="AWantGo">
         <node child="phraseit">
             <node syntax="PropAction">
@@ -271,6 +263,7 @@
         </node>
     </sentence>
 
+    <!--Works-->
     <sentence desc="Someone is somewhere" id="ABePlace">
         <node child="phraseit">
             <node syntax="PropAction">

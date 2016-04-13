@@ -25,6 +25,7 @@ public class SyntaxTree {
     //creates an ArrayList och LinkedHashMaps, each representing
     //a currently available option to be customized.
     private void initializeOptions(SyntaxNode currentRoot) {
+        if(currentRoot == null) return;
         if(currentRoot.isModular()) {
             for(SyntaxNodeList l : currentRoot.getSyntaxNodes()) {
                 if(l.getQuestion()!=null && !options.contains(l)) {

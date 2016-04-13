@@ -26,9 +26,6 @@ public class TranslatorFragment extends Fragment {
 
     private Model model;
 
-    public TranslatorFragment() {
-        // Required empty public constructor
-    }
 
     public static TranslatorFragment newInstance(String phrase) {
         TranslatorFragment fragment = new TranslatorFragment();

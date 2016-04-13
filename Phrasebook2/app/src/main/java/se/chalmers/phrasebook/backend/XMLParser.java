@@ -86,9 +86,9 @@ public class XMLParser {
      */
     private SyntaxNode constructSyntaxNodeList(NodeList nl, SyntaxNode parent, SyntaxNodeList list, SyntaxNode nextSequence, int nbrOfArgs) {
         if (nl == null || nl.getLength() < 1) {
-            if (nextSequence != null) {
-                list.add(nextSequence);
-                parent.getSyntaxNodes().add(list);
+            if (nextSequence != null && !(parent.getData().isEmpty() && nextSequence.getSyntaxNodes().isEmpty())) {
+                    list.add(nextSequence);
+                    parent.getSyntaxNodes().add(list);
             }
             return null;
         }
@@ -157,7 +157,7 @@ public class XMLParser {
                 }
 
                 //Add the list to the current parent node list
-                if (!parent.getSyntaxNodes().contains(list)) {
+                if (!list.getChildren().isEmpty()&& !parent.getSyntaxNodes().contains(list)) {
                     parent.getSyntaxNodes().add(list);
                 }
                 //Check if current node is multiple arg nodes i.e. add another list to its syntaxNodes.

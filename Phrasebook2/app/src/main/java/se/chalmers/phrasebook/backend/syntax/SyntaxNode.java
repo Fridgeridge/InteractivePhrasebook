@@ -29,12 +29,7 @@ public class SyntaxNode {
     }
 
     public boolean isModular() {
-        System.out.println(this.desc);
-        if(syntaxNodes.size() > 0 && syntaxNodes.get(0).getChildren().size() > 1) {
-            System.out.println("Is modular");
-            return true;
-        }
-        System.out.println("Is NOT modular");
+        for(SyntaxNodeList s: syntaxNodes) if(!s.getChildren().isEmpty()) return true;
         return false;
     }
 

@@ -1,5 +1,6 @@
 package se.chalmers.phrasebook.gui.smallFragments;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -20,6 +20,7 @@ import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
 import se.chalmers.phrasebook.backend.syntax.SyntaxNode;
 import se.chalmers.phrasebook.backend.syntax.SyntaxNodeList;
+import se.chalmers.phrasebook.gui.fragments.FragmentCommunicator;
 
 /**
  * Created by matilda on 14/03/16.
@@ -33,6 +34,8 @@ public class SpinnerInputFragment extends Fragment {
     private String currentChoice;
     private Spinner spinner;
 
+    FragmentCommunicator mCallback;
+
     public static SpinnerInputFragment newInstance(int optionIndex) {
         SpinnerInputFragment spinnerInputFragment = new SpinnerInputFragment();
         Bundle args = new Bundle();
@@ -40,6 +43,24 @@ public class SpinnerInputFragment extends Fragment {
         spinnerInputFragment.setArguments(args);
         return spinnerInputFragment;
     }
+
+
+
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        // This makes sure that the container activity has implemented
+        // the callback interface. If not, it throws an exception
+        try {
+            mCallback = (FragmentCommunicator) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement selectedInputListener");
+        }
+    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,7 +75,6 @@ public class SpinnerInputFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.small_fragment_spinner, container, false);
-
         TextView textView = (TextView) view.findViewById(R.id.text_view_spinner);
         spinner = (Spinner) view.findViewById(R.id.choice_spinner);
 
@@ -79,6 +99,8 @@ public class SpinnerInputFragment extends Fragment {
         } else {
             textView.setText(label);
         }
+
+
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -110,4 +132,10 @@ public class SpinnerInputFragment extends Fragment {
         LocalBroadcastManager.getInstance(getActivity().getApplicationContext()).sendBroadcast(intent);
 
     }
+
+
+    protected AdapterView getInputComponent(){
+        return this.spinner;
+    }
+
 }

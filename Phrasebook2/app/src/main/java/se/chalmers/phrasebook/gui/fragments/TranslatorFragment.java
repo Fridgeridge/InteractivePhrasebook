@@ -68,7 +68,7 @@ public class TranslatorFragment extends Fragment {
         fm.commit();
 
         ImageView imageView = new ImageView(App.get());
-        imageView.setImageResource(R.drawable.ic_menu_camera);
+        imageView.setImageResource(R.drawable.ic_add_white_24dp);
 
         floatingActionButton = new FloatingActionButton.Builder(getActivity()).setContentView(imageView).build();
 

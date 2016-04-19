@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="primary_color" type="color">#4db6ac</item>
-    <item name="secondary_color" type="color">#80cbc4</item>
+    <item name="primary_color" type="color">#009688</item>
+    <item name="secondary_color" type="color">#4DB6AC</item>
     <item name="highlight_color" type="color">#ff7043</item>
     <item name="background_color" type="color">#FAFAFA</item>
     
-    <color name="colorPrimary">#4db6ac</color>
-    <color name="colorPrimaryDark">#26A69A</color>
+    <color name="colorPrimary">#009688</color>
+    <color name="colorPrimaryDark">#00897B</color>
 </resources>

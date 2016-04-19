@@ -4,6 +4,9 @@
     <item name="secondary_color" type="color">#4DB6AC</item>
     <item name="highlight_color" type="color">#ff7043</item>
     <item name="background_color" type="color">#FAFAFA</item>
+
+    <item name="text_colour_light" type="color">#616161</item>
+    <item name="text_colour_dark" type="color">#212121</item>
     
     <color name="colorPrimary">#009688</color>
     <color name="colorPrimaryDark">#00897B</color>

@@ -1,17 +1,24 @@
 package se.chalmers.phrasebook.gui.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.content.LocalBroadcastManager;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+import se.chalmers.phrasebook.App;
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
 import se.chalmers.phrasebook.gui.activities.NavigationActivity;
@@ -30,8 +37,6 @@ public class PhrasebookButtonAdapter extends BaseAdapter {
     public PhrasebookButtonAdapter(Context context, ArrayList<String> phrasebooks) {
         this.context = context;
 
-        //Ska hämtas nånstans ifrån istället för en statisk lista i xml
-        //SNART FIXAT
         phrasebookNames = new ArrayList<>();
         phrasebookNames = phrasebooks;
         model = Model.getInstance();
@@ -68,7 +73,7 @@ public class PhrasebookButtonAdapter extends BaseAdapter {
         final View clickview = convertView;
 
         button.setMinimumHeight(250);
-//        button.setHeight(100);
+        button.setHeight(400);
         button.setWidth(100);
         button.setBackgroundResource(R.drawable.grid_phrasebook_button);
         button.setTextColor(Color.BLACK);

@@ -1,2 +1,6 @@
-configurations.create("default")
+apply plugin:'java'
+configurations.maybeCreate("default")
 artifacts.add("default", file('jpgf.jar'))
+dependencies {
+    compile files('jpgf.jar')
+}

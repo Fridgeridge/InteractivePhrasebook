@@ -31,9 +31,8 @@ public class Translator {
             s = lang.linearize(expr);
         } catch (PGFError e) {
             Log.e("TranslationError", "Error while parsing XML syntax: " + abstractSyntax + "\n with Error: " + e.toString());
-        } finally {
-            return s;
         }
+            return s;
     }
 
     public String translateToOrigin(String abstractSyntax) {

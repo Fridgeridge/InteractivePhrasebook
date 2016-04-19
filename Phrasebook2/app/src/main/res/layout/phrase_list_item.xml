@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:textSize="18dp"
     android:textColor="@color/text_colour_light"
+    android:fontFamily="sans-serif-light"
     android:text="New Text"
     android:id="@+id/textView3"
     android:padding="8dp"

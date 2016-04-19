@@ -4,9 +4,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
+import se.chalmers.phrasebook.backend.syntax.SyntaxNodeList;
 import se.chalmers.phrasebook.gui.smallFragments.SwipeFragment;
 import se.chalmers.phrasebook.gui.smallFragments.TranslationFragment;
 
@@ -52,7 +53,7 @@ public class TranslatorFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_translator, container, false);
 
         FragmentTransaction fm = getChildFragmentManager().beginTransaction();
-        
+
         fm.add(R.id.containerfor_translation, new TranslationFragment());
         fm.add(R.id.containerfor_options, new SwipeFragment());
 
@@ -71,35 +72,37 @@ public class TranslatorFragment extends Fragment {
 
     }
 
+    public void updateTranslation() {
+
+        TranslationFragment translationFragment = (TranslationFragment) getChildFragmentManager().findFragmentById(R.id.containerfor_translation);
+        if (translationFragment != null)
+            translationFragment.updateData();
+
+
+    }
 
     private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
 
-            System.out.println("receiving");
 
             String action = intent.getAction();
             int dataIndex;
             int childIndex;
-            String newChoice;
+            SyntaxNodeList syntaxNodeList;
 
-            if(action.equals("gui_update")){
+            if (action.equals("gui_update")) {
 
                 dataIndex = intent.getIntExtra("optionIndex", -1);
+                syntaxNodeList = (SyntaxNodeList) (intent.getSerializableExtra("selectedSyntaxNodeList"));
                 childIndex = intent.getIntExtra("childIndex", -1);
-                model.update(dataIndex, childIndex);
 
+                model.update(dataIndex, syntaxNodeList, childIndex);
 
-                TranslationFragment translationFragment = (TranslationFragment)getChildFragmentManager().findFragmentById(R.id.containerfor_translation);
+                TranslationFragment translationFragment = (TranslationFragment) getChildFragmentManager().findFragmentById(R.id.containerfor_translation);
                 translationFragment.updateData();
 
-                FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-
-                transaction.replace(R.id.containerfor_options, new SwipeFragment());
-                transaction.commit();
-
-
-            }else{
+            } else {
                 throw new IllegalArgumentException();
             }
 

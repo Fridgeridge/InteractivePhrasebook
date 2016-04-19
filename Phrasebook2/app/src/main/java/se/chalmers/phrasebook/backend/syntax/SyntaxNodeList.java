@@ -1,5 +1,6 @@
 package se.chalmers.phrasebook.backend.syntax;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import se.chalmers.phrasebook.backend.syntax.SyntaxNode;
@@ -7,7 +8,7 @@ import se.chalmers.phrasebook.backend.syntax.SyntaxNode;
 /**
  * Created by David on 2016-04-01.
  */
-public class SyntaxNodeList {
+public class SyntaxNodeList implements Serializable {
     private SyntaxNode selectedChild;
     private ArrayList<SyntaxNode> children;
     private String question;
@@ -18,7 +19,6 @@ public class SyntaxNodeList {
     }
 
     public ArrayList<SyntaxNode> getChildren() {
-        System.out.println(children.size());
         return children;
     }
 

@@ -30,7 +30,6 @@ public class TTSHandler {
 
     public void setTargetTTSLanguage(Langs target) {
         int e = tts.setLanguage(target.getTTS());
-        System.out.println(e);
     }
 
     public void playSentence(String sentence) {

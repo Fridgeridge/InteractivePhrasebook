@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -13,18 +14,23 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
+import se.chalmers.phrasebook.backend.syntax.SyntaxNodeList;
+import se.chalmers.phrasebook.gui.FragmentCommunicator;
 import se.chalmers.phrasebook.gui.fragments.ChangeLanguageFragment;
 import se.chalmers.phrasebook.gui.fragments.DefaultPhrasebooksFragment;
 import se.chalmers.phrasebook.gui.fragments.MyPhrasebooksFragment;
 import se.chalmers.phrasebook.gui.fragments.NavigationDrawerFragment;
 import se.chalmers.phrasebook.gui.fragments.PhraseListFragment;
 import se.chalmers.phrasebook.gui.fragments.TranslatorFragment;
+import se.chalmers.phrasebook.gui.smallFragments.InputHolderFragment;
+import se.chalmers.phrasebook.gui.smallFragments.TranslationFragment;
 
 public class NavigationActivity extends FragmentActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks, FragmentCommunicator {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -124,18 +130,16 @@ public class NavigationActivity extends FragmentActivity
         @Override
         public void onReceive(Context context, Intent intent) {
 
-            System.out.println("receiving");
-
             String action = intent.getAction();
             String message;
 
-            if(action.equals("phrasebook_event")){
+            if (action.equals("phrasebook_event")) {
                 message = intent.getStringExtra("message");
                 switchContent(PhraseListFragment.newInstance(message), "");
-            }else if(action.equals("phrase_list_event")){
+            } else if (action.equals("phrase_list_event")) {
                 message = intent.getStringExtra("message");
                 switchContent(TranslatorFragment.newInstance(message), "");
-            }else{
+            } else {
                 throw new IllegalArgumentException();
             }
 
@@ -152,12 +156,19 @@ public class NavigationActivity extends FragmentActivity
     public void onBackPressed() {
 
         //Nån konstig bug...
-        if(getFragmentManager().getBackStackEntryCount() > 0) {
+        if (getFragmentManager().getBackStackEntryCount() > 0) {
             getFragmentManager().popBackStack();
-        }
-        else {
+        } else {
             super.onBackPressed();
         }
     }
 
+    @Override
+    public void updateSyntax(int optionIndex, SyntaxNodeList l, int childIndex) {
+        model.update(optionIndex,l,childIndex);
+        if(mContent instanceof TranslatorFragment){
+            TranslatorFragment fragment = (TranslatorFragment) mContent;
+            fragment.updateTranslation();
+        }
+    }
 }

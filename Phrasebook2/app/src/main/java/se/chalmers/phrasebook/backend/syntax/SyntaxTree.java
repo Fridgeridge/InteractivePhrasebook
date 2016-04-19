@@ -49,17 +49,32 @@ public class SyntaxTree {
             if(options.get(optionIndex).getChildren().get(childIndex)!= null)
                 status = options.get(optionIndex).setSelectedChild(options.get(optionIndex).getChildren().get(childIndex));
         }
-
         return status;
     }
 
 
-    public boolean setSelectedChild(SyntaxNodeList l, SyntaxNode s){
-        boolean status = false;
-        if(options.contains(l)){
-            status = l.setSelectedChild(s);
+
+    public void setSelectedChild(int optionIndex,SyntaxNodeList snl, int childIndex){
+        SyntaxNodeList nodeList = options.get(optionIndex);
+        setRecursiveSelectedChild(nodeList,snl,childIndex);
+    }
+
+
+
+    private void setRecursiveSelectedChild(SyntaxNodeList nodeList, SyntaxNodeList optionTarget, int childIndex){
+
+        if(nodeList.equals(optionTarget)){
+            setSelectedChild(nodeList,nodeList.getChildren().get(childIndex));
+        }else{
+            for(SyntaxNodeList list :nodeList.getSelectedChild().getSyntaxNodes())
+                setRecursiveSelectedChild(list, optionTarget,childIndex);
         }
-        return status;
+
+    }
+
+
+    public boolean setSelectedChild(SyntaxNodeList l, SyntaxNode s){
+            return l.setSelectedChild(s);
     }
 
 //    /**
@@ -111,15 +126,14 @@ public class SyntaxTree {
             String syntax = node.getData();
             for (int i = 0; i < node.getSyntaxNodes().size(); i++) {
                 if (node.getSyntaxNodes().get(i).getSelectedChild().getData().isEmpty()) {
-                    syntax = syntax + parseSentenceSyntax(node.getSyntaxNodes().get(i).getSelectedChild());
+                    syntax += parseSentenceSyntax(node.getSyntaxNodes().get(i).getSelectedChild());
                 } else {
                     syntax = syntax + "(" + parseSentenceSyntax(node.getSyntaxNodes().get(i).getSelectedChild()) + ")";
                     if (node.getSyntaxNodes().size() > 1) {
-                        syntax = syntax + " ";
+                        syntax += " ";
                     }
                 }
             }
-            System.out.println(syntax);
             return syntax;
         }
     }

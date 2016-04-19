@@ -66,13 +66,13 @@ public class OptionsFragment extends Fragment {
         if(type == 1) {
             for (int i = 0; i < options.size(); i++) {
                 if (options.get(i) != null) {
-                    transaction.add(containers[i],InputHolderFragment.newInstance(i));
+                    transaction.add(containers[i], (InputHolderFragment.newInstance(i)));
                 }
             }
         }else if(type == 2){
             for (int i = 0; i < advancedOptions.size(); i++) {
                 if (advancedOptions.get(i) != null)
-                    transaction.add(containers[i], SpinnerInputFragment.newInstance(i));
+                    transaction.add(containers[i], InputHolderFragment.newInstance(i));
             }
         }
 

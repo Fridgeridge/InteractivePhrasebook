@@ -66,7 +66,7 @@ public class Model {
         PhraseBook tourism = new PhraseBook("Tourism");
         for (String s : parser.getSentencesData().keySet()) {
             tourism.addPhrase(translator.translateToOrigin(parser.buildSyntaxTree(parser.getSentence(s)).getSyntax())
-                    ,parser.buildSyntaxTree(parser.getSentence(s)));
+                    , parser.buildSyntaxTree(parser.getSentence(s)));
         }
         phrasebooks.add(tourism);
     }
@@ -115,8 +115,8 @@ public class Model {
         editor.apply();
     }
 
-    public void deleteAllPreferences(){
-        SharedPreferences.Editor editor= sharedPref.edit();
+    public void deleteAllPreferences() {
+        SharedPreferences.Editor editor = sharedPref.edit();
         editor.clear();
         editor.commit();
     }
@@ -148,8 +148,8 @@ public class Model {
         return null;
     }
 
-    public void update(int optionIndex, int childIndex) {
-        currentPhrase.setSelectedChild(optionIndex,childIndex);
+    public void update(int optionIndex, SyntaxNodeList target, int childIndex) {
+        currentPhrase.setSelectedChild(optionIndex, target, childIndex);
         playCurrentTargetPhrase();
     }
 
@@ -172,7 +172,7 @@ public class Model {
         optionsList = currentPhrase.getOptions();
         ArrayList<String> guiOptions = new ArrayList<>();
 
-        for (SyntaxNodeList l: optionsList) {
+        for (SyntaxNodeList l : optionsList) {
             if (l.getQuestion() != null && !l.getQuestion().isEmpty())
                 guiOptions.add(l.getQuestion());
         }
@@ -194,7 +194,6 @@ public class Model {
     }
 
     public String translateToOrigin() {
-        System.out.println(getCurrentPhrase() == null);
         return translator.translateToOrigin(getCurrentPhrase().getSyntax());
     }
 
@@ -220,8 +219,8 @@ public class Model {
     }
 
     public void setCurrentPhrase(int position) {
-            currentPhrase = parser.buildSyntaxTree(parser.getSentence
-                    ((String)(parser.getSentencesData().keySet().toArray()[position])));
+        currentPhrase = parser.buildSyntaxTree(parser.getSentence
+                ((String) (parser.getSentencesData().keySet().toArray()[position])));
 
     }
 

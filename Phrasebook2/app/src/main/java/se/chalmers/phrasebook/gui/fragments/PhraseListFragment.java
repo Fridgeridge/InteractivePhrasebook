@@ -1,7 +1,6 @@
 package se.chalmers.phrasebook.gui.fragments;
 
 
-import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,9 +28,6 @@ public class PhraseListFragment extends Fragment {
     Context context;
     private String title;
 
-    public PhraseListFragment() {
-        // Required empty public constructor
-    }
 
     public static PhraseListFragment newInstance(String title) {
         PhraseListFragment fragment = new PhraseListFragment();
@@ -83,9 +79,8 @@ public class PhraseListFragment extends Fragment {
         return view;
     }
 
-    private void sendMessage(String phrase){
+    private void sendMessage(String phrase) {
 
-        System.out.println("sending");
 
         Intent intent = new Intent("phrase_list_event");
         // add data
@@ -94,7 +89,6 @@ public class PhraseListFragment extends Fragment {
     }
 
     private void sendMessage(int position) {
-        System.out.println("sending");
 
         Intent intent = new Intent("phrase_list_event");
         // add data

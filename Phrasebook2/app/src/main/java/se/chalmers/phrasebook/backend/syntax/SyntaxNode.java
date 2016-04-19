@@ -24,12 +24,20 @@ public class SyntaxNode {
         return syntaxNodes;
     }
 
+    public ArrayList<SyntaxNodeList> getModularSyntaxNodes() {
+        ArrayList<SyntaxNodeList> result = new ArrayList<SyntaxNodeList>();
+        for (SyntaxNodeList snl : syntaxNodes) {
+            if (snl.getChildren().size() > 1) result.add(snl);
+        }
+        return result;
+    }
+
     public String getData() {
         return data;
     }
 
     public boolean isModular() {
-        for(SyntaxNodeList s: syntaxNodes) if(!s.getChildren().isEmpty()) return true;
+        for (SyntaxNodeList s : syntaxNodes) if (s.getChildren().size() > 1) return true;
         return false;
     }
 

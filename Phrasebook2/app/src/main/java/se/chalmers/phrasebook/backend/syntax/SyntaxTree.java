@@ -132,6 +132,7 @@ public class SyntaxTree {
                     if (node.getSyntaxNodes().size() > 1) {
                         syntax += " ";
                     }
+
                 }
             }
             return syntax;

@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-//import com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton;
+import com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton;
 
 import se.chalmers.phrasebook.App;
 import se.chalmers.phrasebook.R;
@@ -33,7 +33,7 @@ public class TranslatorFragment extends Fragment {
 
     private Model model;
 
-//    private FloatingActionButton floatingActionButton;
+    private FloatingActionButton floatingActionButton;
 
     public static TranslatorFragment newInstance(String phrase) {
         TranslatorFragment fragment = new TranslatorFragment();
@@ -49,7 +49,7 @@ public class TranslatorFragment extends Fragment {
 
         model = Model.getInstance();
 
-        //phrase = getArguments().getString("phrase");
+        phrase = getArguments().getString("phrase");
 
     }
 
@@ -70,16 +70,16 @@ public class TranslatorFragment extends Fragment {
         ImageView imageView = new ImageView(App.get());
         imageView.setImageResource(R.drawable.ic_menu_camera);
 
-//        floatingActionButton = new FloatingActionButton.Builder(getActivity()).setContentView(imageView).build();
+        floatingActionButton = new FloatingActionButton.Builder(getActivity()).setContentView(imageView).build();
 
-////        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                FragmentManager fm = getFragmentManager();
-//                DialogFragment dialogFragment = new DialogFragment();
-//                dialogFragment.show(fm, "dialog_fragment");
-//            }
-//        });
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fm = getFragmentManager();
+                DialogFragment dialogFragment = new DialogFragment();
+                dialogFragment.show(fm, "dialog_fragment");
+            }
+        });
 
 
         return view;
@@ -135,13 +135,13 @@ public class TranslatorFragment extends Fragment {
     public void onPause() {
         LocalBroadcastManager.getInstance(getActivity().getApplicationContext()).unregisterReceiver(mMessageReceiver);
         super.onPause();
-//        floatingActionButton.setVisibility(View.GONE);
+        floatingActionButton.setVisibility(View.GONE);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-//        floatingActionButton.setVisibility(View.GONE);
+        floatingActionButton.setVisibility(View.GONE);
     }
 
 

@@ -43,10 +43,4 @@ public class SwipeAdapter extends FragmentPagerAdapter {
 
     }
 
-    public void updateData(){
-
-        pages = (int) Math.ceil((double) model.getCurrentPhrase().getOptions().size() / 3);
-        notifyDataSetChanged();
-    }
-
 }

@@ -66,7 +66,6 @@ public class DefaultPhrasebooksFragment extends Fragment {
         TextView text = (TextView) view.findViewById(R.id.my_phrasebooks_textView);
         text.setVisibility(View.GONE);
 
-        Resources res = getResources();
         GridView gridView = (GridView) view.findViewById(R.id.standard_gridView);
         gridView.setAdapter(new PhrasebookButtonAdapter(getActivity().getApplicationContext(), model.getDefaultPhrasebookTitles()));
 

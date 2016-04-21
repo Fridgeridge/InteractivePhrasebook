@@ -33,6 +33,7 @@ public class Translator {
             expr = pgf.inferExpr(expr).getExpr();
 
             s = lang.linearize(expr);
+
         } catch (PGFError e) {
             Log.e("TranslationError", "Error while parsing XML syntax: " + abstractSyntax + "\n with Error: " + e.toString());
         } catch (TypeError typeError) {

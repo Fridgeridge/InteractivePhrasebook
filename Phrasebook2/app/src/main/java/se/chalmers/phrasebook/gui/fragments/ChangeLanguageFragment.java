@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Langs;
@@ -22,7 +23,6 @@ import se.chalmers.phrasebook.backend.Model;
 public class ChangeLanguageFragment extends Fragment {
 
     private Model model;
-    private Context context;
 
     private Spinner origin, target;
 
@@ -31,8 +31,6 @@ public class ChangeLanguageFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         model = Model.getInstance();
-        context = getActivity().getApplicationContext();
-
     }
 
     @Override
@@ -45,8 +43,8 @@ public class ChangeLanguageFragment extends Fragment {
         target = (Spinner) view.findViewById(R.id.target_spinner1);
 
         ArrayList<String> al = Langs.getLanguages();
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, al);
+        Collections.sort(al);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, al);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         origin.setAdapter(adapter);
@@ -56,18 +54,22 @@ public class ChangeLanguageFragment extends Fragment {
         int currentSelectedTarget = al.indexOf(model.getTargetLang().getLang());
 
         origin.setSelection(currentSelectedOrigin);
-        origin.setSelection(currentSelectedTarget);
+        target.setSelection(currentSelectedTarget);
+
+        origin.setOnItemSelectedListener(new SpinnerListener());
+        target.setOnItemSelectedListener(new SpinnerListener());
+
 
         return view;
     }
 
     private class SpinnerListener implements AdapterView.OnItemSelectedListener {
-
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
             if (parent.equals(origin)) {
                 model.setOriginLanguage(Langs.getKey(parent.getSelectedItem().toString()));
-            }else if (parent.equals(target)) {
+            } else if (parent.equals(target)) {
                 model.setTargetLanguage(Langs.getKey(target.getSelectedItem().toString()));
             }
         }

@@ -6,6 +6,7 @@ import org.grammaticalframework.pgf.Concr;
 import org.grammaticalframework.pgf.Expr;
 import org.grammaticalframework.pgf.PGF;
 import org.grammaticalframework.pgf.PGFError;
+import org.grammaticalframework.pgf.TypeError;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,11 +29,16 @@ public class Translator {
         String s = "Error";
         try {
             Expr expr = Expr.readExpr(abstractSyntax);
+
+            expr = pgf.inferExpr(expr).getExpr();
+
             s = lang.linearize(expr);
         } catch (PGFError e) {
             Log.e("TranslationError", "Error while parsing XML syntax: " + abstractSyntax + "\n with Error: " + e.toString());
+        } catch (TypeError typeError) {
+            typeError.printStackTrace();
         }
-            return s;
+        return s;
     }
 
     public String translateToOrigin(String abstractSyntax) {

@@ -23,7 +23,7 @@
                         <node child="allpersons"></node>
                     </option>
                     <option option="">
-                        <node syntax="NameNN"/>
+                        <node syntax="NameNN" />
                     </option>
                 </node>
             </node>
@@ -46,10 +46,10 @@
             <node syntax="PropAction">
                 <node args="2" syntax="AHasAge">
                     <option option="Who are we talking about?">
-                        <node child="allpersons"/>
+                        <node child="allpersons" />
                     </option>
                     <option option="How many years?">
-                        <node syntax="NNumeral"/>
+                        <node syntax="NNumeral" />
                     </option>
                 </node>
             </node>
@@ -197,7 +197,7 @@
                         <node child="allpersons"></node>
                     </option>
                     <option option="What language?">
-                        <node child="language"/>
+                        <node child="language" />
                     </option>
                 </node>
             </node>
@@ -286,10 +286,10 @@
         <node syntax="PQuestion">
             <node args="2" syntax="HowFarFrom">
                 <option option="Where are we going from?">
-                    <node child="superlative_places"/>
+                    <node child="superlative_places" />
                 </option>
                 <option option="Where are we going to?">
-                    <node child="superlative_places"/>
+                    <node child="superlative_places" />
                 </option>
             </node>
         </node>
@@ -327,7 +327,7 @@
         </node>
     </sentence>
 
-    <!-- GETS EMPTY DROPDOWNLISTS-->
+    <!-- Kinda works-->
     <sentence desc="Someone wants some food" id="AWant">
         <node child="phraseit">
             <node syntax="PropAction">
@@ -335,11 +335,7 @@
                     <option option="Who wants food?">
                         <node child="allpersons"></node>
                     </option>
-                    <option option="What is wanted?">
-                        <node child="objectsPrep">
-                            <node child="food"></node>
-                        </node>
-                    </option>
+                    <node child ="food_with_objectsPrep"></node>
                 </node>
             </node>
         </node>
@@ -352,11 +348,9 @@
                     <option option="Who likes it?">
                         <node child="allpersons"></node>
                     </option>
-                    <option option="What is being liked?">
                         <node child="prep">
                             <node child="food"></node>
                         </node>
-                    </option>
                 </node>
             </node>
         </node>
@@ -365,13 +359,13 @@
     <sentence desc="How much does something cost?" id="HowMuchCost">
         <node syntax="PQuestion">
             <node syntax="HowMuchCost">
-                    <node child="prep">
-                        <node child="food" />
-                    </node>
+                <node child="prep">
+                    <node child="food" />
+                </node>
             </node>
         </node>
     </sentence>
-<!-- ___________________________________________________________________________________________ -->
+    <!-- ___________________________________________________________________________________________ -->
     <!--Option lists -->
     <child id="allpersons">
         <node child="persons" />
@@ -379,24 +373,24 @@
     </child>
 
     <child id="superlative_places">
-            <node child="superlative">
-                <option option="">
-                    <node child="places"></node>
-                </option>
-            </node>
+        <node child="superlative">
+            <option option="">
+                <node child="places"></node>
+            </option>
+        </node>
     </child>
 
     <child id="a/an/the">
-            <node desc="a/an" syntax="APlace">
-                <option option="">
-                    <node child="places" />
-                </option>
-            </node>
-            <node desc="The" syntax=" ">
-                <option option="">
-                    <node child="superlative_places" />
-                </option>
-            </node>
+        <node desc="a/an" syntax="APlace">
+            <option option="">
+                <node child="places" />
+            </option>
+        </node>
+        <node desc="The" syntax=" ">
+            <option option="">
+                <node child="superlative_places" />
+            </option>
+        </node>
     </child>
 
     <child id="phraseit">
@@ -415,24 +409,25 @@
 
     <child id="language">
         <option option="What language?">
-            <node desc="Bulgarian" syntax="(LangNat Bulgarian)"/>
-            <node desc="Catalan" syntax="(LangNat Catalan)"/>
-            <node desc="Danish" syntax="(LangNat Danish)"/>
-            <node desc="Dutch" syntax="(LangNat Dutch)"/>
-            <node desc="English" syntax="(LangNat English)"/>
-            <node desc="Finnish" syntax="(LangNat Finnish)"/>
-            <node desc="Flemish" syntax="Flemish"/>
-            <node desc="French" syntax="(LangNat Frech)"/>
-            <node desc="German" syntax="(LangNat German)"/>
-            <node desc="Italian" syntax="(LangNat Italian)"/>
-            <node desc="Norwegian" syntax="(LangNat Norwegian)"/>
-            <node desc="Polish" syntax="(LangNat Polish)"/>
-            <node desc="Romanian" syntax="(LangNat Romanian)"/>
-            <node desc="Russian" syntax="(LangNat Russian)"/>
-            <node desc="Spanish" syntax="(LangNat Spanish)"/>
-            <node desc="Swedish" syntax="(LangNat Swedish)"/>
+            <node desc="Bulgarian" syntax="(LangNat Bulgarian)" />
+            <node desc="Catalan" syntax="(LangNat Catalan)" />
+            <node desc="Danish" syntax="(LangNat Danish)" />
+            <node desc="Dutch" syntax="(LangNat Dutch)" />
+            <node desc="English" syntax="(LangNat English)" />
+            <node desc="Finnish" syntax="(LangNat Finnish)" />
+            <node desc="Flemish" syntax="Flemish" />
+            <node desc="French" syntax="(LangNat Frech)" />
+            <node desc="German" syntax="(LangNat German)" />
+            <node desc="Italian" syntax="(LangNat Italian)" />
+            <node desc="Norwegian" syntax="(LangNat Norwegian)" />
+            <node desc="Polish" syntax="(LangNat Polish)" />
+            <node desc="Romanian" syntax="(LangNat Romanian)" />
+            <node desc="Russian" syntax="(LangNat Russian)" />
+            <node desc="Spanish" syntax="(LangNat Spanish)" />
+            <node desc="Swedish" syntax="(LangNat Swedish)" />
         </option>
     </child>
+
     <child id="nationality">
         <option option="What nationality">
             <node desc="Belgian" syntax="Belgian"></node>
@@ -547,21 +542,35 @@
         </option>
     </child>
 
+
+    <child id= "food_with_objectsPrep">
+        <option option="What is being wanted?">
+            <node child="objectsPrep">
+                <node child="food"></node>
+            </node>
+        </option>
+    </child>
+
+
     <child id="objectsPrep">
-        <node syntax="OneObj">
-            <option option="">
-                <node desc="a/an" syntax="ObjMass"></node>
-                <node desc="the" syntax="ObjItem">
+            <node desc="a/an" syntax="OneObj">
+                <node syntax="ObjMass"></node>
+            </node>
+            <node desc="the" syntax="OneObj">
+                <node syntax="ObjItem">
                     <node syntax="TheMass"></node>
                 </node>
-                <node desc="this" syntax="ObjItem">
+            </node>
+            <node desc="this" syntax="OneObj">
+                <node syntax="ObjItem">
                     <node syntax="ThisMass"></node>
                 </node>
-                <node desc="that" syntax="ObjItem">
+            </node>
+            <node desc="that" syntax="OneObj">
+                <node syntax="ObjItem">
                     <node syntax="ThatMass"></node>
                 </node>
-            </option>
-        </node>
+            </node>
     </child>
 
     <child id="prep">

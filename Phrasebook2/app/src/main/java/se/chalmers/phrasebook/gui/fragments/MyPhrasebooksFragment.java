@@ -44,11 +44,11 @@ public class MyPhrasebooksFragment extends Fragment {
             gridView.setAdapter(new PhrasebookButtonAdapter(getActivity().getApplicationContext(), model.getMyPhrasebookTitles()));
             text.setVisibility(view.GONE);
         }else{
-            text.setText("Please add a phrasebook by clicking the button below");
+            text.setText("Please add a phrasebook by clicking the button below.");
         }
 
         ImageView image = new ImageView(App.get());
-        image.setImageResource(R.drawable.ic_menu_camera);
+        image.setImageResource(R.drawable.ic_add_white_24dp);
 
         fab = new FloatingActionButton.Builder(getActivity()).setContentView(image).build();
 

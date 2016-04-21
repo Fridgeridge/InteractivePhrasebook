@@ -168,7 +168,6 @@ public class Model {
 
     public void update(int optionIndex, SyntaxNodeList target, int childIndex) {
         currentPhrase.setSelectedChild(optionIndex, target, childIndex);
-        playCurrentTargetPhrase();
     }
 
     public boolean isNodeSelected(SyntaxNode node, LinkedHashMap options) {

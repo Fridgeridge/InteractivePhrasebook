@@ -19,10 +19,7 @@ public class AddPhrasebookDialog extends android.support.v4.app.DialogFragment {
 
     private ArrayList<String> phrasebooks;
     private Model model;
-
-    public AddPhrasebookDialog() {
-        // Empty constructor required for DialogFragment
-    }
+    
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

@@ -33,8 +33,10 @@ public class NumeralSyntaxNode extends SyntaxNode {
         this.number = Integer.parseInt(number);
     }
 
-    public void setSelectedChild(String updated) {
-        setDesc(updated);
+
+    @Override
+    public void setSelectedChild(int listIndex, SyntaxNode newChild) {
+        setDesc(Integer.toString(listIndex));
     }
 
     private String nbrToSyntax(int nbr) throws IllegalArgumentException {

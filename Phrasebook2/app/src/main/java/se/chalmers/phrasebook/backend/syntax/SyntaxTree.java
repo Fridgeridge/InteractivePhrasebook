@@ -2,7 +2,6 @@ package se.chalmers.phrasebook.backend.syntax;
 
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 
 
 /**
@@ -25,16 +24,15 @@ public class SyntaxTree {
     //creates an ArrayList och LinkedHashMaps, each representing
     //a currently available option to be customized.
     private void initializeOptions(SyntaxNode currentRoot) {
-        if(currentRoot == null) return;
-        if(currentRoot.isModular()) {
-            for(SyntaxNodeList l : currentRoot.getSyntaxNodes()) {
-                if(l.getQuestion()!=null && !options.contains(l)) {
+        if (currentRoot == null) return;
+        if (currentRoot.isModular()) {
+            for (SyntaxNodeList l : currentRoot.getSyntaxNodes()) {
+                if (l.getQuestion() != null && !options.contains(l)) {
                     options.add(l);
                 }
                 initializeOptions(l.getSelectedChild());
             }
-        }
-        else if (currentRoot.getSyntaxNodes() != null && currentRoot.getSyntaxNodes().size() > 0) {
+        } else if (currentRoot.getSyntaxNodes() != null && currentRoot.getSyntaxNodes().size() > 0) {
             for (SyntaxNodeList n : currentRoot.getSyntaxNodes()) {
                 initializeOptions(n.getSelectedChild());
             }
@@ -42,53 +40,44 @@ public class SyntaxTree {
     }
 
 
-    public void setNumeralSelectedChild(int optionIndex, int childIndex){
-        NumeralSyntaxNode node =(NumeralSyntaxNode) (options.get(optionIndex).getSelectedChild());
-        node.setDesc(Integer.toString(childIndex));
-    }
-
     public boolean setSelectedChild(int optionIndex, int childIndex) {
         boolean status = false;
 
-        if(options.get(optionIndex).getSelectedChild() instanceof NumeralSyntaxNode){
-            setNumeralSelectedChild(optionIndex,childIndex);
-            return true;
-        }
-
-        if(options.get(optionIndex)!= null){
-            if(options.get(optionIndex).getChildren().get(childIndex)!= null)
+        if (options.get(optionIndex).getSelectedChild() instanceof NumeralSyntaxNode) {
+            options.get(optionIndex).getSelectedChild().setSelectedChild(childIndex, null);
+            status = true;
+        } else if (options.get(optionIndex) != null) {
+            if (options.get(optionIndex).getChildren().get(childIndex) != null)
                 status = options.get(optionIndex).setSelectedChild(options.get(optionIndex).getChildren().get(childIndex));
         }
         return status;
     }
 
 
-
-    public void setSelectedChild(int optionIndex,SyntaxNodeList snl, int childIndex){
-        if(snl != null) {
+    public void setSelectedChild(int optionIndex, SyntaxNodeList snl, int childIndex) {
+        if (snl != null) {
             SyntaxNodeList nodeList = options.get(optionIndex);
             setRecursiveSelectedChild(nodeList, snl, childIndex);
-        }else{
-            setSelectedChild(optionIndex,childIndex);
+        } else {
+            setSelectedChild(optionIndex, childIndex);
         }
     }
 
 
+    private void setRecursiveSelectedChild(SyntaxNodeList nodeList, SyntaxNodeList optionTarget, int childIndex) {
 
-    private void setRecursiveSelectedChild(SyntaxNodeList nodeList, SyntaxNodeList optionTarget, int childIndex){
-
-        if(nodeList.equals(optionTarget)){
-            setSelectedChild(nodeList,nodeList.getChildren().get(childIndex));
-        }else{
-            for(SyntaxNodeList list :nodeList.getSelectedChild().getSyntaxNodes())
-                setRecursiveSelectedChild(list, optionTarget,childIndex);
+        if (nodeList.equals(optionTarget)) {
+            setSelectedChild(nodeList, nodeList.getChildren().get(childIndex));
+        } else {
+            for (SyntaxNodeList list : nodeList.getSelectedChild().getSyntaxNodes())
+                setRecursiveSelectedChild(list, optionTarget, childIndex);
         }
 
     }
 
 
-    public boolean setSelectedChild(SyntaxNodeList l, SyntaxNode s){
-            return l.setSelectedChild(s);
+    public boolean setSelectedChild(SyntaxNodeList l, SyntaxNode s) {
+        return l.setSelectedChild(s);
     }
 
 //    /**
@@ -154,7 +143,7 @@ public class SyntaxTree {
     }
 
     private SyntaxNode getSentenceHead() {
-        if(root.getSyntaxNodes().get(0)!=null)
+        if (root.getSyntaxNodes().get(0) != null)
             return root.getSyntaxNodes().get(0).getSelectedChild();//TODO Might cause bugs
         return null;
     }

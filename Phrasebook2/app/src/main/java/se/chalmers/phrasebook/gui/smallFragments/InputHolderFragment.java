@@ -100,7 +100,7 @@ public class InputHolderFragment extends Fragment {
         NumeralSyntaxNode nsn = (NumeralSyntaxNode) l.getSelectedChild();
         defaultIntValue = nsn.getNumber();
 
-        transaction.add(R.id.input_holder, NumberInputFragment.newInstance(optionIndex, title, defaultIntValue), s);
+        transaction.replace(R.id.input_holder, NumberInputFragment.newInstance(optionIndex, title, defaultIntValue), s);
 
         fragmentTags.add(s);
         transaction.commit();
@@ -153,9 +153,8 @@ public class InputHolderFragment extends Fragment {
 
         if(this.optionIndex == optionIndex){
         mCallback.updateSyntax(optionIndex, null, childIndex);
-
-
         }
+        this.redrawInputGUI();
     }
 
 

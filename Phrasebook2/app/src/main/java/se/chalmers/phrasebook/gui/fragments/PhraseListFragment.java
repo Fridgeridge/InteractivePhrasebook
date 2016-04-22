@@ -92,7 +92,7 @@ public class PhraseListFragment extends Fragment {
 
         Intent intent = new Intent("phrase_list_event");
         // add data
-        intent.putExtra("message", "data");
+        intent.putExtra("position", position);
         LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
     }
 

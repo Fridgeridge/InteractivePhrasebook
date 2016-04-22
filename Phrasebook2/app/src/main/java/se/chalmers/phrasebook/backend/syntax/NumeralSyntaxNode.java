@@ -1,9 +1,5 @@
 package se.chalmers.phrasebook.backend.syntax;
 
-import java.io.IOException;
-
-import se.chalmers.phrasebook.backend.syntax.SyntaxNode;
-
 /**
  * Created by Björn on 2016-04-04.
  */
@@ -22,8 +18,8 @@ public class NumeralSyntaxNode extends SyntaxNode {
 
     public String getData() {
         try {
-            return nmbrToSyntax(number);
-        }catch(IOException e) {
+            return nbrToSyntax(number);
+        }catch(IllegalArgumentException e) {
             //Returns the syntax for "1" in case of erroneous input.
             return "(NNumeral(num (pot2as3 (pot1as2 (pot0as1 pot01)))))";
         }
@@ -41,57 +37,57 @@ public class NumeralSyntaxNode extends SyntaxNode {
         setDesc(updated);
     }
 
-    private String nmbrToSyntax(int nmbr) throws IOException {
+    private String nbrToSyntax(int nbr) throws IllegalArgumentException {
         String syntax = "";
-        if(nmbr < 1000000 && nmbr > 0) {
-            if (nmbr <=999) {
-                syntax = "(NNumeral(num(pot2as3 " + subs1000(nmbr) + ")))";
-            } else if(nmbr % 1000 == 0) {
-                syntax = "(NNumeral(num(pot3 " + subs1000(nmbr/1000) + ")))";
-            } else if(nmbr > 1000 && nmbr%1000 != 0) {
-                syntax = "(NNumeral(num(pot3plus " + subs1000(nmbr/1000) + " " +
-                        subs1000(nmbr%1000) + ")))";
+        if(nbr < 1000000 && nbr > 0) {
+            if (nbr <=999) {
+                syntax = "(NNumeral(num(pot2as3 " + subs1000(nbr) + ")))";
+            } else if(nbr % 1000 == 0) {
+                syntax = "(NNumeral(num(pot3 " + subs1000(nbr/1000) + ")))";
+            } else if(nbr > 1000 && nbr%1000 != 0) {
+                syntax = "(NNumeral(num(pot3plus " + subs1000(nbr/1000) + " " +
+                        subs1000(nbr%1000) + ")))";
             }
         } else {
-            throw new IOException("Input must be between 1 and 999999");
+            throw new IllegalArgumentException("Input must be between 1 and 999999");
         }
         return syntax;
     }
 
-    private String subs1000(int nmbr) {
+    private String subs1000(int nbr) {
         String syntax = "";
-        if(nmbr < 100) {
-            syntax = "(pot1as2 " + subs100(nmbr) + ")";
-        } else if(nmbr % 100 == 0) {
-            syntax = "(pot2 " + subs100(nmbr/100) + ")";
-        } else if(nmbr > 100 && nmbr%100 != 0) {
-            syntax = "(pot2plus " + subs10(nmbr/100) + " " + subs100(nmbr%100) + ")";
+        if(nbr < 100) {
+            syntax = "(pot1as2 " + subs100(nbr) + ")";
+        } else if(nbr % 100 == 0) {
+            syntax = "(pot2 " + subs100(nbr/100) + ")";
+        } else if(nbr > 100 && nbr%100 != 0) {
+            syntax = "(pot2plus " + subs10(nbr/100) + " " + subs100(nbr%100) + ")";
         }
         return syntax;
     }
 
-    private String subs100(int nmbr) {
+    private String subs100(int nbr) {
         String syntax = "";
-        if(nmbr < 10) {
-            syntax = "(pot0as1 " + subs10(nmbr) + ")";
-        } else if(nmbr == 10 || nmbr == 11) {
-            syntax = "(pot0as1 " + "pot" + nmbr + ")";
-        } else if(nmbr >= 12 && nmbr <= 19) {
-            syntax = "(pot1to19 n" + nmbr%10 + ")";
-        } else if(nmbr >= 20 && nmbr%10 == 0) {
-            syntax = "(pot1 " + subs10(nmbr/10) + ")";
-        } else if(nmbr%10 != 0) {
-            syntax = "(pot1plus n" + nmbr/10 + subs10(nmbr%10) + ")";
+        if(nbr < 10) {
+            syntax = "(pot0as1 " + subs10(nbr) + ")";
+        } else if(nbr == 10 || nbr == 11) {
+            syntax = "(pot0as1 " + "pot" + nbr + ")";
+        } else if(nbr >= 12 && nbr <= 19) {
+            syntax = "(pot1to19 n" + nbr%10 + ")";
+        } else if(nbr >= 20 && nbr%10 == 0) {
+            syntax = "(pot1 " + subs10(nbr/10) + ")";
+        } else if(nbr%10 != 0) {
+            syntax = "(pot1plus n" + nbr/10 + subs10(nbr%10) + ")";
         }
         return syntax;
     }
 
-    private String subs10(int nmbr) {
+    private String subs10(int nbr) {
         String syntax = "";
-        if (nmbr == 1) {
+        if (nbr == 1) {
             syntax = "pot01";
-        } else if (nmbr >= 2 && nmbr <= 9) {
-            syntax = "(pot0 n" + nmbr + ")";
+        } else if (nbr >= 2 && nbr <= 9) {
+            syntax = "(pot0 n" + nbr + ")";
         }
         return syntax;
     }

@@ -85,7 +85,7 @@ public class InputHolderFragment extends Fragment {
     private void addListInputFragment(SyntaxNodeList l) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         String s = "Input: " + l.toString();
-        transaction.add(R.id.input_holder, SpinnerInputFragment.newInstance(optionIndex, null, l), s);
+        transaction.replace(R.id.input_holder, SpinnerInputFragment.newInstance(optionIndex, null, l), s);
 
         fragmentTags.add(s);
         transaction.commit();
@@ -126,6 +126,7 @@ public class InputHolderFragment extends Fragment {
         }
 
     }
+    
 
 
 }

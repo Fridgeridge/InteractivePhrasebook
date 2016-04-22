@@ -1,12 +1,13 @@
 package se.chalmers.phrasebook.backend.syntax;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by Björn on 2016-03-03.
  */
 
-public class SyntaxNode {
+public class SyntaxNode implements Serializable {
     private String data;
     private String desc;
     private ArrayList<SyntaxNodeList> syntaxNodes;

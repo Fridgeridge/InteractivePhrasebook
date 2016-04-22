@@ -68,6 +68,8 @@ public class NumberInputFragment extends Fragment {
         final EditText editNumber = (EditText) view.findViewById(R.id.editNumber);
 
         viewLabel.setText(label);
+        seekBar.setProgress(defaultInt);
+        editNumber.setText(defaultInt);
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 

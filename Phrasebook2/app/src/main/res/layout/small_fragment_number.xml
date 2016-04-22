@@ -14,7 +14,7 @@
     <SeekBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:max="999999"
+        android:max="100"
         android:id="@+id/seekBar" />
 
     <EditText

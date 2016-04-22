@@ -42,8 +42,18 @@ public class SyntaxTree {
     }
 
 
+    public void setNumeralSelectedChild(int optionIndex, int childIndex){
+        NumeralSyntaxNode node =(NumeralSyntaxNode) (options.get(optionIndex).getSelectedChild());
+        node.setDesc(Integer.toString(childIndex));
+    }
+
     public boolean setSelectedChild(int optionIndex, int childIndex) {
         boolean status = false;
+
+        if(options.get(optionIndex).getSelectedChild() instanceof NumeralSyntaxNode){
+            setNumeralSelectedChild(optionIndex,childIndex);
+            return true;
+        }
 
         if(options.get(optionIndex)!= null){
             if(options.get(optionIndex).getChildren().get(childIndex)!= null)
@@ -55,8 +65,12 @@ public class SyntaxTree {
 
 
     public void setSelectedChild(int optionIndex,SyntaxNodeList snl, int childIndex){
-        SyntaxNodeList nodeList = options.get(optionIndex);
-        setRecursiveSelectedChild(nodeList,snl,childIndex);
+        if(snl != null) {
+            SyntaxNodeList nodeList = options.get(optionIndex);
+            setRecursiveSelectedChild(nodeList, snl, childIndex);
+        }else{
+            setSelectedChild(optionIndex,childIndex);
+        }
     }
 
 

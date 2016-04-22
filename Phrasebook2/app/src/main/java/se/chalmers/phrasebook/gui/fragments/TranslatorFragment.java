@@ -85,15 +85,6 @@ public class TranslatorFragment extends Fragment {
         return view;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        // Register mMessageReceiver to receive messages.
-        LocalBroadcastManager.getInstance(getActivity().getApplicationContext()).registerReceiver(mMessageReceiver, new IntentFilter("gui_update"));
-
-    }
-
     public void updateTranslation() {
 
         TranslationFragment translationFragment = (TranslationFragment) getChildFragmentManager().findFragmentById(R.id.containerfor_translation);
@@ -103,37 +94,8 @@ public class TranslatorFragment extends Fragment {
 
     }
 
-    private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-
-
-            String action = intent.getAction();
-            int dataIndex;
-            int childIndex;
-            SyntaxNodeList syntaxNodeList;
-
-            if (action.equals("gui_update")) {
-
-                dataIndex = intent.getIntExtra("optionIndex", -1);
-                syntaxNodeList = (SyntaxNodeList) (intent.getSerializableExtra("selectedSyntaxNodeList"));
-                childIndex = intent.getIntExtra("childIndex", -1);
-
-                model.update(dataIndex, syntaxNodeList, childIndex);
-
-                TranslationFragment translationFragment = (TranslationFragment) getChildFragmentManager().findFragmentById(R.id.containerfor_translation);
-                translationFragment.updateData();
-
-            } else {
-                throw new IllegalArgumentException();
-            }
-
-        }
-    };
-
     @Override
     public void onPause() {
-        LocalBroadcastManager.getInstance(getActivity().getApplicationContext()).unregisterReceiver(mMessageReceiver);
         super.onPause();
         floatingActionButton.setVisibility(View.GONE);
     }

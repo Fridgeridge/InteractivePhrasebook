@@ -69,7 +69,7 @@ public class NumberInputFragment extends Fragment {
 
         viewLabel.setText(label);
         seekBar.setProgress(defaultInt);
-        editNumber.setText(defaultInt);
+        editNumber.setText(""+defaultInt);
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
@@ -77,7 +77,7 @@ public class NumberInputFragment extends Fragment {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
                 currentNumber = progress;
-                editNumber.setText(progress);
+                editNumber.setText(""+progress);
             }
 
             @Override

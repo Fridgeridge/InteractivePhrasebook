@@ -4,7 +4,7 @@ package se.chalmers.phrasebook.backend.syntax;
  * Created by Björn on 2016-04-04.
  */
 public class NumeralSyntaxNode extends SyntaxNode {
-    
+
     private int number = 1;
 
     public NumeralSyntaxNode() {
@@ -90,5 +90,13 @@ public class NumeralSyntaxNode extends SyntaxNode {
             syntax = "(pot0 n" + nbr + ")";
         }
         return syntax;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
     }
 }

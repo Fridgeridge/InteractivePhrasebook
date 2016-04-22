@@ -1,12 +1,10 @@
 package se.chalmers.phrasebook.gui.smallFragments;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.LocalBroadcastManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +14,7 @@ import java.util.ArrayList;
 
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
+import se.chalmers.phrasebook.backend.syntax.NumeralSyntaxNode;
 import se.chalmers.phrasebook.backend.syntax.SyntaxNodeList;
 import se.chalmers.phrasebook.gui.FragmentCommunicator;
 
@@ -77,7 +76,7 @@ public class InputHolderFragment extends Fragment {
         TextView textView = (TextView) view.findViewById(R.id.holderOptionText);
 
         textView.setText(guiOptions.getQuestion());
-        addListInputFragment(guiOptions);
+        addInputFragments(guiOptions);
 
         return view;
     }
@@ -85,10 +84,27 @@ public class InputHolderFragment extends Fragment {
     private void addListInputFragment(SyntaxNodeList l) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         String s = "Input: " + l.toString();
-        transaction.replace(R.id.input_holder, SpinnerInputFragment.newInstance(optionIndex, null, l), s);
+
+        transaction.add(R.id.input_holder, SpinnerInputFragment.newInstance(optionIndex, null, l), s);
 
         fragmentTags.add(s);
         transaction.commit();
+    }
+
+    private void addNumberInputFragment(SyntaxNodeList l) {
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        String s = "Input: " + l.toString();
+
+        int defaultIntValue = 0;
+        String title = l.getQuestion();
+        NumeralSyntaxNode nsn = (NumeralSyntaxNode) l.getSelectedChild();
+        defaultIntValue = nsn.getNumber();
+
+        transaction.add(R.id.input_holder, NumberInputFragment.newInstance(optionIndex, title, defaultIntValue), s);
+
+        fragmentTags.add(s);
+        transaction.commit();
+
     }
 
     private void redrawInputGUI() {
@@ -98,7 +114,14 @@ public class InputHolderFragment extends Fragment {
 
     private void addInputFragments(SyntaxNodeList snl) {
         if (snl != null) {
-            addListInputFragment(snl);
+
+            if (snl.getSelectedChild() instanceof NumeralSyntaxNode) {
+                addNumberInputFragment(snl);
+            } else {
+                addListInputFragment(snl);
+            }
+
+
             if (snl.getSelectedChild().isModular()) {
                 ArrayList<SyntaxNodeList> modularLists = snl.getSelectedChild().getModularSyntaxNodes();
                 for (SyntaxNodeList nodeList : modularLists)
@@ -120,13 +143,20 @@ public class InputHolderFragment extends Fragment {
 
     public void updateSyntax(int optionIndex, SyntaxNodeList l, int childIndex) {
         if (this.optionIndex == optionIndex) {
-            mCallback.updateSyntax(optionIndex,l,childIndex);
+            mCallback.updateSyntax(optionIndex, l, childIndex);
 
             this.redrawInputGUI();
         }
-
     }
-    
+
+    public void updateNumeralSyntax(int optionIndex, int childIndex){
+
+        if(this.optionIndex == optionIndex){
+        mCallback.updateSyntax(optionIndex, null, childIndex);
+
+
+        }
+    }
 
 
 }

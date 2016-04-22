@@ -22,9 +22,7 @@
                     <option option="Who are we talking about?">
                         <node child="allpersons"></node>
                     </option>
-                    <option option="">
                         <node syntax="NameNN" />
-                    </option>
                 </node>
             </node>
         </node>

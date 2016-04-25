@@ -52,11 +52,9 @@ public class NumberInputFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         model = Model.getInstance();
-
         optionIndex = getArguments().getInt("optionIndex");
         label = getArguments().getString("title");
         defaultInt = getArguments().getInt("defaultInt");
-
     }
 
     @Override
@@ -72,12 +70,10 @@ public class NumberInputFragment extends Fragment {
         editNumber.setText(""+defaultInt);
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
                 currentNumber = progress;
-                editNumber.setText(""+progress);
             }
 
             @Override
@@ -87,6 +83,7 @@ public class NumberInputFragment extends Fragment {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
+                editNumber.setText(""+currentNumber);
                 sendMessage(optionIndex, currentNumber);
 
             }
@@ -105,11 +102,13 @@ public class NumberInputFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-
-                currentNumber = Integer.parseInt(editNumber.getText().toString());
+                if(editNumber.getText().toString().equals("")) {
+                    currentNumber = 1;
+                } else {
+                    currentNumber = Integer.parseInt(editNumber.getText().toString());
+                }
                 seekBar.setProgress(currentNumber);
                 sendMessage(optionIndex, currentNumber);
-
             }
         });
 

@@ -38,7 +38,7 @@ public class DialogFragment extends android.support.v4.app.DialogFragment {
 
         phrasebooks = model.getMyPhrasebookTitles();
 
-        ArrayAdapter adapter = new ArrayAdapter<String>(App.get(), R.layout.phrase_list_item, phrasebooks);
+        ArrayAdapter adapter = new ArrayAdapter<String>(App.get(), android.R.layout.simple_list_item_1, phrasebooks);
         final ListView phraseListView = (ListView) view.findViewById(R.id.phrasebookList);
         phraseListView.setAdapter(adapter);
 

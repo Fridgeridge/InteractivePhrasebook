@@ -59,7 +59,7 @@ public class PhraseListFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_phrase_list, container, false);
 
-        ArrayAdapter adapter = new ArrayAdapter<String>(context, R.layout.phrase_list_item, phrases);
+        ArrayAdapter adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, phrases);
 
         final ListView phraseListView = (ListView) view.findViewById(R.id.phrase_listView);
         phraseListView.setAdapter(adapter);

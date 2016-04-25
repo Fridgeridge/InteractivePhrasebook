@@ -68,6 +68,7 @@ public class NumberInputFragment extends Fragment {
         viewLabel.setText(label);
         seekBar.setProgress(defaultInt);
         editNumber.setText(""+defaultInt);
+        editNumber.requestFocus();
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -103,12 +104,13 @@ public class NumberInputFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
                 if(editNumber.getText().toString().equals("")) {
-                    currentNumber = 1;
+                    currentNumber = 0;
                 } else {
                     currentNumber = Integer.parseInt(editNumber.getText().toString());
+                    sendMessage(optionIndex, currentNumber);
                 }
                 seekBar.setProgress(currentNumber);
-                sendMessage(optionIndex, currentNumber);
+
             }
         });
 

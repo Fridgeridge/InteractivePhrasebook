@@ -96,7 +96,8 @@ public class InputHolderFragment extends Fragment {
         String s = "Input: " + l.toString();
 
         int defaultIntValue = 0;
-        String title = l.getQuestion();
+       // String title = l.getQuestion();
+        String title = "";
         NumeralSyntaxNode nsn = (NumeralSyntaxNode) l.getSelectedChild();
         defaultIntValue = nsn.getNumber();
 

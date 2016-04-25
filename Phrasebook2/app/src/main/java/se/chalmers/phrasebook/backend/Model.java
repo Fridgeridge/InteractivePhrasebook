@@ -210,6 +210,14 @@ public class Model {
         return phrases;
     }
 
+    public ArrayList<String> getDefaultSentences() {
+        ArrayList<String> phrases = new ArrayList<String>();
+        for (SyntaxTree tree : currentPhrasebook.getPhrases()) {
+            phrases.add(tree.getId());
+        }
+        return phrases;
+    }
+
     public String translateToOrigin() {
         return translator.translateToOrigin(getCurrentPhrase().getSyntax());
     }

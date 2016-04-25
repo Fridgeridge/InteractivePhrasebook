@@ -135,6 +135,9 @@ public class NavigationActivity extends FragmentActivity
 
             if (action.equals("phrasebook_event")) {
                 message = intent.getStringExtra("message");
+                /*if(is default phrasebook) {
+                    //switchContent(DefaultPhraseListFragment.newInstance(message), "");
+                } else {*/
                 switchContent(PhraseListFragment.newInstance(message), "");
             } else if (action.equals("phrase_list_event")) {
                 message = intent.getStringExtra("message");

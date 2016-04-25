@@ -8,6 +8,7 @@ import java.util.ArrayList;
  * Created by Björn on 2016-02-26.
  */
 public class SyntaxTree {
+
     private String id;
     private SyntaxNode root;
     private ArrayList<SyntaxNodeList> options = new ArrayList<>();
@@ -39,6 +40,9 @@ public class SyntaxTree {
         }
     }
 
+    public String getId() {
+        return id;
+    }
 
     public boolean setSelectedChild(int optionIndex, int childIndex) {
         boolean status = false;

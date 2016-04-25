@@ -23,8 +23,8 @@ import se.chalmers.phrasebook.backend.Model;
  */
 public class PhraseListFragment extends Fragment {
 
-    private Model model;
-    private ArrayList<String> phrases;
+    protected Model model;
+    protected ArrayList<String> phrases;
     Context context;
     private String title;
 

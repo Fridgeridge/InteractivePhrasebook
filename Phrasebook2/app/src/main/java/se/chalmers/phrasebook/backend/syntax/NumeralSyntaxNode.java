@@ -73,13 +73,13 @@ public class NumeralSyntaxNode extends SyntaxNode {
         if(nbr < 10) {
             syntax = "(pot0as1 " + subs10(nbr) + ")";
         } else if(nbr == 10 || nbr == 11) {
-            syntax = "(pot0as1 " + "pot" + nbr + ")";
+            syntax = "(pot0as1 " + "pot" + "1" + nbr + ")";
         } else if(nbr >= 12 && nbr <= 19) {
             syntax = "(pot1to19 n" + nbr%10 + ")";
         } else if(nbr >= 20 && nbr%10 == 0) {
             syntax = "(pot1 " + subs10(nbr/10) + ")";
         } else if(nbr%10 != 0) {
-            syntax = "(pot1plus n" + nbr/10 + subs10(nbr%10) + ")";
+            syntax = "(pot1plus n" + nbr/10 + " " + subs10(nbr%10) + ")";
         }
         return syntax;
     }

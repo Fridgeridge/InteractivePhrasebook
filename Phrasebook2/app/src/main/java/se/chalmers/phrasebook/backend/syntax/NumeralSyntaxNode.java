@@ -77,7 +77,7 @@ public class NumeralSyntaxNode extends SyntaxNode {
         } else if(nbr >= 12 && nbr <= 19) {
             syntax = "(pot1to19 n" + nbr%10 + ")";
         } else if(nbr >= 20 && nbr%10 == 0) {
-            syntax = "(pot1 " + subs10(nbr/10) + ")";
+            syntax = "(pot1 n" + Integer.toString(nbr/10) + ")";
         } else if(nbr%10 != 0) {
             syntax = "(pot1plus n" + nbr/10 + " " + subs10(nbr%10) + ")";
         }

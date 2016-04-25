@@ -1,24 +1,16 @@
 package se.chalmers.phrasebook.gui.adapters;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.content.LocalBroadcastManager;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-import se.chalmers.phrasebook.App;
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
 import se.chalmers.phrasebook.gui.activities.NavigationActivity;
@@ -32,15 +24,13 @@ public class PhrasebookButtonAdapter extends BaseAdapter {
     private ArrayList<String> phrasebookNames;
 
     private Model model;
-    private NavigationActivity na;
 
     public PhrasebookButtonAdapter(Context context, ArrayList<String> phrasebooks) {
         this.context = context;
 
         phrasebookNames = new ArrayList<>();
-        phrasebookNames = phrasebooks;
+        phrasebookNames.addAll(phrasebooks);
         model = Model.getInstance();
-        na = new NavigationActivity();
 
     }
 
@@ -84,7 +74,8 @@ public class PhrasebookButtonAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 model.setCurrentPhrasebook(model.getPhrasebookByTitle((String)button.getText()));
-                sendMessage("Tourism");
+                System.out.println(model.getCurrentPhrasebook().getTitle());
+                sendMessage(model.getCurrentPhrasebook().getTitle());
             }
         });
 

@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import se.chalmers.phrasebook.App;
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
+import se.chalmers.phrasebook.backend.syntax.SyntaxTree;
 
 /**
  * Created by matilda on 07/04/16.
@@ -37,7 +38,7 @@ public class DialogFragment extends android.support.v4.app.DialogFragment {
 
         phrasebooks = model.getMyPhrasebookTitles();
 
-        ArrayAdapter adapter = new ArrayAdapter<String>(App.get(), R.layout.phrase_list_item, phrasebooks);
+        ArrayAdapter adapter = new ArrayAdapter<String>(App.get(), android.R.layout.simple_list_item_1, phrasebooks);
         final ListView phraseListView = (ListView) view.findViewById(R.id.phrasebookList);
         phraseListView.setAdapter(adapter);
 
@@ -48,6 +49,16 @@ public class DialogFragment extends android.support.v4.app.DialogFragment {
                 String name = model.translateToOrigin();
 
                 model.getPhrasebookByTitle((String) phraseListView.getItemAtPosition(position)).addPhrase(name, model.getCurrentPhrase());
+
+                System.out.println((String) phraseListView.getItemAtPosition(position));
+                System.out.println(model.getCurrentPhrase().getSyntax());
+
+                ArrayList<SyntaxTree> tree = model.getPhrasebookByTitle((String) phraseListView.getItemAtPosition(position)).getPhrases();
+
+                for (int i = 0; i < tree.size(); i++) {
+                    SyntaxTree temp = tree.get(i);
+                    System.out.println(temp.getSyntax());
+                }
 
                 getDialog().dismiss();
 

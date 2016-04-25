@@ -136,6 +136,7 @@ public class NavigationActivity extends FragmentActivity
 
             String action = intent.getAction();
             String message;
+            int position;
 
             if (action.equals("phrasebook_event")) {
                 message = intent.getStringExtra("message");
@@ -144,8 +145,8 @@ public class NavigationActivity extends FragmentActivity
                 } else {*/
                 switchContent(PhraseListFragment.newInstance(message), "");
             } else if (action.equals("phrase_list_event")) {
-                message = intent.getStringExtra("message");
-                switchContent(TranslatorFragment.newInstance(message), "");
+                position = intent.getIntExtra("position", 0);
+                switchContent(TranslatorFragment.newInstance(model.getCurrentPhrasebook().getPhrases().get(position).getSyntax()), "");
             } else {
                 throw new IllegalArgumentException();
             }

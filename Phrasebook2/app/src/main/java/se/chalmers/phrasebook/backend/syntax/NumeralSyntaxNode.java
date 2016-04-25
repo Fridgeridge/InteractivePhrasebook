@@ -61,7 +61,7 @@ public class NumeralSyntaxNode extends SyntaxNode {
         if(nbr < 100) {
             syntax = "(pot1as2 " + subs100(nbr) + ")";
         } else if(nbr % 100 == 0) {
-            syntax = "(pot2 " + subs100(nbr/100) + ")";
+            syntax = "(pot2 " + subs10(nbr/100) + ")";
         } else if(nbr > 100 && nbr%100 != 0) {
             syntax = "(pot2plus " + subs10(nbr/100) + " " + subs100(nbr%100) + ")";
         }
@@ -73,7 +73,7 @@ public class NumeralSyntaxNode extends SyntaxNode {
         if(nbr < 10) {
             syntax = "(pot0as1 " + subs10(nbr) + ")";
         } else if(nbr == 10 || nbr == 11) {
-            syntax = "(pot0as1 " + "pot" + "1" + nbr + ")";
+            syntax = "pot1" + nbr;
         } else if(nbr >= 12 && nbr <= 19) {
             syntax = "(pot1to19 n" + nbr%10 + ")";
         } else if(nbr >= 20 && nbr%10 == 0) {

@@ -246,7 +246,10 @@ public class Model {
     public void setCurrentPhrase(int position) {
         currentPhrase = parser.buildSyntaxTree(parser.getSentence
                 ((String) (parser.getSentencesData().keySet().toArray()[position])));
+    }
 
+    public void setNumeralCurrentPhrase() {
+        currentPhrase = parser.buildSyntaxTree(parser.getSentence("NNumeral"));
     }
 
     public Langs getOriginLang() {

@@ -54,6 +54,14 @@
         </node>
     </sentence>
 
+    <sentence desc="Numbers" id="NNumeral">
+        <node syntax="">
+            <option option="Which number?">
+                <node syntax="NNumeral"/>
+            </option>
+        </node>
+    </sentence>
+
     <!--works-->
     <sentence desc="Someone loves someone" id="ALove">
         <node child="phraseit">

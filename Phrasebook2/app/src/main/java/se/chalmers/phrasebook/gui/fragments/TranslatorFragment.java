@@ -31,9 +31,9 @@ public class TranslatorFragment extends Fragment {
 
     private String phrase;
 
-    private Model model;
+    protected Model model;
 
-    private FloatingActionButton floatingActionButton;
+    protected FloatingActionButton floatingActionButton;
 
     public static TranslatorFragment newInstance(String phrase) {
         TranslatorFragment fragment = new TranslatorFragment();

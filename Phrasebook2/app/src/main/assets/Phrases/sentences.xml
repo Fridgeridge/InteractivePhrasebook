@@ -156,7 +156,6 @@
         </node>
     </sentence>
 
-
     <!--WORKS-->
     <sentence desc="Someone understands" id="AUnderstand">
         <node child="phraseit">
@@ -412,32 +411,6 @@
                 <node syntax="SPropNot"></node>
             </node>
         </option>
-    </child>
-
-    <child id="advphraseit">
-        <option option="How do they phrase it?">
-            <node desc="statement" syntax="PSentence">
-                <node syntax="SProp"></node>
-            </node>
-            <node desc="question" syntax="PQuestion">
-                <node syntax="QProp"></node>
-            </node>
-            <node desc="negation" syntax="PSentence">
-                <node syntax="SPropNot"></node>
-            </node>
-        </option>
-    </child>
-
-    <child id="advanced">
-        <node child="advphraseit">
-            <node syntax="PropAction">
-                <node syntax="AKnowSentence">
-                    <option options="Who is saying that they know this?">
-                        <node child="allpersons"/>
-                    </option>
-                </node>
-            </node>
-        </node>
     </child>
 
     <child id="language">

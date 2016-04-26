@@ -12,7 +12,6 @@ public class SyntaxTree {
     private String id;
     private SyntaxNode root;
     private ArrayList<SyntaxNodeList> options = new ArrayList<>();
-    private boolean reportedSpeech = false;
 
     public SyntaxTree(SyntaxNode root) {
         this.root = root;
@@ -121,14 +120,7 @@ public class SyntaxTree {
      * @return The syntax usable by the GF-grammar to generate a translation
      */
     public String getSyntax() {
-        String syntax = parseSentenceSyntax(getSentenceHead());
-        if(reportedSpeech) {
-            //Hardcoded as we have no xml to represent the adv, options
-            //removes the initial tag and replaces it with the advanced options
-            return "PSentence(QProp(PropAction(AKnowSentence YouFamMale"
-                    + syntax.substring(9, syntax.length() + 2) + ")))";
-        }
-        return syntax;
+        return parseSentenceSyntax(getSentenceHead());
     }
 
     // Builds recursively from root node to parse syntax
@@ -152,10 +144,6 @@ public class SyntaxTree {
             }
             return syntax;
         }
-    }
-
-    public void useReportedSpeech(boolean value) {
-        reportedSpeech = value;
     }
 
     private SyntaxNode getSentenceHead() {

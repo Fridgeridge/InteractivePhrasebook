@@ -39,10 +39,6 @@ public class Translator {
         } catch (TypeError typeError) {
             typeError.printStackTrace();
         }
-
-
-
-        //Unneeded comment
         return s;
     }
 

@@ -158,5 +158,4 @@ public class InputHolderFragment extends Fragment {
         this.redrawInputGUI();
     }
 
-
 }

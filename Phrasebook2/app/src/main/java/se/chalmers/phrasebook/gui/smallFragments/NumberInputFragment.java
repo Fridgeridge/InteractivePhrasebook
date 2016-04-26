@@ -66,6 +66,7 @@ public class NumberInputFragment extends Fragment {
         final EditText editNumber = (EditText) view.findViewById(R.id.editNumber);
 
         viewLabel.setText(label);
+        viewLabel.setVisibility(View.GONE);
         seekBar.setProgress(defaultInt);
         editNumber.setText(""+defaultInt);
         editNumber.requestFocus();
@@ -121,7 +122,6 @@ public class NumberInputFragment extends Fragment {
 
         InputHolderFragment fragment = (InputHolderFragment) getParentFragment();
 
-        //options är ju tom i det här fragmentet, hur ska vi lösa det?
         fragment.updateSyntax(optionIndex, options,childIndex);
 
     }

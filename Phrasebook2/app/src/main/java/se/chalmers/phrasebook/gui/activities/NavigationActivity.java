@@ -22,6 +22,7 @@ import se.chalmers.phrasebook.gui.fragments.ChangeLanguageFragment;
 import se.chalmers.phrasebook.gui.fragments.DefaultPhrasebooksFragment;
 import se.chalmers.phrasebook.gui.fragments.MyPhrasebooksFragment;
 import se.chalmers.phrasebook.gui.fragments.NavigationDrawerFragment;
+import se.chalmers.phrasebook.gui.fragments.NumeralTranslatorFragment;
 import se.chalmers.phrasebook.gui.fragments.PhraseListFragment;
 import se.chalmers.phrasebook.gui.fragments.TranslatorFragment;
 
@@ -77,6 +78,10 @@ public class NavigationActivity extends FragmentActivity
             case 2:
                 switchContent(new ChangeLanguageFragment(), "");
                 break;
+            case 3:
+                switchContent(new NumeralTranslatorFragment(), "");
+                model.setCurrentPhrase(1);
+                break;
         }
 
     }
@@ -101,6 +106,9 @@ public class NavigationActivity extends FragmentActivity
                 break;
             case 3:
                 mTitle = getString(R.string.title_section3);
+                break;
+            case 4:
+                mTitle = getString(R.string.title_section4);
                 break;
         }
     }
@@ -131,6 +139,7 @@ public class NavigationActivity extends FragmentActivity
 
             if (action.equals("phrasebook_event")) {
                 message = intent.getStringExtra("message");
+                System.out.println(message);
                 /*if(is default phrasebook) {
                     //switchContent(DefaultPhraseListFragment.newInstance(message), "");
                 } else {*/
@@ -138,6 +147,9 @@ public class NavigationActivity extends FragmentActivity
             } else if (action.equals("phrase_list_event")) {
                 message = intent.getStringExtra("message");
                 switchContent(TranslatorFragment.newInstance(message), "");
+            }else if (action.equals("number_event")) {
+                message = intent.getStringExtra("message");
+                switchContent(NumeralTranslatorFragment.newInstance(message), "");
             } else {
                 throw new IllegalArgumentException();
             }

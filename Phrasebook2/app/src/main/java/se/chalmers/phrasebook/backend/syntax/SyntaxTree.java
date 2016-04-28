@@ -12,6 +12,8 @@ public class SyntaxTree {
     private String id;
     private SyntaxNode root;
     private ArrayList<SyntaxNodeList> options = new ArrayList<>();
+    private SyntaxTree advancedTree; //Realy ugly solution but the only one we can think of as
+                                    // some of the GF code isnt running currently
 
     public SyntaxTree(SyntaxNode root) {
         this.root = root;
@@ -20,6 +22,18 @@ public class SyntaxTree {
 
     public ArrayList<SyntaxNodeList> getOptions() {
         return options;
+    }
+
+    public boolean containsAdvancedOptions() {
+        return advancedTree != null;
+    }
+
+    public ArrayList<SyntaxNodeList> getAdvOptions() {
+        if(advancedTree != null) {
+            return advancedTree.getOptions();
+        }
+        //empty list
+        return new ArrayList<SyntaxNodeList>();
     }
 
     //creates an ArrayList och LinkedHashMaps, each representing
@@ -121,6 +135,17 @@ public class SyntaxTree {
      */
     public String getSyntax() {
         return parseSentenceSyntax(getSentenceHead());
+    }
+
+    //shall parse with the advoptions, not used as of yet
+    public String getAdvSyntax() {
+        String syntax = getSyntax();
+        if(advancedTree != null) {
+            String advSyntax = advancedTree.getSyntax();
+            return advSyntax.substring(0, advSyntax.length() - 3) +
+                    syntax.substring(9, syntax.length()) + ")))";
+        }
+        return syntax;
     }
 
     // Builds recursively from root node to parse syntax

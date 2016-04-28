@@ -91,7 +91,7 @@
     </sentence>
 
     <!--works-->
-    <sentence desc="Someone is married" id="AMarried">
+    <sentence desc="Someone is married" id="AMarried" advanced="true">
         <node child="phraseit">
             <node syntax="PropAction">
                 <node syntax="AMarried">

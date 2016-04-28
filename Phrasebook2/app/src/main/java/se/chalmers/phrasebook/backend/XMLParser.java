@@ -42,21 +42,6 @@ public class XMLParser {
 
     }
 
-
-    public NodeList getSentence(String sentenceTitle) {
-        NodeList result = null;
-        NodeList nl = document.getElementsByTagName("sentence");
-
-        for (int i = 0; i < nl.getLength(); i++) {
-            NamedNodeMap attr = nl.item(i).getAttributes();
-            String s = attr.getNamedItem("id").getNodeValue();
-            if (nl.item(i).getNodeType() == Node.ELEMENT_NODE && sentenceTitle.equals(s)) {
-                result = nl.item(i).getChildNodes();
-            }
-        }
-        return result;
-    }
-
     public HashMap<String, String> getSentencesData() {
         String[] result;
         HashMap<String, String> sentenceMap = new HashMap<String, String>();
@@ -75,15 +60,37 @@ public class XMLParser {
         return sentenceMap;
     }
 
-    public SyntaxTree getAdvancedOptionSyntaxTree(){
+    public SyntaxTree getAdvancedOptionSyntaxTree() {
         NodeList advSentence = document.getElementsByTagName("advanced");
-        SyntaxTree s = new SyntaxTree(constructSyntaxNodeList(advSentence,new SyntaxNode("Root"),new SyntaxNodeList(),null,1));
+        advSentence = advSentence.item(0).getChildNodes();
+        SyntaxTree s = new SyntaxTree(constructSyntaxNodeList(advSentence, new SyntaxNode("Root"), new SyntaxNodeList(), null, 1));
         return s;
-    };
+    }
 
 
+    public SyntaxTree getSyntaxTree(String sentenceTitle) {
+        NodeList result = null;
+        NodeList nl = document.getElementsByTagName("sentence");
+        boolean isAdvanced = false;
 
-    public SyntaxTree buildSyntaxTree(NodeList currentRoot) {
+        for (int i = 0; i < nl.getLength(); i++) {
+            NamedNodeMap attr = nl.item(i).getAttributes();
+            String s = attr.getNamedItem("id").getNodeValue();
+            if (nl.item(i).getNodeType() == Node.ELEMENT_NODE && sentenceTitle.equals(s)) {
+                result = nl.item(i).getChildNodes();
+                if (attr.getNamedItem("advanced") != null) isAdvanced = true;
+                break;
+            }
+        }
+        SyntaxTree s = buildSyntaxTree(result);
+
+        if (isAdvanced) {
+            s.setAdvancedTree(getAdvancedOptionSyntaxTree());
+        }
+        return s;
+    }
+
+    private SyntaxTree buildSyntaxTree(NodeList currentRoot) {
         SyntaxTree s = new SyntaxTree(constructSyntaxNodeList(currentRoot, new SyntaxNode("Root"), new SyntaxNodeList(), null, 1));
         return s;
     }
@@ -94,8 +101,8 @@ public class XMLParser {
     private SyntaxNode constructSyntaxNodeList(NodeList nl, SyntaxNode parent, SyntaxNodeList list, SyntaxNode nextSequence, int nbrOfArgs) {
         if (nl == null || nl.getLength() < 1) {
             if (nextSequence != null && !(parent.getData().isEmpty() && nextSequence.getSyntaxNodes().isEmpty())) {
-                    list.add(nextSequence);
-                    parent.getSyntaxNodes().add(list);
+                list.add(nextSequence);
+                parent.getSyntaxNodes().add(list);
             }
             return null;
         }
@@ -164,7 +171,7 @@ public class XMLParser {
                 }
 
                 //Add the list to the current parent node list
-                if (!list.getChildren().isEmpty()&& !parent.getSyntaxNodes().contains(list)) {
+                if (!list.getChildren().isEmpty() && !parent.getSyntaxNodes().contains(list)) {
                     parent.getSyntaxNodes().add(list);
                 }
                 //Check if current node is multiple arg nodes i.e. add another list to its syntaxNodes.

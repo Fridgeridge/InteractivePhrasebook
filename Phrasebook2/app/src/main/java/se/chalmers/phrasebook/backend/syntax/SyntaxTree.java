@@ -12,7 +12,16 @@ public class SyntaxTree {
     private String id;
     private SyntaxNode root;
     private ArrayList<SyntaxNodeList> options = new ArrayList<>();
+
     private SyntaxTree advancedTree; //Realy ugly solution but the only one we can think of as
+
+    public SyntaxTree getAdvancedTree() {
+        return advancedTree;
+    }
+
+    public void setAdvancedTree(SyntaxTree advancedTree) {
+        this.advancedTree = advancedTree;
+    }
                                     // some of the GF code isnt running currently
 
     public SyntaxTree(SyntaxNode root) {

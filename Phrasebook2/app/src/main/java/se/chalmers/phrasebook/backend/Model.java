@@ -197,6 +197,18 @@ public class Model {
         return guiOptions;
     }
 
+    //Same code as above method, but with other options
+    public ArrayList<String> getAdvNodeOptions(int index) {
+        optionsList = currentPhrase.getAdvOptions();
+        ArrayList<String> guiOptions = new ArrayList<>();
+
+        for (SyntaxNodeList l : optionsList) {
+            if (l.getQuestion() != null && !l.getQuestion().isEmpty())
+                guiOptions.add(l.getQuestion());
+        }
+
+        return guiOptions;
+    }
 
     public void playCurrentTargetPhrase() {
         ttsHandler.playSentence(translateToTarget());
@@ -249,7 +261,7 @@ public class Model {
     }
 
     public void setNumeralCurrentPhrase() {
-        currentPhrase = parser.buildSyntaxTree(parser.getSentence("NNumeral"));
+        setCurrentPhrase(0);
     }
 
     public Langs getOriginLang() {

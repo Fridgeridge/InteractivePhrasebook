@@ -142,8 +142,10 @@ public class SyntaxTree {
         String syntax = getSyntax();
         if(advancedTree != null) {
             String advSyntax = advancedTree.getSyntax();
-            return advSyntax.substring(0, advSyntax.length() - 3) +
-                    syntax.substring(9, syntax.length()) + ")))";
+            if(!advSyntax.isEmpty()) {
+                return advSyntax.substring(0, advSyntax.length() - 3) +
+                        syntax.substring(9, syntax.length()) + ")))";
+            }
         }
         return syntax;
     }

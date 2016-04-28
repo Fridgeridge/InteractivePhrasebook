@@ -54,13 +54,25 @@
         </node>
     </sentence>
 
-    <sentence desc="Numbers" id="NNumeral">
+    <!--<sentence desc="Numbers" id="NNumeral">
         <node syntax="">
             <option option="Which number?">
                 <node syntax="NNumeral"/>
             </option>
         </node>
-    </sentence>
+    </sentence>-->
+
+    <advanced desc="Reported Speech" id="AKnowQuestion">
+        <node child="phraseit">
+            <node syntax="PropAction">
+                <node syntax="AKnowQuestion">
+                    <option option="Who is saying they know this?">
+                        <node child="allpersons" />
+                    </option>
+                </node>
+            </node>
+        </node>
+    </advanced>
 
     <!--works-->
     <sentence desc="Someone loves someone" id="ALove">

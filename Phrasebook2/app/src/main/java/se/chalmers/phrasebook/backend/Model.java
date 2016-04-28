@@ -25,6 +25,7 @@ public class Model {
 
     private static Model model;
     private App instance;
+    private SyntaxTree basicAdvTree;
 
     SharedPreferences sharedPref;
 

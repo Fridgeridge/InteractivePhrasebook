@@ -161,7 +161,10 @@ public class SyntaxTree {
         if(advancedTree != null) {
             String advSyntax = advancedTree.getSyntax();
             if(!advSyntax.isEmpty()) {
-                String test = advSyntax.substring(0, advSyntax.length() - 3) +
+                System.out.println(advSyntax.indexOf("AKnow"));
+                String test = advSyntax.substring(0, advSyntax.indexOf("AKnow") + 5) +
+                        syntax.substring(1, 9) + "(" +
+                        advSyntax.substring(advSyntax.indexOf("AKnow") + 6, advSyntax.length() - 3) +
                         syntax.substring(9, syntax.length()) + ")))";
                 return test;
             }

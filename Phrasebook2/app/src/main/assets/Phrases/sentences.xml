@@ -63,15 +63,15 @@
     </sentence>-->
 
     <advanced desc="Reported Speech" id="AKnowQuestion">
-        <node child="phraseit">
-            <node syntax="PropAction">
-                <node syntax="AKnowQuestion">
-                    <option option="Who is saying they know this?">
-                        <node child="allpersons" />
-                    </option>
+                <node child="phraseit">
+                    <node syntax="PropAction">
+                        <node syntax="AKnow">
+                            <option option="Who is saying they know this?">
+                                <node child="allpersons" />
+                            </option>
+                        </node>
+                    </node>
                 </node>
-            </node>
-        </node>
     </advanced>
 
     <!--works-->

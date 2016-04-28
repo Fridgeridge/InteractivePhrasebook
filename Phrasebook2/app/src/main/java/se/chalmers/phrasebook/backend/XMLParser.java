@@ -75,6 +75,13 @@ public class XMLParser {
         return sentenceMap;
     }
 
+    public SyntaxTree getAdvancedOptionSyntaxTree(){
+        NodeList advSentence = document.getElementsByTagName("advanced");
+        SyntaxTree s = new SyntaxTree(constructSyntaxNodeList(advSentence,new SyntaxNode("Root"),new SyntaxNodeList(),null,1));
+        return s;
+    };
+
+
 
     public SyntaxTree buildSyntaxTree(NodeList currentRoot) {
         SyntaxTree s = new SyntaxTree(constructSyntaxNodeList(currentRoot, new SyntaxNode("Root"), new SyntaxNodeList(), null, 1));

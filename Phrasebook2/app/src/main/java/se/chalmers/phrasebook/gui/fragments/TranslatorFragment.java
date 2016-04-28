@@ -28,11 +28,7 @@ import se.chalmers.phrasebook.gui.smallFragments.TranslationFragment;
  * Created by matilda on 04/04/16.
  */
 public class TranslatorFragment extends Fragment {
-
-    private String phrase;
-
     protected Model model;
-
     protected FloatingActionButton floatingActionButton;
 
     public static TranslatorFragment newInstance(String phrase) {
@@ -46,11 +42,7 @@ public class TranslatorFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         model = Model.getInstance();
-
-        phrase = getArguments().getString("phrase");
-
     }
 
     @Override
@@ -86,12 +78,9 @@ public class TranslatorFragment extends Fragment {
     }
 
     public void updateTranslation() {
-
         TranslationFragment translationFragment = (TranslationFragment) getChildFragmentManager().findFragmentById(R.id.containerfor_translation);
         if (translationFragment != null)
             translationFragment.updateData();
-
-
     }
 
     @Override

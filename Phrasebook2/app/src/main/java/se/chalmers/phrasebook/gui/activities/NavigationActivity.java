@@ -79,8 +79,9 @@ public class NavigationActivity extends FragmentActivity
                 switchContent(new ChangeLanguageFragment(), "");
                 break;
             case 3:
+                System.out.println("SWITCHING");
                 switchContent(new NumeralTranslatorFragment(), "");
-                model.setCurrentPhrase(1);
+               // model.setCurrentPhrase(1);
                 break;
         }
 
@@ -148,8 +149,10 @@ public class NavigationActivity extends FragmentActivity
                 message = intent.getStringExtra("message");
                 switchContent(TranslatorFragment.newInstance(message), "");
             }else if (action.equals("number_event")) {
-                message = intent.getStringExtra("message");
-                switchContent(NumeralTranslatorFragment.newInstance(message), "");
+               // message = intent.getStringExtra("message");
+               // switchContent(NumeralTranslatorFragment.newInstance(message), "");
+                //switchContent(new NumeralTranslatorFragment(), "");
+                System.out.println("The forth option");
             } else {
                 throw new IllegalArgumentException();
             }
@@ -175,8 +178,8 @@ public class NavigationActivity extends FragmentActivity
     }
 
     @Override
-    public void updateSyntax(int optionIndex, SyntaxNodeList l, int childIndex) {
-        model.update(optionIndex,l,childIndex);
+    public void updateSyntax(int optionIndex, SyntaxNodeList l, int childIndex, boolean isAdvanced) {
+        model.update(optionIndex,l,childIndex, isAdvanced);
         if(mContent instanceof TranslatorFragment){
             TranslatorFragment fragment = (TranslatorFragment) mContent;
             fragment.updateTranslation();

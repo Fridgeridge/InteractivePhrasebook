@@ -30,14 +30,16 @@ public class InputHolderFragment extends Fragment {
     private SyntaxNodeList guiOptions;
     private FragmentManager fragmentManager;
     private ArrayList<String> fragmentTags;
+    private boolean isAdvanced;
 
     private FragmentCommunicator mCallback;
 
-    public static Fragment newInstance(int optionIndex) {
+    public static Fragment newInstance(int optionIndex, boolean isAdvanced) {
         InputHolderFragment inputHolderFragment = new InputHolderFragment();
 
         Bundle args = new Bundle();
         args.putInt("index", optionIndex);
+        args.putBoolean("advanced", isAdvanced);
         inputHolderFragment.setArguments(args);
 
         return inputHolderFragment;
@@ -61,10 +63,15 @@ public class InputHolderFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.isAdvanced = getArguments().getBoolean("advanced");
         model = Model.getInstance();
         optionIndex = getArguments().getInt("index");
         fragmentManager = getChildFragmentManager();
-        guiOptions = model.getCurrentPhrase().getOptions().get(optionIndex);
+        if(isAdvanced) {
+            guiOptions = model.getCurrentPhrase().getAdvOptions().get(optionIndex);
+        } else {
+            guiOptions = model.getCurrentPhrase().getOptions().get(optionIndex);
+        }
         fragmentTags = new ArrayList<String>();
     }
 
@@ -144,8 +151,7 @@ public class InputHolderFragment extends Fragment {
 
     public void updateSyntax(int optionIndex, SyntaxNodeList l, int childIndex) {
         if (this.optionIndex == optionIndex) {
-            mCallback.updateSyntax(optionIndex, l, childIndex);
-
+            mCallback.updateSyntax(optionIndex, l, childIndex, isAdvanced);
             this.redrawInputGUI();
         }
     }
@@ -153,7 +159,7 @@ public class InputHolderFragment extends Fragment {
     public void updateNumeralSyntax(int optionIndex, int childIndex){
 
         if(this.optionIndex == optionIndex){
-        mCallback.updateSyntax(optionIndex, null, childIndex);
+        mCallback.updateSyntax(optionIndex, null, childIndex, false);
         }
         this.redrawInputGUI();
     }

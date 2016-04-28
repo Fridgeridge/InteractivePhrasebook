@@ -67,27 +67,36 @@ public class SyntaxTree {
         return id;
     }
 
-    public boolean setSelectedChild(int optionIndex, int childIndex) {
+    public boolean setSelectedChild(int optionIndex, int childIndex, boolean isAdvanced) {
         boolean status = false;
-
-        if (options.get(optionIndex).getSelectedChild() instanceof NumeralSyntaxNode) {
-            options.get(optionIndex).getSelectedChild().setSelectedChild(childIndex, null);
-            status = true;
-        } else if (options.get(optionIndex) != null) {
-            if (options.get(optionIndex).getChildren().get(childIndex) != null)
-                status = options.get(optionIndex).setSelectedChild(options.get(optionIndex).getChildren().get(childIndex));
+        if(!isAdvanced) {
+            if (options.get(optionIndex).getSelectedChild() instanceof NumeralSyntaxNode) {
+                options.get(optionIndex).getSelectedChild().setSelectedChild(childIndex, null);
+                status = true;
+            } else if (options.get(optionIndex) != null) {
+                if (options.get(optionIndex).getChildren().get(childIndex) != null)
+                    status = options.get(optionIndex).setSelectedChild(options.get(optionIndex).getChildren().get(childIndex));
+            }
+        } else {
+            advancedTree.setSelectedChild(optionIndex,childIndex,false);
         }
+
         return status;
     }
 
 
-    public void setSelectedChild(int optionIndex, SyntaxNodeList snl, int childIndex) {
-        if (snl != null) {
-            SyntaxNodeList nodeList = options.get(optionIndex);
-            setRecursiveSelectedChild(nodeList, snl, childIndex);
+    public void setSelectedChild(int optionIndex, SyntaxNodeList snl, int childIndex, boolean isAdvanced) {
+        if(!isAdvanced) {
+            if (snl != null) {
+                SyntaxNodeList nodeList = options.get(optionIndex);
+                setRecursiveSelectedChild(nodeList, snl, childIndex);
+            } else {
+                setSelectedChild(optionIndex, childIndex,false);
+            }
         } else {
-            setSelectedChild(optionIndex, childIndex);
+            advancedTree.setSelectedChild(optionIndex,snl,childIndex,false);
         }
+
     }
 
 
@@ -152,8 +161,9 @@ public class SyntaxTree {
         if(advancedTree != null) {
             String advSyntax = advancedTree.getSyntax();
             if(!advSyntax.isEmpty()) {
-                return advSyntax.substring(0, advSyntax.length() - 3) +
+                String test = advSyntax.substring(0, advSyntax.length() - 3) +
                         syntax.substring(9, syntax.length()) + ")))";
+                return test;
             }
         }
         return syntax;

@@ -69,7 +69,7 @@ public class Model {
         //Hardcoded default testing phrasebook
         PhraseBook tourism = new PhraseBook("Tourism");
         for (String s : parser.getSentencesData().keySet()) {
-            tourism.addPhrase(translator.translateToOrigin(parser.getSyntaxTree(s).getSyntax())
+            tourism.addPhrase(translator.translateToOrigin(parser.getSyntaxTree(s).getAdvSyntax())
                     , parser.getSyntaxTree(s));
         }
         defaultPhrasebooks.add(tourism);
@@ -167,8 +167,8 @@ public class Model {
         return null;
     }
 
-    public void update(int optionIndex, SyntaxNodeList target, int childIndex) {
-        currentPhrase.setSelectedChild(optionIndex, target, childIndex);
+    public void update(int optionIndex, SyntaxNodeList target, int childIndex, boolean isAdvanced) {
+        currentPhrase.setSelectedChild(optionIndex, target, childIndex, isAdvanced);
     }
 
     public boolean isNodeSelected(SyntaxNode node, LinkedHashMap options) {
@@ -218,7 +218,7 @@ public class Model {
     public ArrayList<String> getSentencesInCurrentPhrasebook() {
         ArrayList<String> phrases = new ArrayList<String>();
         for (SyntaxTree tree : currentPhrasebook.getPhrases()) {
-            phrases.add(translator.translateToOrigin(tree.getSyntax()));
+            phrases.add(translator.translateToOrigin(tree.getAdvSyntax()));
         }
         return phrases;
     }
@@ -232,11 +232,11 @@ public class Model {
     }
 
     public String translateToOrigin() {
-        return translator.translateToOrigin(getCurrentPhrase().getSyntax());
+        return translator.translateToOrigin(getCurrentPhrase().getAdvSyntax());
     }
 
     public String translateToTarget() {
-        return translator.translateToTarget(getCurrentPhrase().getSyntax());
+        return translator.translateToTarget(getCurrentPhrase().getAdvSyntax());
     }
 
     public void setOriginLanguage(String originLanguageKey) {

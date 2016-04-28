@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 import se.chalmers.phrasebook.R;
@@ -89,7 +90,6 @@ public class PhraseListFragment extends Fragment {
     }
 
     private void sendMessage(int position) {
-
         Intent intent = new Intent("phrase_list_event");
         // add data
         intent.putExtra("message", "data");

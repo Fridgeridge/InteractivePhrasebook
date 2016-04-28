@@ -36,7 +36,7 @@ public class SwipeAdapter extends FragmentPagerAdapter {
             case 0:
                 return OptionsFragment.newInstance(1);
             case 1:
-                return OptionsFragment.newInstance(1);
+                return OptionsFragment.newInstance(2);
             default:
                 return null;
         }

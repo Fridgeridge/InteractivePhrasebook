@@ -43,7 +43,7 @@ public class OptionsFragment extends Fragment {
         type = getArguments().getInt("index");
 
         options = model.getCurrentPhrase().getOptions();
-        advancedOptions = new ArrayList<>();
+        advancedOptions = model.getCurrentPhrase().getAdvOptions();
         containers = new int[6];
 
         addContainers();
@@ -66,13 +66,13 @@ public class OptionsFragment extends Fragment {
         if(type == 1) {
             for (int i = 0; i < options.size(); i++) {
                 if (options.get(i) != null) {
-                    transaction.add(containers[i], (InputHolderFragment.newInstance(i)));
+                    transaction.add(containers[i], (InputHolderFragment.newInstance(i, false)));
                 }
             }
         }else if(type == 2){
             for (int i = 0; i < advancedOptions.size(); i++) {
                 if (advancedOptions.get(i) != null)
-                    transaction.add(containers[i], InputHolderFragment.newInstance(i));
+                    transaction.add(containers[i], InputHolderFragment.newInstance(i, true));
             }
         }
 

@@ -14,13 +14,13 @@ public class NumeralTranslatorFragment extends TranslatorFragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        Bundle args = new Bundle();
-        args.putString("phrase", "Number");
-        super.onCreate(args);
+        super.onCreate(savedInstanceState);
         model = Model.getInstance();
+        System.out.println("Does it even create");
         super.model.setNumeralCurrentPhrase();
-        if(super.floatingActionButton != null) {
+        if(floatingActionButton != null) {
             floatingActionButton.detach();
+            System.out.println("Detaching");
         }
     }
 

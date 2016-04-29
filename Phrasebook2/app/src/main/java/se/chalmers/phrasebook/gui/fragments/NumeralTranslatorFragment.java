@@ -16,12 +16,6 @@ public class NumeralTranslatorFragment extends TranslatorFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         model = Model.getInstance();
-        System.out.println("Does it even create");
-        super.model.setNumeralCurrentPhrase();
-        if(floatingActionButton != null) {
-            floatingActionButton.detach();
-            System.out.println("Detaching");
-        }
     }
 
     public static NumeralTranslatorFragment newInstance() {
@@ -30,5 +24,17 @@ public class NumeralTranslatorFragment extends TranslatorFragment {
         args.putString("phrase", "Number");
         fragment.setArguments(args);
         return fragment;
+    }
+
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceStat) {
+        View view = super.onCreateView(inflater, container,
+                savedInstanceStat);
+        super.model.setNumeralCurrentPhrase();
+        if(floatingActionButton != null) {
+            floatingActionButton.detach();
+            System.out.println("Detaching");
+        }
+        return view;
     }
 }

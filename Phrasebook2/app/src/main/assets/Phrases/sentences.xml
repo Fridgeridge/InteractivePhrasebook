@@ -74,6 +74,12 @@
                 </node>
     </advanced>
 
+    <sentence desc="Numbers to Words" id="NNumeral">
+        <node syntax="num">
+            <node syntax="NNumeral" />
+        </node>
+    </sentence>
+
     <!--works-->
     <sentence desc="Someone loves someone" id="ALove" advanced="true">
         <node child="phraseit">

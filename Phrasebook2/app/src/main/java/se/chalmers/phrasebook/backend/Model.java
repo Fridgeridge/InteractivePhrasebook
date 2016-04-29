@@ -267,7 +267,11 @@ public class Model {
     }
 
     public void setNumeralCurrentPhrase() {
-          setCurrentPhrase(0);
+        for(int i = 0; i < parser.getSentencesData().values().size(); i++) {
+            if((parser.getSentencesData().values().toArray()[i]).equals("NNumeral")) {
+                setCurrentPhrase(i);
+            }
+        }
     }
 
     public Langs getOriginLang() {

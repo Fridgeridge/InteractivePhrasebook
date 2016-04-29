@@ -261,8 +261,13 @@ public class Model {
                 ((String) (parser.getSentencesData().keySet().toArray()[position])));
     }
 
+    public String getDescFromPos(int pos) {
+        return parser.getSentencesData()
+                .get((String) (parser.getSentencesData().keySet().toArray()[pos]));
+    }
+
     public void setNumeralCurrentPhrase() {
-        setCurrentPhrase(0);
+          setCurrentPhrase(0);
     }
 
     public Langs getOriginLang() {

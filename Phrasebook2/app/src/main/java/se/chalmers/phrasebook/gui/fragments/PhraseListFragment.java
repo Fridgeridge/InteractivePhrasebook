@@ -45,7 +45,6 @@ public class PhraseListFragment extends Fragment {
         model = Model.getInstance();
 
         title = getArguments().getString("title");
-
         phrases = new ArrayList<>();
         phrases.addAll(model.getSentencesInCurrentPhrasebook());
         //phrases.addAll(model.getSentences().values());
@@ -59,7 +58,7 @@ public class PhraseListFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_phrase_list, container, false);
-
+        getActivity().getActionBar().setTitle(title);
         ArrayAdapter adapter = new ArrayAdapter<String>(context, R.layout.phrase_list_item, phrases);
 
         final ListView phraseListView = (ListView) view.findViewById(R.id.phrase_listView);
@@ -70,7 +69,6 @@ public class PhraseListFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 model.setCurrentPhrase(position);
-
                 //sendMessage((String) phraseListView.getItemAtPosition(position));
                 sendMessage(position);
             }
@@ -92,7 +90,7 @@ public class PhraseListFragment extends Fragment {
     private void sendMessage(int position) {
         Intent intent = new Intent("phrase_list_event");
         // add data
-        intent.putExtra("message", "data");
+        intent.putExtra("message", model.getDescFromPos(position));
         LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
     }
 

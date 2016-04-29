@@ -48,12 +48,10 @@ public class XMLParser {
 
         NodeList sentences = document.getElementsByTagName("sentence");
         int nbrOfSentences = sentences.getLength();
-        result = new String[nbrOfSentences];
 
         for (int i = 0; i < nbrOfSentences; i++) {
             String desc = sentences.item(i).getAttributes().getNamedItem("desc").getNodeValue();
             String id = sentences.item(i).getAttributes().getNamedItem("id").getNodeValue();
-
             if (desc != null && id != null)
                 sentenceMap.put(id, desc);
         }

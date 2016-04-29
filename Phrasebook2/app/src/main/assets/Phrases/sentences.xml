@@ -63,7 +63,7 @@
     </sentence>-->
 
     <advanced desc="Reported Speech" id="AKnowQuestion">
-                <node child="phraseit">
+                <node child="advphraseit">
                     <node syntax="PropAction">
                         <node syntax="AKnow">
                             <option option="Who is saying they know this?">
@@ -75,7 +75,7 @@
     </advanced>
 
     <!--works-->
-    <sentence desc="Someone loves someone" id="ALove">
+    <sentence desc="Someone loves someone" id="ALove" advanced="true">
         <node child="phraseit">
             <node syntax="PropAction">
                 <node args="2" syntax="ALove">
@@ -413,13 +413,27 @@
 
     <child id="phraseit">
         <option option="How do you want to phrase it?">
-            <node desc="statement" syntax="PSentence">
+            <node desc="As a statement" syntax="PSentence">
                 <node syntax="SProp"></node>
             </node>
-            <node desc="question" syntax="PQuestion">
+            <node desc="As a question" syntax="PQuestion">
                 <node syntax="QProp"></node>
             </node>
-            <node desc="negation" syntax="PSentence">
+            <node desc="As a negation" syntax="PSentence">
+                <node syntax="SPropNot"></node>
+            </node>
+        </option>
+    </child>
+
+    <child id="advphraseit">
+        <option option="How are they phrasing it?">
+            <node desc="As a statement" syntax="PSentence">
+                <node syntax="SProp"></node>
+            </node>
+            <node desc="As a question" syntax="PQuestion">
+                <node syntax="QProp"></node>
+            </node>
+            <node desc="As a negation" syntax="PSentence">
                 <node syntax="SPropNot"></node>
             </node>
         </option>

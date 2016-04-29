@@ -70,16 +70,19 @@ public class NavigationActivity extends FragmentActivity
 
         switch (position) {
             case 0:
+                getActionBar().setTitle("Default Phrasebooks");
                 switchContent(DefaultPhrasebooksFragment.newInstance(1), "default");
                 break;
             case 1:
+                getActionBar().setTitle("My Phrasebooks");
                 switchContent(new MyPhrasebooksFragment(), "");
                 break;
             case 2:
+                getActionBar().setTitle("Change Language");
                 switchContent(new ChangeLanguageFragment(), "");
                 break;
             case 3:
-                System.out.println("SWITCHING");
+                getActionBar().setTitle("Numbers to Words");
                 switchContent(new NumeralTranslatorFragment(), "");
                // model.setCurrentPhrase(1);
                 break;
@@ -140,13 +143,13 @@ public class NavigationActivity extends FragmentActivity
 
             if (action.equals("phrasebook_event")) {
                 message = intent.getStringExtra("message");
-                System.out.println(message);
                 /*if(is default phrasebook) {
                     //switchContent(DefaultPhraseListFragment.newInstance(message), "");
                 } else {*/
                 switchContent(PhraseListFragment.newInstance(message), "");
             } else if (action.equals("phrase_list_event")) {
                 message = intent.getStringExtra("message");
+                getActionBar().setTitle(message);
                 switchContent(TranslatorFragment.newInstance(message), "");
             }else if (action.equals("number_event")) {
                // message = intent.getStringExtra("message");

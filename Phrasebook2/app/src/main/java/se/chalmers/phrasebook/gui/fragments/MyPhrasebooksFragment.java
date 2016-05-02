@@ -11,14 +11,18 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton;
+
+import java.util.List;
 
 import se.chalmers.phrasebook.App;
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
 import se.chalmers.phrasebook.gui.FragmentCommunicator;
+import se.chalmers.phrasebook.gui.adapters.MyPhrasebookButtonAdapter;
 import se.chalmers.phrasebook.gui.adapters.PhrasebookButtonAdapter;
 import se.chalmers.phrasebook.gui.smallFragments.AddPhrasebookDialog;
 
@@ -29,6 +33,9 @@ public class MyPhrasebooksFragment extends Fragment {
     private Model model;
     private FloatingActionButton fab;
     FragmentCommunicator mCallback;
+
+
+
 
     @Override
     public void onAttach(Activity activity) {
@@ -55,7 +62,7 @@ public class MyPhrasebooksFragment extends Fragment {
 
         if(model.getMyPhrasebookTitles().size() > 0) {
             GridView gridView = (GridView) view.findViewById(R.id.standard_gridView);
-            gridView.setAdapter(new PhrasebookButtonAdapter(getActivity().getApplicationContext(),mCallback, model.getMyPhrasebookTitles()));
+            gridView.setAdapter(new MyPhrasebookButtonAdapter(getActivity().getApplicationContext(),mCallback, model.getMyPhrasebookTitles()));
             text.setVisibility(View.GONE);
         }else{
             text.setText("Please add a phrasebook by clicking the button below.");
@@ -79,16 +86,5 @@ public class MyPhrasebooksFragment extends Fragment {
         return view;
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        fab.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void onDestroy(){
-        super.onDestroy();
-        fab.setVisibility(View.GONE);
-    }
 
 }

@@ -160,46 +160,6 @@ public class Model {
         currentPhrase.setSelectedChild(optionIndex, target, childIndex, isAdvanced);
     }
 
-    public boolean isNodeSelected(SyntaxNode node, LinkedHashMap options) {
-        Iterator iterate = options.entrySet().iterator();
-        if (iterate.hasNext()) {
-            Map.Entry entry = (Map.Entry) iterate.next();
-            SyntaxNode parent = (SyntaxNode) entry.getValue();
-            for (int i = 0; i < parent.getSyntaxNodes().size(); i++) {
-                if (parent.getSyntaxNodes().get(i).getSelectedChild() == node) {
-                    return true;
-                }
-            }
-            return false;
-        }
-        return false;
-    }
-
-    public ArrayList<String> getNodeOptions(int index) {
-        optionsList = currentPhrase.getOptions();
-        ArrayList<String> guiOptions = new ArrayList<>();
-
-        for (SyntaxNodeList l : optionsList) {
-            if (l.getQuestion() != null && !l.getQuestion().isEmpty())
-                guiOptions.add(l.getQuestion());
-        }
-
-        return guiOptions;
-    }
-
-    //Same code as above method, but with other options
-    public ArrayList<String> getAdvNodeOptions(int index) {
-        optionsList = currentPhrase.getAdvOptions();
-        ArrayList<String> guiOptions = new ArrayList<>();
-
-        for (SyntaxNodeList l : optionsList) {
-            if (l.getQuestion() != null && !l.getQuestion().isEmpty())
-                guiOptions.add(l.getQuestion());
-        }
-
-        return guiOptions;
-    }
-
     public void playCurrentTargetPhrase() {
         ttsHandler.playSentence(translateToTarget());
     }
@@ -269,6 +229,12 @@ public class Model {
 
     public Langs getTargetLang() {
         return target;
+    }
+
+    public boolean removePhrasebook(PhraseBook phraseBook){
+        boolean status = myPhrasebooks.removePhraseBook(phraseBook);
+        FileWriter.saveToFile(instance,myPhrasebooks);
+        return status;
     }
 
     public PhraseBook getCurrentPhrasebook() {

@@ -17,7 +17,7 @@ public class FileWriter {
 
     public static boolean saveToFile(Context context, PhraseBookHolder books) {
         boolean status = false;
-        if(books==null || books.getPhraseBooks().isEmpty())
+        if(books==null)
             return false;
 
         try {

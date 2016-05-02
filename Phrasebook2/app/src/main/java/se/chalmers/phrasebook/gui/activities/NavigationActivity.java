@@ -16,6 +16,7 @@ import android.support.v4.widget.DrawerLayout;
 
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
+import se.chalmers.phrasebook.backend.PhraseBook;
 import se.chalmers.phrasebook.backend.syntax.SyntaxNodeList;
 import se.chalmers.phrasebook.gui.FragmentCommunicator;
 import se.chalmers.phrasebook.gui.fragments.ChangeLanguageFragment;
@@ -193,8 +194,16 @@ public class NavigationActivity extends FragmentActivity
     }
 
     @Override
-    public void setPhraseList(String id) {
+    public void setPhraseListFragment(String id) {
         if(id!= null && !id.isEmpty())
             switchContent(PhraseListFragment.newInstance(id), "");
+    }
+
+    @Override
+    public boolean removePhrasebook(String id) {
+        PhraseBook phraseBook = model.getPhrasebookByTitle(id);
+        boolean status = model.removePhrasebook(phraseBook);
+        this.recreate();
+        return status;
     }
 }

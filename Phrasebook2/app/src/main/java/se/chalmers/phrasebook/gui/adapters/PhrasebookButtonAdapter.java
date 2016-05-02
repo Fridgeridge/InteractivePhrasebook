@@ -1,28 +1,17 @@
 package se.chalmers.phrasebook.gui.adapters;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
-import android.support.v4.content.LocalBroadcastManager;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-import se.chalmers.phrasebook.App;
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
 import se.chalmers.phrasebook.gui.FragmentCommunicator;
-import se.chalmers.phrasebook.gui.activities.NavigationActivity;
 
 /**
  * Created by David on 2016-02-17.
@@ -33,7 +22,6 @@ public class PhrasebookButtonAdapter extends BaseAdapter {
     private ArrayList<String> phrasebookNames;
 
     private Model model;
-
     private FragmentCommunicator mCallback;
 
     public PhrasebookButtonAdapter(Context context,FragmentCommunicator mCallback, ArrayList<String> phrasebooks) {
@@ -70,7 +58,6 @@ public class PhrasebookButtonAdapter extends BaseAdapter {
         } else {
             button = (Button) convertView;
         }
-        final View clickview = convertView;
 
         button.setMinimumHeight(250);
         button.setHeight(400);
@@ -92,7 +79,7 @@ public class PhrasebookButtonAdapter extends BaseAdapter {
     }
 
     private void sendMessage(String phrasebook){
-        mCallback.setPhraseList(phrasebook);
+        mCallback.setPhraseListFragment(phrasebook);
     }
 
 }

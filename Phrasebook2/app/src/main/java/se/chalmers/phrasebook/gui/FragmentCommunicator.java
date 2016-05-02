@@ -12,8 +12,9 @@ public interface FragmentCommunicator {
 
     void updateSyntax(int optionIndex, SyntaxNodeList l, int childIndex, boolean isAdvanced);
 
-    void setPhraseList(String id);
+    void setPhraseListFragment(String id);
 
+    boolean removePhrasebook(String id);
 
 
 

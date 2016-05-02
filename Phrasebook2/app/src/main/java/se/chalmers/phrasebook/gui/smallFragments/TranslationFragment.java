@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import se.chalmers.phrasebook.R;
@@ -32,6 +34,15 @@ public class TranslationFragment extends Fragment {
 
         origin = (TextView) translateView.findViewById(R.id.origin_phrase);
         target = (TextView) translateView.findViewById(R.id.target_phrase);
+
+        ImageButton button = (ImageButton) translateView.findViewById(R.id.button3);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                model.playCurrentTargetPhrase();
+            }
+        });
 
         return translateView;
     }

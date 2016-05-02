@@ -3,13 +3,10 @@ package se.chalmers.phrasebook.backend;
 import android.content.Context;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.StreamCorruptedException;
-import java.util.ArrayList;
 
 import se.chalmers.phrasebook.R;
 
@@ -18,11 +15,11 @@ import se.chalmers.phrasebook.R;
  */
 public class FileWriter {
 
-    public static boolean saveToFile(Context context, PhraseBookHolder books){
+    public static boolean saveToFile(Context context, PhraseBookHolder books) {
         boolean status = false;
         try {
-            FileOutputStream fileOutputStream = context.openFileOutput(context.getString(R.string.save_file),Context.MODE_PRIVATE);
-            ObjectOutputStream objectOutputStream= new ObjectOutputStream(fileOutputStream);
+            FileOutputStream fileOutputStream = context.openFileOutput(context.getString(R.string.save_file), Context.MODE_PRIVATE);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
             objectOutputStream.writeObject(books);
             objectOutputStream.close();
             status = true;
@@ -33,13 +30,13 @@ public class FileWriter {
         return status;
     }
 
-    public static PhraseBookHolder readFromFile(Context context){
+    public static PhraseBookHolder readFromFile(Context context) {
         try {
             FileInputStream fileInputStream = context.openFileInput(context.getString(R.string.save_file));
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             Object object = objectInputStream.readObject();
 
-            if((object != null) && (object instanceof PhraseBookHolder)) {
+            if ((object != null) && (object instanceof PhraseBookHolder)) {
                 return (PhraseBookHolder) object;
             }
 
@@ -49,7 +46,6 @@ public class FileWriter {
 
         return null;
     }
-
 
 
 }

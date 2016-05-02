@@ -25,7 +25,7 @@ public class Model {
 
     private static Model model;
     private App instance;
-    
+
     SharedPreferences sharedPref;
 
     private Translator translator;
@@ -61,8 +61,12 @@ public class Model {
         setTargetLanguage(sharedPref.getString(instance.getString(R.string.saved_target_language), targetKeyDef));
         setOriginLanguage(sharedPref.getString(instance.getString(R.string.saved_origin_language), originKeyDef));
 
+        myPhrasebooks = FileWriter.readFromFile(instance);
 
-        myPhrasebooks = new PhraseBookHolder();
+        //If the reading of saved phrasebooks does not work...
+        if (myPhrasebooks == null)
+            myPhrasebooks = new PhraseBookHolder();
+
         defaultPhrasebooks = new ArrayList<>();
 
         //Hardcoded default testing phrasebook
@@ -88,10 +92,12 @@ public class Model {
         }
         PhraseBook pb = new PhraseBook(name);
         myPhrasebooks.addPhraseBook(pb);
+        FileWriter.saveToFile(instance, myPhrasebooks);
         return true;
     }
 
     public PhraseBook getPhrasebookByTitle(String title) {
+        PhraseBookHolder phraseBookHolder = FileWriter.readFromFile(instance);
         for (PhraseBook book : myPhrasebooks.getPhraseBooks()) {
             if (book.getTitle().equals(title)) {
                 return book;
@@ -128,7 +134,7 @@ public class Model {
     public void deleteAllPreferences() {
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.clear();
-        editor.commit();
+        editor.apply();
     }
 
     public ArrayList<String> getMyPhrasebookTitles() {
@@ -149,21 +155,6 @@ public class Model {
 
     public HashMap<String, String> getSentences() {
         return parser.getSentencesData();
-    }
-
-
-    //TODO Remove method and find suitable abstraction layer
-    public XMLParser getParser() {
-        return parser;
-    }
-
-
-    //TODO Consider moving to a separate class
-    public static String getKey(String name, Map<String, String> map) {
-        for (Map.Entry<String, String> e : map.entrySet()) {
-            if (e.getValue().equals(name)) return e.getKey();
-        }
-        return null;
     }
 
     public void update(int optionIndex, SyntaxNodeList target, int childIndex, boolean isAdvanced) {
@@ -266,8 +257,8 @@ public class Model {
     }
 
     public void setNumeralCurrentPhrase() {
-        for(int i = 0; i < parser.getSentencesData().values().size(); i++) {
-            if((parser.getSentencesData().keySet().toArray()[i]).equals("NNumeral")) {
+        for (int i = 0; i < parser.getSentencesData().values().size(); i++) {
+            if ((parser.getSentencesData().keySet().toArray()[i]).equals("NNumeral")) {
                 setCurrentPhrase(i);
             }
         }

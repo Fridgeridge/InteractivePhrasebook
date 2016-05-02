@@ -32,7 +32,7 @@ public class Model {
     private XMLParser parser;
     private TTSHandler ttsHandler;
     private PhraseBookHolder myPhrasebooks;
-    private ArrayList<PhraseBook> defaultPhrasebooks;
+    private PhraseBookHolder defaultPhrasebooks;
     private Langs origin, target;
     private PhraseBook currentPhrasebook;
     private SyntaxTree currentPhrase;
@@ -67,15 +67,15 @@ public class Model {
         if (myPhrasebooks == null)
             myPhrasebooks = new PhraseBookHolder();
 
-        defaultPhrasebooks = new ArrayList<>();
+        defaultPhrasebooks = new PhraseBookHolder();
 
         //Hardcoded default testing phrasebook
-        PhraseBook tourism = new PhraseBook("Tourism");
+        PhraseBook tourism = new PhraseBook("Default");
         for (String s : parser.getSentencesData().keySet()) {
             tourism.addPhrase(translator.translateToOrigin(parser.getSyntaxTree(s).getAdvSyntax())
                     , parser.getSyntaxTree(s));
         }
-        defaultPhrasebooks.add(tourism);
+        defaultPhrasebooks.addPhraseBook(tourism);
     }
 
     public static Model getInstance() {
@@ -104,7 +104,7 @@ public class Model {
             }
         }
 
-        for (PhraseBook book : defaultPhrasebooks) {
+        for (PhraseBook book : defaultPhrasebooks.getPhraseBooks()) {
             if (book.getTitle().equals(title)) {
                 return book;
             }
@@ -147,7 +147,7 @@ public class Model {
 
     public ArrayList<String> getDefaultPhrasebookTitles() {
         ArrayList<String> names = new ArrayList<String>();
-        for (PhraseBook book : defaultPhrasebooks) {
+        for (PhraseBook book : defaultPhrasebooks.getPhraseBooks()) {
             names.add(book.getTitle());
         }
         return names;

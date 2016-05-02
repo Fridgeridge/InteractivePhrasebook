@@ -18,6 +18,10 @@ public class PhraseBookHolder implements Serializable{
         return phraseBooks;
     }
 
+    public boolean removePhraseBook(PhraseBook phraseBook){
+       return phraseBooks.remove(phraseBook);
+    }
+
     public void addPhraseBook(PhraseBook phraseBook) {
         phraseBooks.add(phraseBook);
     }

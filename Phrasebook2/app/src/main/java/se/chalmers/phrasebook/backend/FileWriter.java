@@ -17,6 +17,9 @@ public class FileWriter {
 
     public static boolean saveToFile(Context context, PhraseBookHolder books) {
         boolean status = false;
+        if(books==null || books.getPhraseBooks().isEmpty())
+            return false;
+
         try {
             FileOutputStream fileOutputStream = context.openFileOutput(context.getString(R.string.save_file), Context.MODE_PRIVATE);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);

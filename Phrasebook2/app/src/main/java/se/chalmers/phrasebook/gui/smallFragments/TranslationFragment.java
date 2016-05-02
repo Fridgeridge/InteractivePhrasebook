@@ -25,8 +25,6 @@ public class TranslationFragment extends Fragment {
     private Model model;
     private TextView origin,target;
 
-    private com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton fab;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,8 +58,8 @@ public class TranslationFragment extends Fragment {
 
         String originTranslation = model.translateToOrigin();
         String targetTranslation = model.translateToTarget();
-        origin.setText(originTranslation);
-        target.setText(targetTranslation);
+        origin.setText(formattingText(originTranslation));
+        target.setText(formattingText(targetTranslation));
 
     }
 
@@ -73,9 +71,22 @@ public class TranslationFragment extends Fragment {
 
         String originTranslation = model.translateToOrigin();
         String targetTranslation = model.translateToTarget();
-        origin.setText(originTranslation);
-        target.setText(targetTranslation);
+        origin.setText(formattingText(originTranslation));
+        target.setText(formattingText(targetTranslation));
 
+    }
+
+    private String formattingText(String text){
+
+        String temp;
+
+        temp = text.substring(0,1).toUpperCase() + text.substring(1);
+
+        temp = temp.replace(" ?", "?");
+        temp = temp.replace(" .", ".");
+        temp = temp.replace(" !", "!");
+
+        return temp;
     }
 
 

@@ -83,7 +83,9 @@ public class NavigationActivity extends FragmentActivity
                 break;
             case 3:
                 getActionBar().setTitle("Numbers to Words");
-                switchContent(new NumeralTranslatorFragment(), "");
+                model.setNumeralCurrentPhrase();
+                System.out.println(model.getCurrentPhrase().getSyntax() + "currentPhraze");
+                switchContent(TranslatorFragment.newInstance("NNumeral"), "");
                // model.setCurrentPhrase(1);
                 break;
         }
@@ -154,7 +156,8 @@ public class NavigationActivity extends FragmentActivity
             }else if (action.equals("number_event")) {
                // message = intent.getStringExtra("message");
                // switchContent(NumeralTranslatorFragment.newInstance(message), "");
-                //switchContent(new NumeralTranslatorFragment(), "");
+                model.setNumeralCurrentPhrase();
+                switchContent(NumeralTranslatorFragment.newInstance(), "");
                 System.out.println("The forth option");
             } else {
                 throw new IllegalArgumentException();

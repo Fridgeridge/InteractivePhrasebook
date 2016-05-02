@@ -25,7 +25,7 @@ public class HelperActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
- //       setContentView(R.layout.activity_splash);
+        //setContentView(R.layout.activity_splash);
 
         time = System.currentTimeMillis();
 
@@ -47,7 +47,7 @@ public class HelperActivity extends Activity {
             //strat  DataActivity beacuase its your app first run
             // using the following line to edit/commit prefs
             prefs.edit().putBoolean("firstrun", false).commit();
-            //startActivity(new Intent(HelperActivity.ths , FirstUsageActivity.class));
+            //startActivity(new Intent(HelperActivity.this , FirstUsageActivity.class));
             Intent intent = new Intent(this, FirstUsageActivity.class);
             startActivity(intent);
             finish();

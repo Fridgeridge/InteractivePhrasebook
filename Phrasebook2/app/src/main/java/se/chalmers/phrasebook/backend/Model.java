@@ -268,7 +268,7 @@ public class Model {
 
     public void setNumeralCurrentPhrase() {
         for(int i = 0; i < parser.getSentencesData().values().size(); i++) {
-            if((parser.getSentencesData().values().toArray()[i]).equals("NNumeral")) {
+            if((parser.getSentencesData().keySet().toArray()[i]).equals("NNumeral")) {
                 setCurrentPhrase(i);
             }
         }

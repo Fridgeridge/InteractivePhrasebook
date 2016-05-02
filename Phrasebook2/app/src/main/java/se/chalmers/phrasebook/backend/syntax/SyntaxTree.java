@@ -172,6 +172,10 @@ public class SyntaxTree {
         return syntax;
     }
 
+    public boolean hasAdvOptions() {
+        return (advancedTree != null);
+    }
+
     // Builds recursively from root node to parse syntax
     //the getSyntax() method acts as a wrapper
     private String parseSentenceSyntax(SyntaxNode node) {

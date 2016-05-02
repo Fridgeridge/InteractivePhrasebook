@@ -18,14 +18,13 @@ public class SwipeAdapter extends FragmentPagerAdapter {
     public SwipeAdapter(FragmentManager fragmentManager) {
         super(fragmentManager);
         model = Model.getInstance();
-        if(model.getCurrentPhrase().getAdvancedTree() != null) {
+        if(model.getCurrentPhrase().hasAdvOptions()) {
             pages = 2;
         } else {
             pages = 1;
         }
-
-
     }
+
 
     // Returns total number of pages
     @Override

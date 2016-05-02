@@ -50,11 +50,16 @@ public class TranslatorFragment extends Fragment {
 
         final FragmentTransaction fm = getChildFragmentManager().beginTransaction();
 
+
         fm.add(R.id.containerfor_translation, new TranslationFragment());
         fm.add(R.id.containerfor_options, new SwipeFragment());
 
         fm.commit();
 
+        if(!model.getCurrentPhrase().hasAdvOptions()) {
+            view.findViewById(R.id.firstDot).setVisibility(View.GONE);
+            view.findViewById(R.id.secondDot).setVisibility(View.GONE);
+        }
 
         ImageView imageView = new ImageView(App.get());
         imageView.setImageResource(R.drawable.ic_add_white_24dp);

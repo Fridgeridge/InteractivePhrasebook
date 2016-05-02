@@ -28,8 +28,11 @@ public class SwipeFragment extends Fragment {
         swipeAdapter = new SwipeAdapter(getChildFragmentManager());
 
         pager.setAdapter(swipeAdapter);
-
         return view;
+    }
+
+    public boolean isAdvanced() {
+        return true;
     }
 
 }

@@ -20,7 +20,7 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="467dp"
         android:id="@+id/containerfor_options"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="0dp"
@@ -28,5 +28,27 @@
         android:layout_marginTop="0dp"
         android:layout_below="@id/containerfor_translation">
     </FrameLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_alignParentRight="true"
+        android:id="@+id/dots">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/firstDot"
+            android:src="@drawable/abc_btn_radio_to_on_mtrl_015" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/secondDot"
+            android:src="@drawable/abc_btn_radio_to_on_mtrl_000" />
+    </LinearLayout>
 
 </LinearLayout>

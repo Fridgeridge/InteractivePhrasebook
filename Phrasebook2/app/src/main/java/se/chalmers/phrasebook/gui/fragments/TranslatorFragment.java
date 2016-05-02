@@ -50,8 +50,8 @@ public class TranslatorFragment extends Fragment {
 
         final FragmentTransaction fm = getChildFragmentManager().beginTransaction();
 
-        fm.add(R.id.containerfor_translation, new TranslationFragment());
-        fm.add(R.id.containerfor_options, new SwipeFragment());
+        fm.replace(R.id.containerfor_translation, new TranslationFragment());
+        fm.replace(R.id.containerfor_options, new SwipeFragment());
 
         fm.commit();
 
@@ -84,6 +84,12 @@ public class TranslatorFragment extends Fragment {
     public void onPause() {
         super.onPause();
     }
+
+    @Override
+    public void onResume() {
+        super.onPause();
+    }
+
 
     @Override
     public void onDestroy() {

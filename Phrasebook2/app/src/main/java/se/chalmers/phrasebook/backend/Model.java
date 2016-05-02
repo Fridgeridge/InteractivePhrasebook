@@ -25,14 +25,13 @@ public class Model {
 
     private static Model model;
     private App instance;
-    private SyntaxTree basicAdvTree;
-
+    
     SharedPreferences sharedPref;
 
     private Translator translator;
     private XMLParser parser;
     private TTSHandler ttsHandler;
-    private ArrayList<PhraseBook> myPhrasebooks;
+    private PhraseBookHolder myPhrasebooks;
     private ArrayList<PhraseBook> defaultPhrasebooks;
     private Langs origin, target;
     private PhraseBook currentPhrasebook;
@@ -63,7 +62,7 @@ public class Model {
         setOriginLanguage(sharedPref.getString(instance.getString(R.string.saved_origin_language), originKeyDef));
 
 
-        myPhrasebooks = new ArrayList<>();
+        myPhrasebooks = new PhraseBookHolder();
         defaultPhrasebooks = new ArrayList<>();
 
         //Hardcoded default testing phrasebook
@@ -82,18 +81,18 @@ public class Model {
 
     //Requires unique name
     public boolean addPhrasebook(String name) {
-        for (PhraseBook book : myPhrasebooks) {
+        for (PhraseBook book : myPhrasebooks.getPhraseBooks()) {
             if (book.getTitle().equals(name)) {
                 return false;
             }
         }
         PhraseBook pb = new PhraseBook(name);
-        myPhrasebooks.add(pb);
+        myPhrasebooks.addPhraseBook(pb);
         return true;
     }
 
     public PhraseBook getPhrasebookByTitle(String title) {
-        for (PhraseBook book : myPhrasebooks) {
+        for (PhraseBook book : myPhrasebooks.getPhraseBooks()) {
             if (book.getTitle().equals(title)) {
                 return book;
             }
@@ -134,7 +133,7 @@ public class Model {
 
     public ArrayList<String> getMyPhrasebookTitles() {
         ArrayList<String> names = new ArrayList<String>();
-        for (PhraseBook book : myPhrasebooks) {
+        for (PhraseBook book : myPhrasebooks.getPhraseBooks()) {
             names.add(book.getTitle());
         }
         return names;

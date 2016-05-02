@@ -1,5 +1,6 @@
 package se.chalmers.phrasebook.backend;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
@@ -9,7 +10,7 @@ import se.chalmers.phrasebook.backend.syntax.SyntaxTree;
  * A class representing a phrasebook containing sentences
  * Created by David on 2016-02-19.
  */
-public class PhraseBook {
+public class PhraseBook implements Serializable {
 
     private String title;
     private ArrayList<SyntaxTree> phrases;

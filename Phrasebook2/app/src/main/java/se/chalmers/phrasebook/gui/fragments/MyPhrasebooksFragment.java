@@ -86,5 +86,22 @@ public class MyPhrasebooksFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        fab.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        fab.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        fab.setVisibility(View.VISIBLE);
+    }
 
 }

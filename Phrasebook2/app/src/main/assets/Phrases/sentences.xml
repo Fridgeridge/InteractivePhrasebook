@@ -22,7 +22,7 @@
                     <option option="Who are we talking about?">
                         <node child="allpersons"></node>
                     </option>
-                        <node syntax="NameNN" />
+                    <node syntax="NameNN" />
                 </node>
             </node>
         </node>
@@ -63,27 +63,27 @@
     </sentence>-->
 
     <advanced desc="Reported Speech" id="AKnowQuestion">
-                <node child="advphraseit">
-                    <node syntax="PropAction">
-                        <node syntax="AKnow">
-                            <option option="Who is saying they know this?">
-                                <node child="allpersons" />
-                            </option>
-                        </node>
-                    </node>
+        <node child="advphraseit">
+            <node syntax="PropAction">
+                <node syntax="AKnow">
+                    <option option="Who is saying they know this?">
+                        <node child="allpersons" />
+                    </option>
                 </node>
+            </node>
+        </node>
     </advanced>
 
     <sentence desc="Numbers to Words" id="NNumeral">
-                <node syntax=" ">
-                    <option option="How many children?">
-                        <node syntax="NNumeral" />
-                    </option>
-                </node>
+        <node syntax=" ">
+            <option option="How many children?">
+                <node syntax="NNumeral" />
+            </option>
+        </node>
     </sentence>
 
     <!--works-->
-    <sentence desc="Someone loves someone" id="ALove" advanced="true">
+    <sentence advanced="true" desc="Someone loves someone" id="ALove">
         <node child="phraseit">
             <node syntax="PropAction">
                 <node args="2" syntax="ALove">
@@ -99,7 +99,7 @@
     </sentence>
 
     <!--works-->
-    <sentence desc="Someone is married" id="AMarried" advanced="true">
+    <sentence advanced="true" desc="Someone is married" id="AMarried">
         <node child="phraseit">
             <node syntax="PropAction">
                 <node syntax="AMarried">
@@ -125,7 +125,7 @@
     </sentence>
 
     <!--works-->
-    <sentence desc="Someone is thirsty" id="AThirsty" advanced="true">
+    <sentence advanced="true" desc="Someone is thirsty" id="AThirsty">
         <node child="phraseit">
             <node syntax="PropAction">
                 <node syntax="AThirsty">
@@ -282,8 +282,12 @@
                     <option option="Who are we talking about?">
                         <node child="allpersons"></node>
                     </option>
-                    <option option="Going where?">
-                        <node child="a/an/the"></node>
+                    <option option="What article?">
+                        <node child="a/an/the">
+                            <option option="What place">
+                                <node child="places"></node>
+                            </option>
+                        </node>
                     </option>
                 </node>
             </node>
@@ -361,7 +365,7 @@
                     <option option="Who wants food?">
                         <node child="allpersons"></node>
                     </option>
-                    <node child ="food_with_objectsPrep"></node>
+                    <node child="food_with_objectsPrep"></node>
                 </node>
             </node>
         </node>
@@ -374,9 +378,9 @@
                     <option option="Who likes it?">
                         <node child="allpersons"></node>
                     </option>
-                        <node child="prep">
-                            <node child="food"></node>
-                        </node>
+                    <node child="prep">
+                        <node child="food"></node>
+                    </node>
                 </node>
             </node>
         </node>
@@ -409,12 +413,12 @@
     <child id="a/an/the">
         <node desc="a/an" syntax="APlace">
             <option option="">
-                <node child="places" />
+                <node syntax=" " />
             </option>
         </node>
         <node desc="The" syntax=" ">
-            <option option="">
-                <node child="superlative_places" />
+            <option option=" ">
+                <node child="superlative" />
             </option>
         </node>
     </child>
@@ -583,7 +587,7 @@
     </child>
 
 
-    <child id= "food_with_objectsPrep">
+    <child id="food_with_objectsPrep">
         <option option="What is being wanted?">
             <node child="objectsPrep">
                 <node child="food"></node>
@@ -593,24 +597,24 @@
 
 
     <child id="objectsPrep">
-            <node desc="a/an" syntax="OneObj">
-                <node syntax="ObjMass"></node>
+        <node desc="a/an" syntax="OneObj">
+            <node syntax="ObjMass"></node>
+        </node>
+        <node desc="the" syntax="OneObj">
+            <node syntax="ObjItem">
+                <node syntax="TheMass"></node>
             </node>
-            <node desc="the" syntax="OneObj">
-                <node syntax="ObjItem">
-                    <node syntax="TheMass"></node>
-                </node>
+        </node>
+        <node desc="this" syntax="OneObj">
+            <node syntax="ObjItem">
+                <node syntax="ThisMass"></node>
             </node>
-            <node desc="this" syntax="OneObj">
-                <node syntax="ObjItem">
-                    <node syntax="ThisMass"></node>
-                </node>
+        </node>
+        <node desc="that" syntax="OneObj">
+            <node syntax="ObjItem">
+                <node syntax="ThatMass"></node>
             </node>
-            <node desc="that" syntax="OneObj">
-                <node syntax="ObjItem">
-                    <node syntax="ThatMass"></node>
-                </node>
-            </node>
+        </node>
     </child>
 
     <child id="prep">

@@ -25,14 +25,17 @@ public class HelperActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_splash);
+
 
         time = System.currentTimeMillis();
 
         Model.getInstance();
         prefs = getSharedPreferences(App.get().getString(R.string.preference_file_key), MODE_PRIVATE);
 
+
+        //tried to make splash...
         getActionBar().hide();
+        setContentView(R.layout.activity_splash);
 
 
 

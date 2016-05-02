@@ -5,8 +5,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.getbase.floatingactionbutton.FloatingActionButton;
+
+import se.chalmers.phrasebook.App;
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
 
@@ -18,6 +22,9 @@ public class TranslationFragment extends Fragment {
     private View translateView;
     private Model model;
     private TextView origin,target;
+
+    private com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton fab;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +36,11 @@ public class TranslationFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         translateView = inflater.inflate(R.layout.small_fragment_translation, container, false);
+
+
+        ImageView image = new ImageView(App.get());
+        image.setImageResource(R.drawable.ic_add_white_24dp);
+        fab = new com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton.Builder(getActivity()).setContentView(image).build();
 
         origin = (TextView) translateView.findViewById(R.id.origin_phrase);
         target = (TextView) translateView.findViewById(R.id.target_phrase);

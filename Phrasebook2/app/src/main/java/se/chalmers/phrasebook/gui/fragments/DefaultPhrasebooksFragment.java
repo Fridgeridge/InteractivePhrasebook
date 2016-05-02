@@ -1,5 +1,6 @@
 package se.chalmers.phrasebook.gui.fragments;
 
+import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
+import se.chalmers.phrasebook.gui.FragmentCommunicator;
 import se.chalmers.phrasebook.gui.adapters.PhrasebookButtonAdapter;
 
 /**
@@ -27,10 +29,26 @@ public class DefaultPhrasebooksFragment extends Fragment {
     private Model model;
 
     private int sectionNumber;
+    private FragmentCommunicator mCallback;
 
     public DefaultPhrasebooksFragment() {
         // Required empty public constructor
     }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        // This makes sure that the container activity has implemented
+        // the callback interface. If not, it throws an exception
+        try {
+            mCallback = (FragmentCommunicator) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnHeadlineSelectedListener");
+        }
+    }
+
 
     /**
      * Use this factory method to create a new instance of
@@ -67,7 +85,7 @@ public class DefaultPhrasebooksFragment extends Fragment {
         text.setVisibility(View.GONE);
 
         GridView gridView = (GridView) view.findViewById(R.id.standard_gridView);
-        gridView.setAdapter(new PhrasebookButtonAdapter(getActivity().getApplicationContext(), model.getDefaultPhrasebookTitles()));
+        gridView.setAdapter(new PhrasebookButtonAdapter(getActivity().getApplicationContext(),mCallback, model.getDefaultPhrasebookTitles()));
 
         return view;
 

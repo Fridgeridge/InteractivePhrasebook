@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import se.chalmers.phrasebook.App;
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
+import se.chalmers.phrasebook.gui.FragmentCommunicator;
 import se.chalmers.phrasebook.gui.activities.NavigationActivity;
 
 /**
@@ -32,17 +33,16 @@ public class PhrasebookButtonAdapter extends BaseAdapter {
     private ArrayList<String> phrasebookNames;
 
     private Model model;
-    private NavigationActivity na;
 
-    public PhrasebookButtonAdapter(Context context, ArrayList<String> phrasebooks) {
+    private FragmentCommunicator mCallback;
+
+    public PhrasebookButtonAdapter(Context context,FragmentCommunicator mCallback, ArrayList<String> phrasebooks) {
         this.context = context;
-
-        phrasebookNames = new ArrayList<>();
         phrasebookNames = phrasebooks;
+        this.mCallback = mCallback;
         model = Model.getInstance();
-        na = new NavigationActivity();
-
     }
+
 
 
     @Override
@@ -92,12 +92,7 @@ public class PhrasebookButtonAdapter extends BaseAdapter {
     }
 
     private void sendMessage(String phrasebook){
-
-        Intent intent = new Intent();
-        intent.setAction("phrasebook_event");
-        intent.putExtra("message", phrasebook);
-        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
-
+        mCallback.setPhraseList(phrasebook);
     }
 
 }

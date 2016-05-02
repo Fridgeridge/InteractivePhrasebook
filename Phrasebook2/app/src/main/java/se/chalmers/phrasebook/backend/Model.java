@@ -25,15 +25,14 @@ public class Model {
 
     private static Model model;
     private App instance;
-    private SyntaxTree basicAdvTree;
 
     SharedPreferences sharedPref;
 
     private Translator translator;
     private XMLParser parser;
     private TTSHandler ttsHandler;
-    private ArrayList<PhraseBook> myPhrasebooks;
-    private ArrayList<PhraseBook> defaultPhrasebooks;
+    private PhraseBookHolder myPhrasebooks;
+    private PhraseBookHolder defaultPhrasebooks;
     private Langs origin, target;
     private PhraseBook currentPhrasebook;
     private SyntaxTree currentPhrase;
@@ -62,17 +61,21 @@ public class Model {
         setTargetLanguage(sharedPref.getString(instance.getString(R.string.saved_target_language), targetKeyDef));
         setOriginLanguage(sharedPref.getString(instance.getString(R.string.saved_origin_language), originKeyDef));
 
+        myPhrasebooks = FileWriter.readFromFile(instance);
 
-        myPhrasebooks = new ArrayList<>();
-        defaultPhrasebooks = new ArrayList<>();
+        //If the reading of saved phrasebooks does not work...
+        if (myPhrasebooks == null)
+            myPhrasebooks = new PhraseBookHolder();
+
+        defaultPhrasebooks = new PhraseBookHolder();
 
         //Hardcoded default testing phrasebook
-        PhraseBook tourism = new PhraseBook("Tourism");
+        PhraseBook tourism = new PhraseBook("Default");
         for (String s : parser.getSentencesData().keySet()) {
             tourism.addPhrase(translator.translateToOrigin(parser.getSyntaxTree(s).getAdvSyntax())
                     , parser.getSyntaxTree(s));
         }
-        defaultPhrasebooks.add(tourism);
+        defaultPhrasebooks.addPhraseBook(tourism);
     }
 
     public static Model getInstance() {
@@ -82,24 +85,25 @@ public class Model {
 
     //Requires unique name
     public boolean addPhrasebook(String name) {
-        for (PhraseBook book : myPhrasebooks) {
+        for (PhraseBook book : myPhrasebooks.getPhraseBooks()) {
             if (book.getTitle().equals(name)) {
                 return false;
             }
         }
         PhraseBook pb = new PhraseBook(name);
-        myPhrasebooks.add(pb);
+        myPhrasebooks.addPhraseBook(pb);
+        FileWriter.saveToFile(instance, myPhrasebooks);
         return true;
     }
 
     public PhraseBook getPhrasebookByTitle(String title) {
-        for (PhraseBook book : myPhrasebooks) {
+        for (PhraseBook book : myPhrasebooks.getPhraseBooks()) {
             if (book.getTitle().equals(title)) {
                 return book;
             }
         }
 
-        for (PhraseBook book : defaultPhrasebooks) {
+        for (PhraseBook book : defaultPhrasebooks.getPhraseBooks()) {
             if (book.getTitle().equals(title)) {
                 return book;
             }
@@ -129,12 +133,12 @@ public class Model {
     public void deleteAllPreferences() {
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.clear();
-        editor.commit();
+        editor.apply();
     }
 
     public ArrayList<String> getMyPhrasebookTitles() {
         ArrayList<String> names = new ArrayList<String>();
-        for (PhraseBook book : myPhrasebooks) {
+        for (PhraseBook book : myPhrasebooks.getPhraseBooks()) {
             names.add(book.getTitle());
         }
         return names;
@@ -142,7 +146,7 @@ public class Model {
 
     public ArrayList<String> getDefaultPhrasebookTitles() {
         ArrayList<String> names = new ArrayList<String>();
-        for (PhraseBook book : defaultPhrasebooks) {
+        for (PhraseBook book : defaultPhrasebooks.getPhraseBooks()) {
             names.add(book.getTitle());
         }
         return names;
@@ -150,21 +154,6 @@ public class Model {
 
     public HashMap<String, String> getSentences() {
         return parser.getSentencesData();
-    }
-
-
-    //TODO Remove method and find suitable abstraction layer
-    public XMLParser getParser() {
-        return parser;
-    }
-
-
-    //TODO Consider moving to a separate class
-    public static String getKey(String name, Map<String, String> map) {
-        for (Map.Entry<String, String> e : map.entrySet()) {
-            if (e.getValue().equals(name)) return e.getKey();
-        }
-        return null;
     }
 
     public void update(int optionIndex, SyntaxNodeList target, int childIndex, boolean isAdvanced) {
@@ -267,8 +256,8 @@ public class Model {
     }
 
     public void setNumeralCurrentPhrase() {
-        for(int i = 0; i < parser.getSentencesData().values().size(); i++) {
-            if((parser.getSentencesData().keySet().toArray()[i]).equals("NNumeral")) {
+        for (int i = 0; i < parser.getSentencesData().values().size(); i++) {
+            if ((parser.getSentencesData().keySet().toArray()[i]).equals("NNumeral")) {
                 setCurrentPhrase(i);
             }
         }

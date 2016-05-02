@@ -191,4 +191,10 @@ public class NavigationActivity extends FragmentActivity
             fragment.updateTranslation();
         }
     }
+
+    @Override
+    public void setPhraseList(String id) {
+        if(id!= null && !id.isEmpty())
+            switchContent(PhraseListFragment.newInstance(id), "");
+    }
 }

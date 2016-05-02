@@ -5,10 +5,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
+
+import android.widget.ImageView;
+
 import android.widget.TextView;
 
+
+import se.chalmers.phrasebook.App;
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
 
@@ -20,6 +24,9 @@ public class TranslationFragment extends Fragment {
     private View translateView;
     private Model model;
     private TextView origin,target;
+
+    private com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton fab;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

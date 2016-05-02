@@ -22,7 +22,7 @@ public class AddPhrasebookDialog extends android.support.v4.app.DialogFragment {
     
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
 
         model = Model.getInstance();
@@ -46,6 +46,7 @@ public class AddPhrasebookDialog extends android.support.v4.app.DialogFragment {
             public void onClick(View v) {
                 if(model.addPhrasebook(textField.getText().toString())){
                     getDialog().dismiss();
+                    getActivity().recreate();
                 }else{
                     //Skriv nåt coolt meddelande
                     throw new IllegalArgumentException();

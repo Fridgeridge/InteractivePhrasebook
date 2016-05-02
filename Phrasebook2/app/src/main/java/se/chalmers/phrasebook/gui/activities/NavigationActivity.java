@@ -16,6 +16,7 @@ import android.support.v4.widget.DrawerLayout;
 
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
+import se.chalmers.phrasebook.backend.PhraseBook;
 import se.chalmers.phrasebook.backend.syntax.SyntaxNodeList;
 import se.chalmers.phrasebook.gui.FragmentCommunicator;
 import se.chalmers.phrasebook.gui.fragments.ChangeLanguageFragment;
@@ -83,7 +84,9 @@ public class NavigationActivity extends FragmentActivity
                 break;
             case 3:
                 getActionBar().setTitle("Numbers to Words");
-                switchContent(new NumeralTranslatorFragment(), "");
+                model.setNumeralCurrentPhrase();
+                System.out.println(model.getCurrentPhrase().getSyntax() + "currentPhraze");
+                switchContent(TranslatorFragment.newInstance("NNumeral"), "");
                // model.setCurrentPhrase(1);
                 break;
         }
@@ -154,7 +157,8 @@ public class NavigationActivity extends FragmentActivity
             }else if (action.equals("number_event")) {
                // message = intent.getStringExtra("message");
                // switchContent(NumeralTranslatorFragment.newInstance(message), "");
-                //switchContent(new NumeralTranslatorFragment(), "");
+                model.setNumeralCurrentPhrase();
+                switchContent(NumeralTranslatorFragment.newInstance(), "");
                 System.out.println("The forth option");
             } else {
                 throw new IllegalArgumentException();
@@ -187,5 +191,19 @@ public class NavigationActivity extends FragmentActivity
             TranslatorFragment fragment = (TranslatorFragment) mContent;
             fragment.updateTranslation();
         }
+    }
+
+    @Override
+    public void setPhraseListFragment(String id) {
+        if(id!= null && !id.isEmpty())
+            switchContent(PhraseListFragment.newInstance(id), "");
+    }
+
+    @Override
+    public boolean removePhrasebook(String id) {
+        PhraseBook phraseBook = model.getPhrasebookByTitle(id);
+        boolean status = model.removePhrasebook(phraseBook);
+        this.recreate();
+        return status;
     }
 }

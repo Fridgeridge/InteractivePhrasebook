@@ -75,9 +75,11 @@
     </advanced>
 
     <sentence desc="Numbers to Words" id="NNumeral">
-        <node syntax="num">
-            <node syntax="NNumeral" />
-        </node>
+                <node syntax=" ">
+                    <option option="How many children?">
+                        <node syntax="NNumeral" />
+                    </option>
+                </node>
     </sentence>
 
     <!--works-->
@@ -123,7 +125,7 @@
     </sentence>
 
     <!--works-->
-    <sentence desc="Someone is thirsty" id="AThirsty">
+    <sentence desc="Someone is thirsty" id="AThirsty" advanced="true">
         <node child="phraseit">
             <node syntax="PropAction">
                 <node syntax="AThirsty">

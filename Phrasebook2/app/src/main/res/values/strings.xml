@@ -12,6 +12,9 @@
         <item>Tourism</item>
     </string-array>
 
+    <!--Save file-->
+    <string name="save_file">PhraseBookFile</string>
+
     <!-- Preferences data-->
     <string name="preference_file_key"><xliff:g id="se.chalmers.phrasebook2.PREFERENCE_FILE_KEY">enable</xliff:g></string>
 

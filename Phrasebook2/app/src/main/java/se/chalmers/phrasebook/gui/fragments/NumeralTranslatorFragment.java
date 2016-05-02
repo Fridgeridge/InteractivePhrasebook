@@ -21,7 +21,7 @@ public class NumeralTranslatorFragment extends TranslatorFragment {
     public static NumeralTranslatorFragment newInstance() {
         NumeralTranslatorFragment fragment = new NumeralTranslatorFragment();
         Bundle args = new Bundle();
-        args.putString("phrase", "Number");
+        args.putString("phrase", "NNumeral");
         fragment.setArguments(args);
         return fragment;
     }

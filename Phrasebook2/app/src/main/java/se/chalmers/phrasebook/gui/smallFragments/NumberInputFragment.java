@@ -1,13 +1,16 @@
 package se.chalmers.phrasebook.gui.smallFragments;
 
+import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.method.PasswordTransformationMethod;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -32,7 +35,7 @@ public class NumberInputFragment extends Fragment {
     private int optionIndex;
     private String label;
     private int defaultInt;
-
+    private EditText editNumber;
     private int currentNumber;
 
     public static NumberInputFragment newInstance(int optionIndex, String title, int defaultInt) {
@@ -57,19 +60,27 @@ public class NumberInputFragment extends Fragment {
         defaultInt = getArguments().getInt("defaultInt");
     }
 
+    private class NumericKeyBoardTransformationMethod extends PasswordTransformationMethod {
+        @Override
+        public CharSequence getTransformation(CharSequence source, View view) {
+            return source;
+        }
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.small_fragment_number, container, false);
         TextView viewLabel = (TextView) view.findViewById(R.id.textView_number);
         final SeekBar seekBar = (SeekBar) view.findViewById(R.id.seekBar);
-        final EditText editNumber = (EditText) view.findViewById(R.id.editNumber);
+        editNumber = (EditText) view.findViewById(R.id.editNumber);
 
         viewLabel.setText(label);
         seekBar.setProgress(defaultInt);
         editNumber.setText(""+defaultInt);
-        editNumber.requestFocus();
 
+        editNumber.setTransformationMethod(new NumericKeyBoardTransformationMethod());
+        editNumber.requestFocus();
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -85,10 +96,12 @@ public class NumberInputFragment extends Fragment {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 editNumber.setText(""+currentNumber);
+
                 sendMessage(optionIndex, currentNumber);
 
             }
         });
+
 
         editNumber.addTextChangedListener(new TextWatcher() {
             @Override
@@ -105,9 +118,14 @@ public class NumberInputFragment extends Fragment {
             public void afterTextChanged(Editable s) {
                 if(editNumber.getText().toString().equals("")) {
                     currentNumber = 0;
-                } else {
+                } else if(editNumber.getText().toString().length() < 7){
                     currentNumber = Integer.parseInt(editNumber.getText().toString());
+                    editNumber.setInputType(0);
                     sendMessage(optionIndex, currentNumber);
+
+                } else {
+                    editNumber.setText(""+editNumber.getText().toString()
+                            .substring(0,editNumber.getText().toString().length()-1));
                 }
                 seekBar.setProgress(currentNumber);
 
@@ -120,7 +138,6 @@ public class NumberInputFragment extends Fragment {
     private void sendMessage(int optionIndex, int childIndex) {
 
         InputHolderFragment fragment = (InputHolderFragment) getParentFragment();
-
         //options är ju tom i det här fragmentet, hur ska vi lösa det?
         fragment.updateSyntax(optionIndex, options,childIndex);
 

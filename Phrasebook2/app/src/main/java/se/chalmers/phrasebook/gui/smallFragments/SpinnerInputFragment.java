@@ -83,8 +83,8 @@ public class SpinnerInputFragment extends Fragment {
             i++;
         }
 
-        final ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), R.layout.spinner_item,children );
-        adapter.setDropDownViewResource(R.layout.spinner_item);
+        final ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1,children );
+        adapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
         spinner.setAdapter(adapter);
         spinner.setSelection(selectedIndex);
         currentChoice = spinner.getSelectedItem().toString();

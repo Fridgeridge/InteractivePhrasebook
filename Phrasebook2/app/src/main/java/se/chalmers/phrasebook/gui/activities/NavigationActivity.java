@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -176,11 +177,9 @@ public class NavigationActivity extends FragmentActivity
     @Override
     public void onBackPressed() {
         //Nån konstig bug...
-        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+        if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
             getSupportFragmentManager().popBackStack();
             getSupportFragmentManager().beginTransaction().commit();
-        } else {
-            super.onBackPressed();
         }
     }
 

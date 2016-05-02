@@ -97,7 +97,6 @@ public class Model {
     }
 
     public PhraseBook getPhrasebookByTitle(String title) {
-        PhraseBookHolder phraseBookHolder = FileWriter.readFromFile(instance);
         for (PhraseBook book : myPhrasebooks.getPhraseBooks()) {
             if (book.getTitle().equals(title)) {
                 return book;

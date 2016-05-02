@@ -12,7 +12,7 @@ public interface FragmentCommunicator {
 
     void updateSyntax(int optionIndex, SyntaxNodeList l, int childIndex, boolean isAdvanced);
 
-
+    void setPhraseList(String id);
 
 
 

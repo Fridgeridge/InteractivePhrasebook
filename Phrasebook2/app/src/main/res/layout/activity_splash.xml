@@ -13,6 +13,6 @@
             android:layout_height="222dp"
             android:id="@+id/imageView2"
             android:layout_gravity="center"
-            android:src="@drawable/turqoise_logo" />
+            android:src="@drawable/parlira" />
     </FrameLayout>
 </LinearLayout>

@@ -72,11 +72,9 @@ public class OptionsFragment extends Fragment {
             }
         }else if(type == 2){
             transaction.add(containers[0], AdvancedOptionsButtonFragment.newInstance(advActive));
-            if(advActive) {
-                for (int i = 1; i < advancedOptions.size()+1; i++) {
-                    if (advancedOptions.get(i-1) != null)
-                        transaction.replace(containers[i], InputHolderFragment.newInstance(i, true));
-                }
+                for (int i = 0; i < advancedOptions.size(); i++) {
+                    if (advancedOptions.get(i) != null)
+                        transaction.replace(containers[i+1], InputHolderFragment.newInstance(i, true));
             }
         }
 

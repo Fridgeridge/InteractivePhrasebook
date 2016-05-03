@@ -24,6 +24,7 @@ import se.chalmers.phrasebook.gui.fragments.ChangeLanguageFragment;
 import se.chalmers.phrasebook.gui.fragments.DefaultPhrasebooksFragment;
 import se.chalmers.phrasebook.gui.fragments.MyPhrasebooksFragment;
 import se.chalmers.phrasebook.gui.fragments.NavigationDrawerFragment;
+import se.chalmers.phrasebook.gui.fragments.NumeralTranslatorFragment;
 import se.chalmers.phrasebook.gui.fragments.PhraseListFragment;
 import se.chalmers.phrasebook.gui.fragments.TranslatorFragment;
 
@@ -170,8 +171,7 @@ public class NavigationActivity extends FragmentActivity
 
         }
     };
-=======
->>>>>>> 46a0c41d3ed615a6c24901d43aa0012ad5e55642
+
     @Override
     protected void onPause() {
         super.onPause();

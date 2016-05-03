@@ -13,14 +13,11 @@ public interface FragmentCommunicator {
 
     void setPhraseListFragment(String id);
 
-<<<<<<< HEAD
-    boolean removePhrasebook(String id);
-
     void pageChanged();
-=======
+
     void setToTranslationFragment(int id);
 
     boolean removePhrasebook(String id);
->>>>>>> 46a0c41d3ed615a6c24901d43aa0012ad5e55642
+
 
 }

@@ -67,7 +67,7 @@ public class OptionsFragment extends Fragment {
         if(type == 1) {
             for (int i = 0; i < options.size(); i++) {
                 if (options.get(i) != null) {
-                    transaction.add(containers[i], (InputHolderFragment.newInstance(i, false)));
+                    transaction.replace(containers[i], (InputHolderFragment.newInstance(i, false)));
                 }
             }
         }else if(type == 2){
@@ -75,7 +75,7 @@ public class OptionsFragment extends Fragment {
             if(advActive) {
                 for (int i = 1; i < advancedOptions.size()+1; i++) {
                     if (advancedOptions.get(i-1) != null)
-                        transaction.add(containers[i], InputHolderFragment.newInstance(i, true));
+                        transaction.replace(containers[i], InputHolderFragment.newInstance(i, true));
                 }
             }
         }

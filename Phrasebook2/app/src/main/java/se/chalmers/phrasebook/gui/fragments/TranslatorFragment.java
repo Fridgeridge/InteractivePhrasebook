@@ -64,8 +64,8 @@ public class TranslatorFragment extends Fragment {
         final FragmentTransaction fm = getChildFragmentManager().beginTransaction();
 
         swiper = new SwipeFragment();
-        fm.add(R.id.containerfor_translation, new TranslationFragment());
-        fm.add(R.id.containerfor_options, new SwipeFragment());
+        fm.replace(R.id.containerfor_translation, new TranslationFragment());
+        fm.replace(R.id.containerfor_options, new SwipeFragment());
 
         fm.commit();
 

@@ -71,7 +71,7 @@ public class PhrasebookButtonAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 model.setCurrentPhrasebook(model.getPhrasebookByTitle((String)button.getText()));
-                sendMessage("Tourism");
+                sendMessage("Default");
             }
         });
 

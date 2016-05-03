@@ -1,12 +1,15 @@
 package se.chalmers.phrasebook.gui.smallFragments;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -51,10 +54,20 @@ public class DialogFragment extends android.support.v4.app.DialogFragment {
 
                 getDialog().dismiss();
 
+                Toast.makeText(getActivity(), "The phrase is added to " + (String)phraseListView.getItemAtPosition(position),
+                        Toast.LENGTH_SHORT).show();
+
             }
         });
 
         return view;
+    }
+
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        Dialog dialog = super.onCreateDialog(savedInstanceState);
+        dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        return dialog;
     }
 
 }

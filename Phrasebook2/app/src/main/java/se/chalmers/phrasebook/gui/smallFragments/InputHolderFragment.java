@@ -67,7 +67,7 @@ public class InputHolderFragment extends Fragment {
         model = Model.getInstance();
         optionIndex = getArguments().getInt("index");
         fragmentManager = getChildFragmentManager();
-        if(isAdvanced) {
+        if (isAdvanced) {
             guiOptions = model.getCurrentPhrase().getAdvOptions().get(optionIndex);
         } else {
             guiOptions = model.getCurrentPhrase().getOptions().get(optionIndex);
@@ -93,7 +93,6 @@ public class InputHolderFragment extends Fragment {
         String s = "Input: " + l.toString();
 
         transaction.add(R.id.input_holder, SpinnerInputFragment.newInstance(optionIndex, null, l), s);
-
         fragmentTags.add(s);
         transaction.commit();
     }
@@ -103,7 +102,7 @@ public class InputHolderFragment extends Fragment {
         String s = "Input: " + l.toString();
 
         int defaultIntValue = 0;
-       // String title = l.getQuestion();
+        // String title = l.getQuestion();
         String title = "";
         NumeralSyntaxNode nsn = (NumeralSyntaxNode) l.getSelectedChild();
         defaultIntValue = nsn.getNumber();
@@ -156,10 +155,10 @@ public class InputHolderFragment extends Fragment {
         }
     }
 
-    public void updateNumeralSyntax(int optionIndex, int childIndex){
+    public void updateNumeralSyntax(int optionIndex, int childIndex) {
 
-        if(this.optionIndex == optionIndex){
-        mCallback.updateSyntax(optionIndex, null, childIndex, false);
+        if (this.optionIndex == optionIndex) {
+            mCallback.updateSyntax(optionIndex, null, childIndex, false);
         }
         this.redrawInputGUI();
     }

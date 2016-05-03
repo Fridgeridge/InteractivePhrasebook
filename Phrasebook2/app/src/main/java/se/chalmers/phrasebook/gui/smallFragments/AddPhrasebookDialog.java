@@ -1,11 +1,14 @@
 package se.chalmers.phrasebook.gui.smallFragments;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -44,18 +47,31 @@ public class AddPhrasebookDialog extends android.support.v4.app.DialogFragment {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(model.addPhrasebook(textField.getText().toString())){
-                    getDialog().dismiss();
-                    getActivity().recreate();
-                }else{
-                    //Skriv nåt coolt meddelande
-                    throw new IllegalArgumentException();
+                if(textField.getText().toString().equals("")){
+                    Toast.makeText(getActivity(),"Please enter a name",
+                            Toast.LENGTH_SHORT).show();
+                }else {
+                    if (model.addPhrasebook(textField.getText().toString())) {
+                        getDialog().dismiss();
+                        getActivity().recreate();
+                    } else {
+                        Toast.makeText(getActivity(),"The name is taken",
+                                Toast.LENGTH_SHORT).show();
+                        throw new IllegalArgumentException();
+                    }
                 }
 
             }
         });
 
         return view;
+    }
+
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        Dialog dialog = super.onCreateDialog(savedInstanceState);
+        dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        return dialog;
     }
 
 }

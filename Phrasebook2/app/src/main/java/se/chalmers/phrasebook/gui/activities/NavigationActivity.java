@@ -24,7 +24,6 @@ import se.chalmers.phrasebook.gui.fragments.ChangeLanguageFragment;
 import se.chalmers.phrasebook.gui.fragments.DefaultPhrasebooksFragment;
 import se.chalmers.phrasebook.gui.fragments.MyPhrasebooksFragment;
 import se.chalmers.phrasebook.gui.fragments.NavigationDrawerFragment;
-import se.chalmers.phrasebook.gui.fragments.NumeralTranslatorFragment;
 import se.chalmers.phrasebook.gui.fragments.PhraseListFragment;
 import se.chalmers.phrasebook.gui.fragments.TranslatorFragment;
 
@@ -171,9 +170,10 @@ public class NavigationActivity extends FragmentActivity
 
         }
     };
+=======
+>>>>>>> 46a0c41d3ed615a6c24901d43aa0012ad5e55642
     @Override
     protected void onPause() {
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
         super.onPause();
     }
 
@@ -188,8 +188,8 @@ public class NavigationActivity extends FragmentActivity
 
     @Override
     public void updateSyntax(int optionIndex, SyntaxNodeList l, int childIndex, boolean isAdvanced) {
-        model.update(optionIndex,l,childIndex, isAdvanced);
-        if(mContent instanceof TranslatorFragment){
+        model.update(optionIndex, l, childIndex, isAdvanced);
+        if (mContent instanceof TranslatorFragment) {
             TranslatorFragment fragment = (TranslatorFragment) mContent;
             fragment.updateTranslation();
         }
@@ -197,8 +197,13 @@ public class NavigationActivity extends FragmentActivity
 
     @Override
     public void setPhraseListFragment(String id) {
-        if(id!= null && !id.isEmpty())
+        if (id != null && !id.isEmpty())
             switchContent(PhraseListFragment.newInstance(id), "");
+    }
+
+    @Override
+    public void setToTranslationFragment(int id) {
+        switchContent(TranslatorFragment.newInstance(id + ""), "");
     }
 
     @Override

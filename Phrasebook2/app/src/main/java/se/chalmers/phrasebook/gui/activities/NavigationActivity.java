@@ -1,17 +1,16 @@
 package se.chalmers.phrasebook.gui.activities;
 
 import android.app.ActionBar;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.DrawerLayout;
 
@@ -44,7 +43,8 @@ public class NavigationActivity extends FragmentActivity
     private Fragment mContent;
 
     public void pageChanged() {
-        ((TranslatorFragment)mContent).displayDots();
+        if (mContent instanceof TranslatorFragment)
+            ((TranslatorFragment) mContent).displayDots();
     }
 
     private Model model;
@@ -92,7 +92,7 @@ public class NavigationActivity extends FragmentActivity
                 model.setNumeralCurrentPhrase();
                 System.out.println(model.getCurrentPhrase().getSyntax() + "currentPhraze");
                 switchContent(TranslatorFragment.newInstance("NNumeral"), "");
-               // model.setCurrentPhrase(1);
+                // model.setCurrentPhrase(1);
                 break;
         }
 
@@ -159,7 +159,7 @@ public class NavigationActivity extends FragmentActivity
                 message = intent.getStringExtra("message");
                 getActionBar().setTitle(message);
                 switchContent(TranslatorFragment.newInstance(message), "");
-            }else if (action.equals("number_event")) {
+            } else if (action.equals("number_event")) {
                 // message = intent.getStringExtra("message");
                 // switchContent(NumeralTranslatorFragment.newInstance(message), "");
                 model.setNumeralCurrentPhrase();

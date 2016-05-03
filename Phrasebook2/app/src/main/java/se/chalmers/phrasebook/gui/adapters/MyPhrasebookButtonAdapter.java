@@ -64,6 +64,18 @@ public class MyPhrasebookButtonAdapter extends BaseAdapter {
         button.setText(phrasebookNames.get(position));
         button.setId(position);
 
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String phrasebook = (String)button.getText();
+
+                model.setCurrentPhrasebook(model.getPhrasebookByTitle(phrasebook));
+                mCallback.setPhraseListFragment(phrasebook);
+
+            }
+        });
+
+
         button.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -74,6 +86,5 @@ public class MyPhrasebookButtonAdapter extends BaseAdapter {
 
         return button;
     }
-
 
 }

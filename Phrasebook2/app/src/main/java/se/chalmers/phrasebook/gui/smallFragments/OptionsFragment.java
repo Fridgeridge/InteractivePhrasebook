@@ -21,13 +21,15 @@ public class OptionsFragment extends Fragment {
     private ArrayList<SyntaxNodeList> advancedOptions;
 
     private int type;
+    private boolean advActive;
 
     private int[] containers;
 
-    public static OptionsFragment newInstance(int type) {
+    public static OptionsFragment newInstance(int type, boolean advActive) {
         OptionsFragment optionsFragment = new OptionsFragment();
         Bundle args = new Bundle();
         args.putInt("index", type);
+        args.putBoolean("advActive", advActive);
         optionsFragment.setArguments(args);
         return optionsFragment;
     }
@@ -39,6 +41,7 @@ public class OptionsFragment extends Fragment {
         model = Model.getInstance();
 
         type = getArguments().getInt("index");
+        advActive = getArguments().getBoolean("advActive");
 
         options = model.getCurrentPhrase().getOptions();
         advancedOptions = model.getCurrentPhrase().getAdvOptions();
@@ -68,10 +71,12 @@ public class OptionsFragment extends Fragment {
                 }
             }
         }else if(type == 2){
-            transaction.add(containers[0], AdvancedOptionsButtonFragment.newInstance(false));
-            for (int i = 1; i < advancedOptions.size(); i++) {
-                if (advancedOptions.get(i) != null)
-                    transaction.add(containers[i], InputHolderFragment.newInstance(i, true));
+            transaction.add(containers[0], AdvancedOptionsButtonFragment.newInstance(advActive));
+            if(advActive == true) {
+                for (int i = 1; i < advancedOptions.size()+1; i++) {
+                    if (advancedOptions.get(i-1) != null)
+                        transaction.add(containers[i], InputHolderFragment.newInstance(i, true));
+                }
             }
         }
 

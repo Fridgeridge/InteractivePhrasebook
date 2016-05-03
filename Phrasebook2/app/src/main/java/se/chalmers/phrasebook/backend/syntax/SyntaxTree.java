@@ -11,6 +11,8 @@ public class SyntaxTree {
 
     private String id;
     private SyntaxNode root;
+    private boolean advActivated;
+
     private ArrayList<SyntaxNodeList> options = new ArrayList<>();
 
     private SyntaxTree advancedTree; //Realy ugly solution but the only one we can think of as
@@ -26,15 +28,12 @@ public class SyntaxTree {
 
     public SyntaxTree(SyntaxNode root) {
         this.root = root;
+        advActivated = false;
         initializeOptions(this.root);
     }
 
     public ArrayList<SyntaxNodeList> getOptions() {
         return options;
-    }
-
-    public boolean containsAdvancedOptions() {
-        return advancedTree != null;
     }
 
     public ArrayList<SyntaxNodeList> getAdvOptions() {
@@ -203,6 +202,16 @@ public class SyntaxTree {
         if (root.getSyntaxNodes().get(0) != null)
             return root.getSyntaxNodes().get(0).getSelectedChild();//TODO Might cause bugs
         return null;
+    }
+
+    public boolean isAdvActivated(){
+        return advActivated;
+    }
+
+    public void setAdvActivated(boolean activated){
+
+        advActivated = activated;
+
     }
 
 }

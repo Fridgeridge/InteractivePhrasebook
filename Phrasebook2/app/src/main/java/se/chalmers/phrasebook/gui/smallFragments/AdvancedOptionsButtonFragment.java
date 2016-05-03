@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 
 import se.chalmers.phrasebook.R;
+import se.chalmers.phrasebook.backend.Model;
 
 
 /**
@@ -16,6 +17,7 @@ import se.chalmers.phrasebook.R;
 public class AdvancedOptionsButtonFragment extends Fragment{
 
     private boolean active;
+    private Model model;
 
     public static Fragment newInstance(boolean active) {
         AdvancedOptionsButtonFragment advancedOptionsButtonFragment = new AdvancedOptionsButtonFragment();
@@ -33,6 +35,7 @@ public class AdvancedOptionsButtonFragment extends Fragment{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        model = Model.getInstance();
         this.active = getArguments().getBoolean("active");
     }
 
@@ -53,9 +56,12 @@ public class AdvancedOptionsButtonFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 if (((CheckBox) v).isChecked()) {
-                    System.out.println("Checked!");
+                    model.getCurrentPhrase().setAdvActivated(true);
+                    //uppdatera GUI
                 } else {
+                    model.getCurrentPhrase().setAdvActivated(false);
                     System.out.println("Unchecked!");
+                    //uppdatera GUI
                 }
             }
         });

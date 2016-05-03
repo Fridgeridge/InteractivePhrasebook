@@ -7,6 +7,10 @@
         <item name="android:windowBackground">@color/background_color</item>
         <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
         <item name="android:buttonStyle">@style/RobotoButtonStyle</item>
+
+        <item name="colorControlNormal">@color/text_colour_dark</item>
+        <item name="colorControlActivated">@color/text_colour_dark</item>
+        <item name="colorControlHighlight">@color/text_colour_dark</item>
     </style>
 
     <style name="RobotoTextViewStyle" parent="android:Widget.TextView">

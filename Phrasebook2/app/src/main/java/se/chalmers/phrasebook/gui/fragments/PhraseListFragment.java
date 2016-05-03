@@ -1,6 +1,7 @@
 package se.chalmers.phrasebook.gui.fragments;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
+import se.chalmers.phrasebook.gui.FragmentCommunicator;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +31,7 @@ public class PhraseListFragment extends Fragment {
     Context context;
     private String title;
 
+    private FragmentCommunicator mCallback;
 
     public static PhraseListFragment newInstance(String title) {
         PhraseListFragment fragment = new PhraseListFragment();
@@ -36,6 +39,20 @@ public class PhraseListFragment extends Fragment {
         args.putString("title", title);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        // This makes sure that the container activity has implemented
+        // the callback interface. If not, it throws an exception
+        try {
+            mCallback = (FragmentCommunicator) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnHeadlineSelectedListener");
+        }
     }
 
     @Override
@@ -69,7 +86,6 @@ public class PhraseListFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 model.setCurrentPhrase(position);
-                //sendMessage((String) phraseListView.getItemAtPosition(position));
                 sendMessage(position);
             }
         });
@@ -78,20 +94,9 @@ public class PhraseListFragment extends Fragment {
         return view;
     }
 
-    private void sendMessage(String phrase) {
-
-
-        Intent intent = new Intent("phrase_list_event");
-        // add data
-        intent.putExtra("message", "data");
-        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
-    }
 
     private void sendMessage(int position) {
-        Intent intent = new Intent("phrase_list_event");
-        // add data
-        intent.putExtra("message", model.getDescFromPos(position));
-        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+       mCallback.setToTranslationFragment(position);
     }
 
 

@@ -3,16 +3,10 @@ package se.chalmers.phrasebook.gui.activities;
 import android.app.ActionBar;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.os.Bundle;
-import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.DrawerLayout;
 
 import se.chalmers.phrasebook.R;
@@ -24,7 +18,6 @@ import se.chalmers.phrasebook.gui.fragments.ChangeLanguageFragment;
 import se.chalmers.phrasebook.gui.fragments.DefaultPhrasebooksFragment;
 import se.chalmers.phrasebook.gui.fragments.MyPhrasebooksFragment;
 import se.chalmers.phrasebook.gui.fragments.NavigationDrawerFragment;
-import se.chalmers.phrasebook.gui.fragments.NumeralTranslatorFragment;
 import se.chalmers.phrasebook.gui.fragments.PhraseListFragment;
 import se.chalmers.phrasebook.gui.fragments.TranslatorFragment;
 
@@ -88,7 +81,7 @@ public class NavigationActivity extends FragmentActivity
                 model.setNumeralCurrentPhrase();
                 System.out.println(model.getCurrentPhrase().getSyntax() + "currentPhraze");
                 switchContent(TranslatorFragment.newInstance("NNumeral"), "");
-               // model.setCurrentPhrase(1);
+                // model.setCurrentPhrase(1);
                 break;
         }
 
@@ -131,46 +124,11 @@ public class NavigationActivity extends FragmentActivity
     @Override
     public void onResume() {
         super.onResume();
-
-        // Register mMessageReceiver to receive messages.
-        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, new IntentFilter("phrasebook_event"));
-        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, new IntentFilter("phrase_list_event"));
     }
 
 
-    private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-
-            String action = intent.getAction();
-            String message;
-
-            if (action.equals("phrasebook_event")) {
-                message = intent.getStringExtra("message");
-                /*if(is default phrasebook) {
-                    //switchContent(DefaultPhraseListFragment.newInstance(message), "");
-                } else {*/
-                switchContent(PhraseListFragment.newInstance(message), "");
-            } else if (action.equals("phrase_list_event")) {
-                message = intent.getStringExtra("message");
-                getActionBar().setTitle(message);
-                switchContent(TranslatorFragment.newInstance(message), "");
-            }else if (action.equals("number_event")) {
-               // message = intent.getStringExtra("message");
-               // switchContent(NumeralTranslatorFragment.newInstance(message), "");
-                model.setNumeralCurrentPhrase();
-                switchContent(NumeralTranslatorFragment.newInstance(), "");
-                System.out.println("The forth option");
-            } else {
-                throw new IllegalArgumentException();
-            }
-
-        }
-    };
-
     @Override
     protected void onPause() {
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
         super.onPause();
     }
 
@@ -185,8 +143,8 @@ public class NavigationActivity extends FragmentActivity
 
     @Override
     public void updateSyntax(int optionIndex, SyntaxNodeList l, int childIndex, boolean isAdvanced) {
-        model.update(optionIndex,l,childIndex, isAdvanced);
-        if(mContent instanceof TranslatorFragment){
+        model.update(optionIndex, l, childIndex, isAdvanced);
+        if (mContent instanceof TranslatorFragment) {
             TranslatorFragment fragment = (TranslatorFragment) mContent;
             fragment.updateTranslation();
         }
@@ -194,8 +152,13 @@ public class NavigationActivity extends FragmentActivity
 
     @Override
     public void setPhraseListFragment(String id) {
-        if(id!= null && !id.isEmpty())
+        if (id != null && !id.isEmpty())
             switchContent(PhraseListFragment.newInstance(id), "");
+    }
+
+    @Override
+    public void setToTranslationFragment(int id) {
+        switchContent(TranslatorFragment.newInstance(id + ""), "");
     }
 
     @Override

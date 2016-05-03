@@ -8,11 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
-import se.chalmers.phrasebook.backend.syntax.SyntaxNode;
 import se.chalmers.phrasebook.backend.syntax.SyntaxNodeList;
 
 public class OptionsFragment extends Fragment {
@@ -70,7 +68,8 @@ public class OptionsFragment extends Fragment {
                 }
             }
         }else if(type == 2){
-            for (int i = 0; i < advancedOptions.size(); i++) {
+            transaction.add(containers[0], AdvancedOptionsButtonFragment.newInstance(false));
+            for (int i = 1; i < advancedOptions.size(); i++) {
                 if (advancedOptions.get(i) != null)
                     transaction.add(containers[i], InputHolderFragment.newInstance(i, true));
             }

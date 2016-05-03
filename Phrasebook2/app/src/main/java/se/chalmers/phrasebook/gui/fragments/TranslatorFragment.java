@@ -24,6 +24,8 @@ import se.chalmers.phrasebook.gui.smallFragments.TranslationFragment;
 public class TranslatorFragment extends Fragment {
     protected Model model;
     protected FloatingActionButton floatingActionButton;
+    private SwipeFragment swiper;
+    private View view;
 
     public static TranslatorFragment newInstance(String phrase) {
         TranslatorFragment fragment = new TranslatorFragment();
@@ -39,15 +41,29 @@ public class TranslatorFragment extends Fragment {
         model = Model.getInstance();
     }
 
+    public void displayDots() {
+        if(swiper.isAdvanced(view.findViewById(R.id.containerfor_options))) {
+            ((ImageView)view.findViewById(R.id.firstDot))
+                    .setImageResource(R.drawable.abc_btn_radio_to_on_mtrl_000);
+            ((ImageView)view.findViewById(R.id.secondDot))
+                    .setImageResource(R.drawable.abc_btn_radio_to_on_mtrl_015);
+        } else {
+            ((ImageView)view.findViewById(R.id.secondDot))
+                    .setImageResource(R.drawable.abc_btn_radio_to_on_mtrl_000);
+            ((ImageView)view.findViewById(R.id.firstDot))
+                    .setImageResource(R.drawable.abc_btn_radio_to_on_mtrl_015);
+        }
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_translator, container, false);
+        view = inflater.inflate(R.layout.fragment_translator, container, false);
 
         final FragmentTransaction fm = getChildFragmentManager().beginTransaction();
 
-
+        swiper = new SwipeFragment();
         fm.add(R.id.containerfor_translation, new TranslationFragment());
         fm.add(R.id.containerfor_options, new SwipeFragment());
 

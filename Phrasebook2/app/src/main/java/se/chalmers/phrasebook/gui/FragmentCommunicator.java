@@ -16,6 +16,6 @@ public interface FragmentCommunicator {
 
     boolean removePhrasebook(String id);
 
-
+    void pageChanged();
 
 }

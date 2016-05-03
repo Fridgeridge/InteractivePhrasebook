@@ -43,6 +43,10 @@ public class NavigationActivity extends FragmentActivity
 
     private Fragment mContent;
 
+    public void pageChanged() {
+        ((TranslatorFragment)mContent).displayDots();
+    }
+
     private Model model;
 
     @Override
@@ -156,8 +160,8 @@ public class NavigationActivity extends FragmentActivity
                 getActionBar().setTitle(message);
                 switchContent(TranslatorFragment.newInstance(message), "");
             }else if (action.equals("number_event")) {
-               // message = intent.getStringExtra("message");
-               // switchContent(NumeralTranslatorFragment.newInstance(message), "");
+                // message = intent.getStringExtra("message");
+                // switchContent(NumeralTranslatorFragment.newInstance(message), "");
                 model.setNumeralCurrentPhrase();
                 switchContent(NumeralTranslatorFragment.newInstance(), "");
                 System.out.println("The forth option");
@@ -167,7 +171,6 @@ public class NavigationActivity extends FragmentActivity
 
         }
     };
-
     @Override
     protected void onPause() {
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);

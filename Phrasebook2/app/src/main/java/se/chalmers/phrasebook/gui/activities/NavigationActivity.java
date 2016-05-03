@@ -189,6 +189,10 @@ public class NavigationActivity extends FragmentActivity
     @Override
     public void updateSyntax(int optionIndex, SyntaxNodeList l, int childIndex, boolean isAdvanced) {
         model.update(optionIndex, l, childIndex, isAdvanced);
+        updateTranslation();
+    }
+
+    public void updateTranslation() {
         if (mContent instanceof TranslatorFragment) {
             TranslatorFragment fragment = (TranslatorFragment) mContent;
             fragment.updateTranslation();

@@ -154,10 +154,10 @@ public class SyntaxTree {
         return parseSentenceSyntax(getSentenceHead());
     }
 
-    //shall parse with the advoptions, not used as of yet
+    //A really ugly hack, should DEFINITIVELY BE FIXED
     public String getAdvSyntax() {
         String syntax = getSyntax();
-        if(advancedTree != null) {
+        if(advActivated) {
             String advSyntax = advancedTree.getSyntax();
             if(!advSyntax.isEmpty()) {
                 System.out.println(advSyntax.indexOf("AKnow"));
@@ -209,7 +209,6 @@ public class SyntaxTree {
     }
 
     public void setAdvActivated(boolean activated){
-
         advActivated = activated;
 
     }

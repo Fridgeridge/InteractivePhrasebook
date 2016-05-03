@@ -1,5 +1,6 @@
 package se.chalmers.phrasebook.gui.smallFragments;
 
+import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +10,8 @@ import android.widget.CheckBox;
 
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
+import se.chalmers.phrasebook.gui.FragmentCommunicator;
+import se.chalmers.phrasebook.gui.fragments.TranslatorFragment;
 
 
 /**
@@ -18,6 +21,7 @@ public class AdvancedOptionsButtonFragment extends Fragment{
 
     private boolean active;
     private Model model;
+    private FragmentCommunicator mCallback;
 
     public static Fragment newInstance(boolean active) {
         AdvancedOptionsButtonFragment advancedOptionsButtonFragment = new AdvancedOptionsButtonFragment();
@@ -46,7 +50,7 @@ public class AdvancedOptionsButtonFragment extends Fragment{
 
         CheckBox checkBox = (CheckBox) view.findViewById(R.id.checkBox);
 
-        checkBox.setText("Activate advanced options");
+        checkBox.setText("Use reported speech ('I Know that...')");
 
         if(active == true){
             checkBox.setChecked(true);
@@ -57,16 +61,28 @@ public class AdvancedOptionsButtonFragment extends Fragment{
             public void onClick(View v) {
                 if (((CheckBox) v).isChecked()) {
                     model.getCurrentPhrase().setAdvActivated(true);
-                    //uppdatera GUI
                 } else {
                     model.getCurrentPhrase().setAdvActivated(false);
-                    System.out.println("Unchecked!");
-                    //uppdatera GUI
                 }
+                mCallback.updateTranslation();
             }
         });
 
         return view;
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        System.out.println("Attaching");
+        // This makes sure that the container activity has implemented
+        // the callback interface. If not, it throws an exception
+        try {
+            mCallback = (FragmentCommunicator) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnHeadlineSelectedListener");
+        }
     }
 
 }

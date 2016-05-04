@@ -85,6 +85,7 @@ public class TranslationFragment extends Fragment {
         temp = temp.replace(" ?", "?");
         temp = temp.replace(" .", ".");
         temp = temp.replace(" !", "!");
+        temp = temp.replace(" ,", ",");
 
         return temp;
     }

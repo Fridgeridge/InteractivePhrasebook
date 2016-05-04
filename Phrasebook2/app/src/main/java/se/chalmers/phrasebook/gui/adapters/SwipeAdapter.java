@@ -49,7 +49,7 @@ public class SwipeAdapter extends FragmentPagerAdapter {
             case 0:
                 return OptionsFragment.newInstance(1, false);
             case 1:
-                return OptionsFragment.newInstance(2, model.getCurrentPhrase().hasAdvOptions());
+                return OptionsFragment.newInstance(2, model.getCurrentPhrase().isAdvActivated());
             default:
                 return null;
         }

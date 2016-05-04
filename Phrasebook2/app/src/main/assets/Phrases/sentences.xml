@@ -284,7 +284,7 @@
                     </option>
                     <option option="What article?">
                         <node child="a/an/the">
-                            <option option="What place">
+                            <option option="What place?">
                                 <node child="places"></node>
                             </option>
                         </node>
@@ -302,8 +302,12 @@
                     <option option="Who are we talking about?">
                         <node child="allpersons"></node>
                     </option>
-                    <option option="Going where?">
-                        <node child="a/an/the"></node>
+                    <option option="What article?">
+                        <node child="a/an/the">
+                            <option option="What place?">
+                                <node child="places"></node>
+                            </option>
+                        </node>
                     </option>
                 </node>
             </node>

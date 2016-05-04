@@ -52,7 +52,9 @@ public class AdvancedOptionsButtonFragment extends Fragment{
 
         checkBox.setText("Use reported speech ('I Know that...')");
 
-        if(active == true){
+        if(active != true){
+            checkBox.setChecked(false);
+        } else {
             checkBox.setChecked(true);
         }
 
@@ -61,8 +63,10 @@ public class AdvancedOptionsButtonFragment extends Fragment{
             public void onClick(View v) {
                 if (((CheckBox) v).isChecked()) {
                     model.getCurrentPhrase().setAdvActivated(true);
+                    ((OptionsFragment)getParentFragment()).update(true);
                 } else {
                     model.getCurrentPhrase().setAdvActivated(false);
+                    ((OptionsFragment)getParentFragment()).update(false);
                 }
                 mCallback.updateTranslation();
             }

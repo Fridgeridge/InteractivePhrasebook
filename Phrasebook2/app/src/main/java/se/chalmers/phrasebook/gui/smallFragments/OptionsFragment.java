@@ -64,22 +64,34 @@ public class OptionsFragment extends Fragment {
 
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
 
-        if(type == 1) {
+        if (type == 1) {
             for (int i = 0; i < options.size(); i++) {
                 if (options.get(i) != null) {
                     transaction.replace(containers[i], (InputHolderFragment.newInstance(i, false)));
                 }
             }
-        }else if(type == 2){
-            transaction.add(containers[0], AdvancedOptionsButtonFragment.newInstance(advActive));
+        } else if (type == 2) {
+            System.out.println(advActive + " adv");
+            transaction.replace(containers[0], AdvancedOptionsButtonFragment.newInstance(advActive));
+            if (advActive) {
                 for (int i = 0; i < advancedOptions.size(); i++) {
                     if (advancedOptions.get(i) != null)
-                        transaction.replace(containers[i+1], InputHolderFragment.newInstance(i, true));
+                        transaction.replace(containers[i + 1], InputHolderFragment.newInstance(i, true));
+                }
+            } else {
+                //Replaces with empty fragments
+                for (int i = 0; i < advancedOptions.size(); i++) {
+                    if (advancedOptions.get(i) != null)
+                        transaction.replace(containers[i + 1], new Fragment());
+                }
             }
         }
-
         transaction.commit();
+    }
 
+    public void update(boolean advActive) {
+        this.advActive = advActive;
+        addFragments();
     }
 
     private void addContainers() {

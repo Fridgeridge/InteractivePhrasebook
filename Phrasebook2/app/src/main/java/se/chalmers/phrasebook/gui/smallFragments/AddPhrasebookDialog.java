@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
+import se.chalmers.phrasebook.backend.PhraseBook;
 
 /**
  * Created by matilda on 08/04/16.
@@ -51,7 +52,7 @@ public class AddPhrasebookDialog extends android.support.v4.app.DialogFragment {
                     Toast.makeText(getActivity(),"Please enter a name",
                             Toast.LENGTH_SHORT).show();
                 }else {
-                    if (model.addPhrasebook(textField.getText().toString())) {
+                    if (model.addPhrasebook(textField.getText().toString(), true)) {
                         getDialog().dismiss();
                         getActivity().recreate();
                     } else {

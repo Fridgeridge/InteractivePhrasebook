@@ -14,10 +14,16 @@ public class PhraseBook implements Serializable {
 
     private String title;
     private ArrayList<SyntaxTree> phrases;
+    private boolean isEditable;
 
-    public PhraseBook(String name) {
+    public PhraseBook(String name, boolean editable) {
+        this.isEditable = editable;
         title = name;
         phrases = new ArrayList<>();
+    }
+
+    public boolean getEditable() {
+        return isEditable;
     }
 
     public boolean addPhrase(String desc, SyntaxTree phrase) {

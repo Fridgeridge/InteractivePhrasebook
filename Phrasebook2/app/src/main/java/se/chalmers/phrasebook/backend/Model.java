@@ -70,7 +70,7 @@ public class Model {
         defaultPhrasebooks = new PhraseBookHolder();
 
         //Hardcoded default testing phrasebook
-        PhraseBook tourism = new PhraseBook("Default");
+        PhraseBook tourism = new PhraseBook("Default", false);
         for (String s : parser.getSentencesData().keySet()) {
             tourism.addPhrase(translator.translateToOrigin(parser.getSyntaxTree(s).getAdvSyntax())
                     , parser.getSyntaxTree(s));
@@ -84,13 +84,13 @@ public class Model {
     }
 
     //Requires unique name
-    public boolean addPhrasebook(String name) {
+    public boolean addPhrasebook(String name, boolean editable) {
         for (PhraseBook book : myPhrasebooks.getPhraseBooks()) {
             if (book.getTitle().equals(name)) {
                 return false;
             }
         }
-        PhraseBook pb = new PhraseBook(name);
+        PhraseBook pb = new PhraseBook(name, editable);
         myPhrasebooks.addPhraseBook(pb);
         FileWriter.saveToFile(instance, myPhrasebooks);
         return true;
@@ -166,8 +166,13 @@ public class Model {
 
     public ArrayList<String> getSentencesInCurrentPhrasebook() {
         ArrayList<String> phrases = new ArrayList<String>();
-        for (SyntaxTree tree : currentPhrasebook.getPhrases()) {
-            phrases.add(translator.translateToOrigin(tree.getAdvSyntax()));
+        for (int i = 0; i < currentPhrasebook.getPhrases().size(); i++) {
+            if(currentPhrasebook.getEditable()) {
+                phrases.add(translator.translateToOrigin(currentPhrasebook.
+                        getPhrases().get(i).getAdvSyntax()));
+            } else {
+                phrases.add(getDescFromPos(i));
+            }
         }
         return phrases;
     }

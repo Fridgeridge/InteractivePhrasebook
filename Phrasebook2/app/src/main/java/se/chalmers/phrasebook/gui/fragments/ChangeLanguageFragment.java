@@ -1,6 +1,5 @@
 package se.chalmers.phrasebook.gui.fragments;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -14,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import se.chalmers.phrasebook.R;
-import se.chalmers.phrasebook.backend.Langs;
+import se.chalmers.phrasebook.backend.Languages;
 import se.chalmers.phrasebook.backend.Model;
 
 /**
@@ -42,7 +41,7 @@ public class ChangeLanguageFragment extends Fragment {
         origin = (Spinner) view.findViewById(R.id.origin_spinner1);
         target = (Spinner) view.findViewById(R.id.target_spinner1);
 
-        ArrayList<String> al = Langs.getLanguages();
+        ArrayList<String> al = Languages.getLanguages();
         Collections.sort(al);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, al);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -68,9 +67,9 @@ public class ChangeLanguageFragment extends Fragment {
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
             if (parent.equals(origin)) {
-                model.setOriginLanguage(Langs.getKey(parent.getSelectedItem().toString()));
+                model.setOriginLanguage(Languages.getKey(parent.getSelectedItem().toString()));
             } else if (parent.equals(target)) {
-                model.setTargetLanguage(Langs.getKey(target.getSelectedItem().toString()));
+                model.setTargetLanguage(Languages.getKey(target.getSelectedItem().toString()));
             }
         }
 

@@ -28,7 +28,7 @@ public class TTSHandler {
 
     }
 
-    public void setTargetTTSLanguage(Langs target) {
+    public void setTargetTTSLanguage(Languages target) {
         int e = tts.setLanguage(target.getTTS());
     }
 

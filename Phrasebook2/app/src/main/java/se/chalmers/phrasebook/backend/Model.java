@@ -7,14 +7,9 @@ import android.content.SharedPreferences;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 import se.chalmers.phrasebook.App;
 import se.chalmers.phrasebook.R;
-import se.chalmers.phrasebook.backend.syntax.SyntaxNode;
 import se.chalmers.phrasebook.backend.syntax.SyntaxNodeList;
 import se.chalmers.phrasebook.backend.syntax.SyntaxTree;
 
@@ -33,10 +28,9 @@ public class Model {
     private TTSHandler ttsHandler;
     private PhraseBookHolder myPhrasebooks;
     private PhraseBookHolder defaultPhrasebooks;
-    private Langs origin, target;
+    private Languages origin, target;
     private PhraseBook currentPhrasebook;
     private SyntaxTree currentPhrase;
-    private ArrayList<SyntaxNodeList> optionsList;
 
     private Model() {
         instance = App.get();
@@ -83,6 +77,11 @@ public class Model {
         return model;
     }
 
+    private synchronized static Model getSync() {
+        if (model == null) model = new Model();
+        return model;
+    }
+
     //Requires unique name
     public boolean addPhrasebook(String name, boolean editable) {
         for (PhraseBook book : myPhrasebooks.getPhraseBooks()) {
@@ -112,11 +111,6 @@ public class Model {
         return null;
     }
 
-    private synchronized static Model getSync() {
-        if (model == null) model = new Model();
-        return model;
-    }
-
 
     public void savePreferences() {
         SharedPreferences.Editor editor = sharedPref.edit();
@@ -137,7 +131,7 @@ public class Model {
     }
 
     public ArrayList<String> getMyPhrasebookTitles() {
-        ArrayList<String> names = new ArrayList<String>();
+        ArrayList<String> names = new ArrayList<>();
         for (PhraseBook book : myPhrasebooks.getPhraseBooks()) {
             names.add(book.getTitle());
         }
@@ -145,15 +139,11 @@ public class Model {
     }
 
     public ArrayList<String> getDefaultPhrasebookTitles() {
-        ArrayList<String> names = new ArrayList<String>();
+        ArrayList<String> names = new ArrayList<>();
         for (PhraseBook book : defaultPhrasebooks.getPhraseBooks()) {
             names.add(book.getTitle());
         }
         return names;
-    }
-
-    public HashMap<String, String> getSentences() {
-        return parser.getSentencesData();
     }
 
     public void update(int optionIndex, SyntaxNodeList target, int childIndex, boolean isAdvanced) {
@@ -165,9 +155,9 @@ public class Model {
     }
 
     public ArrayList<String> getSentencesInCurrentPhrasebook() {
-        ArrayList<String> phrases = new ArrayList<String>();
+        ArrayList<String> phrases = new ArrayList<>();
         for (int i = 0; i < currentPhrasebook.getPhrases().size(); i++) {
-            if(currentPhrasebook.getEditable()) {
+            if (currentPhrasebook.getEditable()) {
                 phrases.add(translator.translateToOrigin(currentPhrasebook.
                         getPhrases().get(i).getAdvSyntax()));
             } else {
@@ -178,7 +168,7 @@ public class Model {
     }
 
     public ArrayList<String> getDefaultSentences() {
-        ArrayList<String> phrases = new ArrayList<String>();
+        ArrayList<String> phrases = new ArrayList<>();
         for (SyntaxTree tree : currentPhrasebook.getPhrases()) {
             phrases.add(tree.getId());
         }
@@ -194,13 +184,13 @@ public class Model {
     }
 
     public void setOriginLanguage(String originLanguageKey) {
-        origin = Langs.getLang(originLanguageKey);
+        origin = Languages.getLang(originLanguageKey);
         translator.setOriginLanguage(originLanguageKey);
         savePreferences();
     }
 
     public void setTargetLanguage(String targetLanguageKey) {
-        target = Langs.getLang(targetLanguageKey);
+        target = Languages.getLang(targetLanguageKey);
         translator.setTargetLanguage(targetLanguageKey);
         ttsHandler.setTargetTTSLanguage(target);
         savePreferences();
@@ -211,7 +201,7 @@ public class Model {
     }
 
     public void setCurrentPhrase(int position) {
-        currentPhrase = (SyntaxTree)currentPhrasebook.getPhrases().toArray()[position];
+        currentPhrase = (SyntaxTree) currentPhrasebook.getPhrases().toArray()[position];
     }
 
     public String getDescFromPos(int pos) {
@@ -222,23 +212,23 @@ public class Model {
     public void setNumeralCurrentPhrase() {
         for (int i = 0; i < parser.getSentencesData().values().size(); i++) {
             if ((parser.getSentencesData().keySet().toArray()[i]).equals("NNumeral")) {
-                currentPhrase = parser.getSyntaxTree((String)parser.getSentencesData()
+                currentPhrase = parser.getSyntaxTree((String) parser.getSentencesData()
                         .keySet().toArray()[i]);
             }
         }
     }
 
-    public Langs getOriginLang() {
+    public Languages getOriginLang() {
         return origin;
     }
 
-    public Langs getTargetLang() {
+    public Languages getTargetLang() {
         return target;
     }
 
-    public boolean removePhrasebook(PhraseBook phraseBook){
+    public boolean removePhrasebook(PhraseBook phraseBook) {
         boolean status = myPhrasebooks.removePhraseBook(phraseBook);
-        FileWriter.saveToFile(instance,myPhrasebooks);
+        FileWriter.saveToFile(instance, myPhrasebooks);
         return status;
     }
 

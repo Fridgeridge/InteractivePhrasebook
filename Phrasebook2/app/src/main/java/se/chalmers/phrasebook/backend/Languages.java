@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * Created by David on 2016-03-03.
  */
-public enum Langs {
+public enum Languages {
 
     RUSSIAN("ру́сский","Russian","PhrasebookRus", new Locale("ru")),
     BULGARIAN("български","Bulgarian","PhrasebookBul",new Locale("bg")),
@@ -42,7 +42,7 @@ public enum Langs {
 
     private static final Map<String, String> langMap = Collections.unmodifiableMap(initializeMap());
 
-    Langs(String spelling, String language, String key, Locale locale){
+    Languages(String spelling, String language, String key, Locale locale){
         this.nativeSpelling = spelling;
         this.language = language;
         this.key = key;
@@ -64,7 +64,7 @@ public enum Langs {
 
     private static Map<String, String> initializeMap(){
         Map<String, String> map = new HashMap<String, String>();
-        for (Langs l : Langs.values()) {
+        for (Languages l : Languages.values()) {
             map.put(l.key, l.language);
         }
         return map;
@@ -72,11 +72,11 @@ public enum Langs {
 
     public static ArrayList<String> getLanguages() {
         ArrayList<String> list = new ArrayList<>();
-        Langs[] langs = Langs.values();
+        Languages[] langs = Languages.values();
 
         for (int i = 0; i < langs.length; i++) {
-            if (Langs.getEngName(langs[i].getKey()) != null)
-                list.add(Langs.getEngName(langs[i].getKey()));
+            if (Languages.getEngName(langs[i].getKey()) != null)
+                list.add(Languages.getEngName(langs[i].getKey()));
         }
         return list;
     }
@@ -85,11 +85,11 @@ public enum Langs {
         return langMap.get(key);
     }
 
-    public static Langs getLang(String Language){
-        for(Langs l : Langs.values()){
+    public static Languages getLang(String Language){
+        for(Languages l : Languages.values()){
            if(l.getKey().equals(Language)) return l;
         }
-        return Langs.ENGLISH;
+        return Languages.ENGLISH;
     }
 
     public static String getKey(String name){

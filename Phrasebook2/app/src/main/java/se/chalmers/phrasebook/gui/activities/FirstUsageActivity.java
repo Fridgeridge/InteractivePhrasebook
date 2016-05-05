@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import se.chalmers.phrasebook.R;
-import se.chalmers.phrasebook.backend.Langs;
+import se.chalmers.phrasebook.backend.Languages;
 import se.chalmers.phrasebook.backend.Model;
 
 
@@ -34,7 +34,7 @@ public class FirstUsageActivity extends Activity {
         final Spinner originSpinner = (Spinner) findViewById(R.id.origin_spinner);
         final Spinner targetSpinner = (Spinner) findViewById(R.id.target_spinner);
 
-        ArrayList al = Langs.getLanguages();
+        ArrayList al = Languages.getLanguages();
         Collections.sort(al);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, al);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -48,8 +48,8 @@ public class FirstUsageActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                model.setOriginLanguage(Langs.getKey(originSpinner.getSelectedItem().toString()));
-                model.setTargetLanguage(Langs.getKey(targetSpinner.getSelectedItem().toString()));
+                model.setOriginLanguage(Languages.getKey(originSpinner.getSelectedItem().toString()));
+                model.setTargetLanguage(Languages.getKey(targetSpinner.getSelectedItem().toString()));
 
                 startApplication();
 

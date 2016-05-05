@@ -48,7 +48,7 @@ public class AddPhrasebookDialog extends android.support.v4.app.DialogFragment {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(textField.getText().toString().equals("")){
+                if(textField.getText().toString().isEmpty()){
                     Toast.makeText(getActivity(),"Please enter a name",
                             Toast.LENGTH_SHORT).show();
                 }else {
@@ -58,7 +58,6 @@ public class AddPhrasebookDialog extends android.support.v4.app.DialogFragment {
                     } else {
                         Toast.makeText(getActivity(),"The name is taken",
                                 Toast.LENGTH_SHORT).show();
-                        throw new IllegalArgumentException();
                     }
                 }
 

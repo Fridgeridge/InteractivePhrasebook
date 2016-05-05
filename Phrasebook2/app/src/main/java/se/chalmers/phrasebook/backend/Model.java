@@ -211,8 +211,7 @@ public class Model {
     }
 
     public void setCurrentPhrase(int position) {
-        currentPhrase = parser.getSyntaxTree(
-                ((String) (parser.getSentencesData().keySet().toArray()[position])));
+        currentPhrase = (SyntaxTree)currentPhrasebook.getPhrases().toArray()[position];
     }
 
     public String getDescFromPos(int pos) {

@@ -124,6 +124,11 @@ public class Model {
         editor.apply();
     }
 
+    public void savePhraseBooks() {
+        if (myPhrasebooks != null)
+            FileWriter.saveToFile(instance, myPhrasebooks);
+    }
+
     public void deleteAllPreferences() {
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.clear();

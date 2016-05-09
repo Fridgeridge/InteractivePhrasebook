@@ -1,13 +1,14 @@
 package se.chalmers.phrasebook.backend.syntax;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
 /**
  * Created by Björn on 2016-02-26.
  */
-public class SyntaxTree {
+public class SyntaxTree implements Serializable {
 
     private String id;
     private SyntaxNode root;

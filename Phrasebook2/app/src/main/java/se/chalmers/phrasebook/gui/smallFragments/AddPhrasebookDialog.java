@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
 import se.chalmers.phrasebook.backend.PhraseBook;
+import se.chalmers.phrasebook.gui.activities.NavigationActivity;
+import se.chalmers.phrasebook.gui.fragments.MyPhrasebooksFragment;
 
 /**
  * Created by matilda on 08/04/16.
@@ -54,7 +56,8 @@ public class AddPhrasebookDialog extends android.support.v4.app.DialogFragment {
                 }else {
                     if (model.addPhrasebook(textField.getText().toString(), true)) {
                         getDialog().dismiss();
-                        getActivity().recreate();
+                        ((NavigationActivity)getActivity()).switchContent(new MyPhrasebooksFragment(), "");
+                        getActivity().onBackPressed();
                     } else {
                         Toast.makeText(getActivity(),"The name is taken",
                                 Toast.LENGTH_SHORT).show();

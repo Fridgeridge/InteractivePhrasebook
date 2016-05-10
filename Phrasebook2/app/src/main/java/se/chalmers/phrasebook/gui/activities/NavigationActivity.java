@@ -212,7 +212,8 @@ public class NavigationActivity extends FragmentActivity
     public boolean removePhrasebook(String id) {
         PhraseBook phraseBook = model.getPhrasebookByTitle(id);
         boolean status = model.removePhrasebook(phraseBook);
-        this.recreate();
+        switchContent(new MyPhrasebooksFragment(), "");
+        onBackPressed();
         return status;
     }
 }

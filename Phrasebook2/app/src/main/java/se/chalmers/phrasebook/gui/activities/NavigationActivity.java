@@ -181,6 +181,10 @@ public class NavigationActivity extends FragmentActivity
         if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
             getSupportFragmentManager().popBackStack();
             getSupportFragmentManager().beginTransaction().commit();
+            //Switches to the previous entry on the stack to ensure
+            //that mContent is preserved
+            mContent = getSupportFragmentManager().getFragments()
+                    .get(getSupportFragmentManager().getFragments().size() - 2);
         }
     }
 
@@ -191,7 +195,7 @@ public class NavigationActivity extends FragmentActivity
     }
 
     public void updateTranslation() {
-        if (mContent instanceof TranslatorFragment) {
+       if (mContent instanceof TranslatorFragment) {
             TranslatorFragment fragment = (TranslatorFragment) mContent;
             fragment.updateTranslation();
         }

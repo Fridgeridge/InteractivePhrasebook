@@ -49,10 +49,12 @@
         android:spinnerMode="dropdown" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="95dp"
         android:layout_height="wrap_content"
         android:text="Confirm"
         android:id="@+id/confirmButton"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/background_color"
+        android:background="@color/accent_material_dark" />
 
 </LinearLayout>

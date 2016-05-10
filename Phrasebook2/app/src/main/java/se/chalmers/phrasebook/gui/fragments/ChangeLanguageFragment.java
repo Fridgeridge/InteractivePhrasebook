@@ -18,6 +18,7 @@ import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Languages;
 import se.chalmers.phrasebook.backend.Model;
 import se.chalmers.phrasebook.gui.FragmentCommunicator;
+import se.chalmers.phrasebook.gui.activities.NavigationActivity;
 
 /**
  * Created by matilda on 05/04/16.
@@ -64,10 +65,7 @@ public class ChangeLanguageFragment extends Fragment {
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (getActivity().getSupportFragmentManager().getBackStackEntryCount() > 1) {
-                    getActivity().getSupportFragmentManager().popBackStack();
-                    getActivity().getSupportFragmentManager().beginTransaction().commit();
-                }
+                getActivity().onBackPressed();
             }
         });
 

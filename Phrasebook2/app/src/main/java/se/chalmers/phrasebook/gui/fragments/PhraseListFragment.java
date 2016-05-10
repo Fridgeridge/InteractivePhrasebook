@@ -71,6 +71,13 @@ public class PhraseListFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        phrases.clear();
+        phrases.addAll(model.getSentencesInCurrentPhrasebook());
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 

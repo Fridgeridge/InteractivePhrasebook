@@ -103,18 +103,24 @@ public class TranslatorFragment extends Fragment {
     public void onPause() {
         super.onPause();
         floatingActionButton.setVisibility(View.GONE);
+        floatingActionButton.detach();
     }
+
 
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        floatingActionButton.setVisibility(View.GONE);
+        if(floatingActionButton != null) {
+            floatingActionButton.setVisibility(View.GONE);
+            floatingActionButton.detach();
+        }
     }
 
     @Override
     public void onResume(){
         super.onResume();
+        updateTranslation();
         floatingActionButton.setVisibility(View.VISIBLE);
     }
 

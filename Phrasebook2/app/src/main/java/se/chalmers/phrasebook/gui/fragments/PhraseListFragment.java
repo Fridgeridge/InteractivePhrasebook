@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
 import se.chalmers.phrasebook.gui.FragmentCommunicator;
+import se.chalmers.phrasebook.gui.activities.NavigationActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -93,6 +94,7 @@ public class PhraseListFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 model.setCurrentPhrase(position);
+                ((NavigationActivity)mCallback).getActionBar().setTitle(model.getDescFromPos(position));
                 sendMessage(position);
             }
         });

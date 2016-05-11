@@ -33,6 +33,10 @@ public class SyntaxTree implements Serializable {
         initializeOptions(this.root);
     }
 
+    public SyntaxTree copy() {
+        return new SyntaxTree(root.clone());
+    }
+
     public ArrayList<SyntaxNodeList> getOptions() {
         return options;
     }
@@ -45,7 +49,31 @@ public class SyntaxTree implements Serializable {
         return new ArrayList<SyntaxNodeList>();
     }
 
-    //creates an ArrayList och LinkedHashMaps, each representing
+    public boolean replicate(SyntaxTree tree) {
+        if(this.getOptions() == null) {
+            return false;
+        } else {
+            for(int i = 0; i < getOptions().size(); i++) {
+                for(SyntaxNode n: getOptions().get(i).getChildren()) {
+
+                    if(n.getData().equals(tree.getOptions().get(i).getSelectedChild().getData())) {
+                        this.setSelectedChild(getOptions().get(i), n);
+                        System.out.println("Setting selected child?");
+                    }
+                }
+            }
+        }
+       /*if(advancedTree != null && advancedTree.replicate(tree.getAdvancedTree())) {
+            return true;
+        }*/
+        return true;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    //creates an ArrayList of LinkedHashMaps, each representing
     //a currently available option to be customized.
     private void initializeOptions(SyntaxNode currentRoot) {
         if (currentRoot == null) return;
@@ -113,6 +141,7 @@ public class SyntaxTree implements Serializable {
 
 
     public boolean setSelectedChild(SyntaxNodeList l, SyntaxNode s) {
+        System.out.println(s.getData());
         return l.setSelectedChild(s);
     }
 

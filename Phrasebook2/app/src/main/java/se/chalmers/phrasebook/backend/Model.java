@@ -154,9 +154,6 @@ public class Model {
 
     public void update(int optionIndex, SyntaxNodeList target, int childIndex, boolean isAdvanced) {
         currentPhrase.setSelectedChild(optionIndex, target, childIndex, isAdvanced);
-        System.out.println(currentPhrase.getSyntax());
-        System.out.println(target.getQuestion() + childIndex + ": " + target
-                .getSelectedChild().getSyntaxNodes().get(0).getSelectedChild().getData());
     }
 
     public void playCurrentTargetPhrase() {
@@ -209,18 +206,16 @@ public class Model {
         currentPhrasebook = phrasebook;
     }
 
+    public SyntaxTree copyCurrentPhrase() {
+        SyntaxTree newTree = parser.getSyntaxTree(currentPhrase.getId());
+        newTree.replicate(currentPhrase);
+        return newTree;
+    }
+
     public void setCurrentPhrase(int position) {
         SyntaxTree choosenPhrase = ((SyntaxTree) currentPhrasebook.getPhrases().toArray()[position]);
-        System.out.println(getDescFromPos(position));
-        /*for(int i = 0; i < parser.getSentencesData().values().size(); i++) {
-            if(parser.getSentencesData().values().toArray()[i].equals(getDescFromPos(position))) {
-                currentPhrase = parser.getSyntaxTree((String)parser.getSentencesData().keySet().toArray()[i]);
-            }
-        }*/
-        System.out.println(choosenPhrase.getId());
         currentPhrase = parser.getSyntaxTree(choosenPhrase.getId());
         boolean status = currentPhrase.replicate(choosenPhrase);
-        System.out.println(status + ":managed to replicate");
     }
 
     public String getDescFromPos(int pos) {

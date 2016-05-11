@@ -33,10 +33,6 @@ public class SyntaxTree implements Serializable {
         initializeOptions(this.root);
     }
 
-    public SyntaxTree copy() {
-        return new SyntaxTree(root.clone());
-    }
-
     public ArrayList<SyntaxNodeList> getOptions() {
         return options;
     }
@@ -58,15 +54,21 @@ public class SyntaxTree implements Serializable {
 
                     if(n.getData().equals(tree.getOptions().get(i).getSelectedChild().getData())) {
                         this.setSelectedChild(getOptions().get(i), n);
-                        System.out.println("Setting selected child?");
+                    } else if(n instanceof NumeralSyntaxNode) {
+                        ((NumeralSyntaxNode) n).setDesc
+                                (Integer.toString(((NumeralSyntaxNode)tree.getOptions()
+                                        .get(i).getSelectedChild()).getNumber()));
                     }
                 }
             }
         }
-       /*if(advancedTree != null && advancedTree.replicate(tree.getAdvancedTree())) {
-            return true;
-        }*/
-        return true;
+       if(advancedTree != null) {
+           if(tree.advActivated) {
+               setAdvActivated(true);
+               return advancedTree.replicate(tree.getAdvancedTree());
+           }
+        }
+        return false;
     }
 
     public void setId(String id) {

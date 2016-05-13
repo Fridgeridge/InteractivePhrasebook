@@ -24,6 +24,7 @@ public class FileWriter {
             FileOutputStream fileOutputStream = context.openFileOutput(context.getString(R.string.save_file), Context.MODE_PRIVATE);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
             objectOutputStream.writeObject(books);
+            fileOutputStream.close();
             objectOutputStream.close();
             status = true;
         } catch (IOException e) {
@@ -38,7 +39,8 @@ public class FileWriter {
             FileInputStream fileInputStream = context.openFileInput(context.getString(R.string.save_file));
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             Object object = objectInputStream.readObject();
-
+            fileInputStream.close();
+            objectInputStream.close();
             if ((object != null) && (object instanceof PhraseBookHolder)) {
                 return (PhraseBookHolder) object;
             }

@@ -25,7 +25,6 @@ public class SyntaxTree implements Serializable {
     public void setAdvancedTree(SyntaxTree advancedTree) {
         this.advancedTree = advancedTree;
     }
-                                    // some of the GF code isnt running currently
 
     public SyntaxTree(SyntaxNode root) {
         this.root = root;
@@ -41,7 +40,6 @@ public class SyntaxTree implements Serializable {
         if(advancedTree != null) {
             return advancedTree.getOptions();
         }
-        //empty list
         return new ArrayList<SyntaxNodeList>();
     }
 
@@ -143,38 +141,8 @@ public class SyntaxTree implements Serializable {
 
 
     public boolean setSelectedChild(SyntaxNodeList l, SyntaxNode s) {
-        System.out.println(s.getData());
         return l.setSelectedChild(s);
     }
-
-//    /**
-//     * Replaces an old selectedChild with a new one.
-//     * The method returns true if it succesfully managed to replace a
-//     * selected child, otherwise it returns false.
-//     *
-//     * @param parent   the modular SyntaxNode containing the two children
-//     * @param question the question to be answered
-//     * @param newChild the child which replaces the old one
-//     * @return if the operations was succesful or not
-//     */
-//    //TODO REALLY UGLY SOLUTION, TRY TO FIX IT WITHOUT 'instanceof' FOR NUMERALSYNTAXNODE
-//    public boolean setSelectedChild(SyntaxNode parent, int listIndex, String newChild, String question) {
-//        if(parent.getSyntaxNodes().get(0).getChildren().get(0) instanceof NumeralSyntaxNode) {
-//            ((NumeralSyntaxNode)parent).setSelectedChild(newChild);
-//            options.clear();
-//            this.initializeOptions(root);
-//            return true;
-//        }
-//        for(int i = 0; i < parent.getSyntaxNodes().size(); i++) {
-//            if(parent.getSyntaxNodes().get(i).getQuestion().equals(question)) {
-//                parent.setSelectedChild(i, (SyntaxNode)options.get(listIndex).get(newChild));
-//                options.clear();
-//                this.initializeOptions(root);
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
 
     /**
      * Parses the selected children into a text syntax usable by the grammar to
@@ -186,13 +154,12 @@ public class SyntaxTree implements Serializable {
         return parseSentenceSyntax(getSentenceHead());
     }
 
-    //A really ugly hack, should DEFINITIVELY BE FIXED
+    //TODO A really ugly hack, should DEFINITIVELY BE FIXED
     public String getAdvSyntax() {
         String syntax = getSyntax();
         if(advActivated) {
             String advSyntax = advancedTree.getSyntax();
             if(!advSyntax.isEmpty()) {
-                System.out.println(advSyntax.indexOf("AKnow"));
                 String test = advSyntax.substring(0, advSyntax.indexOf("AKnow") + 5) +
                         syntax.substring(1, 9) + "(" +
                         advSyntax.substring(advSyntax.indexOf("AKnow") + 6, advSyntax.length() - 3) +

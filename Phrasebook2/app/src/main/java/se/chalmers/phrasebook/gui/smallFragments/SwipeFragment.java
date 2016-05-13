@@ -30,7 +30,6 @@ public class SwipeFragment extends Fragment {
         swipeAdapter = new SwipeAdapter(getChildFragmentManager(), mCallback);
 
         pager.setAdapter(swipeAdapter);
-        System.out.println(pager.getCurrentItem() + ":currentpage");
         return view;
     }
 

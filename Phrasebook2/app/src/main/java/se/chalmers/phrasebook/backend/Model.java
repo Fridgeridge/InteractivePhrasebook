@@ -69,7 +69,6 @@ public class Model {
         for (String s : parser.getSentencesData().keySet()) {
             tourism.addPhrase(translator.translateToOrigin(parser.getSyntaxTree(s).getAdvSyntax())
                     , parser.getSyntaxTree(s));
-            System.out.println(s);
         }
         defaultPhrasebooks.addPhraseBook(tourism);
 

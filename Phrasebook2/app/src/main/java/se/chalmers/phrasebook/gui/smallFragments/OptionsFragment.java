@@ -71,7 +71,6 @@ public class OptionsFragment extends Fragment {
                 }
             }
         } else if (type == 2) {
-            System.out.println(advActive + " adv");
             transaction.replace(containers[0], AdvancedOptionsButtonFragment.newInstance(advActive));
             if (advActive) {
                 for (int i = 0; i < advancedOptions.size(); i++) {

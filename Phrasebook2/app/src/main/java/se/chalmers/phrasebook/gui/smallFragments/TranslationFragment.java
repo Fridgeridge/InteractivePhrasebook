@@ -78,6 +78,10 @@ public class TranslationFragment extends Fragment {
 
     private String formattingText(String text){
 
+        if(text.length() < 2){
+            return text;
+        }
+
         String temp;
 
         temp = text.substring(0,1).toUpperCase() + text.substring(1);

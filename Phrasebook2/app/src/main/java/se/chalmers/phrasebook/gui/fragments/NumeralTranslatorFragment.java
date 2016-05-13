@@ -33,7 +33,6 @@ public class NumeralTranslatorFragment extends TranslatorFragment {
         super.model.setNumeralCurrentPhrase();
         if(floatingActionButton != null) {
             floatingActionButton.detach();
-            System.out.println("Detaching");
         }
         return view;
     }

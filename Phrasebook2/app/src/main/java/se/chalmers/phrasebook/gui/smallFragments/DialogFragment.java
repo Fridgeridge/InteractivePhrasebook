@@ -50,7 +50,8 @@ public class DialogFragment extends android.support.v4.app.DialogFragment {
 
                 String name = model.translateToOrigin();
 
-                model.getPhrasebookByTitle((String) phraseListView.getItemAtPosition(position)).addPhrase(name, model.getCurrentPhrase());
+                model.getPhrasebookByTitle((String) phraseListView.getItemAtPosition(position))
+                        .addPhrase(name, model.copyCurrentPhrase());
                 model.savePhraseBooks();
                 getDialog().dismiss();
 

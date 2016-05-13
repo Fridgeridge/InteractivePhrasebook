@@ -26,6 +26,7 @@ public class XMLParser {
 
     private DocumentBuilder documentBuilder;
     private Document document;
+    private String currentId;
 
     public XMLParser(InputStream is) {
         try {
@@ -70,18 +71,18 @@ public class XMLParser {
         NodeList result = null;
         NodeList nl = document.getElementsByTagName("sentence");
         boolean isAdvanced = false;
-
+        String id = "";
         for (int i = 0; i < nl.getLength(); i++) {
             NamedNodeMap attr = nl.item(i).getAttributes();
-            String s = attr.getNamedItem("id").getNodeValue();
-            if (nl.item(i).getNodeType() == Node.ELEMENT_NODE && sentenceTitle.equals(s)) {
+            id = attr.getNamedItem("id").getNodeValue();
+            if (nl.item(i).getNodeType() == Node.ELEMENT_NODE && sentenceTitle.equals(id)) {
                 result = nl.item(i).getChildNodes();
                 if (attr.getNamedItem("advanced") != null) isAdvanced = true;
                 break;
             }
         }
         SyntaxTree s = buildSyntaxTree(result);
-
+        s.setId(id);
         if (isAdvanced) {
             s.setAdvancedTree(getAdvancedOptionSyntaxTree());
         }
@@ -162,7 +163,6 @@ public class XMLParser {
 
 
                     list.add(node);
-
                     SyntaxNodeList mList = new SyntaxNodeList();
 
                     constructSyntaxNodeList(nl.item(i).getChildNodes(), node, mList, nextSequence, nbrOfArgs);

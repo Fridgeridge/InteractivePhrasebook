@@ -69,6 +69,7 @@ public class Model {
         for (String s : parser.getSentencesData().keySet()) {
             tourism.addPhrase(translator.translateToOrigin(parser.getSyntaxTree(s).getAdvSyntax())
                     , parser.getSyntaxTree(s));
+            System.out.println(s);
         }
         defaultPhrasebooks.addPhraseBook(tourism);
 
@@ -212,8 +213,16 @@ public class Model {
         currentPhrasebook = phrasebook;
     }
 
+    public SyntaxTree copyCurrentPhrase() {
+        SyntaxTree newTree = parser.getSyntaxTree(currentPhrase.getId());
+        newTree.replicate(currentPhrase);
+        return newTree;
+    }
+
     public void setCurrentPhrase(int position) {
-        currentPhrase = (SyntaxTree) currentPhrasebook.getPhrases().toArray()[position];
+        SyntaxTree choosenPhrase = ((SyntaxTree) currentPhrasebook.getPhrases().toArray()[position]);
+        currentPhrase = parser.getSyntaxTree(choosenPhrase.getId());
+        boolean status = currentPhrase.replicate(choosenPhrase);
     }
 
     public String getDescFromPos(int pos) {

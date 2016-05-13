@@ -37,7 +37,7 @@
     <string name="title_section1">Phrasebooks</string>
     <string name="title_section2">My Phrasebooks</string>
     <string name="title_section3">Change Language</string>
-    <string name="title_section4">Numbers to words</string>
+    <!--<string name="title_section4">Numbers to words</string>-->
 
 
     <string name="navigation_drawer_open">Open navigation drawer</string>

@@ -74,14 +74,6 @@
         </node>
     </advanced>
 
-    <sentence desc="Numbers to Words" id="NNumeral">
-        <node syntax=" ">
-            <option option="How many children?">
-                <node syntax="NNumeral" />
-            </option>
-        </node>
-    </sentence>
-
     <!--works-->
     <sentence advanced="true" desc="Someone loves someone" id="ALove">
         <node child="phraseit">
@@ -430,13 +422,13 @@
     <child id="phraseit">
         <option option="How do you want to phrase it?">
             <node desc="As a statement" syntax="PSentence">
-                <node syntax="SProp"></node>
+                <node syntax="SProp"/>
             </node>
             <node desc="As a question" syntax="PQuestion">
-                <node syntax="QProp"></node>
+                <node syntax="QProp"/>
             </node>
             <node desc="As a negation" syntax="PSentence">
-                <node syntax="SPropNot"></node>
+                <node syntax="SPropNot"/>
             </node>
         </option>
     </child>

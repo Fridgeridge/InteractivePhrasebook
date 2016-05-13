@@ -36,10 +36,9 @@ public class HelperActivity extends Activity {
         //tried to make splash...
         getActionBar().hide();
         setContentView(R.layout.activity_splash);
-
-
-
     }
+
+
 
     @Override
     protected void onResume() {

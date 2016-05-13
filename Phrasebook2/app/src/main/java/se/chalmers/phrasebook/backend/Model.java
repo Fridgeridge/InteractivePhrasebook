@@ -58,8 +58,9 @@ public class Model {
         myPhrasebooks = FileWriter.readFromFile(instance);
 
         //If the reading of saved phrasebooks does not work...
-        if (myPhrasebooks == null)
+        if (myPhrasebooks == null) {
             myPhrasebooks = new PhraseBookHolder();
+        }
 
         defaultPhrasebooks = new PhraseBookHolder();
 
@@ -70,6 +71,7 @@ public class Model {
                     , parser.getSyntaxTree(s));
         }
         defaultPhrasebooks.addPhraseBook(tourism);
+
     }
 
     public static Model getInstance() {
@@ -81,6 +83,11 @@ public class Model {
         if (model == null) model = new Model();
         return model;
     }
+
+    public void destroy(){
+        ttsHandler.destroy();
+    }
+
 
     //Requires unique name
     public boolean addPhrasebook(String name, boolean editable) {

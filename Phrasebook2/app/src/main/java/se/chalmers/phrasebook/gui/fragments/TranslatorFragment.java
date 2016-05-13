@@ -39,6 +39,8 @@ public class TranslatorFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         model = Model.getInstance();
+        //TODO Quickfix for TTS language. TTS defaults to English despite target language being different.
+        model.setTargetLanguage(model.getTargetLang().getKey());
     }
 
     public void displayDots() {

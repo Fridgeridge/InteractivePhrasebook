@@ -61,6 +61,12 @@ public class FirstUsageActivity extends Activity {
     }
 
 
+    @Override
+    protected void onDestroy() {
+        model.destroy();
+        super.onDestroy();
+    }
+
     public void startApplication() {
         Intent intent = new Intent(this, NavigationActivity.class);
         startActivity(intent);

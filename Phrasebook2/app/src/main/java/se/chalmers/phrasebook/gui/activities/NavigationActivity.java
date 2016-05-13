@@ -87,12 +87,13 @@ public class NavigationActivity extends FragmentActivity
                 getActionBar().setTitle("Change Language");
                 switchContent(new ChangeLanguageFragment(), "");
                 break;
-            case 3:
-                getActionBar().setTitle("Numbers to Words");
-                model.setNumeralCurrentPhrase();
-                System.out.println(model.getCurrentPhrase().getSyntax() + "currentPhraze");
-                switchContent(TranslatorFragment.newInstance("NNumeral"), "");
-                // model.setCurrentPhrase(1);
+//            case 3:
+//                getActionBar().setTitle("Numbers to Words");
+//                model.setNumeralCurrentPhrase();
+//                System.out.println(model.getCurrentPhrase().getSyntax() + "currentPhraze");
+//                switchContent(TranslatorFragment.newInstance("NNumeral"), "");
+//                // model.setCurrentPhrase(1);
+            default:
                 break;
         }
 
@@ -119,9 +120,9 @@ public class NavigationActivity extends FragmentActivity
             case 3:
                 mTitle = getString(R.string.title_section3);
                 break;
-            case 4:
-                mTitle = getString(R.string.title_section4);
-                break;
+//            case 4:
+//                mTitle = getString(R.string.title_section4);
+//                break;
         }
     }
 
@@ -133,46 +134,9 @@ public class NavigationActivity extends FragmentActivity
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-
-        // Register mMessageReceiver to receive messages.
-        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, new IntentFilter("phrasebook_event"));
-        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, new IntentFilter("phrase_list_event"));
-    }
-
-
-    private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-
-            String action = intent.getAction();
-            String message;
-
-            if (action.equals("phrasebook_event")) {
-                message = intent.getStringExtra("message");
-                /*if(is default phrasebook) {
-                    //switchContent(DefaultPhraseListFragment.newInstance(message), "");
-                } else {*/
-                switchContent(PhraseListFragment.newInstance(message), "");
-            } else if (action.equals("phrase_list_event")) {
-                message = intent.getStringExtra("message");
-                getActionBar().setTitle(message);
-                switchContent(TranslatorFragment.newInstance(message), "");
-            } else if (action.equals("number_event")) {
-                model.setNumeralCurrentPhrase();
-                switchContent(NumeralTranslatorFragment.newInstance(), "");
-                System.out.println("The forth option");
-            } else {
-                throw new IllegalArgumentException();
-            }
-
-        }
-    };
-
-    @Override
-    protected void onPause() {
-        super.onPause();
+    protected void onDestroy() {
+        model.destroy();
+        super.onDestroy();
     }
 
     @Override

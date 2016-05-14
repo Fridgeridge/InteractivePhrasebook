@@ -13,7 +13,9 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:src="@drawable/parlira"
-        android:visibility="visible" />
+        android:visibility="visible"
+        android:paddingBottom="50dp"
+        android:paddingTop="40dp"/>
 
 
     <TextView

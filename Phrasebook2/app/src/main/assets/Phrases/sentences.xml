@@ -456,7 +456,7 @@
             <node desc="English" syntax="(LangNat English)" />
             <node desc="Finnish" syntax="(LangNat Finnish)" />
             <node desc="Flemish" syntax="Flemish" />
-            <node desc="French" syntax="(LangNat Frech)" />
+            <node desc="French" syntax="(LangNat French)" />
             <node desc="German" syntax="(LangNat German)" />
             <node desc="Italian" syntax="(LangNat Italian)" />
             <node desc="Norwegian" syntax="(LangNat Norwegian)" />

@@ -39,6 +39,7 @@ public class DialogFragment extends android.support.v4.app.DialogFragment {
         getDialog().setTitle("Choose Phrasebook");
 
         phrasebooks = model.getMyPhrasebookTitles();
+        phrasebooks.remove(0);
 
         ArrayAdapter adapter = new ArrayAdapter<String>(App.get(), R.layout.phrase_list_item, phrasebooks);
         final ListView phraseListView = (ListView) view.findViewById(R.id.phrasebookList);

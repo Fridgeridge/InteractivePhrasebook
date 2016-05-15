@@ -41,11 +41,35 @@ public class TranslationFragment extends Fragment {
         target = (TextView) translateView.findViewById(R.id.target_phrase);
 
         ImageButton button = (ImageButton) translateView.findViewById(R.id.button3);
+        final ImageButton favorite = (ImageButton)translateView.findViewById(R.id.imageButton);
+
+        if(model.isFavorite(model.getCurrentPhrase())) {
+            favorite.setImageResource(R.drawable.btn_star_on_focused_holo_dark);
+        } else {
+            favorite.setImageResource(R.drawable.btn_star_off_normal_holo_light);
+        }
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 model.playCurrentTargetPhrase();
+            }
+        });
+
+        favorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(model.isFavorite(model.getCurrentPhrase())) {
+                    favorite.setImageResource(R.drawable.btn_star_off_normal_holo_light);
+                    model.getFavorites().removePhrase(model.getCurrentPhrase().getId());
+                    model.getCurrentPhrase().setFavorite(false);
+                } else {
+                    favorite.setImageResource(R.drawable.btn_star_on_focused_holo_dark);
+                    model.getFavorites().addPhrase(model.translateToOrigin()
+                           , model.getSentenceFromID(model.getCurrentPhrase().getId()));
+                    model.getCurrentPhrase().setFavorite(true);
+                    System.out.println("Should add");
+                }
             }
         });
 

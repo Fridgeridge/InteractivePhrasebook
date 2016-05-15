@@ -13,6 +13,7 @@ public class SyntaxTree implements Serializable {
     private String id;
     private SyntaxNode root;
     private boolean advActivated;
+    private boolean favorite;
 
     private ArrayList<SyntaxNodeList> options = new ArrayList<>();
 
@@ -43,6 +44,13 @@ public class SyntaxTree implements Serializable {
         return new ArrayList<SyntaxNodeList>();
     }
 
+    public boolean getFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(boolean fav) {
+        favorite = fav;
+    }
     public boolean replicate(SyntaxTree tree) {
         if(this.getOptions() == null) {
             return false;
@@ -60,7 +68,8 @@ public class SyntaxTree implements Serializable {
                 }
             }
         }
-       if(advancedTree != null) {
+        tree.setFavorite(getFavorite());
+        if(advancedTree != null) {
            if(tree.advActivated) {
                setAdvActivated(true);
                return advancedTree.replicate(tree.getAdvancedTree());

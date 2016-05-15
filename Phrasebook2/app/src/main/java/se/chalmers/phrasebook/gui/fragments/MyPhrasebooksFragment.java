@@ -2,6 +2,7 @@ package se.chalmers.phrasebook.gui.fragments;
 
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -63,9 +64,10 @@ public class MyPhrasebooksFragment extends Fragment {
 
 
         ImageView image = new ImageView(App.get());
-        image.setImageResource(R.drawable.ic_add_white_24dp);
+        image.setImageResource(R.drawable.orange_fab_2);
 
         fab = new FloatingActionButton.Builder(getActivity()).setContentView(image).build();
+        fab.setBackgroundResource(R.drawable.orange_fab_2);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

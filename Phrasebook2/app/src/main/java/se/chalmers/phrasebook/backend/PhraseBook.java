@@ -34,6 +34,17 @@ public class PhraseBook implements Serializable {
             return phrases.remove(phrase);
     }
 
+    //When each phrase has unique ID (default, favorite)
+    public boolean removePhrase(String id) {
+        for(int i = 0; i < phrases.size(); i++) {
+            if(phrases.get(i).getId().equals(id)) {
+                phrases.remove(i);
+                return true;
+            }
+        }
+        return false;
+    }
+
     public String getTitle() {
         return title;
     }

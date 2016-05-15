@@ -60,6 +60,8 @@ public class Model {
         //If the reading of saved phrasebooks does not work...
         if (myPhrasebooks == null) {
             myPhrasebooks = new PhraseBookHolder();
+            PhraseBook favorites = new PhraseBook("Favorites", false);
+            myPhrasebooks.addPhraseBook(favorites);
         }
 
         defaultPhrasebooks = new PhraseBookHolder();
@@ -72,6 +74,14 @@ public class Model {
         }
         defaultPhrasebooks.addPhraseBook(tourism);
 
+    }
+
+    public SyntaxTree getSentenceFromID(String id) {
+        return parser.getSyntaxTree(id);
+    }
+
+    public PhraseBook getFavorites() {
+        return myPhrasebooks.getPhraseBooks().get(0);
     }
 
     public static Model getInstance() {
@@ -88,6 +98,14 @@ public class Model {
         ttsHandler.destroy();
     }
 
+    public boolean isFavorite(SyntaxTree tree) {
+        for(SyntaxTree syntax: this.getFavorites().getPhrases()) {
+            if(syntax.getId().equals(tree.getId())) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     //Requires unique name
     public boolean addPhrasebook(String name, boolean editable) {
@@ -173,7 +191,8 @@ public class Model {
                 phrases.add(translator.translateToOrigin(currentPhrasebook.
                         getPhrases().get(i).getAdvSyntax()));
             } else {
-                phrases.add(getDescFromPos(i));
+                phrases.add(parser.getSentencesData().get(currentPhrasebook.
+                        getPhrases().get(i).getId()));
             }
         }
         return phrases;

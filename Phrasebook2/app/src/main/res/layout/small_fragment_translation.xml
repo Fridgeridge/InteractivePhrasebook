@@ -42,13 +42,22 @@
         android:layout_gravity="right">
 
         <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageButton"
+            android:layout_gravity="right"
+            android:src="@android:drawable/btn_star_big_on"
+            android:background="#ffffff" />
+
+        <ImageButton
             style="?android:attr/buttonStyleSmall"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:text="New Button"
+            android:text=""
             android:id="@+id/button3"
             android:src="@drawable/ic_volume_up_black_18dp"
             android:background="@color/background_color" />
+
     </LinearLayout>
 
 </LinearLayout>

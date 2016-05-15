@@ -87,12 +87,11 @@ public class NavigationActivity extends FragmentActivity
                 getActionBar().setTitle("Change Language");
                 switchContent(new ChangeLanguageFragment(), "");
                 break;
-//            case 3:
-//                getActionBar().setTitle("Numbers to Words");
-//                model.setNumeralCurrentPhrase();
-//                System.out.println(model.getCurrentPhrase().getSyntax() + "currentPhraze");
-//                switchContent(TranslatorFragment.newInstance("NNumeral"), "");
-//                // model.setCurrentPhrase(1);
+            case 3:
+                getActionBar().setTitle("Favorites");
+                model.setCurrentPhrasebook(model.getPhrasebookByTitle("Favorites"));
+                switchContent(PhraseListFragment.newInstance("Favorites"), "");
+                // model.setCurrentPhrase(1);
             default:
                 break;
         }

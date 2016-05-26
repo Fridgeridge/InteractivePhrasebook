@@ -2,6 +2,7 @@ package se.chalmers.phrasebook.gui.smallFragments;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +43,7 @@ public class TranslationFragment extends Fragment {
 
         ImageButton button = (ImageButton) translateView.findViewById(R.id.button3);
         final ImageButton favorite = (ImageButton)translateView.findViewById(R.id.imageButton);
+        ImageButton addButton = (ImageButton) translateView.findViewById(R.id.imageButton2);
 
         if(model.isFavorite(model.getCurrentPhrase())) {
             favorite.setImageResource(R.drawable.green_star);
@@ -70,6 +72,15 @@ public class TranslationFragment extends Fragment {
                     model.getCurrentPhrase().setFavorite(true);
                     System.out.println("Should add");
                 }
+            }
+        });
+
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fm = getFragmentManager();
+                DialogFragment dialogFragment = new DialogFragment();
+                dialogFragment.show(fm, "dialog_fragment");
             }
         });
 

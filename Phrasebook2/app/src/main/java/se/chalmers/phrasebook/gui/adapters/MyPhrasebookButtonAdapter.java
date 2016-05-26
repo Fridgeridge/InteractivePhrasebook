@@ -2,6 +2,7 @@ package se.chalmers.phrasebook.gui.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -60,28 +61,58 @@ public class MyPhrasebookButtonAdapter extends BaseAdapter {
         button.setHeight(400);
         button.setWidth(100);
         button.setBackgroundResource(R.drawable.grid_phrasebook_button);
-        button.setTextColor(Color.BLACK);
+        button.setTextColor(Color.WHITE);
         button.setText(phrasebookNames.get(position));
+        button.setBackgroundColor(new Color().rgb(238,130,238));
         button.setId(position);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String phrasebook = (String)button.getText();
-
                 model.setCurrentPhrasebook(model.getPhrasebookByTitle(phrasebook));
                 mCallback.setPhraseListFragment(phrasebook);
-
             }
         });
 
 
-        button.setOnLongClickListener(new View.OnLongClickListener() {
+      /*  button.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                mCallback.removePhrasebook((String) button.getText());
+                if(!button.getText().equals("Favorites")) {
+                    mCallback.removePhrasebook((String) button.getText());
+                    return false;
+                }
                 return false;
             }
+        });*/
+
+        button.setOnTouchListener(new View.OnTouchListener() {
+            long then = 0;
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_DOWN){
+                    then = (Long) System.currentTimeMillis();
+                    button.setBackgroundColor(new Color().rgb(216,191,216));
+                    System.out.println("Should recolor");
+                    while(System.currentTimeMillis() - then < 2000) {
+
+                    }
+                    button.setBackgroundColor(Color.RED);
+                }
+                else if(event.getAction() == MotionEvent.ACTION_UP){
+                    button.setBackgroundColor(new Color().rgb(238,130,238));
+                    if(((Long) System.currentTimeMillis() - then) > 2000){
+                        mCallback.removePhrasebook((String) button.getText());
+                        return false;
+                    }
+                } else if(event.getAction() == MotionEvent.ACTION_CANCEL) {
+                    button.setBackgroundColor(new Color().rgb(238,130,238));
+                }
+                return false;
+
+            }
+
         });
 
         return button;

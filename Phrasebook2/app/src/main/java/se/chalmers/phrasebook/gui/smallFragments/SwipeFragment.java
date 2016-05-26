@@ -36,7 +36,6 @@ public class SwipeFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        System.out.println("Attaching");
         // This makes sure that the container activity has implemented
         // the callback interface. If not, it throws an exception
         try {

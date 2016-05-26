@@ -28,6 +28,7 @@ public class Model {
     private TTSHandler ttsHandler;
     private PhraseBookHolder myPhrasebooks;
     private PhraseBookHolder defaultPhrasebooks;
+    private PhraseBook favourites;
     private Languages origin, target;
     private PhraseBook currentPhrasebook;
     private SyntaxTree currentPhrase;
@@ -67,12 +68,12 @@ public class Model {
         defaultPhrasebooks = new PhraseBookHolder();
 
         //Hardcoded default testing phrasebook
-        PhraseBook tourism = new PhraseBook("Default", false);
+        PhraseBook pDefault = new PhraseBook("All phrases", false);
         for (String s : parser.getSentencesData().keySet()) {
-            tourism.addPhrase(translator.translateToOrigin(parser.getSyntaxTree(s).getAdvSyntax())
+            pDefault.addPhrase(translator.translateToOrigin(parser.getSyntaxTree(s).getAdvSyntax())
                     , parser.getSyntaxTree(s));
         }
-        defaultPhrasebooks.addPhraseBook(tourism);
+        defaultPhrasebooks.addPhraseBook(pDefault);
 
     }
 

@@ -140,7 +140,6 @@ public class NavigationActivity extends FragmentActivity
 
     @Override
     public void onBackPressed() {
-        //Nån konstig bug...
         if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
             getSupportFragmentManager().popBackStack();
             getSupportFragmentManager().beginTransaction().commit();

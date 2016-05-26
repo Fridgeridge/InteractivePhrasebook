@@ -77,11 +77,11 @@ public class TranslatorFragment extends Fragment {
         }
 
         ImageView imageView = new ImageView(App.get());
-        imageView.setImageResource(R.drawable.orange_fab_2);
+        imageView.setImageResource(R.drawable.ic_add_white_24dp);
 
 
         floatingActionButton = new FloatingActionButton.Builder(getActivity()).setContentView(imageView).build();
-        floatingActionButton.setBackgroundResource(R.drawable.orange_fab_2);
+        floatingActionButton.setBackgroundResource(R.drawable.fab);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

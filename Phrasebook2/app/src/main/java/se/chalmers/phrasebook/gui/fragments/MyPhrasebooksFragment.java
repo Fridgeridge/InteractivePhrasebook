@@ -64,10 +64,10 @@ public class MyPhrasebooksFragment extends Fragment {
 
 
         ImageView image = new ImageView(App.get());
-        image.setImageResource(R.drawable.orange_fab_2);
+        image.setImageResource(R.drawable.ic_add_white_24dp);
 
         fab = new FloatingActionButton.Builder(getActivity()).setContentView(image).build();
-        fab.setBackgroundResource(R.drawable.orange_fab_2);
+        fab.setBackgroundResource(R.drawable.fab);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

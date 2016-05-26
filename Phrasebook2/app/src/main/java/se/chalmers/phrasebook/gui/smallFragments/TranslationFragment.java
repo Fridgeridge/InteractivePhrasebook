@@ -44,9 +44,9 @@ public class TranslationFragment extends Fragment {
         final ImageButton favorite = (ImageButton)translateView.findViewById(R.id.imageButton);
 
         if(model.isFavorite(model.getCurrentPhrase())) {
-            favorite.setImageResource(R.drawable.btn_star_on_focused_holo_dark);
+            favorite.setImageResource(R.drawable.green_star);
         } else {
-            favorite.setImageResource(R.drawable.btn_star_off_normal_holo_light);
+            favorite.setImageResource(R.drawable.grey_star);
         }
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -60,11 +60,11 @@ public class TranslationFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(model.isFavorite(model.getCurrentPhrase())) {
-                    favorite.setImageResource(R.drawable.btn_star_off_normal_holo_light);
+                    favorite.setImageResource(R.drawable.grey_star);
                     model.getFavorites().removePhrase(model.getCurrentPhrase().getId());
                     model.getCurrentPhrase().setFavorite(false);
                 } else {
-                    favorite.setImageResource(R.drawable.btn_star_on_focused_holo_dark);
+                    favorite.setImageResource(R.drawable.green_star);
                     model.getFavorites().addPhrase(model.translateToOrigin()
                            , model.getSentenceFromID(model.getCurrentPhrase().getId()));
                     model.getCurrentPhrase().setFavorite(true);

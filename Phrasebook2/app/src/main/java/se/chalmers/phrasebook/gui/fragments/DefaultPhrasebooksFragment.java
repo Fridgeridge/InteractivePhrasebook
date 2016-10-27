@@ -1,8 +1,6 @@
 package se.chalmers.phrasebook.gui.fragments;
 
 import android.app.Activity;
-import android.app.FragmentManager;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -28,7 +26,6 @@ public class DefaultPhrasebooksFragment extends Fragment {
 
     private Model model;
 
-    private int sectionNumber;
     private FragmentCommunicator mCallback;
 
     public DefaultPhrasebooksFragment() {
@@ -71,7 +68,7 @@ public class DefaultPhrasebooksFragment extends Fragment {
         super.onCreate(savedInstanceState);
         model = Model.getInstance();
         if (getArguments() != null) {
-            sectionNumber = getArguments().getInt(ARG_SECTION_NBR);
+            int sectionNumber = getArguments().getInt(ARG_SECTION_NBR);
         }
     }
 

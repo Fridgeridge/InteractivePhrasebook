@@ -16,7 +16,6 @@ import se.chalmers.phrasebook.gui.adapters.SwipeAdapter;
 public class SwipeFragment extends Fragment {
 
     private ViewPager pager;
-    private SwipeAdapter swipeAdapter;
     private FragmentCommunicator mCallback;
 
     @Override
@@ -27,7 +26,7 @@ public class SwipeFragment extends Fragment {
 
         pager = (ViewPager)view.findViewById(R.id.vpPager);
 
-        swipeAdapter = new SwipeAdapter(getChildFragmentManager(), mCallback);
+        SwipeAdapter swipeAdapter = new SwipeAdapter(getChildFragmentManager(), mCallback);
 
         pager.setAdapter(swipeAdapter);
         return view;

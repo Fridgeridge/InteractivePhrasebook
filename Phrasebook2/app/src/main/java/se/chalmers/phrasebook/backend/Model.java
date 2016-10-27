@@ -239,14 +239,14 @@ public class Model {
     }
 
     public void setCurrentPhrase(int position) {
-        SyntaxTree choosenPhrase = ((SyntaxTree) currentPhrasebook.getPhrases().toArray()[position]);
-        currentPhrase = parser.getSyntaxTree(choosenPhrase.getId());
-        boolean status = currentPhrase.replicate(choosenPhrase);
+        SyntaxTree chosenPhrase = ((SyntaxTree) currentPhrasebook.getPhrases().toArray()[position]);
+        currentPhrase = parser.getSyntaxTree(chosenPhrase.getId());
+        currentPhrase.replicate(chosenPhrase);
     }
 
     public String getDescFromPos(int pos) {
         return parser.getSentencesData()
-                .get((String) (parser.getSentencesData().keySet().toArray()[pos]));
+                .get(parser.getSentencesData().keySet().toArray()[pos]);
     }
 
     public void setNumeralCurrentPhrase() {

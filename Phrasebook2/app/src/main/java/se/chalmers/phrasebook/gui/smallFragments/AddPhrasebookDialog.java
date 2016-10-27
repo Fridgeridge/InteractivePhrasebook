@@ -14,7 +14,6 @@ import java.util.ArrayList;
 
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
-import se.chalmers.phrasebook.backend.PhraseBook;
 import se.chalmers.phrasebook.gui.activities.NavigationActivity;
 import se.chalmers.phrasebook.gui.fragments.MyPhrasebooksFragment;
 

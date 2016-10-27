@@ -1,6 +1,5 @@
 package se.chalmers.phrasebook.gui.smallFragments;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -15,14 +14,12 @@ import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
 import se.chalmers.phrasebook.backend.syntax.SyntaxNode;
 import se.chalmers.phrasebook.backend.syntax.SyntaxNodeList;
-import se.chalmers.phrasebook.gui.FragmentCommunicator;
 
 /**
  * Created by matilda on 14/03/16.
  */
 public class SpinnerInputFragment extends Fragment {
 
-    private Model model;
     private int spinnerIndex;
     private SyntaxNodeList options;
 
@@ -47,7 +44,7 @@ public class SpinnerInputFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        model = Model.getInstance();
+        Model model = Model.getInstance();
 
         label = getArguments().getString("title");
         spinnerIndex = getArguments().getInt("index");

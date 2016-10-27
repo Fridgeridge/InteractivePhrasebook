@@ -22,7 +22,6 @@ import se.chalmers.phrasebook.backend.Model;
  */
 public class DialogFragment extends android.support.v4.app.DialogFragment {
 
-    private ArrayList<String> phrasebooks;
     private Model model;
 
     public DialogFragment() {
@@ -38,7 +37,7 @@ public class DialogFragment extends android.support.v4.app.DialogFragment {
         View view = inflater.inflate(R.layout.dialog_fragment, container);
         getDialog().setTitle("Choose Phrasebook");
 
-        phrasebooks = model.getMyPhrasebookTitles();
+        ArrayList<String> phrasebooks = model.getMyPhrasebookTitles();
         phrasebooks.remove(0);
 
         ArrayAdapter adapter = new ArrayAdapter<String>(App.get(), R.layout.phrase_list_item, phrasebooks);
@@ -56,7 +55,7 @@ public class DialogFragment extends android.support.v4.app.DialogFragment {
                 model.savePhraseBooks();
                 getDialog().dismiss();
 
-                Toast.makeText(getActivity(), "The phrase is added to " + (String)phraseListView.getItemAtPosition(position),
+                Toast.makeText(getActivity(), "The phrase is added to " + phraseListView.getItemAtPosition(position),
                         Toast.LENGTH_SHORT).show();
 
             }

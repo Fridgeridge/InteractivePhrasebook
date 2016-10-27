@@ -2,7 +2,6 @@ package se.chalmers.phrasebook.gui.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,10 +10,8 @@ import android.widget.ImageView;
 
 import com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton;
 
-import se.chalmers.phrasebook.App;
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
-import se.chalmers.phrasebook.gui.smallFragments.DialogFragment;
 import se.chalmers.phrasebook.gui.smallFragments.SwipeFragment;
 import se.chalmers.phrasebook.gui.smallFragments.TranslationFragment;
 

@@ -6,7 +6,6 @@ import android.util.Log;
 import android.widget.Toast;
 
 import java.util.Locale;
-import java.util.Set;
 
 import se.chalmers.phrasebook.App;
 

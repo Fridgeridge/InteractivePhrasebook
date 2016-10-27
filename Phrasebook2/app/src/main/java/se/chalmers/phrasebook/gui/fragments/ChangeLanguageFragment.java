@@ -1,6 +1,5 @@
 package se.chalmers.phrasebook.gui.fragments;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -17,8 +16,6 @@ import java.util.Collections;
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Languages;
 import se.chalmers.phrasebook.backend.Model;
-import se.chalmers.phrasebook.gui.FragmentCommunicator;
-import se.chalmers.phrasebook.gui.activities.NavigationActivity;
 
 /**
  * Created by matilda on 05/04/16.

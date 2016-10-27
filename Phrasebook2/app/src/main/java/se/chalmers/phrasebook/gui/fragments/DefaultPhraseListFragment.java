@@ -2,11 +2,6 @@ package se.chalmers.phrasebook.gui.fragments;
 
 import android.os.Bundle;
 
-import java.util.ArrayList;
-
-import se.chalmers.phrasebook.backend.Model;
-import se.chalmers.phrasebook.backend.syntax.SyntaxTree;
-
 /**
  * Created by Björn on 2016-04-25.
  */

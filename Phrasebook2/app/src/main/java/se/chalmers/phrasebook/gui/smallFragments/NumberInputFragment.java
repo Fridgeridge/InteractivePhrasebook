@@ -1,26 +1,19 @@
 package se.chalmers.phrasebook.gui.smallFragments;
 
-import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.method.PasswordTransformationMethod;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.SeekBar;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
-import se.chalmers.phrasebook.backend.syntax.SyntaxNode;
 import se.chalmers.phrasebook.backend.syntax.SyntaxNodeList;
 
 /**
@@ -28,7 +21,6 @@ import se.chalmers.phrasebook.backend.syntax.SyntaxNodeList;
  */
 public class NumberInputFragment extends Fragment {
 
-    private Model model;
     private int spinnerIndex;
     private SyntaxNodeList options;
 
@@ -54,7 +46,7 @@ public class NumberInputFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        model = Model.getInstance();
+        Model model = Model.getInstance();
         optionIndex = getArguments().getInt("optionIndex");
         label = getArguments().getString("title");
         defaultInt = getArguments().getInt("defaultInt");

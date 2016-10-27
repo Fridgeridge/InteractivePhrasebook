@@ -11,11 +11,10 @@
         android:layout_height="wrap_content"
         android:paddingRight="40dp"
         android:paddingLeft="40dp"
-        android:text="Add Phrasebook"
-        android:textSize="20dp"
+        android:text="@string/add_phrasebook"
+        android:textSize="20sp"
         android:textColor="@color/text_colour_light"
-        android:fontFamily="sans-serif-light"
-        android:id="@+id/textView" />
+        android:fontFamily="sans-serif-light" />
 
     <EditText
         android:layout_width="match_parent"
@@ -37,7 +36,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cancel"
+            android:text="@string/cancel"
             android:textColor="@color/text_colour_dark"
             android:id="@+id/button"
             android:layout_alignParentRight="true"
@@ -49,7 +48,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add"
+            android:text="@string/add"
             android:textColor="@color/text_colour_dark"
             android:id="@+id/button2"
             android:layout_alignParentRight="true"

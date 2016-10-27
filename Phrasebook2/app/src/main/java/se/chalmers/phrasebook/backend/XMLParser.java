@@ -24,13 +24,12 @@ import se.chalmers.phrasebook.backend.syntax.SyntaxTree;
  */
 public class XMLParser {
 
-    private DocumentBuilder documentBuilder;
     private Document document;
     private String currentId;
 
     public XMLParser(InputStream is) {
         try {
-            documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+            DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             document = documentBuilder.parse(is);
             is.close();
         } catch (ParserConfigurationException e) {
@@ -44,7 +43,6 @@ public class XMLParser {
     }
 
     public HashMap<String, String> getSentencesData() {
-        String[] result;
         HashMap<String, String> sentenceMap = new HashMap<String, String>();
 
         NodeList sentences = document.getElementsByTagName("sentence");
@@ -110,17 +108,17 @@ public class XMLParser {
         //CurrentArgs counts the number of arguments for the current NodeList
         int currentArgs = 0;
 
-        //If the parent node, or previous "recursion", calls for multiple args
+        //If the parent node, or previous "recursion" calls for multiple args
         if (nbrOfArgs > 1) {
-            currentArgs = nbrOfArgs;////Update currentArgs
+            currentArgs = nbrOfArgs;
             nbrOfArgs = 0;//Reset nbrOfArgs, important due to the other recursive calls which will happen before nbrOfArgs is actually used.
         }
 
-        int args = 0;
+        int args;
 
         for (int i = 0; i < length; i++) {
             if (nl.item(i) != null && (nl.item(i).getNodeType() == Node.ELEMENT_NODE) && nl.item(i).getAttributes() != null) {
-                String syntax = "", desc = "", option = "", question = "";
+                String syntax = "", desc = "", option, question;
 
                 NamedNodeMap attributes = nl.item(i).getAttributes();
                 if (attributes.getNamedItem("syntax") != null) {

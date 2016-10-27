@@ -1,39 +1,36 @@
 <resources xmlns:xliff="http://schemas.android.com/tools">
-    <string name="app_name">Parlira</string>
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_home_screen">HomeScreenActivity</string>
+    <string name="app_name" translatable="false">Parlira</string>
 
-
-    <string-array name="phrasebooks_default">
-        <item>Tourism</item>
-    </string-array>
-
-    <string-array name="my_phrasebooks">
-        <item>Tourism</item>
-    </string-array>
 
     <!--Save file-->
-    <string name="save_file">PhraseBookFile</string>
+    <string name="save_file" translatable="false">PhraseBookFile</string>
 
     <!-- Preferences data-->
-    <string name="preference_file_key"><xliff:g id="se.chalmers.phrasebook2.PREFERENCE_FILE_KEY">enable</xliff:g></string>
+    <string name="preference_file_key" translatable="false"><xliff:g id="se.chalmers.phrasebook2.PREFERENCE_FILE_KEY">enable</xliff:g></string>
 
-    <string name="saved_target_language_default">PhrasebookEng</string>
-    <string name="saved_target_language">se.chalmers.phrasebook2.saved_target</string>
+    <string name="saved_target_language_default" translatable="false">PhrasebookEng</string>
+    <string name="saved_target_language" translatable="false">se.chalmers.phrasebook2.saved_target</string>
 
-    <string name="saved_origin_language_default">PhrasebookEng</string>
-    <string name="saved_origin_language">se.chalmers.phrasebook2.saved_origin</string>
+    <string name="saved_origin_language_default" translatable="false">PhrasebookEng</string>
+    <string name="saved_origin_language" translatable="false">se.chalmers.phrasebook2.saved_origin</string>
 
 
 
 
     <!--Headers-->
-    <string name="phrasebook_activity">Phrasebooks</string>
-    <string name="Phrases_activity">Phrases</string>
-    <string name="translator_activity">Translator</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main" translatable="false">MainActivity</string>
 
     <!--Menu items-->
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="add">Add</string>
+    <string name="start_button">Start</string>
+    <string name="add_phrasebook">Add Phrasebook</string>
+    <string name="choose_phrasebook">Choose Phrasebook</string>
+    <string name="origin_lang_input">I want to translate from...</string>
+    <string name="target_lang_input">and translate to...</string>
+
+
     <string name="title_section1">Phrasebooks</string>
     <string name="title_section2">My Phrasebooks</string>
     <string name="title_section3">Change Language</string>
@@ -44,10 +41,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_example">Example action</string>
-
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

@@ -10,11 +10,10 @@
         android:layout_height="wrap_content"
         android:paddingRight="30dp"
         android:paddingLeft="30dp"
-        android:text="Choose Phrasebook"
+        android:text="@string/choose_phrasebook"
         android:textColor="@color/text_colour_light"
         android:fontFamily="sans-serif-light"
-        android:textSize="20dp"
-        android:id="@+id/textView2" />
+        android:textSize="20sp" />
 
     <ListView
         android:layout_width="match_parent"

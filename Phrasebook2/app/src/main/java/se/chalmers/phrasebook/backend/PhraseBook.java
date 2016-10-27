@@ -2,7 +2,6 @@ package se.chalmers.phrasebook.backend;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 
 import se.chalmers.phrasebook.backend.syntax.SyntaxTree;
 

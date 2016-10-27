@@ -4,6 +4,7 @@
     android:installLocation="auto">
 
     <application
+        android:allowBackup="true"
         android:name=".App"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -15,7 +16,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".gui.activities.NavigationActivity"></activity>
+        <activity android:name=".gui.activities.NavigationActivity" />
 
         <activity
             android:name=".gui.activities.FirstUsageActivity"

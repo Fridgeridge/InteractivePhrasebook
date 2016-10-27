@@ -11,7 +11,6 @@ import android.widget.CheckBox;
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
 import se.chalmers.phrasebook.gui.FragmentCommunicator;
-import se.chalmers.phrasebook.gui.fragments.TranslatorFragment;
 
 
 /**
@@ -52,7 +51,7 @@ public class AdvancedOptionsButtonFragment extends Fragment{
 
         checkBox.setText("Use reported speech ('I Know that...')");
 
-        if(active != true){
+        if(!active){
             checkBox.setChecked(false);
         } else {
             checkBox.setChecked(true);

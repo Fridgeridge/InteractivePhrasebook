@@ -6,14 +6,13 @@
     android:background="@drawable/grid_phrasebook_button"
     android:layout_marginTop="10dp"
     android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp"
-    android:id="@+id/fragment_translation">
+    android:layout_marginRight="10dp">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="New Text"
-            android:textSize="24dp"
+            android:textSize="24sp"
             android:id="@+id/origin_phrase"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
@@ -27,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="New Text"
-            android:textSize="24dp"
+            android:textSize="24sp"
             android:id="@+id/target_phrase"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"

@@ -2,7 +2,6 @@ package se.chalmers.phrasebook.gui.fragments;
 
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -26,7 +25,6 @@ import se.chalmers.phrasebook.gui.smallFragments.AddPhrasebookDialog;
  * A simple {@link Fragment} subclass.
  */
 public class MyPhrasebooksFragment extends Fragment {
-    private Model model;
     private FloatingActionButton fab;
     FragmentCommunicator mCallback;
 
@@ -49,7 +47,7 @@ public class MyPhrasebooksFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        model = Model.getInstance();
+        Model model = Model.getInstance();
         View view = inflater.inflate(R.layout.fragment_phrasebooks, container, false);
 
         TextView text = (TextView) view.findViewById(R.id.my_phrasebooks_textView);

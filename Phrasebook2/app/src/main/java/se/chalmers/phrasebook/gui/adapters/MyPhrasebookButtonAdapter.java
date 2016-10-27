@@ -91,10 +91,10 @@ public class MyPhrasebookButtonAdapter extends BaseAdapter {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if(event.getAction() == MotionEvent.ACTION_DOWN){
-                    then = (Long) System.currentTimeMillis();
+                    then = System.currentTimeMillis();
                 }
                 else if(event.getAction() == MotionEvent.ACTION_UP){
-                    if(((Long) System.currentTimeMillis() - then) > 2000 && !(button.getText().equals("Favorites"))){
+                    if((System.currentTimeMillis() - then) > 2000 && !(button.getText().equals("Favorites"))){
                         mCallback.removePhrasebook((String) button.getText());
                         return false;
                     }

@@ -20,7 +20,7 @@
             <node syntax="PropAction">
                 <node args="2" syntax="AHasName">
                     <option option="Who are we talking about?">
-                        <node child="allpersons"></node>
+                        <node child="allpersons" />
                     </option>
                     <node syntax="NameNN" />
                 </node>
@@ -80,10 +80,10 @@
             <node syntax="PropAction">
                 <node args="2" syntax="ALove">
                     <option option="Who loves someone?">
-                        <node child="allpersons"></node>
+                        <node child="allpersons" />
                     </option>
                     <option option="Who is loved?">
-                        <node child="allpersons"></node>
+                        <node child="allpersons" />
                     </option>
                 </node>
             </node>
@@ -148,7 +148,7 @@
             <node syntax="PropAction">
                 <node syntax="AScared">
                     <option option="Who are we talking about?">
-                        <node child="allpersons"></node>
+                        <node child="allpersons" />
                     </option>
                 </node>
             </node>
@@ -161,7 +161,7 @@
             <node syntax="PropAction">
                 <node syntax="AIll">
                     <option option="Who are we talking about?">
-                        <node child="allpersons"></node>
+                        <node child="allpersons" />
                     </option>
                 </node>
             </node>
@@ -174,7 +174,7 @@
             <node syntax="PropAction">
                 <node syntax="AUnderstand">
                     <option option="Who are we talking about?">
-                        <node child="allpersons"></node>
+                        <node child="allpersons" />
                     </option>
                 </node>
             </node>
@@ -187,7 +187,7 @@
             <node syntax="PropAction">
                 <node syntax="AKnow">
                     <option option="Who are we talking about?">
-                        <node child="allpersons"></node>
+                        <node child="allpersons" />
                     </option>
                 </node>
             </node>
@@ -200,7 +200,7 @@
             <node syntax="PropAction">
                 <node syntax="AReady">
                     <option option="Who are we talking about?">
-                        <node child="allpersons"></node>
+                        <node child="allpersons" />
                     </option>
                 </node>
             </node>
@@ -212,7 +212,7 @@
             <node syntax="PropAction">
                 <node args="2" syntax="ASpeak">
                     <option option="Who speaks it?">
-                        <node child="allpersons"></node>
+                        <node child="allpersons" />
                     </option>
                     <option option="What language?">
                         <node child="language" />
@@ -239,7 +239,7 @@
             <node syntax="PropAction">
                 <node args="2" syntax="AHasChildren">
                     <option option="Who are we talking about?">
-                        <node child="allpersons"></node>
+                        <node child="allpersons" />
                     </option>
                     <option option="How many children?">
                         <node syntax="NNumeral" />
@@ -255,10 +255,10 @@
             <node syntax="PropAction">
                 <node args="2" syntax="ALive">
                     <option option="Who are we talking about?">
-                        <node child="allpersons"></node>
+                        <node child="allpersons" />
                     </option>
                     <option option="Living where?">
-                        <node child="country"></node>
+                        <node child="country" />
                     </option>
                 </node>
             </node>
@@ -272,12 +272,12 @@
             <node syntax="PropAction">
                 <node args="2" syntax="AWantGo">
                     <option option="Who are we talking about?">
-                        <node child="allpersons"></node>
+                        <node child="allpersons" />
                     </option>
                     <option option="What article?">
                         <node child="a/an/the">
                             <option option="What place?">
-                                <node child="places"></node>
+                                <node child="places" />
                             </option>
                         </node>
                     </option>
@@ -292,12 +292,12 @@
             <node syntax="PropAction">
                 <node args="2" syntax="ABePlace">
                     <option option="Who are we talking about?">
-                        <node child="allpersons"></node>
+                        <node child="allpersons" />
                     </option>
                     <option option="What article?">
                         <node child="a/an/the">
                             <option option="What place?">
-                                <node child="places"></node>
+                                <node child="places" />
                             </option>
                         </node>
                     </option>
@@ -359,9 +359,9 @@
             <node syntax="PropAction">
                 <node args="2" syntax="AWant">
                     <option option="Who wants food?">
-                        <node child="allpersons"></node>
+                        <node child="allpersons" />
                     </option>
-                    <node child="food_with_objectsPrep"></node>
+                    <node child="food_with_objectsPrep" />
                 </node>
             </node>
         </node>
@@ -372,10 +372,10 @@
             <node syntax="PropAction">
                 <node args="2" syntax="ALike">
                     <option option="Who likes it?">
-                        <node child="allpersons"></node>
+                        <node child="allpersons" />
                     </option>
                     <node child="prep">
-                        <node child="food"></node>
+                        <node child="food" />
                     </node>
                 </node>
             </node>
@@ -401,7 +401,7 @@
     <child id="superlative_places">
         <node child="superlative">
             <option option="">
-                <node child="places"></node>
+                <node child="places" />
             </option>
         </node>
     </child>
@@ -436,13 +436,13 @@
     <child id="advphraseit">
         <option option="How are they phrasing it?">
             <node desc="As a statement" syntax="PSentence">
-                <node syntax="SProp"></node>
+                <node syntax="SProp" />
             </node>
             <node desc="As a question" syntax="PQuestion">
-                <node syntax="QProp"></node>
+                <node syntax="QProp" />
             </node>
             <node desc="As a negation" syntax="PSentence">
-                <node syntax="SPropNot"></node>
+                <node syntax="SPropNot" />
             </node>
         </option>
     </child>
@@ -470,58 +470,58 @@
 
     <child id="nationality">
         <option option="What nationality">
-            <node desc="Belgian" syntax="Belgian"></node>
-            <node desc="Bulgarian" syntax="CitiNat Bulgarian"></node>
-            <node desc="Catalan" syntax="CitiNat Catalan"></node>
-            <node desc="Dutch" syntax="CitiNat Dutch"></node>
-            <node desc="Danish" syntax="CitiNat Danish"></node>
-            <node desc="English" syntax="CitiNat English"></node>
-            <node desc="Finnish" syntax="CitiNat Finnish"></node>
-            <node desc="French" syntax="CitiNat French"></node>
-            <node desc="German" syntax="CitiNat German"></node>
-            <node desc="Italian" syntax="CitiNat Italian"></node>
-            <node desc="Norwegian" syntax="CitiNat Norwegian"></node>
-            <node desc="Polish" syntax="CitiNat Polish"></node>
-            <node desc="Romanian" syntax="CitiNat Romanian"></node>
-            <node desc="Russian" syntax="CitiNat Russian"></node>
-            <node desc="Spanish" syntax="CitiNat Spanish"></node>
-            <node desc="Swedish" syntax="CitiNat Swedish"></node>
+            <node desc="Belgian" syntax="Belgian" />
+            <node desc="Bulgarian" syntax="CitiNat Bulgarian" />
+            <node desc="Catalan" syntax="CitiNat Catalan" />
+            <node desc="Dutch" syntax="CitiNat Dutch" />
+            <node desc="Danish" syntax="CitiNat Danish" />
+            <node desc="English" syntax="CitiNat English" />
+            <node desc="Finnish" syntax="CitiNat Finnish" />
+            <node desc="French" syntax="CitiNat French" />
+            <node desc="German" syntax="CitiNat German" />
+            <node desc="Italian" syntax="CitiNat Italian" />
+            <node desc="Norwegian" syntax="CitiNat Norwegian" />
+            <node desc="Polish" syntax="CitiNat Polish" />
+            <node desc="Romanian" syntax="CitiNat Romanian" />
+            <node desc="Russian" syntax="CitiNat Russian" />
+            <node desc="Spanish" syntax="CitiNat Spanish" />
+            <node desc="Swedish" syntax="CitiNat Swedish" />
         </option>
     </child>
 
     <child id="places">
-        <node desc="supermarket" syntax="Supermarket"></node>
-        <node desc="bank" syntax="Bank"></node>
-        <node desc="amusement park" syntax="AmusementPark"></node>
-        <node desc="bar" syntax="Bar"></node>
-        <node desc="Cafeteria" syntax="Cafeteria"></node>
-        <node desc="car park" syntax="Parking"></node>
-        <node desc="center" syntax="Center"></node>
-        <node desc="cinema" syntax="Cinema"></node>
-        <node desc="church" syntax="Church"></node>
-        <node desc="disco" syntax="Disco"></node>
-        <node desc="hospital" syntax="Hospital"></node>
-        <node desc="hotel" syntax="Hotel"></node>
-        <node desc="museum" syntax="Museum"></node>
-        <node desc="park" syntax="Park"></node>
-        <node desc="pharmacy" syntax="Pharmacy"></node>
-        <node desc="post office" syntax="PostOffice"></node>
-        <node desc="pub" syntax="Pub"></node>
+        <node desc="supermarket" syntax="Supermarket" />
+        <node desc="bank" syntax="Bank" />
+        <node desc="amusement park" syntax="AmusementPark" />
+        <node desc="bar" syntax="Bar" />
+        <node desc="Cafeteria" syntax="Cafeteria" />
+        <node desc="car park" syntax="Parking" />
+        <node desc="center" syntax="Center" />
+        <node desc="cinema" syntax="Cinema" />
+        <node desc="church" syntax="Church" />
+        <node desc="disco" syntax="Disco" />
+        <node desc="hospital" syntax="Hospital" />
+        <node desc="hotel" syntax="Hotel" />
+        <node desc="museum" syntax="Museum" />
+        <node desc="park" syntax="Park" />
+        <node desc="pharmacy" syntax="Pharmacy" />
+        <node desc="post office" syntax="PostOffice" />
+        <node desc="pub" syntax="Pub" />
         <!--<node desc="restaurant" syntax="CitRestaurant">
             <node child="nationality"></node>
         </node>-->
-        <node desc="school" syntax="School"></node>
-        <node desc="shop" syntax="Shop"></node>
+        <node desc="school" syntax="School" />
+        <node desc="shop" syntax="Shop" />
     </child>
 
     <child id="superlative">
-        <node desc="(no superlative)" syntax="ThePlace"></node>
-        <node desc="best" syntax="SuperlPlace TheBest"></node>
-        <node desc="worst" syntax="SuperlPlace TheWorst"></node>
-        <node desc="nearest" syntax="SuperlPlace TheClosest"></node>
-        <node desc="cheapest" syntax="SuperlPlace TheCheapest"></node>
-        <node desc="most expensive" syntax="SuperlPlace TheMostExpensive"></node>
-        <node desc="most popular" syntax="SuperlPlace TheMostPopular"></node>
+        <node desc="(no superlative)" syntax="ThePlace" />
+        <node desc="best" syntax="SuperlPlace TheBest" />
+        <node desc="worst" syntax="SuperlPlace TheWorst" />
+        <node desc="nearest" syntax="SuperlPlace TheClosest" />
+        <node desc="cheapest" syntax="SuperlPlace TheCheapest" />
+        <node desc="most expensive" syntax="SuperlPlace TheMostExpensive" />
+        <node desc="most popular" syntax="SuperlPlace TheMostPopular" />
     </child>
 
     <child id="persons">
@@ -563,22 +563,22 @@
 
     <child id="country">
         <option option="What nationality">
-            <node desc="Belgium" syntax="Belgium"></node>
-            <node desc="Bulgaria" syntax="CountryNat Bulgarian"></node>
-            <node desc="Catalonia" syntax="CountryNat Catalan"></node>
-            <node desc="The Netherlands" syntax="CountryNat Dutch"></node>
-            <node desc="Denmark" syntax="CountryNat Danish"></node>
-            <node desc="England" syntax="CountryNat English"></node>
-            <node desc="Finland" syntax="CountryNat Finnish"></node>
-            <node desc="France" syntax="CountryNat French"></node>
-            <node desc="Germany" syntax="CountryNat German"></node>
-            <node desc="Italy" syntax="CountryNat Italian"></node>
-            <node desc="Norway" syntax="CountryNat Norwegian"></node>
-            <node desc="Poland" syntax="CountryNat Polish"></node>
-            <node desc="Romania" syntax="CountryNat Romanian"></node>
-            <node desc="Russia" syntax="CountryNat Russian"></node>
-            <node desc="Spain" syntax="CountryNat Spanish"></node>
-            <node desc="Sweden" syntax="CountryNat Swedish"></node>
+            <node desc="Belgium" syntax="Belgium" />
+            <node desc="Bulgaria" syntax="CountryNat Bulgarian" />
+            <node desc="Catalonia" syntax="CountryNat Catalan" />
+            <node desc="The Netherlands" syntax="CountryNat Dutch" />
+            <node desc="Denmark" syntax="CountryNat Danish" />
+            <node desc="England" syntax="CountryNat English" />
+            <node desc="Finland" syntax="CountryNat Finnish" />
+            <node desc="France" syntax="CountryNat French" />
+            <node desc="Germany" syntax="CountryNat German" />
+            <node desc="Italy" syntax="CountryNat Italian" />
+            <node desc="Norway" syntax="CountryNat Norwegian" />
+            <node desc="Poland" syntax="CountryNat Polish" />
+            <node desc="Romania" syntax="CountryNat Romanian" />
+            <node desc="Russia" syntax="CountryNat Russian" />
+            <node desc="Spain" syntax="CountryNat Spanish" />
+            <node desc="Sweden" syntax="CountryNat Swedish" />
         </option>
     </child>
 
@@ -586,7 +586,7 @@
     <child id="food_with_objectsPrep">
         <option option="What is being wanted?">
             <node child="objectsPrep">
-                <node child="food"></node>
+                <node child="food" />
             </node>
         </option>
     </child>
@@ -594,21 +594,21 @@
 
     <child id="objectsPrep">
         <node desc="a/an" syntax="OneObj">
-            <node syntax="ObjMass"></node>
+            <node syntax="ObjMass" />
         </node>
         <node desc="the" syntax="OneObj">
             <node syntax="ObjItem">
-                <node syntax="TheMass"></node>
+                <node syntax="TheMass" />
             </node>
         </node>
         <node desc="this" syntax="OneObj">
             <node syntax="ObjItem">
-                <node syntax="ThisMass"></node>
+                <node syntax="ThisMass" />
             </node>
         </node>
         <node desc="that" syntax="OneObj">
             <node syntax="ObjItem">
-                <node syntax="ThatMass"></node>
+                <node syntax="ThatMass" />
             </node>
         </node>
     </child>
@@ -623,18 +623,18 @@
 
     <child id="food">
         <option option="What are we talking about?">
-            <node desc="Beer" syntax="MassDrink Beer"></node>
-            <node desc="Bread" syntax="Bread"></node>
-            <node desc="Cheese" syntax="Cheese"></node>
-            <node desc="Chicken" syntax="Chicken"></node>
-            <node desc="Coffee" syntax="MassDrink Coffee"></node>
-            <node desc="Fish" syntax="Fish"></node>
-            <node desc="Meat" syntax="Meat"></node>
-            <node desc="Milk" syntax="Milk"></node>
-            <node desc="Salt" syntax="Salt"></node>
-            <node desc="Tea" syntax="MassDrink Tea"></node>
-            <node desc="Water" syntax="MassDrink Water"></node>
-            <node desc="Wine" syntax="MassDrink Wine"></node>
+            <node desc="Beer" syntax="MassDrink Beer" />
+            <node desc="Bread" syntax="Bread" />
+            <node desc="Cheese" syntax="Cheese" />
+            <node desc="Chicken" syntax="Chicken" />
+            <node desc="Coffee" syntax="MassDrink Coffee" />
+            <node desc="Fish" syntax="Fish" />
+            <node desc="Meat" syntax="Meat" />
+            <node desc="Milk" syntax="Milk" />
+            <node desc="Salt" syntax="Salt" />
+            <node desc="Tea" syntax="MassDrink Tea" />
+            <node desc="Water" syntax="MassDrink Water" />
+            <node desc="Wine" syntax="MassDrink Wine" />
         </option>
     </child>
 

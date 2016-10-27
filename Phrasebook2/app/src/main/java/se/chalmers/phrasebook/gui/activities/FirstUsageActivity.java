@@ -34,7 +34,7 @@ public class FirstUsageActivity extends Activity {
         final Spinner originSpinner = (Spinner) findViewById(R.id.origin_spinner);
         final Spinner targetSpinner = (Spinner) findViewById(R.id.target_spinner);
 
-        ArrayList al = Languages.getLanguages();
+        ArrayList<String> al = Languages.getLanguages();
         Collections.sort(al);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, al);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

@@ -9,9 +9,6 @@ import android.util.Log;
 import se.chalmers.phrasebook.App;
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
-import se.chalmers.phrasebook.gui.fragments.MyPhrasebooksFragment;
-
-
 
 
 /**
@@ -48,7 +45,7 @@ public class HelperActivity extends Activity {
             // Do first run stuff here then set 'firstrun' as false
             //strat  DataActivity beacuase its your app first run
             // using the following line to edit/commit prefs
-            prefs.edit().putBoolean("firstrun", false).commit();
+            prefs.edit().putBoolean("firstrun", false).apply();
             //startActivity(new Intent(HelperActivity.this , FirstUsageActivity.class));
             Intent intent = new Intent(this, FirstUsageActivity.class);
             startActivity(intent);

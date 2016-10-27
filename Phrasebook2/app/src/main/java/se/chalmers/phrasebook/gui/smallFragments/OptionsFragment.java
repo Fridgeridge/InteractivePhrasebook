@@ -15,8 +15,6 @@ import se.chalmers.phrasebook.backend.syntax.SyntaxNodeList;
 
 public class OptionsFragment extends Fragment {
 
-    private Model model;
-
     private ArrayList<SyntaxNodeList> options;
     private ArrayList<SyntaxNodeList> advancedOptions;
 
@@ -38,7 +36,7 @@ public class OptionsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        model = Model.getInstance();
+        Model model = Model.getInstance();
 
         type = getArguments().getInt("index");
         advActive = getArguments().getBoolean("advActive");

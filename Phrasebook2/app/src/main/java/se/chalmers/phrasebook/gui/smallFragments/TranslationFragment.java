@@ -8,12 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
-import android.widget.ImageView;
-
 import android.widget.TextView;
 
 
-import se.chalmers.phrasebook.App;
 import se.chalmers.phrasebook.R;
 import se.chalmers.phrasebook.backend.Model;
 
@@ -22,7 +19,6 @@ import se.chalmers.phrasebook.backend.Model;
  */
 public class TranslationFragment extends Fragment {
 
-    private View translateView;
     private Model model;
     private TextView origin,target;
 
@@ -36,13 +32,13 @@ public class TranslationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        translateView = inflater.inflate(R.layout.small_fragment_translation, container, false);
+        View translateView = inflater.inflate(R.layout.small_fragment_translation, container, false);
 
         origin = (TextView) translateView.findViewById(R.id.origin_phrase);
         target = (TextView) translateView.findViewById(R.id.target_phrase);
 
         ImageButton button = (ImageButton) translateView.findViewById(R.id.button3);
-        final ImageButton favorite = (ImageButton)translateView.findViewById(R.id.imageButton);
+        final ImageButton favorite = (ImageButton) translateView.findViewById(R.id.imageButton);
         ImageButton addButton = (ImageButton) translateView.findViewById(R.id.imageButton2);
 
         if(model.isFavorite(model.getCurrentPhrase())) {

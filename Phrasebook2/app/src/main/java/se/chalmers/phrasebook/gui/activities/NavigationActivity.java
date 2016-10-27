@@ -1,17 +1,12 @@
 package se.chalmers.phrasebook.gui.activities;
 
 import android.app.ActionBar;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.DrawerLayout;
 
 import se.chalmers.phrasebook.R;
@@ -23,17 +18,11 @@ import se.chalmers.phrasebook.gui.fragments.ChangeLanguageFragment;
 import se.chalmers.phrasebook.gui.fragments.DefaultPhrasebooksFragment;
 import se.chalmers.phrasebook.gui.fragments.MyPhrasebooksFragment;
 import se.chalmers.phrasebook.gui.fragments.NavigationDrawerFragment;
-import se.chalmers.phrasebook.gui.fragments.NumeralTranslatorFragment;
 import se.chalmers.phrasebook.gui.fragments.PhraseListFragment;
 import se.chalmers.phrasebook.gui.fragments.TranslatorFragment;
 
 public class NavigationActivity extends FragmentActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks, FragmentCommunicator {
-
-    /**
-     * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
-     */
-    private NavigationDrawerFragment mNavigationDrawerFragment;
 
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
@@ -56,7 +45,10 @@ public class NavigationActivity extends FragmentActivity
 
         model = Model.getInstance();
 
-        mNavigationDrawerFragment = (NavigationDrawerFragment)
+        /*
+      Fragment managing the behaviors, interactions and presentation of the navigation drawer.
+     */
+        NavigationDrawerFragment mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
 

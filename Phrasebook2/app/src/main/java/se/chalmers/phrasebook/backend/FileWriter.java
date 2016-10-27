@@ -16,7 +16,7 @@ import se.chalmers.phrasebook.R;
 public class FileWriter {
 
     public static boolean saveToFile(Context context, PhraseBookHolder books) {
-        boolean status = false;
+        boolean status;
         if(books==null)
             return false;
 

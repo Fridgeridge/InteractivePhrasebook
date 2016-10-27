@@ -17,7 +17,7 @@ public class SyntaxTree implements Serializable {
 
     private ArrayList<SyntaxNodeList> options = new ArrayList<>();
 
-    private SyntaxTree advancedTree; //Realy ugly solution but the only one we can think of as
+    private SyntaxTree advancedTree; //Really ugly solution but the only one we can think of as
 
     public SyntaxTree getAdvancedTree() {
         return advancedTree;
@@ -41,7 +41,7 @@ public class SyntaxTree implements Serializable {
         if(advancedTree != null) {
             return advancedTree.getOptions();
         }
-        return new ArrayList<SyntaxNodeList>();
+        return new ArrayList<>();
     }
 
     public boolean getFavorite() {
@@ -61,7 +61,7 @@ public class SyntaxTree implements Serializable {
                     if(n.getData().equals(tree.getOptions().get(i).getSelectedChild().getData())) {
                         this.setSelectedChild(getOptions().get(i), n);
                     } else if(n instanceof NumeralSyntaxNode) {
-                        ((NumeralSyntaxNode) n).setDesc
+                        n.setDesc
                                 (Integer.toString(((NumeralSyntaxNode)tree.getOptions()
                                         .get(i).getSelectedChild()).getNumber()));
                     }
@@ -155,7 +155,7 @@ public class SyntaxTree implements Serializable {
 
     /**
      * Parses the selected children into a text syntax usable by the grammar to
-     * generate a translation. Builds recursivly.
+     * generate a translation. Builds recursively.
      *
      * @return The syntax usable by the GF-grammar to generate a translation
      */

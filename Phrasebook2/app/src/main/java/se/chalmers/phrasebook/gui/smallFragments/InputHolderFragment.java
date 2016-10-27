@@ -24,7 +24,6 @@ import se.chalmers.phrasebook.gui.FragmentCommunicator;
 
 
 public class InputHolderFragment extends Fragment {
-    private Model model;
 
     private int optionIndex;
     private SyntaxNodeList guiOptions;
@@ -64,7 +63,7 @@ public class InputHolderFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.isAdvanced = getArguments().getBoolean("advanced");
-        model = Model.getInstance();
+        Model model = Model.getInstance();
         optionIndex = getArguments().getInt("index");
         fragmentManager = getChildFragmentManager();
         if (isAdvanced) {
@@ -101,7 +100,7 @@ public class InputHolderFragment extends Fragment {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         String s = "Input: " + l.toString();
 
-        int defaultIntValue = 0;
+        int defaultIntValue;
         // String title = l.getQuestion();
         String title = "";
         NumeralSyntaxNode nsn = (NumeralSyntaxNode) l.getSelectedChild();

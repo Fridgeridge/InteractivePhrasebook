@@ -37,13 +37,11 @@ public enum Languages {
 
     private final String language;
     private final String key;
-    private final String nativeSpelling;
     private final Locale ttsLang;
 
     private static final Map<String, String> langMap = Collections.unmodifiableMap(initializeMap());
 
     Languages(String spelling, String language, String key, Locale locale){
-        this.nativeSpelling = spelling;
         this.language = language;
         this.key = key;
         this.ttsLang = locale;

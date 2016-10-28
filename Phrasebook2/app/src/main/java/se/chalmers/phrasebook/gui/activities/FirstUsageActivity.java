@@ -67,7 +67,7 @@ public class FirstUsageActivity extends Activity {
         super.onDestroy();
     }
 
-    public void startApplication() {
+    private void startApplication() {
         Intent intent = new Intent(this, NavigationActivity.class);
         startActivity(intent);
     }

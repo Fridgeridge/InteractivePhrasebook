@@ -38,14 +38,14 @@
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right">
+        android:layout_gravity="end">
 
         <ImageButton
             style="?android:attr/buttonStyleSmall"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:id="@+id/imageButton2"
-            android:layout_gravity="right"
+            android:layout_gravity="end"
             android:src="@drawable/ic_add_black_18dp"
             android:background="@color/background_color" />
 
@@ -54,7 +54,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:id="@+id/imageButton"
-            android:layout_gravity="right"
+            android:layout_gravity="end"
             android:background="@color/background_color" />
 
         <ImageButton

@@ -7,11 +7,11 @@ import java.util.ArrayList;
  * Created by David on 2016-05-02.
  */
 public class PhraseBookHolder implements Serializable{
-    private ArrayList<PhraseBook> phraseBooks;
+    private final ArrayList<PhraseBook> phraseBooks;
 
 
     public PhraseBookHolder(){
-        phraseBooks = new ArrayList<PhraseBook>();
+        phraseBooks = new ArrayList<>();
     }
 
     public ArrayList<PhraseBook> getPhraseBooks() {

@@ -53,7 +53,7 @@ public class AddPhrasebookDialog extends android.support.v4.app.DialogFragment {
                     Toast.makeText(getActivity(),"Please enter a name",
                             Toast.LENGTH_SHORT).show();
                 }else {
-                    if (model.addPhrasebook(textField.getText().toString(), true)) {
+                    if (model.addPhrasebook(textField.getText().toString())) {
                         getDialog().dismiss();
                         ((NavigationActivity)getActivity()).switchContent(new MyPhrasebooksFragment(), "");
                         getActivity().onBackPressed();

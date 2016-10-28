@@ -19,8 +19,8 @@ import se.chalmers.phrasebook.gui.smallFragments.TranslationFragment;
  * Created by matilda on 04/04/16.
  */
 public class TranslatorFragment extends Fragment {
-    protected Model model;
-    protected FloatingActionButton floatingActionButton;
+    Model model;
+    FloatingActionButton floatingActionButton;
     private SwipeFragment swiper;
     private View view;
 

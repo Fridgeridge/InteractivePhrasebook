@@ -10,19 +10,19 @@ import se.chalmers.phrasebook.backend.syntax.SyntaxNode;
  */
 public class SyntaxNodeList implements Serializable {
     private SyntaxNode selectedChild;
-    private ArrayList<SyntaxNode> children;
+    private final ArrayList<SyntaxNode> children;
     private String question;
 
 
     public SyntaxNodeList() {
-        children = new ArrayList<SyntaxNode>();
+        children = new ArrayList<>();
     }
 
     public ArrayList<SyntaxNode> getChildren() {
         return children;
     }
 
-    public boolean add(SyntaxNode object) {
+    public void add(SyntaxNode object) {
         if (selectedChild == null)
             selectedChild = object;
         return children.add(object);

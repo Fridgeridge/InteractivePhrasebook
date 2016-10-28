@@ -14,9 +14,9 @@ import se.chalmers.phrasebook.gui.smallFragments.OptionsFragment;
  */
 public class SwipeAdapter extends FragmentPagerAdapter {
 
-    private int pages;
-    private FragmentCommunicator mCallback;
-    private Model model;
+    private final int pages;
+    private final FragmentCommunicator mCallback;
+    private final Model model;
 
     public SwipeAdapter(FragmentManager fragmentManager, FragmentCommunicator mCallback) {
         super(fragmentManager);

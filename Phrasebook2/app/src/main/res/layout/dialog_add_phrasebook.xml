@@ -17,6 +17,7 @@
         android:fontFamily="sans-serif-light" />
 
     <EditText
+        android:inputType="textAutoComplete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -39,9 +40,9 @@
             android:text="@string/cancel"
             android:textColor="@color/text_colour_dark"
             android:id="@+id/button"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="50dp"
-            android:layout_toLeftOf="@+id/button2"
+            android:layout_alignParentStart="true"
+            android:layout_marginEnd="50dp"
+            android:layout_toStartOf="@+id/button2"
             android:layout_alignParentTop="true"
             android:background="@null" />
 
@@ -51,9 +52,9 @@
             android:text="@string/add"
             android:textColor="@color/text_colour_dark"
             android:id="@+id/button2"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="156dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="false"
+            android:layout_marginStart="156dp"
             android:layout_alignParentTop="true"
             android:background="@null" />
     </RelativeLayout>

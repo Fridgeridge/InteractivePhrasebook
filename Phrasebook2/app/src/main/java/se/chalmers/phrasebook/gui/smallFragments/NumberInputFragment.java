@@ -130,7 +130,7 @@ public class NumberInputFragment extends Fragment {
     private void sendMessage(int optionIndex, int childIndex) {
 
         InputHolderFragment fragment = (InputHolderFragment) getParentFragment();
-        //options är ju tom i det här fragmentet, hur ska vi lösa det?
+        //TODO Empty options
         fragment.updateSyntax(optionIndex, options,childIndex);
 
     }

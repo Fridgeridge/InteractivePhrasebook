@@ -19,15 +19,15 @@ import se.chalmers.phrasebook.backend.syntax.SyntaxTree;
 public class Model {
 
     private static Model model;
-    private App instance;
+    private final App instance;
 
-    SharedPreferences sharedPref;
+    private final SharedPreferences sharedPref;
 
     private Translator translator;
     private XMLParser parser;
-    private TTSHandler ttsHandler;
+    private final TTSHandler ttsHandler;
     private PhraseBookHolder myPhrasebooks;
-    private PhraseBookHolder defaultPhrasebooks;
+    private final PhraseBookHolder defaultPhrasebooks;
     private PhraseBook favourites;
     private Languages origin, target;
     private PhraseBook currentPhrasebook;
@@ -70,8 +70,8 @@ public class Model {
         //Hardcoded default testing phrasebook
         PhraseBook pDefault = new PhraseBook("All phrases", false);
         for (String s : parser.getSentencesData().keySet()) {
-            pDefault.addPhrase(translator.translateToOrigin(parser.getSyntaxTree(s).getAdvSyntax())
-                    , parser.getSyntaxTree(s));
+            pDefault.addPhrase(
+                    parser.getSyntaxTree(s));
         }
         defaultPhrasebooks.addPhraseBook(pDefault);
 
@@ -109,13 +109,13 @@ public class Model {
     }
 
     //Requires unique name
-    public boolean addPhrasebook(String name, boolean editable) {
+    public boolean addPhrasebook(String name) {
         for (PhraseBook book : myPhrasebooks.getPhraseBooks()) {
             if (book.getTitle().equals(name)) {
                 return false;
             }
         }
-        PhraseBook pb = new PhraseBook(name, editable);
+        PhraseBook pb = new PhraseBook(name, true);
         myPhrasebooks.addPhraseBook(pb);
         FileWriter.saveToFile(instance, myPhrasebooks);
         return true;
@@ -138,7 +138,7 @@ public class Model {
     }
 
 
-    public void savePreferences() {
+    private void savePreferences() {
         SharedPreferences.Editor editor = sharedPref.edit();
 
         if (origin != null)

@@ -97,7 +97,7 @@ public class NavigationDrawerFragment extends Fragment {
                 selectItem(position);
             }
         });
-        mDrawerListView.setAdapter(new ArrayAdapter<String>(
+        mDrawerListView.setAdapter(new ArrayAdapter<>(
                 getActionBar().getThemedContext(),
                 R.layout.phrase_list_item,
                 R.id.textView3,
@@ -241,11 +241,8 @@ public class NavigationDrawerFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (mDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
+        return mDrawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
 
-        return super.onOptionsItemSelected(item);
     }
 
     /**

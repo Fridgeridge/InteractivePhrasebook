@@ -8,17 +8,17 @@ import java.util.ArrayList;
  */
 
 public class SyntaxNode implements Serializable {
-    private String data;
+    private final String data;
     private String desc;
-    private ArrayList<SyntaxNodeList> syntaxNodes;
+    private final ArrayList<SyntaxNodeList> syntaxNodes;
 
     public SyntaxNode(String data) {
-        syntaxNodes = new ArrayList<SyntaxNodeList>();
+        syntaxNodes = new ArrayList<>();
         this.data = data;
     }
 
-    public void setSelectedChild(int listIndex, SyntaxNode newChild) {
-        syntaxNodes.get(listIndex).setSelectedChild(newChild);
+    public void setSelectedChild(int listIndex) {
+        syntaxNodes.get(listIndex).setSelectedChild(null);
     }
 
     public ArrayList<SyntaxNodeList> getSyntaxNodes() {
@@ -26,7 +26,7 @@ public class SyntaxNode implements Serializable {
     }
 
     public ArrayList<SyntaxNodeList> getModularSyntaxNodes() {
-        ArrayList<SyntaxNodeList> result = new ArrayList<SyntaxNodeList>();
+        ArrayList<SyntaxNodeList> result = new ArrayList<>();
         for (SyntaxNodeList snl : syntaxNodes) {
             if (snl.getChildren().size() > 1) result.add(snl);
         }

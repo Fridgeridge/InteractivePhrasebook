@@ -22,7 +22,7 @@ import se.chalmers.phrasebook.backend.syntax.SyntaxTree;
 /**
  * Created by David on 2016-02-19.
  */
-public class XMLParser {
+class XMLParser {
 
     private Document document;
     private String currentId;
@@ -43,7 +43,7 @@ public class XMLParser {
     }
 
     public HashMap<String, String> getSentencesData() {
-        HashMap<String, String> sentenceMap = new HashMap<String, String>();
+        HashMap<String, String> sentenceMap = new HashMap<>();
 
         NodeList sentences = document.getElementsByTagName("sentence");
         int nbrOfSentences = sentences.getLength();
@@ -57,7 +57,7 @@ public class XMLParser {
         return sentenceMap;
     }
 
-    public SyntaxTree getAdvancedOptionSyntaxTree() {
+    private SyntaxTree getAdvancedOptionSyntaxTree() {
         NodeList advSentence = document.getElementsByTagName("advanced");
         advSentence = advSentence.item(0).getChildNodes();
         SyntaxTree s = new SyntaxTree(constructSyntaxNodeList(advSentence, new SyntaxNode("Root"), new SyntaxNodeList(), null, 1));
@@ -147,7 +147,7 @@ public class XMLParser {
                     SyntaxNodeList mList = new SyntaxNodeList();
                     constructSyntaxNodeList(nl.item(i).getChildNodes(), mNextSequence, mList, nextSequence, nbrOfArgs);
 
-                    constructSyntaxNodeList(jumpToChild("child", option), parent, list, mNextSequence, nbrOfArgs);
+                    constructSyntaxNodeList(jumpToChild(option), parent, list, mNextSequence, nbrOfArgs);
                 }
                 if (!syntax.isEmpty()) {
                     SyntaxNode node;
@@ -181,9 +181,9 @@ public class XMLParser {
 
     }
 
-    public NodeList jumpToChild(String tag, String id) {
+    private NodeList jumpToChild(String id) {
         NodeList result = null;
-        NodeList nl = document.getElementsByTagName(tag);
+        NodeList nl = document.getElementsByTagName("child");
 
         for (int i = 0; i < nl.getLength(); i++) {
             String s = nl.item(i).getFirstChild().getNodeValue();

@@ -15,9 +15,9 @@ import java.util.Set;
 /**
  * Created by David on 2016-02-25.
  */
-public class Translator {
+class Translator {
 
-    private PGF pgf;
+    private final PGF pgf;
     private Concr originLanguage, targetLanguage;
 
     public Translator(InputStream grammar) throws IOException {
@@ -25,7 +25,7 @@ public class Translator {
         grammar.close();
     }
 
-    public String translate(Concr lang, String abstractSyntax) {
+    private String translate(Concr lang, String abstractSyntax) {
         String s = "Error";
         try {
             Expr expr = Expr.readExpr(abstractSyntax);
@@ -50,24 +50,22 @@ public class Translator {
         return translate(targetLanguage, abstractSyntax);
     }
 
-    public boolean setOriginLanguage(String langID) {
+    public void setOriginLanguage(String langID) {
         try {
             Concr origin = pgf.getLanguages().get(langID);
             originLanguage = origin;
         } catch (NullPointerException e) {
-            return false;
+            return;
         }
-        return true;
     }
 
-    public boolean setTargetLanguage(String langID) {
+    public void setTargetLanguage(String langID) {
         try {
             Concr target = pgf.getLanguages().get((langID));
             targetLanguage = target;
         } catch (NullPointerException e) {
-            return false;
+            return;
         }
-        return true;
     }
 
 

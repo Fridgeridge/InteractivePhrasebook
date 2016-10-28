@@ -12,8 +12,8 @@ import se.chalmers.phrasebook.backend.syntax.SyntaxTree;
 public class PhraseBook implements Serializable {
 
     private String title;
-    private ArrayList<SyntaxTree> phrases;
-    private boolean isEditable;
+    private final ArrayList<SyntaxTree> phrases;
+    private final boolean isEditable;
 
     public PhraseBook(String name, boolean editable) {
         this.isEditable = editable;
@@ -25,7 +25,7 @@ public class PhraseBook implements Serializable {
         return isEditable;
     }
 
-    public boolean addPhrase(String desc, SyntaxTree phrase) {
+    public void addPhrase(SyntaxTree phrase) {
         return phrases.add(phrase);
     }
 
@@ -34,14 +34,13 @@ public class PhraseBook implements Serializable {
     }
 
     //When each phrase has unique ID (default, favorite)
-    public boolean removePhrase(String id) {
+    public void removePhrase(String id) {
         for(int i = 0; i < phrases.size(); i++) {
             if(phrases.get(i).getId().equals(id)) {
                 phrases.remove(i);
-                return true;
+                return;
             }
         }
-        return false;
     }
 
     public String getTitle() {

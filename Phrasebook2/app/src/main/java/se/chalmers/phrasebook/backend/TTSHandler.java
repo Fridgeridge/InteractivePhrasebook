@@ -13,9 +13,9 @@ import se.chalmers.phrasebook.App;
 /**
  * Created by David on 2016-04-05.
  */
-public class TTSHandler {
+class TTSHandler {
 
-    private TextToSpeech tts;
+    private final TextToSpeech tts;
 
     public TTSHandler(Application app) {
         tts = new TextToSpeech(app.getApplicationContext(), new InitListener());

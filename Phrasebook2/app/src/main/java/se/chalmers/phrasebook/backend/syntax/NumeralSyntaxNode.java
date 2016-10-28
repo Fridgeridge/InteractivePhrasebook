@@ -35,7 +35,7 @@ public class NumeralSyntaxNode extends SyntaxNode {
 
 
     @Override
-    public void setSelectedChild(int listIndex, SyntaxNode newChild) {
+    public void setSelectedChild(int listIndex) {
         setDesc(Integer.toString(listIndex));
     }
 

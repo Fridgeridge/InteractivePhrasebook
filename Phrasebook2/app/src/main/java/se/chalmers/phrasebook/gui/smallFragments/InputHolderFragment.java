@@ -71,7 +71,7 @@ public class InputHolderFragment extends Fragment {
         } else {
             guiOptions = model.getCurrentPhrase().getOptions().get(optionIndex);
         }
-        fragmentTags = new ArrayList<String>();
+        fragmentTags = new ArrayList<>();
     }
 
 
@@ -91,7 +91,7 @@ public class InputHolderFragment extends Fragment {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         String s = "Input: " + l.toString();
 
-        transaction.add(R.id.input_holder, SpinnerInputFragment.newInstance(optionIndex, null, l), s);
+        transaction.add(R.id.input_holder, SpinnerInputFragment.newInstance(optionIndex, l), s);
         fragmentTags.add(s);
         transaction.commit();
     }

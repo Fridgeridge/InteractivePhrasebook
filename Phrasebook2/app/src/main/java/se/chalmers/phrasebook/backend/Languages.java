@@ -61,7 +61,7 @@ public enum Languages {
 
 
     private static Map<String, String> initializeMap(){
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<>();
         for (Languages l : Languages.values()) {
             map.put(l.key, l.language);
         }
@@ -72,14 +72,14 @@ public enum Languages {
         ArrayList<String> list = new ArrayList<>();
         Languages[] langs = Languages.values();
 
-        for (int i = 0; i < langs.length; i++) {
-            if (Languages.getEngName(langs[i].getKey()) != null)
-                list.add(Languages.getEngName(langs[i].getKey()));
+        for (Languages lang : langs) {
+            if (Languages.getEngName(lang.getKey()) != null)
+                list.add(Languages.getEngName(lang.getKey()));
         }
         return list;
     }
 
-    public static String getEngName(String key){
+    private static String getEngName(String key){
         return langMap.get(key);
     }
 
@@ -89,6 +89,7 @@ public enum Languages {
         }
         return Languages.ENGLISH;
     }
+
 
     public static String getKey(String name){
         for(Map.Entry<String,String> e:langMap.entrySet()){

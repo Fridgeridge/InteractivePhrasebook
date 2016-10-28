@@ -65,22 +65,26 @@ public class NavigationActivity extends FragmentActivity
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
+        ActionBar actionBar = getActionBar();
+
+        if(actionBar == null)
+            return;
 
         switch (position) {
             case 0:
-                getActionBar().setTitle("Default Phrasebooks");
-                switchContent(DefaultPhrasebooksFragment.newInstance(1), "default");
+                actionBar.setTitle("Default Phrasebooks");
+                switchContent(DefaultPhrasebooksFragment.newInstance(), "default");
                 break;
             case 1:
-                getActionBar().setTitle("My Phrasebooks");
+                actionBar.setTitle("My Phrasebooks");
                 switchContent(new MyPhrasebooksFragment(), "");
                 break;
             case 2:
-                getActionBar().setTitle("Change Language");
+                actionBar.setTitle("Change Language");
                 switchContent(new ChangeLanguageFragment(), "");
                 break;
             case 3:
-                getActionBar().setTitle("Favorites");
+                actionBar.setTitle("Favorites");
                 model.setCurrentPhrasebook(model.getPhrasebookByTitle("Favorites"));
                 switchContent(PhraseListFragment.newInstance("Favorites"), "");
                 // model.setCurrentPhrase(1);

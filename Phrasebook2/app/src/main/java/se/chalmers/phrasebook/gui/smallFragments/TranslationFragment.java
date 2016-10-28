@@ -63,8 +63,8 @@ public class TranslationFragment extends Fragment {
                     model.getCurrentPhrase().setFavorite(false);
                 } else {
                     favorite.setImageResource(R.drawable.green_star);
-                    model.getFavorites().addPhrase(model.translateToOrigin()
-                           , model.getSentenceFromID(model.getCurrentPhrase().getId()));
+                    model.getFavorites().addPhrase(
+                            model.getSentenceFromID(model.getCurrentPhrase().getId()));
                     model.getCurrentPhrase().setFavorite(true);
                     System.out.println("Should add");
                 }

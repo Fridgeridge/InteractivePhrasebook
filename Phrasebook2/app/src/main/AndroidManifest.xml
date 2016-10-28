@@ -4,6 +4,7 @@
     android:installLocation="auto">
 
     <application
+        android:supportsRtl="true"
         android:allowBackup="true"
         android:name=".App"
         android:icon="@mipmap/ic_launcher"

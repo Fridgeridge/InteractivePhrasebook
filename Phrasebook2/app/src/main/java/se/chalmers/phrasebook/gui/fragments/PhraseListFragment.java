@@ -24,9 +24,9 @@ import se.chalmers.phrasebook.gui.activities.NavigationActivity;
  */
 public class PhraseListFragment extends Fragment {
 
-    protected Model model;
-    protected ArrayList<String> phrases;
-    Context context;
+    Model model;
+    ArrayList<String> phrases;
+    private Context context;
     private String title;
 
     private FragmentCommunicator mCallback;
@@ -81,7 +81,7 @@ public class PhraseListFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_phrase_list, container, false);
         getActivity().getActionBar().setTitle(title);
-        ArrayAdapter adapter = new ArrayAdapter<String>(context, R.layout.phrase_list_item, phrases);
+        ArrayAdapter adapter = new ArrayAdapter<>(context, R.layout.phrase_list_item, phrases);
 
         final ListView phraseListView = (ListView) view.findViewById(R.id.phrase_listView);
         phraseListView.setAdapter(adapter);

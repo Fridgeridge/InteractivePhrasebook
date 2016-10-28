@@ -13,12 +13,13 @@ import se.chalmers.phrasebook.R;
 /**
  * Created by David on 2016-05-02.
  */
-public class FileWriter {
+class FileWriter {
 
     public static boolean saveToFile(Context context, PhraseBookHolder books) {
-        boolean status;
+        boolean status = false;
+
         if(books==null)
-            return false;
+            return status;
 
         try {
             FileOutputStream fileOutputStream = context.openFileOutput(context.getString(R.string.save_file), Context.MODE_PRIVATE);

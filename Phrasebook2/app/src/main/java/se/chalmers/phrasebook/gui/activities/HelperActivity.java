@@ -16,7 +16,7 @@ import se.chalmers.phrasebook.backend.Model;
  */
 public class HelperActivity extends Activity {
 
-    SharedPreferences prefs = null;
+    private SharedPreferences prefs = null;
     private static long time;
 
     @Override

@@ -20,11 +20,11 @@ import se.chalmers.phrasebook.gui.FragmentCommunicator;
 public class MyPhrasebookButtonAdapter extends BaseAdapter {
 
 
-    private Context context;
-    private ArrayList<String> phrasebookNames;
+    private final Context context;
+    private final ArrayList<String> phrasebookNames;
 
-    private Model model;
-    private FragmentCommunicator mCallback;
+    private final Model model;
+    private final FragmentCommunicator mCallback;
 
     public MyPhrasebookButtonAdapter(Context context, FragmentCommunicator mCallback, ArrayList<String> phrasebooks) {
         this.context = context;

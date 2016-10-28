@@ -28,12 +28,12 @@ public class SpinnerInputFragment extends Fragment {
     private Spinner spinner;
 
 
-    public static SpinnerInputFragment newInstance(int optionIndex, String title, SyntaxNodeList options) {
+    public static SpinnerInputFragment newInstance(int optionIndex, SyntaxNodeList options) {
         SpinnerInputFragment spinnerInputFragment = new SpinnerInputFragment();
         Bundle args = new Bundle();
 
         args.putInt("index", optionIndex);
-        args.putString("title", title);
+        args.putString("title", null);
         args.putSerializable("spinner_options", options);
 
         spinnerInputFragment.setArguments(args);

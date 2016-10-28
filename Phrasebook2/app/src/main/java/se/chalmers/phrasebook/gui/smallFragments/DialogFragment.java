@@ -40,7 +40,7 @@ public class DialogFragment extends android.support.v4.app.DialogFragment {
         ArrayList<String> phrasebooks = model.getMyPhrasebookTitles();
         phrasebooks.remove(0);
 
-        ArrayAdapter adapter = new ArrayAdapter<String>(App.get(), R.layout.phrase_list_item, phrasebooks);
+        ArrayAdapter adapter = new ArrayAdapter<>(App.get(), R.layout.phrase_list_item, phrasebooks);
         final ListView phraseListView = (ListView) view.findViewById(R.id.phrasebookList);
         phraseListView.setAdapter(adapter);
 
@@ -51,7 +51,7 @@ public class DialogFragment extends android.support.v4.app.DialogFragment {
                 String name = model.translateToOrigin();
 
                 model.getPhrasebookByTitle((String) phraseListView.getItemAtPosition(position))
-                        .addPhrase(name, model.copyCurrentPhrase());
+                        .addPhrase(model.copyCurrentPhrase());
                 model.savePhraseBooks();
                 getDialog().dismiss();
 

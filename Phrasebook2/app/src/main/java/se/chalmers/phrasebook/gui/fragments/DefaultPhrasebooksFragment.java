@@ -51,14 +51,13 @@ public class DefaultPhrasebooksFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param sectionNumber Parameter 1.
      * @return A new instance of fragment DefaultPhrasebooksFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static DefaultPhrasebooksFragment newInstance(int sectionNumber) {
+    public static DefaultPhrasebooksFragment newInstance() {
         DefaultPhrasebooksFragment fragment = new DefaultPhrasebooksFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_SECTION_NBR, sectionNumber);
+        args.putInt(ARG_SECTION_NBR, 1);
         fragment.setArguments(args);
         return fragment;
     }

@@ -26,7 +26,7 @@ import se.chalmers.phrasebook.gui.smallFragments.AddPhrasebookDialog;
  */
 public class MyPhrasebooksFragment extends Fragment {
     private FloatingActionButton fab;
-    FragmentCommunicator mCallback;
+    private FragmentCommunicator mCallback;
 
 
     @Override

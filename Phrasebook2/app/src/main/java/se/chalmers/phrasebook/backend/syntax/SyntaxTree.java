@@ -11,15 +11,15 @@ import java.util.ArrayList;
 public class SyntaxTree implements Serializable {
 
     private String id;
-    private SyntaxNode root;
+    private final SyntaxNode root;
     private boolean advActivated;
     private boolean favorite;
 
-    private ArrayList<SyntaxNodeList> options = new ArrayList<>();
+    private final ArrayList<SyntaxNodeList> options = new ArrayList<>();
 
     private SyntaxTree advancedTree; //Really ugly solution but the only one we can think of as
 
-    public SyntaxTree getAdvancedTree() {
+    private SyntaxTree getAdvancedTree() {
         return advancedTree;
     }
 
@@ -44,7 +44,7 @@ public class SyntaxTree implements Serializable {
         return new ArrayList<>();
     }
 
-    public boolean getFavorite() {
+    private boolean getFavorite() {
         return favorite;
     }
 
@@ -104,18 +104,18 @@ public class SyntaxTree implements Serializable {
         return id;
     }
 
-    public boolean setSelectedChild(int optionIndex, int childIndex, boolean isAdvanced) {
+    private void setSelectedChild(int optionIndex, int childIndex) {
         boolean status = false;
-        if(!isAdvanced) {
+        if(!false) {
             if (options.get(optionIndex).getSelectedChild() instanceof NumeralSyntaxNode) {
-                options.get(optionIndex).getSelectedChild().setSelectedChild(childIndex, null);
+                options.get(optionIndex).getSelectedChild().setSelectedChild(childIndex);
                 status = true;
             } else if (options.get(optionIndex) != null) {
                 if (options.get(optionIndex).getChildren().get(childIndex) != null)
                     status = options.get(optionIndex).setSelectedChild(options.get(optionIndex).getChildren().get(childIndex));
             }
         } else {
-            advancedTree.setSelectedChild(optionIndex,childIndex,false);
+            advancedTree.setSelectedChild(optionIndex,childIndex);
         }
 
         return status;
@@ -128,7 +128,7 @@ public class SyntaxTree implements Serializable {
                 SyntaxNodeList nodeList = options.get(optionIndex);
                 setRecursiveSelectedChild(nodeList, snl, childIndex);
             } else {
-                setSelectedChild(optionIndex, childIndex,false);
+                setSelectedChild(optionIndex, childIndex);
             }
         } else {
             advancedTree.setSelectedChild(optionIndex,snl,childIndex,false);
@@ -149,7 +149,7 @@ public class SyntaxTree implements Serializable {
     }
 
 
-    public boolean setSelectedChild(SyntaxNodeList l, SyntaxNode s) {
+    private void setSelectedChild(SyntaxNodeList l, SyntaxNode s) {
         return l.setSelectedChild(s);
     }
 
@@ -159,7 +159,7 @@ public class SyntaxTree implements Serializable {
      *
      * @return The syntax usable by the GF-grammar to generate a translation
      */
-    public String getSyntax() {
+    private String getSyntax() {
         return parseSentenceSyntax(getSentenceHead());
     }
 
